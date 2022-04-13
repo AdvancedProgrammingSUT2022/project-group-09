@@ -1,5 +1,12 @@
 package Units;
 
 public enum CombatType {
-    ARCHERY
+    ARCHERY,
+    MOUNTED,
+    RECON,
+    CIVILIAN,
+    MELEE,
+    SIEGE,
+    GUNPOWDER,
+    ARMORED;
 }
