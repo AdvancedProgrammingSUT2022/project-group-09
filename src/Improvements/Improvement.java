@@ -7,6 +7,7 @@ import Terrains.Terrain;
 import java.util.ArrayList;
 
 public enum Improvement {
+
     CAMP(0, 0, 0, null, null, null);
 
     final int food;
