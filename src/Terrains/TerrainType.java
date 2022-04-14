@@ -21,7 +21,7 @@ public enum TerrainType {
             add(ResourceType.URANIUM);
             add(ResourceType.GOLD);
             add(ResourceType.SILVER);
-            add(ResourceType.GEMS);
+            add(ResourceType.GEM);
             add(ResourceType.MARBLE);
             add(ResourceType.COTTON);
             add(ResourceType.INCENSE);
@@ -30,18 +30,18 @@ public enum TerrainType {
     }),
     GRASSLLAND(2, 0, 0, -33, 1, new ArrayList<TerrainFeatureType>() {
         {
-            add(TerrainFeatureType.FORREST);
+            add(TerrainFeatureType.FOREST);
             add(TerrainFeatureType.MARSH);
         }
     }, new ArrayList<ResourceType>() {
         {
             add(ResourceType.IRON);
-            add(ResourceType.HORSES);
+            add(ResourceType.HORSE);
             add(ResourceType.COAL);
             add(ResourceType.URANIUME);
             add(ResourceType.CATTLE);
             add(ResourceType.GOLD);
-            add(ResourceType.GEMS);
+            add(ResourceType.GEM);
             add(ResourceType.MARBLE);
             add(ResourceType.COTTON);
             add(ResourceType.WINE);
@@ -50,7 +50,7 @@ public enum TerrainType {
     }),
     HILLS(0, 2, 0, 25, 2, new ArrayList<TerrainFeatureType>() {
         {
-            add(TerrainFeatureType.FORREST);
+            add(TerrainFeatureType.FOREST);
             add(TerrainFeatureType.JUNGLE);
         }
     }, new ArrayList<ResourceType>() {
@@ -62,7 +62,7 @@ public enum TerrainType {
             add(ResourceType.DEER);
             add(ResourceType.GOLD);
             add(ResourceType.SILVER);
-            add(ResourceType.GEMS);
+            add(ResourceType.GEM);
             add(ResourceType.MARBLE);
             add(ResourceType.SHEEP);
         }
@@ -79,13 +79,13 @@ public enum TerrainType {
     }),
     PLAIN(1, 1, 0, -33, 1, new ArrayList<TerrainFeatureType>() {
         {
-            add(TerrainFeatureType.FORREST);
+            add(TerrainFeatureType.FOREST);
             add(TerrainFeatureType.JUNGLE);
         }
     }, new ArrayList<ResourceType>() {
         {
             add(ResourceType.IRON);
-            add(ResourceType.HORSES);
+            add(ResourceType.HORSE);
             add(ResourceType.COAL);
             add(ResourceType.ALUMINUM);
             add(ResourceType.URANIUM);
@@ -109,18 +109,18 @@ public enum TerrainType {
     }),
     TUNDRA(1, 0, 0, -33, 1, new ArrayList<TerrainFeatureType>() {
         {
-            add(TerrainFeatureType.FORREST);
+            add(TerrainFeatureType.FOREST);
         }
     }, new ArrayList<ResourceType>() {
         {
             add(ResourceType.IRON);
-            add(ResourceType.HORSES);
+            add(ResourceType.HORSE);
             add(ResourceType.OIL);
             add(ResourceType.ALUMINUM);
             add(ResourceType.URANIUME);
             add(ResourceType.DEER);
             add(ResourceType.SILVER);
-            add(ResourceType.GEMS);
+            add(ResourceType.GEM);
             add(ResourceType.MARBLE);
             add(ResourceType.FURS);
         }

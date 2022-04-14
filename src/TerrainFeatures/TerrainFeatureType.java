@@ -26,8 +26,8 @@ public enum TerrainFeatureType {
         {
             add(ResourceType.OIL);
             add(ResourceType.URANIUM);
-            add(ResourceType.BANANAS);
-            add(ResourceType.GEMS);
+            add(ResourceType.BANANA);
+            add(ResourceType.GEM);
             add(ResourceType.DYES);
             add(ResourceType.SPICES);
         }
