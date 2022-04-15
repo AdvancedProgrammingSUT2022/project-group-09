@@ -19,7 +19,7 @@ public enum UnitType {
     CROSSBOWMAN(120, CombatType.ARCHERY,6,12,2,2, null, TechnologyType.MACHINERY),
     KNIGHT(150, CombatType.MOUNTED,18,0,0,3, ResourceType.HORSE, TechnologyType.CHIVALRY),
     LONGSWORDMAN(150, CombatType.MELEE,18,0,0,3, ResourceType.IRON, TechnologyType.STEEL),
-    PIKEMAN(100, CombatType.MELEE,10,0,0,2,null, TechnologyType.CIVILSERVICE),
+    PIKEMAN(100, CombatType.MELEE,10,0,0,2,null, TechnologyType.CIVILISERVICE),
     TREBUCHET(170, CombatType.SIEGE,6,20,2,2, ResourceType.IRON, TechnologyType.PHYSICS),
     CANON(250, CombatType.SIEGE,10,26,2,2, null, TechnologyType.CHEMISTRY),
     CAVALRY(260, CombatType.MOUNTED,25,0,0,3, ResourceType.HORSE, TechnologyType.MILITARYSCIENCE),

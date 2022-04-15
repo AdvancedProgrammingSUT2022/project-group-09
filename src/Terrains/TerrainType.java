@@ -11,14 +11,14 @@ public enum TerrainType {
     DESERT(0, 0, 0, -33, 1, new ArrayList<TerrainFeatureType>() {
         {
             add(TerrainFeatureType.OASIS);
-            add(TerrainFeatureType.FOODPLAINS);
+            add(TerrainFeatureType.FLOODPLAINS);
         }
     }, new ArrayList<ResourceType>() {
         {
             add(ResourceType.IRON);
             add(ResourceType.GOLD);
             add(ResourceType.SILVER);
-            add(ResourceType.GEM);
+            add(ResourceType.GEMS);
             add(ResourceType.MARBLE);
             add(ResourceType.COTTON);
             add(ResourceType.INCENSE);
@@ -37,7 +37,7 @@ public enum TerrainType {
             add(ResourceType.COAL);
             add(ResourceType.CATTLE);
             add(ResourceType.GOLD);
-            add(ResourceType.GEM);
+            add(ResourceType.GEMS);
             add(ResourceType.MARBLE);
             add(ResourceType.COTTON);
             add(ResourceType.SHEEP);
@@ -55,7 +55,7 @@ public enum TerrainType {
             add(ResourceType.DEER);
             add(ResourceType.GOLD);
             add(ResourceType.SILVER);
-            add(ResourceType.GEM);
+            add(ResourceType.GEMS);
             add(ResourceType.MARBLE);
             add(ResourceType.SHEEP);
         }
@@ -93,8 +93,6 @@ public enum TerrainType {
     SNOW(0, 0, 0, -33, 1, null, new ArrayList<ResourceType>() {
         {
             add(ResourceType.IRON);
-            add(ResourceType.OIL);
-            add(ResourceType.URANIUME);
         }
     }),
     TUNDRA(1, 0, 0, -33, 1, new ArrayList<TerrainFeatureType>() {
@@ -105,12 +103,9 @@ public enum TerrainType {
         {
             add(ResourceType.IRON);
             add(ResourceType.HORSE);
-            add(ResourceType.OIL);
-            add(ResourceType.ALUMINUM);
-            add(ResourceType.URANIUME);
             add(ResourceType.DEER);
             add(ResourceType.SILVER);
-            add(ResourceType.GEM);
+            add(ResourceType.GEMS);
             add(ResourceType.MARBLE);
             add(ResourceType.FURS);
         }

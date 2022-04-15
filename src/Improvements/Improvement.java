@@ -29,7 +29,7 @@ public enum Improvement {
         {
             add(ResourceType.WHEAT);
         }
-    }, TechnologyType.AGRICULTURE, new ArrayList<Object>(){
+    }, TechnologyType.ARGICULTURE, new ArrayList<Object>(){
         {
             add(TerrainType.GRASSLLAND);
             add(TerrainType.PLAIN);
@@ -46,13 +46,11 @@ public enum Improvement {
             add(ResourceType.WHEAT);
             add(ResourceType.IRON);
             add(ResourceType.COAL);
-            add(ResourceType.ALUMINUME);
-            add(ResourceType.URANIUM);
-            add(ResourceType.GEM);
+            add(ResourceType.GEMS);
             add(ResourceType.GOLD);
             add(ResourceType.SILVER);
         }
-    }, TechnologyType.MINIMG, new ArrayList<Object>(){
+    }, TechnologyType.MINING, new ArrayList<Object>(){
         {
             add(TerrainFeatureType.FOREST);
             add(TerrainType.PLAIN);
@@ -65,11 +63,11 @@ public enum Improvement {
     }),
     PASTURE(0, 0, 0,  new ArrayList<ResourceType>(){
         {
-            add(ResourceType.HORSES);
+            add(ResourceType.HORSE);
             add(ResourceType.CATTLE);
             add(ResourceType.SHEEP);
         }
-    }, TechnologyType.ANIMALHUSBANDRY, new ArrayList<Object>(){
+    }, TechnologyType.ANIMALHUSBANDARY, new ArrayList<Object>(){
         {
             add(TerrainType.GRASSLLAND);
             add(TerrainType.PLAIN);
@@ -83,13 +81,11 @@ public enum Improvement {
             add(ResourceType.BANANA);
             add(ResourceType.DYES);
             add(ResourceType.SILK);
-            add(ResourceType.SPICES);
             add(ResourceType.SUGAR);
             add(ResourceType.COTTON);
-            add(ResourceType.WINE);
             add(ResourceType.INCENSE);
         }
-    }, TechnologyType.CALENDAR, new ArrayList<Object>(){
+    }, TechnologyType.CALENDER, new ArrayList<Object>(){
         {
             add(TerrainType.GRASSLLAND);
             add(TerrainType.PLAIN);
