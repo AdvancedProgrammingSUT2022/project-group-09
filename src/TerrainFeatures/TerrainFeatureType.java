@@ -43,7 +43,7 @@ public enum TerrainFeatureType {
     RIVER(0, 0, 1, 0, -1, null);
     //TODO... -1 -> all remanining points, 999999 -> impossible
 
-    TerrainFeatureType(int food, int product, int gold, int combatModifier, int MP, ArrayList<TerrainFeature> possibleFeatures) {
+    TerrainFeatureType(int food, int product, int gold, int combatModifier, int MP, ArrayList<ResourceType> possibleFeatures) {
         this.food = food;
         this.product = product;
         this.gold = gold;
@@ -57,5 +57,5 @@ public enum TerrainFeatureType {
     int gold;
     int MP;
     int combatModifier;
-    ArrayList<TerrainFeature> possibleFeatures;
+    ArrayList<ResourceType> possibleFeatures;
 }
