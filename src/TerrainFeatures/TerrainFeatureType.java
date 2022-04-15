@@ -2,10 +2,11 @@ package TerrainFeatures;
 
 import Resources.Resource;
 import Resources.ResourceType;
+import Resources.TerrainTypeOrTerrainFeatureType;
 
 import java.util.ArrayList;
 
-public enum TerrainFeatureType {
+public enum TerrainFeatureType implements TerrainTypeOrTerrainFeatureType {
     FLOODPLAINS(2, 0, 0, -33, 1, new ArrayList<ResourceType>(){
         {
             add(ResourceType.WHEAT);
@@ -14,7 +15,6 @@ public enum TerrainFeatureType {
     }),
     FOREST(1, 1, 0, 25, 2, new ArrayList<ResourceType>(){
         {
-            add(ResourceType.URANIUM);
             add(ResourceType.DEER);
             add(ResourceType.FURS);
             add(ResourceType.DYES);
@@ -24,18 +24,13 @@ public enum TerrainFeatureType {
     ICE(0, 0, 0, 0, 99999, null),
     JUNGLE(1, -1, 0, 25, 2, new ArrayList<ResourceType>(){
         {
-            add(ResourceType.OIL);
-            add(ResourceType.URANIUM);
             add(ResourceType.BANANA);
-            add(ResourceType.GEM);
+            add(ResourceType.GEMS);
             add(ResourceType.DYES);
-            add(ResourceType.SPICES);
         }
     }),
     MARSH(-1, 0, 0, -33, 2, new ArrayList<ResourceType>(){
         {
-            add(ResourceType.OIL);
-            add(ResourceType.URANIUM);
             add(ResourceType.SUGAR);
         }
     }),

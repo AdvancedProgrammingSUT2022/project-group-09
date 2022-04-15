@@ -2,12 +2,13 @@ package Terrains;
 
 import Resources.Resource;
 import Resources.ResourceType;
+import Resources.TerrainTypeOrTerrainFeatureType;
 import TerrainFeatures.TerrainFeature;
 import TerrainFeatures.TerrainFeatureType;
 
 import java.util.ArrayList;
 
-public enum TerrainType {
+public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
     DESERT(0, 0, 0, -33, 1, new ArrayList<TerrainFeatureType>() {
         {
             add(TerrainFeatureType.OASIS);

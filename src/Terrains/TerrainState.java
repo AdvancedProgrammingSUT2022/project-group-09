@@ -1,6 +1,8 @@
 package Terrains;
 
-public enum TerrainState {
+import java.util.ArrayList;
+
+public enum TerrainState{
     VISIBLE,
     KNOWN,
     FOGOFWAR;

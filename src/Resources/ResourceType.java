@@ -3,51 +3,52 @@ package Resources;
 import Improvements.Improvement;
 import Technologies.Technology;
 import Technologies.TechnologyType;
+import TerrainFeatures.TerrainFeatureType;
 import Terrains.Terrain;
 import Terrains.TerrainType;
 
 import java.util.ArrayList;
 
 public enum ResourceType {
-    BANANA(1, 0, 0, new ArrayList<TerrainType>() {{
-        add(TerrainType.JUNGLE);
+    BANANA(1, 0, 0, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
+        add(TerrainFeatureType.JUNGLE);
     }}, Improvement.PASTURE, null),
 
-    CATTLE(1, 0, 0, new ArrayList<TerrainType>() {{
+    CATTLE(1, 0, 0, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.GRASSLLAND);
     }}, Improvement.PASTURE, null),
 
-    DEER(1, 0, 0, new ArrayList<TerrainType>() {{
-        add(TerrainType.FOREST);
+    DEER(1, 0, 0, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
+        add(TerrainFeatureType.FOREST);
         add(TerrainType.TUNDRA);
         add(TerrainType.HILLS);
     }}, Improvement.CAMP, null),
 
-    SHEEP(1, 0, 0, new ArrayList<TerrainType>() {{
+    SHEEP(1, 0, 0, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.GRASSLLAND);
         add(TerrainType.PLAIN);
         add(TerrainType.DESERT);
         add(TerrainType.HILLS);
     }}, Improvement.PASTURE, null),
 
-    WHEAT(1, 0, 0, new ArrayList<TerrainType>() {{
+    WHEAT(1, 0, 0, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.GRASSLLAND);
         //TODO add jolge
-    }}, Improvement.FARM, null), 
+    }}, Improvement.FARM, null),
 
-    COAL(0, 1, 0, new ArrayList<TerrainType>() {{
+    COAL(0, 1, 0, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.GRASSLLAND);
         add(TerrainType.PLAIN);
         add(TerrainType.HILLS);
     }}, Improvement.MINE, TechnologyType.SCIENTIFICTHEORY),
 
-    HORSE(0, 1, 0, new ArrayList<TerrainType>() {{
+    HORSE(0, 1, 0, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.GRASSLLAND);
         add(TerrainType.PLAIN);
         add(TerrainType.TUNDRA);
     }}, Improvement.PASTURE, TechnologyType.ANIMALHUSBANDARY),
 
-    IRON(0, 1, 0, new ArrayList<TerrainType>() {{
+    IRON(0, 1, 0, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.GRASSLLAND);
         add(TerrainType.PLAIN);
         add(TerrainType.DESERT);
@@ -56,24 +57,24 @@ public enum ResourceType {
         add(TerrainType.HILLS);
     }}, Improvement.MINE, TechnologyType.IRONWORKING),
 
-    COTTON(0, 0, 2, new ArrayList<TerrainType>() {{
+    COTTON(0, 0, 2, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.GRASSLLAND);
         add(TerrainType.PLAIN);
         add(TerrainType.DESERT);
     }}, Improvement.PLANTATION, null),
 
-    DYES(0, 0, 2, new ArrayList<TerrainType>() {{
-        add(TerrainType.JUNGLE);
-        add(TerrainType.FOREST);
+    DYES(0, 0, 2, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
+        add(TerrainFeatureType.JUNGLE);
+        add(TerrainFeatureType.FOREST);
     }}, Improvement.PLANTATION, null),
 
-    FURS(0, 0, 2, new ArrayList<TerrainType>() {{
-        add(TerrainType.FOREST);
+    FURS(0, 0, 2, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
+        add(TerrainFeatureType.FOREST);
         add(TerrainType.TUNDRA);
     }}, Improvement.CAMP, null),
 
-    GEMS(0, 0, 3, new ArrayList<TerrainType>() {{
-        add(TerrainType.JUNGLE);
+    GEMS(0, 0, 3, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
+        add(TerrainFeatureType.JUNGLE);
         add(TerrainType.GRASSLLAND);
         add(TerrainType.PLAIN);
         add(TerrainType.DESERT);
@@ -81,23 +82,23 @@ public enum ResourceType {
         add(TerrainType.HILLS);
     }}, Improvement.MINE, null),
 
-    GOLD(0, 0, 2, new ArrayList<TerrainType>() {{
+    GOLD(0, 0, 2, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.GRASSLLAND);
         add(TerrainType.PLAIN);
         add(TerrainType.DESERT);
         add(TerrainType.HILLS);
     }}, Improvement.MINE, null),
 
-    INCENSE(0, 0, 2, new ArrayList<TerrainType>() {{
+    INCENSE(0, 0, 2, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.PLAIN);
         add(TerrainType.DESERT);
     }}, Improvement.PLANTATION, null),
 
-    IVORY(0, 0, 2, new ArrayList<TerrainType>() {{
+    IVORY(0, 0, 2, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.PLAIN);
     }}, Improvement.CAMP, null),
 
-    MARBLE(0, 0, 2, new ArrayList<TerrainType>() {{
+    MARBLE(0, 0, 2, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.GRASSLLAND);
         add(TerrainType.PLAIN);
         add(TerrainType.DESERT);
@@ -105,30 +106,30 @@ public enum ResourceType {
         add(TerrainType.HILLS);
     }}, Improvement.QUARRY, null),
 
-    SILK(0, 0, 2, new ArrayList<TerrainType>() {{
-        add(TerrainType.FOREST);
+    SILK(0, 0, 2, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
+        add(TerrainFeatureType.FOREST);
     }}, Improvement.PLANTATION, null),
 
-    SILVER(0, 0, 2, new ArrayList<TerrainType>() {{
+    SILVER(0, 0, 2, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
         add(TerrainType.TUNDRA);
         add(TerrainType.DESERT);
         add(TerrainType.HILLS);
     }}, Improvement.MINE, null),
 
-    SUGAR(0, 0, 2, new ArrayList<TerrainType>() {{
-        add(TerrainType.FLOODPLAIN);
-        add(TerrainType.MARSH);
+    SUGAR(0, 0, 2, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
+        add(TerrainFeatureType.FLOODPLAINS);
+        add(TerrainFeatureType.MARSH);
     }}, Improvement.PLANTATION, null);
 
 
     final int food;
     final int production;
     final int gold;
-    final ArrayList<TerrainType> canBeFoundOn;
+    final ArrayList<TerrainTypeOrTerrainFeatureType> canBeFoundOn;
     final Improvement requiredImprovement;
     final TechnologyType requiredTechnology;
 
-    ResourceType(int food, int production, int gold, ArrayList<TerrainType> canBeFoundOn, Improvement requiredImprovement, TechnologyType requiredTechnology) {
+    ResourceType(int food, int production, int gold, ArrayList<TerrainTypeOrTerrainFeatureType> canBeFoundOn, Improvement requiredImprovement, TechnologyType requiredTechnology) {
         this.food = food;
         this.production = production;
         this.gold = gold;
@@ -136,4 +137,4 @@ public enum ResourceType {
         this.requiredImprovement = requiredImprovement;
         this.requiredTechnology = requiredTechnology;
     }
-    }
+}
