@@ -16,9 +16,6 @@ public enum TerrainType {
     }, new ArrayList<ResourceType>() {
         {
             add(ResourceType.IRON);
-            add(ResourceType.OIL);
-            add(ResourceType.ALUMINUM);
-            add(ResourceType.URANIUM);
             add(ResourceType.GOLD);
             add(ResourceType.SILVER);
             add(ResourceType.GEM);
@@ -38,13 +35,11 @@ public enum TerrainType {
             add(ResourceType.IRON);
             add(ResourceType.HORSE);
             add(ResourceType.COAL);
-            add(ResourceType.URANIUME);
             add(ResourceType.CATTLE);
             add(ResourceType.GOLD);
             add(ResourceType.GEM);
             add(ResourceType.MARBLE);
             add(ResourceType.COTTON);
-            add(ResourceType.WINE);
             add(ResourceType.SHEEP);
         }
     }),
@@ -57,8 +52,6 @@ public enum TerrainType {
         {
             add(ResourceType.IRON);
             add(ResourceType.COAL);
-            add(ResourceType.ALUMINUME);
-            add(ResourceType.URANIUME);
             add(ResourceType.DEER);
             add(ResourceType.GOLD);
             add(ResourceType.SILVER);
@@ -74,7 +67,7 @@ public enum TerrainType {
         }
     }, new ArrayList<ResourceType>() {
         {
-            add(ResourceType.OIL);
+
         }
     }),
     PLAIN(1, 1, 0, -33, 1, new ArrayList<TerrainFeatureType>() {
@@ -87,15 +80,12 @@ public enum TerrainType {
             add(ResourceType.IRON);
             add(ResourceType.HORSE);
             add(ResourceType.COAL);
-            add(ResourceType.ALUMINUM);
-            add(ResourceType.URANIUM);
             add(ResourceType.WHEAT);
             add(ResourceType.GOLD);
             add(ResourceType.GEMS);
             add(ResourceType.MARBLE);
             add(ResourceType.IVORY);
             add(ResourceType.COTTON);
-            add(ResourceType.WINE);
             add(ResourceType.INCENSE);
             add(ResourceType.SHEEP);
         }

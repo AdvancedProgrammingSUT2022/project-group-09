@@ -30,6 +30,10 @@ public enum ResourceType {
         add(TerrainType.HILLS);
     }}, Improvement.PASTURE, null),
 
+    WHEAT(1, 0, 0, new ArrayList<TerrainType>() {{
+        add(TerrainType.GRASSLLAND);
+        //TODO add jolge
+    }}, Improvement.FARM, null), 
 
     COAL(0, 1, 0, new ArrayList<TerrainType>() {{
         add(TerrainType.GRASSLLAND);
@@ -68,7 +72,7 @@ public enum ResourceType {
         add(TerrainType.TUNDRA);
     }}, Improvement.CAMP, null),
 
-    GEM(0, 0, 3, new ArrayList<TerrainType>() {{
+    GEMS(0, 0, 3, new ArrayList<TerrainType>() {{
         add(TerrainType.JUNGLE);
         add(TerrainType.GRASSLLAND);
         add(TerrainType.PLAIN);
@@ -114,7 +118,7 @@ public enum ResourceType {
     SUGAR(0, 0, 2, new ArrayList<TerrainType>() {{
         add(TerrainType.FLOODPLAIN);
         add(TerrainType.MARSH);
-    }}, Improvement.PLANTATION, null),
+    }}, Improvement.PLANTATION, null);
 
 
     final int food;
@@ -122,9 +126,9 @@ public enum ResourceType {
     final int gold;
     final ArrayList<TerrainType> canBeFoundOn;
     final Improvement requiredImprovement;
-    final Technology requiredTechnology;
+    final TechnologyType requiredTechnology;
 
-    ResourceType(int food, int production, int gold, ArrayList<TerrainType> canBeFoundOn, Improvement requiredImprovement, Technology requiredTechnology) {
+    ResourceType(int food, int production, int gold, ArrayList<TerrainType> canBeFoundOn, Improvement requiredImprovement, TechnologyType requiredTechnology) {
         this.food = food;
         this.production = production;
         this.gold = gold;
