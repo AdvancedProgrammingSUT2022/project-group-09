@@ -6,6 +6,8 @@ public class Civilization {
     private ArrayList<City> cities;
     private ArrayList<War> wars;
     private Technologies technologies;
+    private Gold gold;
+    private Science science;
 
     public Civilization(ArrayList<City> cities, ArrayList<War> wars, Technologies technologies, Gold gold, Science science) {
         this.cities = cities;
@@ -54,9 +56,6 @@ public class Civilization {
     public void setScience(Science science) {
         this.science = science;
     }
-
-    private Gold gold;
-    private Science science;
 
     public String showInfo() {
         return "";

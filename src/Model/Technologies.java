@@ -9,4 +9,6 @@ public class Technologies {
     private TechnologyType technologyCurrentlyResearching;
     private HashMap<TechnologyType,Integer> technologiesAvailable;
     private ArrayList<TechnologyType> technologiesUnavailable;
+
+    
 }
