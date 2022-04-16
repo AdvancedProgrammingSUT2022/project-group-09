@@ -3,6 +3,47 @@ package Model;
 public class User {
     private String username;
     private String password;
-    private String nickName;
-    private int score;
+    private String nickname;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
+    }
+
+    private int highScore;
+
+    public User(String username, String password, String nickname, int highScore) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.highScore = highScore;
+    }
+
 }

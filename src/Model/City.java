@@ -69,4 +69,9 @@ public class City extends Terrain {
     public City(TerrainType type, TerrainState state, ArrayList<TerrainFeature> terrainFeatures, ArrayList<Resource> resources, Building building) {
         super(type, state, terrainFeatures, resources, building);
     }
+
+    public String showCity()
+    {
+        return "";
+    }
 }

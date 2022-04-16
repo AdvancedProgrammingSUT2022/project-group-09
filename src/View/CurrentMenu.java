@@ -1,4 +1,4 @@
 package View;
 public enum CurrentMenu {
-    MainMenu, GameMenu, ProfileMenu, LoginMenu;
+    MainMenu, GameMenu, ProfileMenu, LoginMenu,EndGame;
 }

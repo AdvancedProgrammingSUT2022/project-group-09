@@ -9,6 +9,10 @@ import java.util.ArrayList;
 public class Terrain implements CitizenCanWork {
     private TerrainType type;
     private TerrainState state;
+    private ArrayList<TerrainFeature> terrainFeatures;
+    private ArrayList<Resource> resources;
+    private Building building;
+
 
     public TerrainType getType() {
         return type;
@@ -57,10 +61,5 @@ public class Terrain implements CitizenCanWork {
         this.resources = resources;
         this.building = building;
     }
-
-    private ArrayList<TerrainFeature> terrainFeatures;
-    private ArrayList<Resource> resources;
-    private Building building;
-
 
 }
