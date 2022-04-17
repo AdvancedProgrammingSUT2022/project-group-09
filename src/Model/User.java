@@ -39,11 +39,11 @@ public class User {
 
     private int highScore;
 
-    public User(String username, String password, String nickname, int highScore) {
+    public User(String username, String password, String nickname) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
-        this.highScore = highScore;
+        this.highScore = 0;
     }
 
 }

@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public enum MainMenuRegex {
     dorosteshkon("");
 
-    private String regex;
+    private final String regex;
 
     MainMenuRegex(String regex) {
         this.regex = regex;
@@ -19,5 +19,5 @@ public enum MainMenuRegex {
             return matcher;
         }
         return null;
-    }   
+    }
 }

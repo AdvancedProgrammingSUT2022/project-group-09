@@ -12,7 +12,7 @@ public enum ProfileMenuRegex {
     CHANGEPASSWORD4("^profile change -p -n \\<(?<newpassword>[\\S]+)\\> -c \\<(?<currentpassword>[\\S]+)\\>$"),
     ENTER("^menu enter (?<menuname>(Main menu)|(Profile menu)|(Game menu))");
 
-    private String regex;
+    private final String regex;
 
     ProfileMenuRegex(String regex) {
         this.regex = regex;
@@ -25,5 +25,5 @@ public enum ProfileMenuRegex {
             return matcher;
         }
         return null;
-    }   
+    }
 }

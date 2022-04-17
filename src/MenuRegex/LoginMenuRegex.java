@@ -15,15 +15,17 @@ public enum LoginMenuRegex {
     CREATE9("^user create -n \\<(?<nickname>[\\S]+)\\> -u \\<(?<username>[\\S]+)\\> -p \\<(?<password>[\\S]+)\\>$"),
     CREATE10("^user create -n \\<(?<nickname>[\\S]+)\\> -p \\<(?<password>[\\S]+)\\> -u \\<(?<username>[\\S]+)\\>$"),
     CREATE11("^user create -p \\<(?<password>[\\S]+)\\> -u \\<(?<username>[\\S]+)\\> -n \\<(?<nickname>[\\S]+)\\>$"),
-    CREATE12("^user create -p \\<(?<password>[\\S]+)\\> -n \\<(?<nickname>[\\S]+)\\> -u \\<(?<username>[\\S]+)\\>$"), 
-    LOGIN1("^user login --username \\<(?<username>[\\S]+)\\> --password \\<(?password>[\\S]+)\\>$"),
-    LOGIN2("^user login --password \\<(?<password>[\\S]+)\\> --username \\<(?username>[\\S]+)\\>$"), 
-    LOGIN3("^user login -u \\<(?<username>[\\S]+)\\> -p \\<(?password>[\\S]+)\\>$"),
-    LOGIN4("^user login -p \\<(?<password>[\\S]+)\\> -u \\<(?username>[\\S]+)\\>$"),
-    ENTER("^menu enter (?<menuname>Main menu)");
+    CREATE12("^user create -p \\<(?<password>[\\S]+)\\> -n \\<(?<nickname>[\\S]+)\\> -u \\<(?<username>[\\S]+)\\>$"),
+    LOGIN1("^user login --username \\<(?<username>\\S+)\\> --password \\<(?<password>\\S+)\\>$"),
+    LOGIN2("^user login --password \\<(?<password>[\\S]+)\\> --username \\<(?<username>[\\S]+)\\>$"),
+    LOGIN3("^user login -u \\<(?<username>[\\S]+)\\> -p \\<(?<password>[\\S]+)\\>$"),
+    LOGIN4("^user login -p \\<(?<password>[\\S]+)\\> -u \\<(?<username>[\\S]+)\\>$"),
+    ENTER("^menu enter (?<menuname>\\S+)"),
+    EXIT("^menu exit"),
+    SHOWMENU("^menu show-current");
     //TODO complete enter menu regex
 
-    private String regex;
+    private final String regex;
 
     LoginMenuRegex(String regex) {
         this.regex = regex;
@@ -36,5 +38,5 @@ public enum LoginMenuRegex {
             return matcher;
         }
         return null;
-    }   
+    }
 }

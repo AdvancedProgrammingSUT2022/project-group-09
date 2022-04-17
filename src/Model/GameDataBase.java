@@ -1,10 +1,5 @@
 package Model;
 
-import Model.Civilization;
-import Model.Units.CivilianUnit;
-import Model.User;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameDataBase{

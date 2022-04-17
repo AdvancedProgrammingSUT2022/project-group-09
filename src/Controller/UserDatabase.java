@@ -6,54 +6,65 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class UserDatabase {
-    private final ArrayList<User> users;
-    private User currentUser;
+    static private ArrayList<User> users;
+    static private User currentUser;
 
-    public UserDatabase() {
-        this.users = new ArrayList<>();
-        this.currentUser = null;
-        //TODO LOAD USER GSON
-    }
-
-    private void loadUsers() {
+    static private void loadUsers() {
         //GSON
     }
 
-    public void saveUsers() {
+    static public void saveUsers() {
         //GSON
     }
 
-    public boolean isUsernameDuplicate(User user) {
+    static public boolean isUsernameDuplicate(User user) {
+        for (User user1 : users) {
+            if (Objects.equals(user1.getUsername(), user.getUsername()))
+                return true;
+        }
         return false;
     }
 
-    public boolean isNicknameDuplicate(User user) {
+    static public boolean isNicknameDuplicate(User user) {
+        for (User user1 : users) {
+            if (Objects.equals(user1.getNickname(), user.getNickname()))
+                return true;
+        }
         return false;
     }
 
-    public User getUserFromUsers(User user) {
-        for (User tmpUser : users) {
-            if (Objects.equals(tmpUser.getUsername(), user.getUsername())) {
-                return tmpUser;
-            }
+    static public User getUserFromUsers(User user) {
+        for (User user1 : users) {
+            if (Objects.equals(user1.getUsername(), user.getUsername()) &&
+                    Objects.equals(user1.getPassword(), user.getPassword()))
+                return user1;
         }
         return null;
     }
 
-    public User getCurrentUser() {
+    static public boolean isUsernameAndPasswordTrue(User user) {
+        for (User user1 : users) {
+            if (Objects.equals(user1.getUsername(), user.getUsername()) &&
+                    Objects.equals(user1.getPassword(), user.getPassword()))
+                return true;
+        }
+        return false;
+    }
+
+    static public User getCurrentUser() {
         return currentUser;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    static public void setCurrentUser(User currentUser) {
+        UserDatabase.currentUser = currentUser;
     }
 
-    public ArrayList<User> getUsers() {
+    static public ArrayList<User> getUsers() {
         return users;
     }
 
-    public void addUser(User user) {
-        this.users.add(user);
+    static public void addUser(User user) {
+        users.add(user);
     }
 
 

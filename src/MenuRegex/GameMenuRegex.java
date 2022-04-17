@@ -10,7 +10,7 @@ public enum GameMenuRegex {
     GOLDCHEAT2("^increase -g \\<(?<amount>\\-?[\\d]+)$"),
     ENTER("^menu enter (?<menuname>Main menu)");
 
-    private String regex;
+    private final String regex;
 
     GameMenuRegex(String regex) {
         this.regex = regex;
@@ -23,5 +23,5 @@ public enum GameMenuRegex {
             return matcher;
         }
         return null;
-    }   
+    }
 }
