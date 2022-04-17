@@ -6,13 +6,13 @@ import Model.Resources.TerrainTypeOrTerrainFeatureType;
 import java.util.ArrayList;
 
 public enum TerrainFeatureType implements TerrainTypeOrTerrainFeatureType {
-    FLOODPLAINS(2, 0, 0, -33, 1, new ArrayList<ResourceType>(){
+    FLOODPLAINS(2, 0, 0, -33, 1, new ArrayList<ResourceType>() {
         {
             add(ResourceType.WHEAT);
             add(ResourceType.SUGAR);
         }
     }),
-    FOREST(1, 1, 0, 25, 2, new ArrayList<ResourceType>(){
+    FOREST(1, 1, 0, 25, 2, new ArrayList<ResourceType>() {
         {
             add(ResourceType.DEER);
             add(ResourceType.FURS);
@@ -21,14 +21,14 @@ public enum TerrainFeatureType implements TerrainTypeOrTerrainFeatureType {
         }
     }),
     ICE(0, 0, 0, 0, 99999, null),
-    JUNGLE(1, -1, 0, 25, 2, new ArrayList<ResourceType>(){
+    JUNGLE(1, -1, 0, 25, 2, new ArrayList<ResourceType>() {
         {
             add(ResourceType.BANANA);
             add(ResourceType.GEMS);
             add(ResourceType.DYES);
         }
     }),
-    MARSH(-1, 0, 0, -33, 2, new ArrayList<ResourceType>(){
+    MARSH(-1, 0, 0, -33, 2, new ArrayList<ResourceType>() {
         {
             add(ResourceType.SUGAR);
         }

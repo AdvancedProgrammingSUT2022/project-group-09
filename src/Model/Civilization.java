@@ -3,13 +3,16 @@ package Model;
 import java.util.ArrayList;
 
 public class Civilization {
+
+    private Map map;
     private ArrayList<City> cities;
     private ArrayList<War> wars;
     private Technologies technologies;
     private Gold gold;
     private Science science;
 
-    public Civilization(ArrayList<City> cities, ArrayList<War> wars, Technologies technologies, Gold gold, Science science) {
+    public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, Technologies technologies, Gold gold, Science science) {
+        this.map = map;
         this.cities = cities;
         this.wars = wars;
         this.technologies = technologies;
@@ -60,4 +63,8 @@ public class Civilization {
     public String showInfo() {
         return "";
     }
+
+    //TODO complete all information functions
+
+
 }

@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 import Controller.ProfileMenuController;
 
-public class ProfileMenuView extends View{
-    private ProfileMenuController profileMenuController;
+public class ProfileMenuView extends View {
+    private final ProfileMenuController profileMenuController;
 
     public ProfileMenuView(Scanner scanner, ProfileMenuController profileMenuController) {
         super(scanner);
@@ -14,6 +14,6 @@ public class ProfileMenuView extends View{
 
     @Override
     public void run() {
-        
+
     }
 }
