@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuRegex {
-    PLAYGAME("^play game (--player\\d \\S+)*$"),
     TURNCHEAT1("^increase (--turn|-t) (?<amount>-?[\\d]+)$"),
     GOLDCHEAT1("^increase (--gold|-g) (?<amount>-?[\\d]+)$"),
     SHOWCURRENTMENU("^menu show-current$"),
@@ -19,7 +18,7 @@ public enum GameMenuRegex {
         this.regex = regex;
     }
 
-    public static HashMap<String, Integer> checkPlayGame(String input){
+    public static HashMap<String, Integer> playGameGetAllPlayerFromRegex(String input) {
         HashMap<String, Integer> usernames = new HashMap<>();
         String[] afterSplit = input.split("--");
         for (String s : afterSplit) {

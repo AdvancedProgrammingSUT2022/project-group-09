@@ -1,9 +1,12 @@
 package MenuRegex;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum MainMenuRegex {
+    PLAYGAME("^play game (--player\\d \\S+)*$"),
     SHOWCURRENTMENU("menu show-current"),
     ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu)"),
     LOGOUT("logout"),
@@ -13,6 +16,21 @@ public enum MainMenuRegex {
 
     MainMenuRegex(String regex) {
         this.regex = regex;
+    }
+
+    public static ArrayList<String> PlayGameRegexConvertToPlayers(String input) {
+        HashMap<Integer, String> players = new HashMap<>();
+        String[] afterSplit = input.split("--");
+        for (String s : afterSplit) {
+            players.put(Integer.parseInt(s.substring(6, 7)), s.substring(8)); // hashmap baraye inke bebinim player chandome tartibesho ok konim
+        }
+        ArrayList<String> playerNames = new ArrayList<String>();
+        for (int i = 1; i <= players.size(); i++) {
+            if (players.get(i) == null)
+                return null;
+            playerNames.add(players.get(i));
+        }
+        return playerNames;
     }
 
     public static Matcher getMatcher(String input, MainMenuRegex command) {

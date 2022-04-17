@@ -9,14 +9,14 @@ import java.util.regex.Matcher;
 public class LoginMenuController extends Controller {
     @Override
     public String menuNavigate(Matcher matcher) {
-        String menuname = matcher.group("manuname");
-        if (Objects.equals(menuname, "MainMenu")) {
-            if (UserDatabase.getCurrentUser() != null) {
-                CurrentMenu.set(CurrentMenu.MainMenu);
-                return "entered MainMenu";
-            }
-            return "please login first";
-        }
+//        String menuName = matcher.group("menuname");
+//        if (Objects.equals(menuName, "MainMenu")) {
+//            if (UserDatabase.getCurrentUser() != null) {
+//                CurrentMenu.set(CurrentMenu.MainMenu);
+//                return "entered MainMenu";
+//            }
+//            return "please login first";
+//        }
         return "menu navigation is not possible!";
     }
 
@@ -27,7 +27,7 @@ public class LoginMenuController extends Controller {
         if (UserDatabase.isNicknameDuplicate(newUser))
             return "user nickname " + newUser.getNickname() + " already exists";
         UserDatabase.addUser(newUser);
-        return "user created successfuly!";
+        return "user created successfully!";
     }
 
     public String login(Matcher matcher) {

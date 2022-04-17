@@ -6,18 +6,18 @@ import java.util.regex.Pattern;
 
 public enum ProfileMenuRegex {
     CHANGENICKNAME("^profile change (--nickname|-n) \\<(?<nickname>[\\S]+)\\>$"),
-//    CHANGENICKNAME2("^profile change -n \\<(?<nickname>[\\S]+)\\>$"),
+    //    CHANGENICKNAME2("^profile change -n \\<(?<nickname>[\\S]+)\\>$"),
     CHANGEPASSWORD1("^profile change (--password|-p) (--current|-c) \\<(?<currentpassword>[\\S]+)\\> (--new|-n) \\<(?<newpassword>[\\S]+)\\>$"),
     CHANGEPASSWORD2("^profile change (--password|-p) (--new|-n) \\<(?<newpassword>[\\S]+)\\> (--current|-c) \\<(?<currentpassword>[\\S]+)\\>$"),
     CHANGEPASSWORD(""),
-//    CHANGEPASSWORD3("^profile change -p -c \\<(?<currentpassword>[\\S]+)\\> -n \\<(?<newpassword>[\\S]+)\\>$"),
+    //    CHANGEPASSWORD3("^profile change -p -c \\<(?<currentpassword>[\\S]+)\\> -n \\<(?<newpassword>[\\S]+)\\>$"),
 //    CHANGEPASSWORD4("^profile change -p -n \\<(?<newpassword>[\\S]+)\\> -c \\<(?<currentpassword>[\\S]+)\\>$"),
     SHOWCURRENTMENU("menu show-current"),
     ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu)"),
     EXIT("^menu exit");
 
     private final String regex;
-    private static ArrayList<ProfileMenuRegex> changePasswordRegexes = new ArrayList<>(){
+    private static final ArrayList<ProfileMenuRegex> changePasswordRegexes = new ArrayList<>() {
         {
             add(CHANGEPASSWORD1);
             add(CHANGEPASSWORD2);

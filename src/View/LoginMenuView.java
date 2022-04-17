@@ -20,7 +20,7 @@ public class LoginMenuView extends View {
             input = scanner.nextLine();
             if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.CREATE)) != null)
                 System.out.println(LoginMenuController.register(matcher));
-            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.LOGIN1)) != null)
+            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.LOGIN)) != null)
                 System.out.println(LoginMenuController.login(matcher));
             else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.EXIT)) != null)
                 System.out.println(LoginMenuController.exit());

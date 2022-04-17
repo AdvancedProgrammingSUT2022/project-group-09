@@ -25,7 +25,7 @@ public enum LoginMenuRegex {
     //TODO complete enter menu regex
 
     private final String regex;
-    private static ArrayList<LoginMenuRegex> createRegexes = new ArrayList<>(){
+    private static final ArrayList<LoginMenuRegex> createRegexes = new ArrayList<>() {
         {
             add(CREATE1);
             add(CREATE2);
@@ -35,7 +35,7 @@ public enum LoginMenuRegex {
             add(CREATE6);
         }
     };
-    private static ArrayList<LoginMenuRegex> loginRegexes = new ArrayList<>(){
+    private static final ArrayList<LoginMenuRegex> loginRegexes = new ArrayList<>() {
         {
             add(LOGIN1);
             add(LOGIN2);
@@ -68,7 +68,7 @@ public enum LoginMenuRegex {
     }
 
     public static Matcher getMatcher(String input, LoginMenuRegex command) {
-        if(command.equals(CREATE))
+        if (command.equals(CREATE))
             return create(input);
         if (command.equals(LOGIN))
             return login(input);

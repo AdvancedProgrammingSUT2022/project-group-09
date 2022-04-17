@@ -2,6 +2,7 @@ package Controller.GameControllerPackage;
 
 import Controller.Controller;
 import Model.Cheat;
+import View.CurrentMenu;
 
 import java.util.regex.Matcher;
 
@@ -22,5 +23,10 @@ public class GameMenuController extends Controller {
     @Override
     public String menuNavigate(Matcher matcher) {
         return null;
+    }
+
+    public String exit() {
+        CurrentMenu.set(CurrentMenu.MainMenu);
+        return "entered main menu";
     }
 }
