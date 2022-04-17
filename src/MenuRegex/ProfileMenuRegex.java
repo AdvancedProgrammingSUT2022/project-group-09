@@ -4,7 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum ProfileMenuRegex {
-    dorosteshkon("");
+    CHANGENICKNAME1("^profile change --nickname \\<(?<nickname>[\\S]+)\\>$"),
+    CHANGENICKNAME2("^profile change -n \\<(?<nickname>[\\S]+)\\>$"),
+    CHANGEPASSWORD1("^profile change --password --current \\<(?<currentpassword>[\\S]+)\\> --new \\<(?<newpassword>[\\S]+)\\>$"),
+    CHANGEPASSWORD2("^profile change --password --new \\<(?<newpassword>[\\S]+)\\> --current \\<(?<currentpassword>[\\S]+)\\>$"),
+    CHANGEPASSWORD3("^profile change -p -c \\<(?<currentpassword>[\\S]+)\\> -n \\<(?<newpassword>[\\S]+)\\>$"),
+    CHANGEPASSWORD4("^profile change -p -n \\<(?<newpassword>[\\S]+)\\> -c \\<(?<currentpassword>[\\S]+)\\>$"),
+    ENTER("^menu enter (?<menuname>(Main menu)|(Profile menu)|(Game menu))");
 
     private String regex;
 

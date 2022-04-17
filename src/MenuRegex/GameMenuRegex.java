@@ -4,7 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuRegex {
-    dorosteshkon("");
+    TURNCHEAT1("^increase --turn \\<(?<amount>\\-?[\\d]+)$"),
+    TURNCHEAT2("^increase -t \\<(?<amount>\\-?[\\d]+)$"),
+    GOLDCHEAT1("^increase --gold \\<(?<amount>\\-?[\\d]+)$"),
+    GOLDCHEAT2("^increase -g \\<(?<amount>\\-?[\\d]+)$"),
+    ENTER("^menu enter (?<menuname>Main menu)");
 
     private String regex;
 
