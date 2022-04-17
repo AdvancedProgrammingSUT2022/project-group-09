@@ -26,6 +26,7 @@ public class Main {
             gameMenu.run();
         }
         System.out.println(CurrentMenu.get());
+        
     }
 
 }
