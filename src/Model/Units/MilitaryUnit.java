@@ -31,5 +31,19 @@ public class MilitaryUnit extends Unit {
 
     }
 
+    public boolean isInAlert() {
+        return isInAlert;
+    }
 
+    public void setInAlert(boolean inAlert) {
+        isInAlert = inAlert;
+    }
+
+    public boolean isFortify() {
+        return isFortify;
+    }
+
+    public void setFortify(boolean fortify) {
+        isFortify = fortify;
+    }
 }

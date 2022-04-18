@@ -5,6 +5,12 @@ import Model.Terrains.Terrain;
 
 public class Unit {
     private UnitType myType;
+    private boolean isSleep;
+    private Terrain terrain;
+    private Civilization civilization;
+
+    private int remainingMove;
+
 
     public UnitType getMyType() {
         return myType;
@@ -38,10 +44,6 @@ public class Unit {
         this.civilization = civilization;
     }
 
-    private boolean isSleep;
-    private Terrain terrain;
-    private Civilization civilization;
-
     public Unit(UnitType myType, Terrain terrain, Civilization civilization) {
         this.myType = myType;
         this.terrain = terrain;
@@ -63,5 +65,13 @@ public class Unit {
 
     public void delete() {
 
+    }
+
+    public int getRemainingMove() {
+        return remainingMove;
+    }
+
+    public void setRemainingMove(int remainingMove) {
+        this.remainingMove = remainingMove;
     }
 }
