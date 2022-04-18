@@ -6,9 +6,7 @@ import java.util.ArrayList;
 
 public class MainMap extends Map {
     public void updateMap() {
-        //bere GameDatabase.civilization.map ok kone
-        Terrain terrain;
-        terrain.
+        Terrain terrain;//TODO in terrain ye forech az MainMap miad Migire
     }
     public MainMap() {
         //TODO GENERATE MAP

@@ -6,6 +6,8 @@ import Model.TerrainFeatures.TerrainFeature;
 import Model.Terrains.Terrain;
 import Model.Terrains.TerrainState;
 import Model.Terrains.TerrainType;
+import Model.Units.MilitaryUnit;
+import Model.Units.Unit;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,11 @@ public class City extends Terrain {
     private Product production;
     private Food food;
     private Gold gold;
+
+    public City(TerrainType type, TerrainState state, ArrayList<TerrainFeature> terrainFeatures, ArrayList<Resource> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> citizens, MilitaryUnit militaryUnit) {
+        super(type, state, terrainFeatures, resources, building, civilianUnit, civilization, citizens, militaryUnit);
+    }
+
 
     public boolean isCapital() {
         return isCapital;
@@ -66,12 +73,9 @@ public class City extends Terrain {
     private ArrayList<Terrain> terrains;
     private ArrayList<Citizen> citizens;
 
-    public City(TerrainType type, TerrainState state, ArrayList<TerrainFeature> terrainFeatures, ArrayList<Resource> resources, Building building) {
-        super(type, state, terrainFeatures, resources, building);
-    }
-
     public String showCity()
     {
         return "";
     }
+
 }
