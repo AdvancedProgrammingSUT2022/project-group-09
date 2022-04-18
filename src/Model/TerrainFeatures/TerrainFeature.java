@@ -1,6 +1,8 @@
 package Model.TerrainFeatures;
 
-public class TerrainFeature{
+import Model.Terrains.Terrain;
+
+public class TerrainFeature {
     private TerrainFeatureType myType;
 
     public TerrainFeatureType getMyType() {

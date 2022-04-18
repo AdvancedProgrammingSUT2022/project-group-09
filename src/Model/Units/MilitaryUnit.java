@@ -5,10 +5,12 @@ import Model.Terrains.Terrain;
 
 public class MilitaryUnit extends Unit {
     private boolean isInAlert;
+    private boolean isInSiege;
     private boolean isFortify;
 
     public MilitaryUnit(UnitType myType, Terrain terrain, Civilization civilization) {
         super(myType, terrain, civilization);
+        this.isInSiege = true;
     }
 
     public void attack() {
@@ -45,5 +47,13 @@ public class MilitaryUnit extends Unit {
 
     public void setFortify(boolean fortify) {
         isFortify = fortify;
+    }
+
+    public boolean isInSiege() {
+        return isInSiege;
+    }
+
+    public void setInSiege(boolean inSiege) {
+        isInSiege = inSiege;
     }
 }
