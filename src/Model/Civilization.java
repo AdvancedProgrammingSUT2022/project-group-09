@@ -10,6 +10,7 @@ public class Civilization {
     private Technologies technologies;
     private Gold gold;
     private Science science;
+    private Happiness happiness;
 
     public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, Technologies technologies, Gold gold, Science science) {
         this.map = map;
