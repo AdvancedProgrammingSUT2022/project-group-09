@@ -13,6 +13,7 @@ public class MilitaryUnit extends Unit {
         this.isInSiege = true;
     }
 
+    
     public void attack() {
 
     }
