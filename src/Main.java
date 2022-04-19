@@ -2,18 +2,29 @@ import Controller.GameControllerPackage.GameMenuController;
 import Controller.LoginMenuController;
 import Controller.MainMenuController;
 import Controller.ProfileMenuController;
+import Controller.UserDatabase;
+import Model.User;
 import View.*;
+import com.google.gson.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
+import java.net.UnknownServiceException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Main {
-
     public static void main(String[] args) {
+        UserDatabase.loadUsers();
         Scanner scanner = new Scanner(System.in);
         LoginMenuView loginMenu = new LoginMenuView(scanner, new LoginMenuController());
         MainMenuView mainMenu = new MainMenuView(scanner, new MainMenuController());
@@ -25,7 +36,6 @@ public class Main {
             profileMenu.run();
             gameMenu.run();
         }
-        System.out.println(CurrentMenu.get());
+        UserDatabase.saveUsers();
     }
-
 }

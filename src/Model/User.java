@@ -46,4 +46,12 @@ public class User {
         this.highScore = 0;
     }
 
+    @Override
+    public String toString() {
+        return "username : " + username + "\n" +
+                "password : " + password + "\n" +
+                "nickname : " + nickname + "\n" +
+                "highscore : " + highScore;
+    }
+
 }

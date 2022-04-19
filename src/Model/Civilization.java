@@ -10,6 +10,7 @@ public class Civilization {
     private Technologies technologies;
     private Gold gold;
     private Science science;
+
     private Happiness happiness;
 
     public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, Technologies technologies, Gold gold, Science science) {
@@ -63,6 +64,14 @@ public class Civilization {
 
     public String showInfo() {
         return "";
+    }
+
+    public Happiness getHappiness() {
+        return happiness;
+    }
+
+    public void setHappiness(Happiness happiness) {
+        this.happiness = happiness;
     }
 
     //TODO complete all information functions
