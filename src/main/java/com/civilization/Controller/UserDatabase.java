@@ -22,12 +22,13 @@ public class UserDatabase {
         try {
             File myObj = new File("UserDatabase.json");
             if(!myObj.exists())
-                myObj.createNewFile(); 
+                myObj.createNewFile();
             List<User> users1 = new ArrayList<>();
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get("UserDatabase.json"));
-            if (gson.fromJson(reader, User[].class) != null)
-                users1 = Arrays.asList(gson.fromJson(reader, User[].class));
+            User[] tempList = gson.fromJson(reader, User[].class);
+            if (tempList != null)
+                users1 = Arrays.asList(tempList);
             ArrayList<User> userArrayList = new ArrayList<>(users1);
             reader.close();
             users.addAll(userArrayList);
