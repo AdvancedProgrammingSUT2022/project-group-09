@@ -1,7 +1,6 @@
 package com.civilization.Controller;
 
 import com.civilization.View.CurrentMenu;
-import com.sun.tools.javac.Main;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
