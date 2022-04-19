@@ -13,7 +13,7 @@ public enum ProfileMenuRegex {
     //    CHANGEPASSWORD3("^profile change -p -c \\<(?<currentpassword>[\\S]+)\\> -n \\<(?<newpassword>[\\S]+)\\>$"),
 //    CHANGEPASSWORD4("^profile change -p -n \\<(?<newpassword>[\\S]+)\\> -c \\<(?<currentpassword>[\\S]+)\\>$"),
     SHOWCURRENTMENU("menu show-current"),
-    ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu)"),
+    ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu))"),
     EXIT("^menu exit");
 
     private final String regex;

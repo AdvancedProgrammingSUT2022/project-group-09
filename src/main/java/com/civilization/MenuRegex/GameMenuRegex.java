@@ -9,7 +9,7 @@ public enum GameMenuRegex {
     TURNCHEAT1("^increase (--turn|-t) (?<amount>-?[\\d]+)$"),
     GOLDCHEAT1("^increase (--gold|-g) (?<amount>-?[\\d]+)$"),
     SHOWCURRENTMENU("^menu show-current$"),
-    ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu)$"),
+    ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu))$"),
     EXIT("^menu exit$");
 
     private final String regex;

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public enum MainMenuRegex {
     PLAYGAME("^play game (--player\\d \\S+)*$"),
     SHOWCURRENTMENU("menu show-current"),
-    ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu)"),
+    ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu))"),
     LOGOUT("logout"),
     EXIT("^menu exit");
 
@@ -24,7 +24,7 @@ public enum MainMenuRegex {
         for (String s : afterSplit) {
             players.put(Integer.parseInt(s.substring(6, 7)), s.substring(8)); // hashmap baraye inke bebinim player chandome tartibesho ok konim
         }
-        ArrayList<String> playerNames = new ArrayList<String>();
+        ArrayList<String> playerNames = new ArrayList<>();
         for (int i = 1; i <= players.size(); i++) {
             if (players.get(i) == null)
                 return null;
