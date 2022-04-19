@@ -16,9 +16,18 @@ public class City extends Terrain {
     private Product production;
     private Food food;
     private Gold gold;
+    private ArrayList<Terrain> terrains;
+    private ArrayList<Citizen> citizens;
 
-    public City(TerrainType type, TerrainState state, ArrayList<TerrainFeature> terrainFeatures, ArrayList<Resource> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> citizens, MilitaryUnit militaryUnit) {
-        super(type, state, terrainFeatures, resources, building, civilianUnit, civilization, citizens, militaryUnit);
+
+    public City(TerrainType type, TerrainState state, ArrayList<TerrainFeature> terrainFeatures, ArrayList<Resource> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> cityCitizens, MilitaryUnit militaryUnit, City city, boolean isCapital, ArrayList<Terrain> terrains, ArrayList<Citizen> terrainCitizens) {
+        super(type, state, terrainFeatures, resources, building, civilianUnit, civilization, cityCitizens, militaryUnit, city);
+        this.isCapital = isCapital;
+        this.production = new Product();
+        this.food = new Food();
+        this.gold = new Gold();
+        this.terrains = terrains;
+        this.citizens = terrainCitizens;
     }
 
 
@@ -70,11 +79,7 @@ public class City extends Terrain {
         this.citizens = citizens;
     }
 
-    private ArrayList<Terrain> terrains;
-    private ArrayList<Citizen> citizens;
-
-    public String showCity()
-    {
+    public String showCity() {
         return "";
     }
 

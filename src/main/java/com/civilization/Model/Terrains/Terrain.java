@@ -2,6 +2,7 @@ package com.civilization.Model.Terrains;
 
 import com.civilization.Model.Buildings.Building;
 import com.civilization.Model.Citizen;
+import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
@@ -21,6 +22,8 @@ public class Terrain implements CitizenCanWork {
     private Unit civilianUnit;
 
     private Civilization civilization;
+
+    private City city;
 
     private ArrayList<Citizen> citizens;
     private MilitaryUnit militaryUnit;
@@ -90,7 +93,7 @@ public class Terrain implements CitizenCanWork {
         this.building = building;
     }
 
-    public Terrain(TerrainType type, TerrainState state, ArrayList<TerrainFeature> terrainFeatures, ArrayList<Resource> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> citizens, MilitaryUnit militaryUnit) {
+    public Terrain(TerrainType type, TerrainState state, ArrayList<TerrainFeature> terrainFeatures, ArrayList<Resource> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> citizens, MilitaryUnit militaryUnit, City city) {
         this.type = type;
         this.state = state;
         this.terrainFeatures = terrainFeatures;
@@ -100,6 +103,7 @@ public class Terrain implements CitizenCanWork {
         this.civilization = civilization;
         this.citizens = citizens;
         this.militaryUnit = militaryUnit;
+        this.city = city;
     }
 
     public Civilization getCivilization() {
@@ -108,5 +112,13 @@ public class Terrain implements CitizenCanWork {
 
     public void setCivilization(Civilization civilization) {
         this.civilization = civilization;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }
