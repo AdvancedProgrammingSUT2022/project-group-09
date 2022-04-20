@@ -8,8 +8,9 @@ public class Unit {
     private boolean isSleep;
     private Terrain terrain;
     private Civilization civilization;
-
     private int remainingMove;
+
+
 
 
     public UnitType getMyType() {

@@ -2,18 +2,30 @@ package com.civilization.Model;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Terrains.Terrain;
+import com.civilization.Model.Terrains.TerrainState;
+
+import java.util.ArrayList;
 
 public class Map {
     protected final Terrain[][] terrains = new Terrain[30][30];
 
+    protected Civilization civilization;
+
     public void updateExploration() {
         int horizental = 80;
         int vertical = 50;
+        setVisibleTerrain();
         for (int i = 0; i < vertical; i++)
             for (int j = 0; j < horizental; j++) {
                 Terrain targetTerrain = terrains[i][j];
-                //badbakht shodim
+                if (targetTerrain.getState() == TerrainState.VISIBLE)
+                    targetTerrain.setState(TerrainState.KNOWN);
+                setVisibleTerrain();
             }
+    }
+
+    private void setVisibleTerrain() {
+        //biad tebgh unit ha terrain haei ke visible and ro darare set kone
     }
 
 
