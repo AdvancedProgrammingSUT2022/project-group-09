@@ -1,9 +1,21 @@
 package com.civilization.Model;
 
+import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Terrains.Terrain;
 
 public class Map {
-    private final Terrain[][] terrains = new Terrain[30][30];
+    protected final Terrain[][] terrains = new Terrain[30][30];
+
+    public void updateExploration() {
+        int horizental = 80;
+        int vertical = 50;
+        for (int i = 0; i < vertical; i++)
+            for (int j = 0; j < horizental; j++) {
+                Terrain targetTerrain = terrains[i][j];
+                //badbakht shodim
+            }
+    }
+
 
     public void setTerrain(int x, int y, Terrain terrain) {
 
@@ -29,8 +41,7 @@ public class Map {
         return false;
     }
 
-    public String showmap()
-    {
+    public String showmap() {
         return "";
     }
 }

@@ -74,6 +74,14 @@ public class Civilization {
         this.happiness = happiness;
     }
 
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
     //TODO complete all information functions
 
 
