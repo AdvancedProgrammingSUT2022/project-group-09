@@ -279,6 +279,8 @@ public enum TechnologyType {
             //6221061078032721
             //EASTER EGG
             //payam taebi shomare kart
+            //man I'm your servant
+            //anything which is your karam please pour
         }
     }, new ArrayList<TechnologyType>() {
         {
