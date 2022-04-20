@@ -4,8 +4,7 @@ import com.civilization.Model.Buildings.Building;
 import com.civilization.Model.Citizen;
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
-import com.civilization.Model.Resources.Resource;
-import com.civilization.Model.TerrainFeatures.TerrainFeature;
+import com.civilization.Model.Resources.ResourceType;
 import com.civilization.Model.TerrainFeatures.TerrainFeatureType;
 import com.civilization.Model.Units.MilitaryUnit;
 import com.civilization.Model.Units.Unit;
@@ -16,11 +15,8 @@ public class Terrain implements CitizenCanWork {
 
     private TerrainType type;
     private TerrainState state;
-    //private ArrayList<TerrainFeature> terrainFeatures;
-    //in ezafi bood zadam pak she
-
     private ArrayList<TerrainFeatureType> terrainFeatures;
-    private ArrayList<Resource> resources;
+    private ArrayList<ResourceType> resources;
     private Building building;
 
     private Unit civilianUnit;
@@ -73,12 +69,19 @@ public class Terrain implements CitizenCanWork {
         this.state = state;
     }
 
+    public ArrayList<TerrainFeatureType> getTerrainFeatures() {
+        return terrainFeatures;
+    }
 
-    public ArrayList<Resource> getResources() {
+    public void setTerrainFeatures(ArrayList<TerrainFeatureType> terrainFeatures) {
+        this.terrainFeatures = terrainFeatures;
+    }
+
+    public ArrayList<ResourceType> getResources() {
         return resources;
     }
 
-    public void setResources(ArrayList<Resource> resources) {
+    public void setResources(ArrayList<ResourceType> resources) {
         this.resources = resources;
     }
 
@@ -90,7 +93,7 @@ public class Terrain implements CitizenCanWork {
         this.building = building;
     }
 
-    public Terrain(TerrainType type, TerrainState state, ArrayList<TerrainFeatureType> terrainFeatures, ArrayList<Resource> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> citizens, MilitaryUnit militaryUnit, City city) {
+    public Terrain(TerrainType type, TerrainState state, ArrayList<TerrainFeatureType> terrainFeatures, ArrayList<ResourceType> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> citizens, MilitaryUnit militaryUnit, City city) {
         this.type = type;
         this.state = state;
         this.terrainFeatures = terrainFeatures;
@@ -101,6 +104,18 @@ public class Terrain implements CitizenCanWork {
         this.citizens = citizens;
         this.militaryUnit = militaryUnit;
         this.city = city;
+    }
+    public Terrain(TerrainType type){
+        this.type = type;
+        this.state = TerrainState.VISIBLE;
+        this.terrainFeatures = null;
+        this.resources = null;
+        this.building = null;
+        this.civilianUnit = null;
+        this.civilization = null;
+        this.citizens = null;
+        this.militaryUnit = null;
+        this.city = null;
     }
 
     public Civilization getCivilization() {
@@ -117,80 +132,5 @@ public class Terrain implements CitizenCanWork {
 
     public void setCity(City city) {
         this.city = city;
-    }
-
-    public ArrayList<Terrain> getSurroundingTerrain() {
-        ArrayList<Terrain> terrains = new ArrayList<>();
-        int x, y;
-        if (getCivilization().getMap().getYpositionTerrain(this) % 2 == 0) {
-            x = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            y = getCivilization().getMap().getXpositionTerrain(this);
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-
-            x = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            y = getCivilization().getMap().getXpositionTerrain(this);
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-
-            x = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            y = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-
-            x = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            y = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-
-            x = getCivilization().getMap().getXpositionTerrain(this);
-            y = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-
-            x = getCivilization().getMap().getXpositionTerrain(this);
-            y = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-        } else {
-            x = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            y = getCivilization().getMap().getXpositionTerrain(this);
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-
-            x = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            y = getCivilization().getMap().getXpositionTerrain(this);
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-
-            x = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            y = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-
-            x = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            y = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-
-            x = getCivilization().getMap().getXpositionTerrain(this);
-            y = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-
-            x = getCivilization().getMap().getXpositionTerrain(this);
-            y = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
-        }
-        return terrains;
-    }
-
-    public ArrayList<TerrainFeatureType> getTerrainFeatures() {
-        return terrainFeatures;
-    }
-
-    public void setTerrainFeatures(ArrayList<TerrainFeatureType> terrainFeatures) {
-        this.terrainFeatures = terrainFeatures;
     }
 }

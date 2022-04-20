@@ -9,7 +9,8 @@ public class Resource {
         this.myType = myType;
     }
 
-    public ResourceMainType getMyMainType() {        return myMainType;
+    public ResourceMainType getMyMainType() {
+        return myMainType;
     }
 
     public void setMyMainType(ResourceMainType myMainType) {

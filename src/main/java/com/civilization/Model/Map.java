@@ -1,35 +1,22 @@
 package com.civilization.Model;
 
-import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
 
-import java.util.ArrayList;
-
 public class Map {
-    protected final Terrain[][] terrains = new Terrain[30][30];
+    protected final int row = 30, column = 30, length = 30; //length for graphic
+    protected final Terrain[][] terrains = new Terrain[row][column];
 
-    public Terrain[][] getTerrains() {
-        return terrains;
-    }
-
-    public Civilization getCivilization() {
-        return civilization;
-    }
-
-    public void setCivilization(Civilization civilization) {
-        this.civilization = civilization;
-    }
 
     protected Civilization civilization;
 
     public void updateExploration() {
-        int horizental = terrains[0].length;
-        int vertical = terrains.length;
+        int horizental = 80;
+        int vertical = 50;
         setVisibleTerrain();
-        for (Terrain[] terrain : terrains)
+        for (int i = 0; i < vertical; i++)
             for (int j = 0; j < horizental; j++) {
-                Terrain targetTerrain = terrain[j];
+                Terrain targetTerrain = terrains[i][j];
                 if (targetTerrain.getState() == TerrainState.VISIBLE)
                     targetTerrain.setState(TerrainState.KNOWN);
                 setVisibleTerrain();
@@ -37,68 +24,32 @@ public class Map {
     }
 
     private void setVisibleTerrain() {
-        int horizental = terrains[0].length;
-        int vertical = terrains.length;
-        for (Terrain[] value : terrains)
-            for (int j = 0; j < horizental; j++) {
-
-                if (value[j].getMilitaryUnit().getCivilization() == getCivilization())
-                    for (Terrain terrain : value[j].getMilitaryUnit().getVisibleTerrain()) {
-                        terrain.setState(TerrainState.VISIBLE);
-                    }
-                if (value[j].getCivilianUnit().getCivilization() == getCivilization())
-                    for (Terrain terrain : value[j].getCivilianUnit().getVisibleTerrain()) {
-                        terrain.setState(TerrainState.VISIBLE);
-                    }
-            }
+        //biad tebgh unit ha terrain haei ke visible and ro darare set kone
     }
 
 
     public void setTerrain(int x, int y, Terrain terrain) {
-        terrains[x][y] = terrain;
+
     }
 
     public Terrain getTerrain(int x, int y) {
-        return terrains[x][y];
+        return null;
     }
 
     public int getXpositionTerrain(Terrain terrain) {
-        int horizental = terrains[0].length;
-        int vertical = terrains.length;
-        for (int i = 0; i < vertical; i++)
-            for (int j = 0; j < horizental; j++) {
-                if (terrains[i][j] == terrain)
-                    return i;
-            }
-        System.err.println("ERROR! in getXpositionTerrain ");
-        throw new RuntimeException();
+        return 0;
     }
 
-    public int getYpositionTerrain(Terrain terrain) {
-        int horizental = terrains[0].length;
-        int vertical = terrains.length;
-        for (Terrain[] value : terrains)
-            for (int j = 0; j < horizental; j++) {
-                if (value[j] == terrain)
-                    return j;
-            }
-        System.err.println("ERROR! in getXpositionTerrain ");
-        throw new RuntimeException();
+    public int getypositionTerrain(Terrain terrain) {
+        return 0;
     }
 
     public boolean isValidTerran(Terrain terrain) {
-        int horizental = terrains[0].length;
-        int vertical = terrains.length;
-        for (Terrain[] value : terrains)
-            for (int j = 0; j < horizental; j++) {
-                if (value[j] == terrain)
-                    return true;
-            }
         return false;
     }
 
     public boolean isValidTerran(int x, int y) {
-        return x < terrains.length && x >= 0 && y < terrains[0].length && y >= 0;
+        return false;
     }
 
     public String showmap() {

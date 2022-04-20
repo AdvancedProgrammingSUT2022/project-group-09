@@ -1,8 +1,7 @@
 package com.civilization.Model;
 
 import com.civilization.Model.Buildings.Building;
-import com.civilization.Model.Resources.Resource;
-import com.civilization.Model.TerrainFeatures.TerrainFeature;
+import com.civilization.Model.Resources.ResourceType;
 import com.civilization.Model.TerrainFeatures.TerrainFeatureType;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
@@ -21,7 +20,7 @@ public class City extends Terrain {
     private ArrayList<Citizen> citizens;
 
 
-    public City(TerrainType type, TerrainState state, ArrayList<TerrainFeatureType> terrainFeatures, ArrayList<Resource> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> cityCitizens, MilitaryUnit militaryUnit, City city, boolean isCapital, ArrayList<Terrain> terrains, ArrayList<Citizen> terrainCitizens) {
+    public City(TerrainType type, TerrainState state, ArrayList<TerrainFeatureType> terrainFeatures, ArrayList<ResourceType> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> cityCitizens, MilitaryUnit militaryUnit, City city, boolean isCapital, ArrayList<Terrain> terrains, ArrayList<Citizen> terrainCitizens) {
         super(type, state, terrainFeatures, resources, building, civilianUnit, civilization, cityCitizens, militaryUnit, city);
         this.isCapital = isCapital;
         this.production = new Product();
