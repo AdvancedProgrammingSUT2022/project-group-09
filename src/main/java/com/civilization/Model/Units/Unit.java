@@ -1,7 +1,12 @@
 package com.civilization.Model.Units;
 
 import com.civilization.Model.Civilization;
+import com.civilization.Model.TerrainFeatures.TerrainFeatureType;
 import com.civilization.Model.Terrains.Terrain;
+import com.civilization.Model.Terrains.TerrainState;
+import com.civilization.Model.Terrains.TerrainType;
+
+import java.util.ArrayList;
 
 public class Unit {
     private UnitType myType;
@@ -9,8 +14,6 @@ public class Unit {
     private Terrain terrain;
     private Civilization civilization;
     private int remainingMove;
-
-
 
 
     public UnitType getMyType() {
@@ -75,4 +78,27 @@ public class Unit {
     public void setRemainingMove(int remainingMove) {
         this.remainingMove = remainingMove;
     }
+
+    public ArrayList<Terrain> getVisibleTerrain() {
+        ArrayList<Terrain> result = new ArrayList<>();
+        result.add(getTerrain());
+
+        ArrayList<Terrain> targetTerrainsBackUp = getTerrain().getSurroundingTerrain();
+        ArrayList<Terrain> targetTerrains = new ArrayList<>(targetTerrainsBackUp);
+        for (int i = 0; i < getMyType().getRange(); i++) {
+
+            for (Terrain targetTerrain : targetTerrainsBackUp) {
+                if (!result.contains(targetTerrain)) result.add(targetTerrain);
+
+                if (!(targetTerrain.getType() == TerrainType.MOUNTAIN ||
+                        targetTerrain.getType() == TerrainType.HILLS ||
+                        targetTerrain.getTerrainFeatures().contains(TerrainFeatureType.FOREST)))
+                    targetTerrains.addAll(targetTerrain.getSurroundingTerrain());
+            }
+            targetTerrainsBackUp = new ArrayList<>(targetTerrains);
+        }
+        return result;
+    }
+
+
 }

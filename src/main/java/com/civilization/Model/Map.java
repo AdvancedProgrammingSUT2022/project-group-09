@@ -9,15 +9,27 @@ import java.util.ArrayList;
 public class Map {
     protected final Terrain[][] terrains = new Terrain[30][30];
 
+    public Terrain[][] getTerrains() {
+        return terrains;
+    }
+
+    public Civilization getCivilization() {
+        return civilization;
+    }
+
+    public void setCivilization(Civilization civilization) {
+        this.civilization = civilization;
+    }
+
     protected Civilization civilization;
 
     public void updateExploration() {
-        int horizental = 80;
-        int vertical = 50;
+        int horizental = terrains[0].length;
+        int vertical = terrains.length;
         setVisibleTerrain();
-        for (int i = 0; i < vertical; i++)
+        for (Terrain[] terrain : terrains)
             for (int j = 0; j < horizental; j++) {
-                Terrain targetTerrain = terrains[i][j];
+                Terrain targetTerrain = terrain[j];
                 if (targetTerrain.getState() == TerrainState.VISIBLE)
                     targetTerrain.setState(TerrainState.KNOWN);
                 setVisibleTerrain();
@@ -25,32 +37,68 @@ public class Map {
     }
 
     private void setVisibleTerrain() {
-        //biad tebgh unit ha terrain haei ke visible and ro darare set kone
+        int horizental = terrains[0].length;
+        int vertical = terrains.length;
+        for (Terrain[] value : terrains)
+            for (int j = 0; j < horizental; j++) {
+
+                if (value[j].getMilitaryUnit().getCivilization() == getCivilization())
+                    for (Terrain terrain : value[j].getMilitaryUnit().getVisibleTerrain()) {
+                        terrain.setState(TerrainState.VISIBLE);
+                    }
+                if (value[j].getCivilianUnit().getCivilization() == getCivilization())
+                    for (Terrain terrain : value[j].getCivilianUnit().getVisibleTerrain()) {
+                        terrain.setState(TerrainState.VISIBLE);
+                    }
+            }
     }
 
 
     public void setTerrain(int x, int y, Terrain terrain) {
-
+        terrains[x][y] = terrain;
     }
 
     public Terrain getTerrain(int x, int y) {
-        return null;
+        return terrains[x][y];
     }
 
     public int getXpositionTerrain(Terrain terrain) {
-        return 0;
+        int horizental = terrains[0].length;
+        int vertical = terrains.length;
+        for (int i = 0; i < vertical; i++)
+            for (int j = 0; j < horizental; j++) {
+                if (terrains[i][j] == terrain)
+                    return i;
+            }
+        System.err.println("ERROR! in getXpositionTerrain ");
+        throw new RuntimeException();
     }
 
-    public int getypositionTerrain(Terrain terrain) {
-        return 0;
+    public int getYpositionTerrain(Terrain terrain) {
+        int horizental = terrains[0].length;
+        int vertical = terrains.length;
+        for (Terrain[] value : terrains)
+            for (int j = 0; j < horizental; j++) {
+                if (value[j] == terrain)
+                    return j;
+            }
+        System.err.println("ERROR! in getXpositionTerrain ");
+        throw new RuntimeException();
     }
 
     public boolean isValidTerran(Terrain terrain) {
+        int horizental = terrains[0].length;
+        int vertical = terrains.length;
+        for (Terrain[] value : terrains)
+            for (int j = 0; j < horizental; j++) {
+                if (value[j] == terrain)
+                    return true;
+            }
         return false;
     }
 
     public boolean isValidTerran(int x, int y) {
-        return false;
+        return x < terrains.length && x >= 0 && y < terrains[0].length && y >= 0;
     }
 
     public String showmap() {
