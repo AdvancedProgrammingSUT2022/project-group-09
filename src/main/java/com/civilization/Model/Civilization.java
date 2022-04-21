@@ -9,7 +9,10 @@ import com.civilization.Model.Resources.Resource;
 import java.util.ArrayList;
 
 public class Civilization {
+
     private Map map;//faghat baraye showmap
+    private String name;
+    private Map map;
     private ArrayList<City> cities;
     private ArrayList<War> wars;
     private Technologies technologies;
@@ -38,7 +41,7 @@ public class Civilization {
     }
 
     public ArrayList<City> getCities() {
-        return cities;
+        return this.cities;
     }
 
     public void setCities(ArrayList<City> cities) {
@@ -46,7 +49,7 @@ public class Civilization {
     }
 
     public ArrayList<War> getWars() {
-        return wars;
+        return this.wars;
     }
 
     public void setWars(ArrayList<War> wars) {
@@ -54,7 +57,7 @@ public class Civilization {
     }
 
     public Technologies getTechnologies() {
-        return technologies;
+        return this.technologies;
     }
 
     public void setTechnologies(Technologies technologies) {
@@ -62,7 +65,7 @@ public class Civilization {
     }
 
     public Gold getGold() {
-        return gold;
+        return this.gold;
     }
 
     public void setGold(Gold gold) {
@@ -70,7 +73,7 @@ public class Civilization {
     }
 
     public Science getScience() {
-        return science;
+        return this.science;
     }
 
     public void setScience(Science science) {
@@ -82,7 +85,7 @@ public class Civilization {
     }
 
     public Happiness getHappiness() {
-        return happiness;
+        return this.happiness;
     }
 
     public void setHappiness(Happiness happiness) {
@@ -90,11 +93,19 @@ public class Civilization {
     }
 
     public Map getMap() {
-        return map;
+        return this.map;
     }
 
     public void setMap(Map map) {
         this.map = map;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     //TODO complete all information functions

@@ -240,4 +240,13 @@ public class Terrain implements CitizenCanWork {
     public int getYPosition() {
         return GameDataBase.getMainMap().getYpositionTerrain(this);
     }
+
+    public String getDetails() {
+        StringBuilder string = new StringBuilder();
+        string.append("this Terrain belongs to: " + this.civilization.getName() + "\n");
+        string.append("Terrain Type is: " + this.type + "\n");
+        string.append("Terrain Features are: " + this.terrainFeatures + "\n");
+        string.append("Terrain Resources are: " + this.resources + "\n");
+        return "";
+    }
 }
