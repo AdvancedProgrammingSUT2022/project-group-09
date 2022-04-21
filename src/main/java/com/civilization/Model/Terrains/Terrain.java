@@ -212,4 +212,6 @@ public class Terrain implements CitizenCanWork {
     public int getYpositionTerrain() {
         return getCivilization().getMap().getYpositionTerrain(this);
     }
+
+
 }
