@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MainMap extends Map {
-    private ArrayList<Coordination> drought = new ArrayList<>();
+    private final ArrayList<Coordination> drought = new ArrayList<>();
     private int numberOfDrought;
 
 
@@ -75,7 +75,7 @@ public class MainMap extends Map {
         }
     }
 
-    public boolean isCoordinationUsed(int x, int y) {
+    private boolean isCoordinationUsed(int x, int y) {
         for (Coordination coordination : drought) {
             if (coordination.getX() == x && coordination.getY() == y) {
                 return true;
