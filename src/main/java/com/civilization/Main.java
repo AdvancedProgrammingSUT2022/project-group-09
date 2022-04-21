@@ -17,7 +17,5 @@ public class Main {
         //     gameMenu.run();
         // }
         // UserDatabase.saveUsers();
-        Map map = new Map();
-        System.out.print(map.showmap(10, 10));
     }
 }
