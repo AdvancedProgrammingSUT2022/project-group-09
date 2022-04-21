@@ -193,4 +193,12 @@ public class Terrain implements CitizenCanWork {
     public void setTerrainFeatures(ArrayList<TerrainFeatureType> terrainFeatures) {
         this.terrainFeatures = terrainFeatures;
     }
+
+    public int getXpositionTerrain() {
+        return getCivilization().getMap().getXpositionTerrain(this);
+    }
+
+    public int getYpositionTerrain() {
+        return getCivilization().getMap().getYpositionTerrain(this);
+    }
 }

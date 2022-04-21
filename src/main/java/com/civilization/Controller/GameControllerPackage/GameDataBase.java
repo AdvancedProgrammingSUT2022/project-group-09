@@ -37,4 +37,12 @@ public class GameDataBase {
     public static void setCivilizations(HashMap<User, Civilization> civilizations) {
         GameDataBase.civilizations = civilizations;
     }
+
+    public static MainMap getMainMap() {
+        return mainMap;
+    }
+
+    public static void setMainMap(MainMap mainMap) {
+        GameDataBase.mainMap = mainMap;
+    }
 }
