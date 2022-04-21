@@ -22,6 +22,8 @@ public class MainMap extends Map {
                 for (int j = 0; j < horizental; j++) {
                     Terrain targetTerrain = GameDataBase.getCivilizations().get(q).getMap().getTerrain(i, j);
                     Terrain mainMapTerrain = terrains[i][j];
+                    if (targetTerrain == null)
+                        targetTerrain = new Terrain();
                     //TADA .. !
                     targetTerrain.setBuilding(mainMapTerrain.getBuilding());
                     targetTerrain.setCitizens(mainMapTerrain.getCitizens());
@@ -68,8 +70,7 @@ public class MainMap extends Map {
             int y = coordination.getY();
             if (getTerrain(x, y).getCivilization() == null) {
                 getTerrain(x, y).setCivilization(GameDataBase.getCivilizations().get(i));
-            }
-            else {
+            } else {
                 i--;
             }
         }

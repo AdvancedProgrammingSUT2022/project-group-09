@@ -5,6 +5,8 @@ public class User {
     private String password;
     private String nickname;
 
+    private int highScore;
+
     public String getUsername() {
         return username;
     }
@@ -37,7 +39,6 @@ public class User {
         this.highScore = highScore;
     }
 
-    private int highScore;
 
     public User(String username, String password, String nickname) {
         this.username = username;

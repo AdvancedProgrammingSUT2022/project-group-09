@@ -101,7 +101,8 @@ public class Terrain implements CitizenCanWork {
         this.militaryUnit = militaryUnit;
         this.city = city;
     }
-    public Terrain(TerrainType type){
+
+    public Terrain(TerrainType type) {
         this.type = type;
         this.state = TerrainState.VISIBLE;
         this.terrainFeatures = null;
@@ -112,6 +113,10 @@ public class Terrain implements CitizenCanWork {
         this.citizens = null;
         this.militaryUnit = null;
         this.city = null;
+    }
+
+    public Terrain() {
+
     }
 
     public Civilization getCivilization() {
