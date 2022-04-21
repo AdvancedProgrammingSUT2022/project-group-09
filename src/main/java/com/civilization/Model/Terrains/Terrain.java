@@ -121,4 +121,13 @@ public class Terrain implements CitizenCanWork {
     public void setCity(City city) {
         this.city = city;
     }
+
+    public String getDetails() {
+        StringBuilder string = new StringBuilder();
+        string.append("this Terrain belongs to: " + this.civilization.getName() + "\n");
+        string.append("Terrain Type is: " + this.type + "\n");
+        string.append("Terrain Features are: " + this.terrainFeatures + "\n");
+        string.append("Terrain Resources are: " + this.resources + "\n");
+        return "";
+    }
 }

@@ -11,13 +11,15 @@ public class Map {
         for (int i = 0; i < terrains.length; i++) {
             for (int j = 0; j < terrains[i].length; j++) {
                 if (j > 12) {
-                    terrains[i][j] = new Terrain(TerrainType.PLAIN, TerrainState.KNOWN, null, null, null, null, null, null, null, null);
+                    terrains[i][j] = new Terrain(TerrainType.PLAIN, TerrainState.FOGOFWAR, null, null, null, null, null,
+                            null, null, null);
                 } else {
-                    terrains[i][j] = new Terrain(TerrainType.SNOW, TerrainState.KNOWN, null, null, null, null, null, null, null, null);
+                    terrains[i][j] = new Terrain(TerrainType.SNOW, TerrainState.KNOWN , null, null, null, null, null,
+                            null, null, null);
                 }
             }
         }
-        //TODO change constructor
+        // TODO change constructor
     }
 
     public void updateExploration() {
@@ -26,7 +28,7 @@ public class Map {
         for (int i = 0; i < vertical; i++) {
             for (int j = 0; j < horizental; j++) {
                 Terrain targetTerrain = terrains[i][j];
-                //badbakht shodim
+                // badbakht shodim
             }
         }
     }
@@ -77,14 +79,39 @@ public class Map {
         return ConsoleColors.RESET;
     }
 
-    public String showmap(int x, int y) {
-        //creating mapString
-        String[][] mapString = new String[21][51];
-        for (int i = 0; i < mapString.length; i++) {
-            for (int j = 0; j < mapString[i].length; j++) {
-                mapString[i][j] = " ";
+    private void drawHex(String[][] mapString, int istart, int jstart) {
+        for (int k = 2; k > -1; k--) {
+            mapString[istart + 2 - k][jstart + k] = "/";
+            mapString[istart + 2 - k][jstart + 10 - k] = "\\";
+            mapString[istart + 5 - k][jstart + 2 - k] = "\\";
+            mapString[istart + 5 - k][jstart + 8 + k] = "/";
+        }
+    }
+
+    private void drawMainDetails(String[][] mapString, int istart, int jstart, int xCenter, int yCenter,
+            String backgroundColor) {
+        for (int k = 2; k > -1; k--) {
+            for (int z = jstart + k + 1; z < jstart + k + 1 + 5 + 4 - 2 * k; z++) {
+                mapString[istart + 2 - k][z] = backgroundColor + " " + ConsoleColors.RESET;
+                mapString[istart + 3 + k][z] = backgroundColor + " " + ConsoleColors.RESET;
             }
         }
+
+        if (xCenter / 10 != 0)
+            mapString[istart + 2][jstart + 3] = ConsoleColors.BLACK + backgroundColor + xCenter / 10
+                    + ConsoleColors.RESET;
+        mapString[istart + 2][jstart + 4] = ConsoleColors.BLACK + backgroundColor + xCenter % 10 + ConsoleColors.RESET;
+        mapString[istart + 2][jstart + 5] = ConsoleColors.BLACK + backgroundColor + "," + ConsoleColors.RESET;
+        if (yCenter / 10 != 0)
+            mapString[istart + 2][jstart + 6] = ConsoleColors.BLACK + backgroundColor + yCenter / 10
+                    + ConsoleColors.RESET;
+        mapString[istart + 2][jstart + 7] = ConsoleColors.BLACK + backgroundColor + yCenter % 10 + ConsoleColors.RESET;
+        for (int k = 0; k < 5; k++) {
+            mapString[istart + 5][jstart + 3 + k] = backgroundColor + "_" + ConsoleColors.RESET;
+        }
+    }
+
+    private void drawMap(String[][] mapString, int x, int y) {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 5; j++) {
@@ -102,30 +129,35 @@ public class Map {
                 if (j % 2 == 1) {
                     istart += 3;
                 }
-                for (int k = 2; k > -1; k--) {
-                    mapString[istart + 2 - k][jstart + k] = "/";
-                    mapString[istart + 2 - k][jstart + 10 - k] = "\\";
-                    mapString[istart + 5 - k][jstart + 2 - k] = "\\";
-                    mapString[istart + 5 - k][jstart + 8 + k] = "/";
+
+                drawHex(mapString, istart, jstart);
+
+                if (terrains[x + i][y + j].getState() == TerrainState.FOGOFWAR) {
+                    backgroundColor = ConsoleColors.GRAY_BACKGROUND;
                 }
-                for (int k = 2; k > -1; k--) {
-                    for (int z = jstart + k + 1; z < jstart + k + 1 + 5 + 4 - 2 * k; z++) {
-                        mapString[istart + 2 - k][z] = backgroundColor + " " + ConsoleColors.RESET;
-                        mapString[istart + 3 + k][z] = backgroundColor + " " + ConsoleColors.RESET;
-                    }
-                }
-                if ((x + i) / 10 != 0)
-                    mapString[istart + 2][jstart + 3] = ConsoleColors.BLACK + backgroundColor + (x + i) / 10 + ConsoleColors.RESET;
-                mapString[istart + 2][jstart + 4] = ConsoleColors.BLACK + backgroundColor + (x + i) % 10 + ConsoleColors.RESET;
-                mapString[istart + 2][jstart + 5] = ConsoleColors.BLACK + backgroundColor + "," + ConsoleColors.RESET;
-                if ((y + j) / 10 != 0)
-                    mapString[istart + 2][jstart + 6] = ConsoleColors.BLACK + backgroundColor + (y + j) / 10 + ConsoleColors.RESET;
-                mapString[istart + 2][jstart + 7] = ConsoleColors.BLACK + backgroundColor + (y + j) % 10 + ConsoleColors.RESET;
-                for (int k = 0; k < 5; k++) {
-                    mapString[istart + 5][jstart + 3 + k] = backgroundColor + "_" + ConsoleColors.RESET;
+
+                drawMainDetails(mapString, istart, jstart, x + i, y + j, backgroundColor);
+
+                if (terrains[x + i][y + j].getState() == TerrainState.VISIBLE) {
+                    // TODO set name in civilization constructor
+                    mapString[istart + 1][jstart + 5] = backgroundColor
+                            + terrains[x + i][y + j].getCivilization().getName().charAt(0) + ConsoleColors.RESET;
                 }
             }
         }
+
+    }
+
+    public String showmap(int x, int y) {
+        // creating mapString
+        String[][] mapString = new String[21][51];
+        for (int i = 0; i < mapString.length; i++) {
+            for (int j = 0; j < mapString[i].length; j++) {
+                mapString[i][j] = " ";
+            }
+        }
+
+        drawMap(mapString, x, y);
 
         StringBuilder mapStringBuilder = new StringBuilder();
         for (int i = 0; i < mapString.length; i++) {
