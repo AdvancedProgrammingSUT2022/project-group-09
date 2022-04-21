@@ -2,7 +2,6 @@ package com.civilization.Model;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Terrains.Terrain;
-import sun.jvm.hotspot.types.CIntegerType;
 
 import java.util.ArrayList;
 
