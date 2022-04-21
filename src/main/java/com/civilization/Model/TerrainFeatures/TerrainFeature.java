@@ -1,19 +1,59 @@
 package com.civilization.Model.TerrainFeatures;
 
-import com.civilization.Model.Terrains.Terrain;
+import com.civilization.Model.Resources.Resource;
+import com.civilization.Model.Resources.TerrainTypeOrTerrainFeatureType;
 
-public class TerrainFeature {
-    private TerrainFeatureType myType;
+import java.util.ArrayList;
 
-    public TerrainFeatureType getMyType() {
-        return myType;
+public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
+    FLOODPLAINS(2, 0, 0, -33, 1, new ArrayList<Resource>() {
+        {
+            add(Resource.WHEAT);
+            add(Resource.SUGAR);
+        }
+    }),
+    FOREST(1, 1, 0, 25, 2, new ArrayList<Resource>() {
+        {
+            add(Resource.DEER);
+            add(Resource.FURS);
+            add(Resource.DYES);
+            add(Resource.SILK);
+        }
+    }),
+    ICE(0, 0, 0, 0, 99999, null),
+    JUNGLE(1, -1, 0, 25, 2, new ArrayList<Resource>() {
+        {
+            add(Resource.BANANA);
+            add(Resource.GEMS);
+            add(Resource.DYES);
+        }
+    }),
+    MARSH(-1, 0, 0, -33, 2, new ArrayList<Resource>() {
+        {
+            add(Resource.SUGAR);
+        }
+    }),
+    OASIS(3, 0, 1, -33, 1, null),
+    RIVER(0, 0, 1, 0, -1, null);
+    //TODO... -1 -> all remanining points, 999999 -> impossible
+
+    TerrainFeature(int food, int product, int gold, int combatModifier, int MP, ArrayList<Resource> possibleResources) {
+        this.food = food;
+        this.product = product;
+        this.gold = gold;
+        this.MP = MP;
+        this.combatModifier = combatModifier;
+        this.possibleResources = possibleResources;
     }
 
-    public void setMyType(TerrainFeatureType myType) {
-        this.myType = myType;
-    }
+    final int food;
+    final int product;
+    final int gold;
+    final int MP;
+    final int combatModifier;
+    final ArrayList<Resource> possibleResources;
 
-    public TerrainFeature(TerrainFeatureType myType) {
-        this.myType = myType;
+    public ArrayList<Resource> getPossibleResources() {
+        return possibleResources;
     }
 }

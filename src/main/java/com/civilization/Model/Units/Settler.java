@@ -14,8 +14,8 @@ public class Settler extends Unit {
     }
 
     public void foundCity() {
-        City city = new City(getTerrain(), new ArrayList<>());
-        GameDataBase.getMainMap().setTerrain(getTerrain().getXpositionTerrain(), getTerrain().getYpositionTerrain(), city);
+      //  City city = new City(getTerrain(), new ArrayList<>());
+      //  GameDataBase.getMainMap().setTerrain(getTerrain().getXpositionTerrain(), getTerrain().getYpositionTerrain(), city);
     }
 
 }

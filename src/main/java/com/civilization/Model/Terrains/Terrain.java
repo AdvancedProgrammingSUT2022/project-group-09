@@ -1,59 +1,63 @@
 package com.civilization.Model.Terrains;
 
-import com.civilization.Model.Buildings.Building;
-import com.civilization.Model.Citizen;
+import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
-import com.civilization.Model.Resources.ResourceType;
-import com.civilization.Model.TerrainFeatures.TerrainFeatureType;
+import com.civilization.Model.Improvements.Improvement;
+import com.civilization.Model.Resources.Resource;
+import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Units.MilitaryUnit;
 import com.civilization.Model.Units.Unit;
 
 import java.util.ArrayList;
 
 public class Terrain implements CitizenCanWork {
-
+    private Improvement improvement;
+    private boolean hasRoad;
     private TerrainType type;
     private TerrainState state;
-    //private ArrayList<TerrainFeature> terrainFeatures;
-    //in ezafi bood zadam pak she
-
-    private ArrayList<TerrainFeatureType> terrainFeatures;
-    private ArrayList<ResourceType> resources;
-    private Building building;
-
+    private ArrayList<TerrainFeature> terrainFeatures;
+    private ArrayList<Resource> resources;
     private Unit civilianUnit;
-
-    private Civilization civilization;
-
-    private City city;
-
-    private ArrayList<Citizen> citizens;
     private MilitaryUnit militaryUnit;
 
-    public ArrayList<Citizen> getCitizens() {
-        return citizens;
+
+    public Terrain() {
+        this.improvement = null;
+        this.hasRoad = false;
+        this.type = null;
+        this.state = null;
+        this.terrainFeatures = new ArrayList<>();
+        this.resources = new ArrayList<>();
+        this.civilianUnit = null;
+        this.militaryUnit = null;
     }
 
-    public void setCitizens(ArrayList<Citizen> citizens) {
-        this.citizens = citizens;
+    public Terrain(TerrainType type) {
+        this.type = type;
+        this.state = TerrainState.VISIBLE;
+        this.improvement = null;
+        this.hasRoad = false;
+        this.terrainFeatures = new ArrayList<>();
+        this.resources = new ArrayList<>();
+        this.civilianUnit = null;
+        this.militaryUnit = null;
     }
 
-
-    public Unit getCivilianUnit() {
-        return civilianUnit;
+    public Improvement getImprovement() {
+        return improvement;
     }
 
-    public void setCivilianUnit(Unit civilianUnit) {
-        this.civilianUnit = civilianUnit;
+    public void setImprovement(Improvement improvement) {
+        this.improvement = improvement;
     }
 
-    public MilitaryUnit getMilitaryUnit() {
-        return militaryUnit;
+    public boolean isHasRoad() {
+        return hasRoad;
     }
 
-    public void setMilitaryUnit(MilitaryUnit militaryUnit) {
-        this.militaryUnit = militaryUnit;
+    public void setHasRoad(boolean hasRoad) {
+        this.hasRoad = hasRoad;
     }
 
     public TerrainType getType() {
@@ -72,67 +76,94 @@ public class Terrain implements CitizenCanWork {
         this.state = state;
     }
 
+    public ArrayList<TerrainFeature> getTerrainFeatures() {
+        return terrainFeatures;
+    }
 
-    public ArrayList<ResourceType> getResources() {
+    public void setTerrainFeatures(ArrayList<TerrainFeature> terrainFeatures) {
+        this.terrainFeatures = terrainFeatures;
+    }
+
+    public void addTerrainFeature(TerrainFeature terrainFeature) {
+        this.terrainFeatures.add(terrainFeature);
+    }
+
+    public ArrayList<Resource> getResources() {
         return resources;
     }
 
-    public void setResources(ArrayList<ResourceType> resources) {
+    public void setResources(ArrayList<Resource> resources) {
         this.resources = resources;
     }
 
-    public Building getBuilding() {
-        return building;
+    public void addResource(Resource resource) {
+        this.resources.add(resource);
     }
 
-    public void setBuilding(Building building) {
-        this.building = building;
+    public Unit getCivilianUnit() {
+        return civilianUnit;
     }
 
-    public Terrain(TerrainType type, TerrainState state, ArrayList<TerrainFeatureType> terrainFeatures, ArrayList<ResourceType> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> citizens, MilitaryUnit militaryUnit, City city) {
-        this.type = type;
-        this.state = state;
-        this.terrainFeatures = terrainFeatures;
-        this.resources = resources;
-        this.building = building;
+    public void setCivilianUnit(Unit civilianUnit) {
         this.civilianUnit = civilianUnit;
-        this.civilization = civilization;
-        this.citizens = citizens;
+    }
+
+    public MilitaryUnit getMilitaryUnit() {
+        return militaryUnit;
+    }
+
+    public void setMilitaryUnit(MilitaryUnit militaryUnit) {
         this.militaryUnit = militaryUnit;
-        this.city = city;
     }
 
-    public Terrain(TerrainType type) {
-        this.type = type;
-        this.state = TerrainState.VISIBLE;
-        this.terrainFeatures = null;
-        this.resources = null;
-        this.building = null;
-        this.civilianUnit = null;
-        this.civilization = null;
-        this.citizens = null;
-        this.militaryUnit = null;
-        this.city = null;
+
+    public City getCity() {
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            for (City city : civilization.getCities()) {
+                if (city.getTerrains().contains(this))
+                    return city;
+            }
+        }
+        return null;
     }
 
-    public Terrain() {
-
+    public void SetCity(City city) {
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            for (City city1 : civilization.getCities()) {
+                city1.getTerrains().remove(this);
+            }
+        }
+        city.addTerrain(this);
     }
+
 
     public Civilization getCivilization() {
-        return civilization;
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            for (City city : civilization.getCities()) {
+                if (city.getTerrains().contains(this))
+                    return civilization;
+            }
+        }
+        return null;
     }
 
     public void setCivilization(Civilization civilization) {
-        this.civilization = civilization;
-    }
+        for (Civilization civilization1 : GameDataBase.getCivilizations()) {
+            for (City city : civilization1.getCities()) {
+                city.getTerrains().remove(this);
+            }
+        }
+        for (Civilization civilization1 : GameDataBase.getCivilizations()) {
+            for (City city : civilization1.getCities()) {
+                if (city.isCapital()) {
+                    city.addTerrain(this);
+                    return;
+                }
+            }
+        }
+        System.err.println("ERROR! setCivilization-Terrain(civilization ma paytakht nadare!)");
+        throw new RuntimeException();
 
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
     }
 
     public ArrayList<Terrain> getSurroundingTerrain() {
@@ -202,21 +233,11 @@ public class Terrain implements CitizenCanWork {
         return terrains;
     }
 
-    public ArrayList<TerrainFeatureType> getTerrainFeatures() {
-        return terrainFeatures;
+    public int getXPosition() {
+        return GameDataBase.getMainMap().getXpositionTerrain(this);
     }
 
-    public void setTerrainFeatures(ArrayList<TerrainFeatureType> terrainFeatures) {
-        this.terrainFeatures = terrainFeatures;
+    public int getYPosition() {
+        return GameDataBase.getMainMap().getYpositionTerrain(this);
     }
-
-    public int getXpositionTerrain() {
-        return getCivilization().getMap().getXpositionTerrain(this);
-    }
-
-    public int getYpositionTerrain() {
-        return getCivilization().getMap().getYpositionTerrain(this);
-    }
-
-
 }

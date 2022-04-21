@@ -1,4 +1,4 @@
-package com.civilization.Model;
+package com.civilization.Model.Info;
 
 import java.util.ArrayList;
 import java.util.HashMap;

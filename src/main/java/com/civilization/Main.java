@@ -1,18 +1,6 @@
 package com.civilization;
 
-import com.civilization.Controller.GameControllerPackage.GameMenuController;
-import com.civilization.Model.ConsoleColors;
 import com.civilization.Model.Map;
-import com.civilization.Model.TerrainFeatures.TerrainFeature;
-import com.civilization.Model.TerrainFeatures.TerrainFeatureType;
-import com.civilization.Controller.LoginMenuController;
-import com.civilization.Controller.MainMenuController;
-import com.civilization.Controller.ProfileMenuController;
-import com.civilization.Controller.UserDatabase;
-import com.civilization.View.*;
-
-import java.io.Console;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {

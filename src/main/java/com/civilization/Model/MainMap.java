@@ -1,8 +1,9 @@
 package com.civilization.Model;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
-import com.civilization.Model.Resources.ResourceType;
-import com.civilization.Model.TerrainFeatures.TerrainFeatureType;
+import com.civilization.Model.Resources.Resource;
+import com.civilization.Model.TerrainFeatures.TerrainFeature;
+import com.civilization.Model.Terrains.CitizenCanWork;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
 
@@ -25,28 +26,31 @@ public class MainMap extends Map {
                     if (targetTerrain == null)
                         targetTerrain = new Terrain();
                     //TADA .. !
-                    targetTerrain.setBuilding(mainMapTerrain.getBuilding());
-                    targetTerrain.setCitizens(mainMapTerrain.getCitizens());
+                    targetTerrain.setImprovement(mainMapTerrain.getImprovement());
+                    targetTerrain.setHasRoad(mainMapTerrain.isHasRoad());
                     targetTerrain.setTerrainFeatures(mainMapTerrain.getTerrainFeatures());
-                    targetTerrain.setCity(mainMapTerrain.getCity());
-                    targetTerrain.setCivilization(mainMapTerrain.getCivilization());
+                    targetTerrain.setResources(mainMapTerrain.getResources());
                     targetTerrain.setCivilianUnit(mainMapTerrain.getCivilianUnit());
                     targetTerrain.setResources(mainMapTerrain.getResources());
-                    targetTerrain.setCitizens(mainMapTerrain.getCitizens());
                     targetTerrain.setType(mainMapTerrain.getType());
                     targetTerrain.setMilitaryUnit(mainMapTerrain.getMilitaryUnit());
                     //if terrain=City
                     if (mainMapTerrain instanceof City) {
                         City mainMapCity = (City) mainMapTerrain;
-                        City targetCity = new City(mainMapCity);
+                        City targetCity;
                         if (targetTerrain instanceof City)
                             targetCity = (City) targetTerrain;
-                        targetCity.setCapital(mainMapCity.getCity().isCapital());
-                        targetCity.setFood(mainMapCity.getFood());
+                        else
+                            targetCity = new City(mainMapCity);
+                        targetCity.setCitizens(mainMapCity.getCitizens());
+                        targetCity.setCapital(mainMapCity.isCapital());
                         targetCity.setProduction(mainMapCity.getProduction());
+                        targetCity.setFood(mainMapCity.getFood());
                         targetCity.setGold(mainMapCity.getGold());
                         targetCity.setTerrains(mainMapCity.getTerrains());
-                        targetCity.setCitizens(mainMapCity.getCitizens());
+                        targetCity.setMakingBuilding(mainMapCity.getMakingBuilding());
+                        targetCity.setMakingUnit(mainMapCity.getMakingUnit());
+                        targetCity.setBuildings(mainMapCity.getBuildings());
                     }
                 }
         }
@@ -154,9 +158,9 @@ public class MainMap extends Map {
         return types.get(whichType);
     }
 
-    private ArrayList<TerrainFeatureType> randomTerrainFeature(Random random, Terrain terrain) {
-        ArrayList<TerrainFeatureType> features = new ArrayList<>();
-        for (TerrainFeatureType terrainFeature : terrain.getTerrainFeatures()) {
+    private ArrayList<TerrainFeature> randomTerrainFeature(Random random, Terrain terrain) {
+        ArrayList<TerrainFeature> features = new ArrayList<>();
+        for (TerrainFeature terrainFeature : terrain.getTerrainFeatures()) {
             boolean state = random.nextBoolean();
             if (state) {
                 features.add(terrainFeature);
@@ -165,16 +169,16 @@ public class MainMap extends Map {
         return features;
     }
 
-    private ArrayList<ResourceType> randomResources(Random random, Terrain terrain) {
-        ArrayList<ResourceType> resources = new ArrayList<>();
-        for (ResourceType resource : terrain.getResources()) {
+    private ArrayList<Resource> randomResources(Random random, Terrain terrain) {
+        ArrayList<Resource> resources = new ArrayList<>();
+        for (Resource resource : terrain.getResources()) {
             boolean state = random.nextBoolean();
             if (state) {
                 resources.add(resource);
             }
         }
-        for (TerrainFeatureType terrainFeature : terrain.getTerrainFeatures()) {
-            for (ResourceType resource : terrainFeature.getPossibleResources()) {
+        for (TerrainFeature terrainFeature : terrain.getTerrainFeatures()) {
+            for (Resource resource : terrainFeature.getPossibleResources()) {
                 boolean state = random.nextBoolean();
                 if (state) {
                     resources.add(resource);

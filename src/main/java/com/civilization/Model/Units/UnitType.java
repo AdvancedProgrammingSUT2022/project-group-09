@@ -1,6 +1,6 @@
 package com.civilization.Model.Units;
 
-import com.civilization.Model.Resources.ResourceType;
+import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TechnologyPackage.TechnologyType;
 
 public enum UnitType implements Combatble {
@@ -10,7 +10,7 @@ public enum UnitType implements Combatble {
 
         }
     },
-    CHARIOTARCHER(60, CombatType.MOUNTED, 3, 6, 2, 4, ResourceType.HORSE, TechnologyType.THEWHEEL) {
+    CHARIOTARCHER(60, CombatType.MOUNTED, 3, 6, 2, 4, Resource.HORSE, TechnologyType.THEWHEEL) {
         @Override
         public void attack() {
 
@@ -46,19 +46,19 @@ public enum UnitType implements Combatble {
 
         }
     },
-    CATAPULT(100, CombatType.SIEGE, 4, 14, 2, 2, ResourceType.IRON, TechnologyType.MATHEMATICS) {
+    CATAPULT(100, CombatType.SIEGE, 4, 14, 2, 2, Resource.IRON, TechnologyType.MATHEMATICS) {
         @Override
         public void attack() {
 
         }
     },
-    HORSEMAN(80, CombatType.MOUNTED, 12, 0, 0, 4, ResourceType.HORSE, TechnologyType.HORSEBACKRIDING) {
+    HORSEMAN(80, CombatType.MOUNTED, 12, 0, 0, 4, Resource.HORSE, TechnologyType.HORSEBACKRIDING) {
         @Override
         public void attack() {
 
         }
     },
-    SWORDSMAN(80, CombatType.MELEE, 11, 0, 0, 2, ResourceType.IRON, TechnologyType.IRONWORKING) {
+    SWORDSMAN(80, CombatType.MELEE, 11, 0, 0, 2, Resource.IRON, TechnologyType.IRONWORKING) {
         @Override
         public void attack() {
 
@@ -70,13 +70,13 @@ public enum UnitType implements Combatble {
 
         }
     },
-    KNIGHT(150, CombatType.MOUNTED, 18, 0, 0, 3, ResourceType.HORSE, TechnologyType.CHIVALRY) {
+    KNIGHT(150, CombatType.MOUNTED, 18, 0, 0, 3, Resource.HORSE, TechnologyType.CHIVALRY) {
         @Override
         public void attack() {
 
         }
     },
-    LONGSWORDMAN(150, CombatType.MELEE, 18, 0, 0, 3, ResourceType.IRON, TechnologyType.STEEL) {
+    LONGSWORDMAN(150, CombatType.MELEE, 18, 0, 0, 3, Resource.IRON, TechnologyType.STEEL) {
         @Override
         public void attack() {
 
@@ -88,7 +88,7 @@ public enum UnitType implements Combatble {
 
         }
     },
-    TREBUCHET(170, CombatType.SIEGE, 6, 20, 2, 2, ResourceType.IRON, TechnologyType.PHYSICS) {
+    TREBUCHET(170, CombatType.SIEGE, 6, 20, 2, 2, Resource.IRON, TechnologyType.PHYSICS) {
         @Override
         public void attack() {
 
@@ -100,13 +100,13 @@ public enum UnitType implements Combatble {
 
         }
     },
-    CAVALRY(260, CombatType.MOUNTED, 25, 0, 0, 3, ResourceType.HORSE, TechnologyType.MILITARYSCIENCE) {
+    CAVALRY(260, CombatType.MOUNTED, 25, 0, 0, 3, Resource.HORSE, TechnologyType.MILITARYSCIENCE) {
         @Override
         public void attack() {
 
         }
     },
-    LANCER(220, CombatType.MOUNTED, 22, 0, 0, 4, ResourceType.HORSE, TechnologyType.METALLURGY) {
+    LANCER(220, CombatType.MOUNTED, 22, 0, 0, 4, Resource.HORSE, TechnologyType.METALLURGY) {
         @Override
         public void attack() {
 
@@ -156,7 +156,7 @@ public enum UnitType implements Combatble {
     };
 
 
-    UnitType(int cost, CombatType combatType, int combatStrengh, int rangedCombatStrengh, int range, int movement, ResourceType requiredResourse, TechnologyType requiredTechnology) {
+    UnitType(int cost, CombatType combatType, int combatStrengh, int rangedCombatStrengh, int range, int movement, Resource requiredResourse, TechnologyType requiredTechnology) {
         this.cost = cost;
         this.combatType = combatType;
         this.combatStrength = combatStrengh;
@@ -191,7 +191,7 @@ public enum UnitType implements Combatble {
         return movement;
     }
 
-    public ResourceType getRequiredResourse() {
+    public Resource getRequiredResourse() {
         return requiredResourse;
     }
 
@@ -206,7 +206,7 @@ public enum UnitType implements Combatble {
     private final int rangedCombatStrengh;
     private final int Range;
     private final int movement;
-    private final ResourceType requiredResourse;
+    private final Resource requiredResourse;
     private final TechnologyType requiredTechnology;
 
 }

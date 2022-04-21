@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.Improvements.Improvement;
-import com.civilization.Model.Resources.ResourceType;
+import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.Units.UnitType;
 
 public enum TechnologyType {
@@ -30,7 +30,7 @@ public enum TechnologyType {
         }
     }, new ArrayList<Object>() {
         {
-            add(ResourceType.HORSE);
+            add(Resource.HORSE);
             add(Improvement.PASTURE);
         }
     }), ARCHERY(35, new ArrayList<TechnologyType>() {
@@ -368,7 +368,7 @@ public enum TechnologyType {
         }
     }, new ArrayList<Object>() {
         {
-            
+
         }
     }), ARCHAEOLOGY(1300, new ArrayList<TechnologyType>() {
         {
@@ -388,13 +388,13 @@ public enum TechnologyType {
             add(TechnologyType.CHIVALRY);
         }
     }, new ArrayList<TechnologyType>() {
-        {   
-            add(TechnologyType. ECONOMICS);
+        {
+            add(TechnologyType.ECONOMICS);
         }
     }, new ArrayList<Object>() {
         {
             add(BuildingType.SATRAPSCOURT);
-            
+
         }
     }), CHEMISTRY(900, new ArrayList<TechnologyType>() {
         {
@@ -511,7 +511,7 @@ public enum TechnologyType {
     }, new ArrayList<Object>() {
         {
             add(BuildingType.PUBLICSCHOOL);
-            add(ResourceType.COAL);
+            add(Resource.COAL);
         }
     }), BIOLOGY(1680, new ArrayList<TechnologyType>() {
         {
@@ -524,13 +524,13 @@ public enum TechnologyType {
         }
     }, new ArrayList<Object>() {
         {
-            
+
         }
     }), COMBUSTION(2200, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.REPLACEABLEPARTS);
             add(TechnologyType.RAILROAD);
-            add(TechnologyType.DYNAMITE);   
+            add(TechnologyType.DYNAMITE);
         }
     }, new ArrayList<TechnologyType>() {
         {
@@ -574,11 +574,11 @@ public enum TechnologyType {
         }
     }, new ArrayList<TechnologyType>() {
         {
-            
+
         }
     }, new ArrayList<Object>() {
         {
-            add(BuildingType.BROADCASTTOWER);   
+            add(BuildingType.BROADCASTTOWER);
         }
     }), RAILROAD(1900, new ArrayList<TechnologyType>() {
         {
@@ -625,7 +625,7 @@ public enum TechnologyType {
         }
     }, new ArrayList<TechnologyType>() {
         {
-            
+
         }
     }, new ArrayList<Object>() {
         {
@@ -634,16 +634,16 @@ public enum TechnologyType {
     });
 
     TechnologyType(int cost, ArrayList<TechnologyType> requirement, ArrayList<TechnologyType> technologyUnlcoks,
-            ArrayList<Object> unlocks) {
+                   ArrayList<Object> unlocks) {
         this.cost = cost;
         this.requirement = requirement;
         this.technologyUnlocks = technologyUnlcoks;
         this.unlocks = unlocks;
     }
 
-    int cost;
-    ArrayList<TechnologyType> requirement;
-    ArrayList<TechnologyType> technologyUnlocks;
-    ArrayList<Object> unlocks;
+    final int cost;
+    final ArrayList<TechnologyType> requirement;
+    final ArrayList<TechnologyType> technologyUnlocks;
+    final ArrayList<Object> unlocks;
 
 }

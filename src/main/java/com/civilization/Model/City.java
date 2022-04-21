@@ -1,55 +1,59 @@
 package com.civilization.Model;
 
-import com.civilization.Model.Buildings.Building;
-import com.civilization.Model.Resources.ResourceType;
-import com.civilization.Model.TerrainFeatures.TerrainFeatureType;
+import com.civilization.Model.Buildings.BuildingType;
+import com.civilization.Model.Info.Food;
+import com.civilization.Model.Info.Gold;
+import com.civilization.Model.Info.Product;
+import com.civilization.Model.Terrains.CitizenCanWork;
 import com.civilization.Model.Terrains.Terrain;
-import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Terrains.TerrainType;
-import com.civilization.Model.Units.MilitaryUnit;
 import com.civilization.Model.Units.Unit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class City extends Terrain {
+    private ArrayList<CitizenCanWork> citizens; //length=number of citizens and arraylisti az jahaei hast ke citizen ha kar mikonnand
     private boolean isCapital;
     private Product production;
     private Food food;
     private Gold gold;
     private ArrayList<Terrain> terrains;
-    private ArrayList<Citizen> citizens;
+    private HashMap<Integer, BuildingType> makingBuilding;//<remaining turn to build,building>
+    private HashMap<Integer, Unit> makingUnit;//<remaining turn to build,Unit>
+    private ArrayList<BuildingType> buildings;
 
-
-    public City(TerrainType type, TerrainState state, ArrayList<TerrainFeatureType> terrainFeatures, ArrayList<ResourceType> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> cityCitizens, MilitaryUnit militaryUnit, City city, boolean isCapital, ArrayList<Terrain> terrains, ArrayList<Citizen> terrainCitizens) {
-        super(type, state, terrainFeatures, resources, building, civilianUnit, civilization, cityCitizens, militaryUnit, city);
-        this.isCapital = isCapital;
+    public City() {
+        this.citizens = new ArrayList<>();
+        this.isCapital = false;
         this.production = new Product();
         this.food = new Food();
         this.gold = new Gold();
-        this.terrains = terrains;
-        this.citizens = terrainCitizens;
+        this.terrains = new ArrayList<>();
+        this.makingBuilding = new HashMap<>();
+        this.makingUnit = new HashMap<>();
+        this.buildings = new ArrayList<>();
     }
 
     public City(City city) {
-        super(city.getType(), city.getState(), city.getTerrainFeatures(), city.getResources(), city.getBuilding(), city.getCivilianUnit(), city.getCivilization(), city.getCitizens(), city.getMilitaryUnit(), city.getCity());
+        this.citizens = city.getCitizens();
         this.isCapital = city.isCapital();
         this.production = city.getProduction();
         this.food = city.getFood();
         this.gold = city.getGold();
         this.terrains = city.getTerrains();
-        this.citizens = city.getCitizens();
+        this.makingBuilding = city.getMakingBuilding();
+        this.makingUnit = city.getMakingUnit();
+        this.buildings = city.getBuildings();
     }
 
-    public City(Terrain terrain, ArrayList<Citizen> terrainCitizens) {
-        super(terrain.getType(), terrain.getState(), terrain.getTerrainFeatures(), terrain.getResources(), terrain.getBuilding(), terrain.getCivilianUnit(), terrain.getCivilization(), terrain.getCitizens(), terrain.getMilitaryUnit(), terrain.getCity());
-        this.isCapital = false;
-        this.production = new Product();
-        this.food = new Food();
-        this.gold = new Gold();
-        this.terrains = null; //nemidoonam ye shahr che city haei dare
-        this.citizens = terrainCitizens;
+    public ArrayList<CitizenCanWork> getCitizens() {
+        return citizens;
     }
 
+    public void setCitizens(ArrayList<CitizenCanWork> citizens) {
+        this.citizens = citizens;
+    }
 
     public boolean isCapital() {
         return isCapital;
@@ -91,17 +95,31 @@ public class City extends Terrain {
         this.terrains = terrains;
     }
 
-    public ArrayList<Citizen> getCitizens() {
-        return citizens;
+    public void addTerrain(Terrain terrain) {
+        this.terrains.add(terrain);
     }
 
-    public void setCitizens(ArrayList<Citizen> citizens) {
-        this.citizens = citizens;
+    public HashMap<Integer, BuildingType> getMakingBuilding() {
+        return makingBuilding;
     }
 
-    public String showCity() {
-        return "";
+    public void setMakingBuilding(HashMap<Integer, BuildingType> makingBuilding) {
+        this.makingBuilding = makingBuilding;
     }
 
+    public HashMap<Integer, Unit> getMakingUnit() {
+        return makingUnit;
+    }
 
+    public void setMakingUnit(HashMap<Integer, Unit> makingUnit) {
+        this.makingUnit = makingUnit;
+    }
+
+    public ArrayList<BuildingType> getBuildings() {
+        return buildings;
+    }
+
+    public void setBuildings(ArrayList<BuildingType> buildings) {
+        this.buildings = buildings;
+    }
 }

@@ -17,22 +17,29 @@ public class Map {
     }
 
     public Civilization getCivilization() {
-        return civilization;
+        for (Civilization civilization1 : GameDataBase.getCivilizations()) {
+            if (civilization1.getMap() == this)
+                return civilization1;
+        }
+        return null;
     }
 
     public void setCivilization(Civilization civilization) {
-        this.civilization = civilization;
+        for (Civilization civilization1 : GameDataBase.getCivilizations()) {
+            if (civilization1.getMap() == this)
+                civilization1.setMap(null);
+        }
+        civilization.setMap(this);
     }
 
-    protected Civilization civilization;
 
     public Map() {
         for (int i = 0; i < terrains.length; i++) {
             for (int j = 0; j < terrains[i].length; j++) {
                 if (j > 12) {
-                    terrains[i][j] = new Terrain(TerrainType.PLAIN, TerrainState.KNOWN, null, null, null, null, null, null, null, null);
+                    terrains[i][j] = new Terrain(TerrainType.PLAIN);
                 } else {
-                    terrains[i][j] = new Terrain(TerrainType.SNOW, TerrainState.KNOWN, null, null, null, null, null, null, null, null);
+                    terrains[i][j] = new Terrain(TerrainType.SNOW);
                 }
             }
         }

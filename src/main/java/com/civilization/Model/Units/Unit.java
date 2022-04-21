@@ -2,13 +2,12 @@ package com.civilization.Model.Units;
 
 import com.civilization.Model.Civilization;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
-import com.civilization.Model.TerrainFeatures.TerrainFeatureType;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
 
 import java.util.ArrayList;
 
-public class Unit {
+public class Unit  {
     private UnitType myType;
     private boolean isSleep;
     private Terrain terrain;
@@ -92,7 +91,7 @@ public class Unit {
 
                 if (!(targetTerrain.getType() == TerrainType.MOUNTAIN ||
                         targetTerrain.getType() == TerrainType.HILLS ||
-                        targetTerrain.getTerrainFeatures().contains(TerrainFeatureType.FOREST)))
+                        targetTerrain.getTerrainFeatures().contains(TerrainFeature.FOREST)))
                     targetTerrains.addAll(targetTerrain.getSurroundingTerrain());
             }
             targetTerrainsBackUp = new ArrayList<>(targetTerrains);

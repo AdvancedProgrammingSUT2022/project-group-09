@@ -1,25 +1,40 @@
 package com.civilization.Model;
 
+import com.civilization.Model.Info.Gold;
+import com.civilization.Model.Info.Happiness;
+import com.civilization.Model.Info.Science;
+import com.civilization.Model.Info.Technologies;
+import com.civilization.Model.Resources.Resource;
+
 import java.util.ArrayList;
 
 public class Civilization {
-
-    private Map map;
+    private Map map;//faghat baraye showmap
     private ArrayList<City> cities;
     private ArrayList<War> wars;
     private Technologies technologies;
     private Gold gold;
     private Science science;
-
     private Happiness happiness;
 
-    public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, Technologies technologies, Gold gold, Science science) {
+    public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, Technologies technologies, Gold gold, Science science, Happiness happiness) {
         this.map = map;
         this.cities = cities;
         this.wars = wars;
         this.technologies = technologies;
         this.gold = gold;
         this.science = science;
+        this.happiness = happiness;
+    }
+
+    public Civilization() {
+        this.map = new Map();
+        this.cities = new ArrayList<>();
+        this.wars = new ArrayList<>();
+        this.technologies = new Technologies();
+        this.gold = new Gold();
+        this.science = new Science();
+        this.happiness = new Happiness();
     }
 
     public ArrayList<City> getCities() {

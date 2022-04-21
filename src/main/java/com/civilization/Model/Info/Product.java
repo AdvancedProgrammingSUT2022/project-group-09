@@ -1,4 +1,4 @@
-package com.civilization.Model;
+package com.civilization.Model.Info;
 
 public class Product {
     private int currentProduct;
