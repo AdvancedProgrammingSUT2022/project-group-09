@@ -2,7 +2,9 @@ package com.civilization.Controller.GameControllerPackage;
 
 import java.util.regex.Matcher;
 
+import com.civilization.Main;
 import com.civilization.Model.ConsoleColors;
+import com.civilization.Model.Map;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Terrains.TerrainType;
@@ -43,7 +45,7 @@ public class MapController {
     }
 
     private void drawMainDetails(String[][] mapString, int istart, int jstart, int xCenter, int yCenter,
-            String backgroundColor) {
+                                 String backgroundColor) {
         for (int k = 2; k > -1; k--) {
             for (int z = jstart + k + 1; z < jstart + k + 1 + 5 + 4 - 2 * k; z++) {
                 mapString[istart + 2 - k][z] = backgroundColor + " " + ConsoleColors.RESET;
@@ -125,8 +127,8 @@ public class MapController {
         return mapStringBuilder.toString();
     }
 
-    public String showMap(Matcher matcher, Terrain[][] terrains) {
-        this.terrains = terrains;
+    public String showMap(Matcher matcher, Map map) {
+        this.terrains = map.getTerrains();
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         return showMap(x, y, terrains);

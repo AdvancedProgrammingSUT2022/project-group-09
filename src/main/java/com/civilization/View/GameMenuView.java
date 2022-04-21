@@ -28,7 +28,7 @@ public class GameMenuView extends View {
             else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWCURRENTMENU)) != null)
                 System.out.println(CurrentMenu.get());
             else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWMAP)) != null)
-                System.out.print(mapController.showMap(matcher, GameDataBase.getCurrentCivilization().getMap().getTerrains()));
+                System.out.print(mapController.showMap(matcher, GameDataBase.getCurrentCivilization().getMap()));
             // TODO
             else
                 System.out.println("invalid command");
