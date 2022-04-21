@@ -26,17 +26,16 @@ public class Map {
     public void updateExploration() {
         int horizental = terrains[0].length;
         int vertical = terrains.length;
-        setVisibleTerrain();
         for (Terrain[] terrain : terrains)
             for (int j = 0; j < horizental; j++) {
                 Terrain targetTerrain = terrain[j];
                 if (targetTerrain.getState() == TerrainState.VISIBLE)
                     targetTerrain.setState(TerrainState.KNOWN);
-                setVisibleTerrain();
             }
+        setVisibleTerrains();
     }
 
-    private void setVisibleTerrain() {
+    private void setVisibleTerrains() {
         int horizental = terrains[0].length;
         int vertical = terrains.length;
         for (Terrain[] value : terrains)
@@ -50,6 +49,11 @@ public class Map {
                     for (Terrain terrain : value[j].getCivilianUnit().getVisibleTerrain()) {
                         terrain.setState(TerrainState.VISIBLE);
                     }
+                if (value[j] instanceof City && value[j].getCivilization() == getCivilization())
+                    for (Terrain terrain : ((City) value[j]).getVisibleTerrain()) {
+                        terrain.setState(TerrainState.VISIBLE);
+                    }
+
             }
     }
 
