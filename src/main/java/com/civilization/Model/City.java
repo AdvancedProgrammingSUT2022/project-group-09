@@ -84,25 +84,5 @@ public class City extends Terrain {
         return "";
     }
 
-    public ArrayList<Terrain> getVisibleTerrain() {
-        ArrayList<Terrain> result = new ArrayList<>();
-        result.add(this);
-
-        ArrayList<Terrain> targetTerrainsBackUp = this.getSurroundingTerrain();
-        ArrayList<Terrain> targetTerrains = new ArrayList<>(targetTerrainsBackUp);
-        for (int i = 0; i < 2; i++) {
-
-            for (Terrain targetTerrain : targetTerrainsBackUp) {
-                if (!result.contains(targetTerrain)) result.add(targetTerrain);
-
-                if (!(targetTerrain.getType() == TerrainType.MOUNTAIN ||
-                        targetTerrain.getType() == TerrainType.HILLS ||
-                        targetTerrain.getTerrainFeatures().contains(TerrainFeatureType.FOREST)))
-                    targetTerrains.addAll(targetTerrain.getSurroundingTerrain());
-            }
-            targetTerrainsBackUp = new ArrayList<>(targetTerrains);
-        }
-        return result;
-    }
 
 }

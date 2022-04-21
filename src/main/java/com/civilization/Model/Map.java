@@ -26,6 +26,13 @@ public class Map {
     public void updateExploration() {
         int horizental = terrains[0].length;
         int vertical = terrains.length;
+        if (this instanceof MainMap) {
+            for (Terrain[] terrain : terrains)
+                for (int j = 0; j < horizental; j++) {
+                    terrain[j].setState(TerrainState.VISIBLE);
+                }
+            return;
+        }
         for (Terrain[] terrain : terrains)
             for (int j = 0; j < horizental; j++) {
                 Terrain targetTerrain = terrain[j];
@@ -41,18 +48,18 @@ public class Map {
         for (Terrain[] value : terrains)
             for (int j = 0; j < horizental; j++) {
 
-                if (value[j].getMilitaryUnit().getCivilization() == getCivilization())
-                    for (Terrain terrain : value[j].getMilitaryUnit().getVisibleTerrain()) {
-                        terrain.setState(TerrainState.VISIBLE);
-                    }
-                if (value[j].getCivilianUnit().getCivilization() == getCivilization())
-                    for (Terrain terrain : value[j].getCivilianUnit().getVisibleTerrain()) {
-                        terrain.setState(TerrainState.VISIBLE);
-                    }
-                if (value[j] instanceof City && value[j].getCivilization() == getCivilization())
-                    for (Terrain terrain : ((City) value[j]).getVisibleTerrain()) {
-                        terrain.setState(TerrainState.VISIBLE);
-                    }
+                if (value[j].getMilitaryUnit() != null)
+                    if (value[j].getMilitaryUnit().getCivilization() == getCivilization())
+                        for (Terrain terrain : value[j].getMilitaryUnit().getVisibleTerrain()) {
+                            terrain.setState(TerrainState.VISIBLE);
+                        }
+                if (value[j].getCivilianUnit() != null)
+                    if (value[j].getCivilianUnit().getCivilization() == getCivilization())
+                        for (Terrain terrain : value[j].getCivilianUnit().getVisibleTerrain()) {
+                            terrain.setState(TerrainState.VISIBLE);
+                        }
+                if (value[j].getCivilization() == getCivilization())
+                    value[j].setState(TerrainState.VISIBLE);
 
             }
     }
