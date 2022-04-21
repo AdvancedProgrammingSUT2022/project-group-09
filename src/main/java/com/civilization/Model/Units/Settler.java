@@ -1,5 +1,6 @@
 package com.civilization.Model.Units;
 
+import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.Terrains.Terrain;
 
@@ -9,7 +10,6 @@ public class Settler extends Unit {
     }
 
     public void foundCity() {
-
     }
 
 }

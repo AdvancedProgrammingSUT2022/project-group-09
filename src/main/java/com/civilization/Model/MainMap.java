@@ -2,6 +2,7 @@ package com.civilization.Model;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Terrains.Terrain;
+import sun.jvm.hotspot.types.CIntegerType;
 
 import java.util.ArrayList;
 
@@ -25,10 +26,22 @@ public class MainMap extends Map {
                     targetTerrain.setCitizens(mainMapTerrain.getCitizens());
                     targetTerrain.setType(mainMapTerrain.getType());
                     targetTerrain.setMilitaryUnit(mainMapTerrain.getMilitaryUnit());
+                    //if terrain=City
+                    if (mainMapTerrain instanceof City) {
+                        City mainMapCity = (City) mainMapTerrain;
+                        City targetCity = new City(mainMapCity);
+                        if (targetTerrain instanceof City)
+                            targetCity = (City) targetTerrain;
+                        targetCity.setCapital(mainMapCity.getCity().isCapital());
+                        targetCity.setFood(mainMapCity.getFood());
+                        targetCity.setProduction(mainMapCity.getProduction());
+                        targetCity.setGold(mainMapCity.getGold());
+                        targetCity.setTerrains(mainMapCity.getTerrains());
+                        targetCity.setCitizens(mainMapCity.getCitizens());
+                    }
                 }
         }
     }
-
 
 
     public MainMap() {

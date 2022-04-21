@@ -31,6 +31,16 @@ public class City extends Terrain {
         this.citizens = terrainCitizens;
     }
 
+    public City(City city) {
+        super(city.getType(), city.getState(), city.getTerrainFeatures(), city.getResources(), city.getBuilding(), city.getCivilianUnit(), city.getCivilization(), city.getCitizens(), city.getMilitaryUnit(), city.getCity());
+        this.isCapital = city.isCapital();
+        this.production = city.getProduction();
+        this.food = city.getFood();
+        this.gold = city.getGold();
+        this.terrains = city.getTerrains();
+        this.citizens = city.getCitizens();
+    }
+
 
     public boolean isCapital() {
         return isCapital;
