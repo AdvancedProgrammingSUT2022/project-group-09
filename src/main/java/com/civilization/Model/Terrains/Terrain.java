@@ -242,11 +242,17 @@ public class Terrain implements CitizenCanWork {
     }
 
     public String getDetails() {
-        StringBuilder string = new StringBuilder();
-        string.append("this Terrain belongs to: " + this.getCivilization().getName() + "\n");
-        string.append("Terrain Type is: " + this.type + "\n");
-        string.append("Terrain Features are: " + this.terrainFeatures + "\n");
-        string.append("Terrain Resources are: " + this.resources + "\n");
-        return "";
+        return "this Terrain belongs to: " + this.getCivilization().getName() + "\n" +
+                "Terrain Type is: " + this.type + "\n" +
+                "Terrain Features are: " + this.terrainFeatures + "\n" +
+                "Terrain Resources are: " + this.resources + "\n";
+    }
+
+    public int getMp() {
+        int sumOfMps = type.getMP();
+        for (TerrainFeature terrainFeature : terrainFeatures) {
+            sumOfMps += terrainFeature.getMP();
+        }
+        return sumOfMps;
     }
 }

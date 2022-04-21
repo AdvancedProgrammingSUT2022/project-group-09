@@ -134,4 +134,6 @@ public class Map {
     public boolean isValidTerran(int x, int y) {
         return x < terrains.length && x >= 0 && y < terrains[0].length && y >= 0;
     }
+
+
 }

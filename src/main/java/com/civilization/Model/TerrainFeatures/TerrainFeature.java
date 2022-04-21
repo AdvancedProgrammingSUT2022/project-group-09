@@ -56,4 +56,24 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
     public ArrayList<Resource> getPossibleResources() {
         return possibleResources;
     }
+
+    public int getFood() {
+        return food;
+    }
+
+    public int getProduct() {
+        return product;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public int getMP() {
+        return MP;
+    }
+
+    public int getCombatModifier() {
+        return combatModifier;
+    }
 }
