@@ -4,8 +4,7 @@ import com.civilization.Model.Buildings.Building;
 import com.civilization.Model.Citizen;
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
-import com.civilization.Model.Resources.Resource;
-import com.civilization.Model.TerrainFeatures.TerrainFeature;
+import com.civilization.Model.Resources.ResourceType;
 import com.civilization.Model.TerrainFeatures.TerrainFeatureType;
 import com.civilization.Model.Units.MilitaryUnit;
 import com.civilization.Model.Units.Unit;
@@ -20,7 +19,7 @@ public class Terrain implements CitizenCanWork {
     //in ezafi bood zadam pak she
 
     private ArrayList<TerrainFeatureType> terrainFeatures;
-    private ArrayList<Resource> resources;
+    private ArrayList<ResourceType> resources;
     private Building building;
 
     private Unit civilianUnit;
@@ -74,11 +73,11 @@ public class Terrain implements CitizenCanWork {
     }
 
 
-    public ArrayList<Resource> getResources() {
+    public ArrayList<ResourceType> getResources() {
         return resources;
     }
 
-    public void setResources(ArrayList<Resource> resources) {
+    public void setResources(ArrayList<ResourceType> resources) {
         this.resources = resources;
     }
 
@@ -90,7 +89,7 @@ public class Terrain implements CitizenCanWork {
         this.building = building;
     }
 
-    public Terrain(TerrainType type, TerrainState state, ArrayList<TerrainFeatureType> terrainFeatures, ArrayList<Resource> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> citizens, MilitaryUnit militaryUnit, City city) {
+    public Terrain(TerrainType type, TerrainState state, ArrayList<TerrainFeatureType> terrainFeatures, ArrayList<ResourceType> resources, Building building, Unit civilianUnit, Civilization civilization, ArrayList<Citizen> citizens, MilitaryUnit militaryUnit, City city) {
         this.type = type;
         this.state = state;
         this.terrainFeatures = terrainFeatures;
@@ -101,6 +100,18 @@ public class Terrain implements CitizenCanWork {
         this.citizens = citizens;
         this.militaryUnit = militaryUnit;
         this.city = city;
+    }
+    public Terrain(TerrainType type){
+        this.type = type;
+        this.state = TerrainState.VISIBLE;
+        this.terrainFeatures = null;
+        this.resources = null;
+        this.building = null;
+        this.civilianUnit = null;
+        this.civilization = null;
+        this.citizens = null;
+        this.militaryUnit = null;
+        this.city = null;
     }
 
     public Civilization getCivilization() {

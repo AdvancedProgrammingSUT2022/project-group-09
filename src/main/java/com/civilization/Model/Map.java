@@ -7,7 +7,8 @@ import com.civilization.Model.Terrains.TerrainState;
 import java.util.ArrayList;
 
 public class Map {
-    protected final Terrain[][] terrains = new Terrain[30][30];
+    protected final int row = 30, column = 30, length = 30; //length for graphic
+    protected final Terrain[][] terrains = new Terrain[row][column];
 
     public Terrain[][] getTerrains() {
         return terrains;
