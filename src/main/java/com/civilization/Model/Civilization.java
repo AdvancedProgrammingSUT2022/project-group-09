@@ -12,7 +12,6 @@ public class Civilization {
 
     private Map map;//faghat baraye showmap
     private String name;
-    private Map map;
     private ArrayList<City> cities;
     private ArrayList<War> wars;
     private Technologies technologies;

@@ -12,10 +12,10 @@ import java.util.HashMap;
 public class GameDataBase {
     static private int turn;
     static private MainMap mainMap;
-    static private ArrayList<User> players; //ina bazi mikonan avalesh inja sabt mishe
-    static private User currentUser;
-    static private Civilization currentCivilization;
-    static private HashMap<User, Civilization> civilizations;
+    static private ArrayList<User> players = new ArrayList<>(); //ina bazi mikonan avalesh inja sabt mishe
+    static private User currentUser = null;
+    static private Civilization currentCivilization = null;
+    static private HashMap<User, Civilization> civilizations = new HashMap<>();
 
     public static void runGameForFirstTime(ArrayList<User> players) {
         GameDataBase.players = players;
@@ -44,5 +44,37 @@ public class GameDataBase {
 
     public static void setMainMap(MainMap mainMap) {
         GameDataBase.mainMap = mainMap;
+    }
+
+    public static int getTurn() {
+        return turn;
+    }
+
+    public static void setTurn(int turn) {
+        GameDataBase.turn = turn;
+    }
+
+    public static ArrayList<User> getPlayers() {
+        return players;
+    }
+
+    public static void setPlayers(ArrayList<User> players) {
+        GameDataBase.players = players;
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User currentUser) {
+        GameDataBase.currentUser = currentUser;
+    }
+
+    public static Civilization getCurrentCivilization() {
+        return currentCivilization;
+    }
+
+    public static void setCurrentCivilization(Civilization currentCivilization) {
+        GameDataBase.currentCivilization = currentCivilization;
     }
 }
