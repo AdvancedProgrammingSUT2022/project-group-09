@@ -9,7 +9,6 @@ import com.civilization.Model.Resources.Resource;
 import java.util.ArrayList;
 
 public class Civilization {
-
     private Map map;//faghat baraye showmap
     private String name;
     private ArrayList<City> cities;
