@@ -127,7 +127,9 @@ public class Civilization {
         this.units.add(unit);
     }
 
-    //TODO complete all information functions
+    public void removeUnit(Unit unit) {
+        this.units.remove(unit);
+    }
 
 
 }

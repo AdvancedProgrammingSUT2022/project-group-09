@@ -62,6 +62,7 @@ public class City extends Terrain {
         this.makingUnit = new HashMap<>();
         this.buildings = new ArrayList<>();
     }
+
     public City() {
         this.citizens = new ArrayList<>();
         this.isCapital = false;
@@ -170,6 +171,17 @@ public class City extends Terrain {
             }
         }
         civilization.addCity(this);
+    }
+
+    @Override
+    public Civilization getCivilization() {
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            for (City city : civilization.getCities()) {
+                if (city == this)
+                    return civilization;
+            }
+        }
+        return null;
     }
 
 }

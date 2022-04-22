@@ -16,31 +16,31 @@ public enum UnitType implements Combatble {
 
         }
     },
-    SCOUT(25, CombatType.RECON, 4, 0, 0, 2, null, null) {
+    SCOUT(25, CombatType.RECON, 4, 0, 1, 2, null, null) {
         @Override
         public void attack() {
 
         }
     },
-    SETTLER(89, CombatType.CIVILIAN, 0, 0, 0, 2, null, null) {
+    SETTLER(89, CombatType.CIVILIAN, 0, 0, 1, 2, null, null) {
         @Override
         public void attack() {
 
         }
     },
-    SPEARMAN(50, CombatType.MELEE, 6, 0, 0, 2, null, null) {
+    SPEARMAN(50, CombatType.MELEE, 6, 0, 1, 2, null, null) {
         @Override
         public void attack() {
 
         }
     },
-    WARRIOR(40, CombatType.MELEE, 6, 0, 0, 2, null, null) {
+    WARRIOR(40, CombatType.MELEE, 6, 0, 1, 2, null, null) {
         @Override
         public void attack() {
 
         }
     },
-    WORKER(70, CombatType.CIVILIAN, 0, 0, 0, 2, null, null) {
+    WORKER(70, CombatType.CIVILIAN, 0, 0, 1, 2, null, null) {
         @Override
         public void attack() {
 
@@ -52,13 +52,13 @@ public enum UnitType implements Combatble {
 
         }
     },
-    HORSEMAN(80, CombatType.MOUNTED, 12, 0, 0, 4, Resource.HORSE, TechnologyType.HORSEBACKRIDING) {
+    HORSEMAN(80, CombatType.MOUNTED, 12, 0, 1, 4, Resource.HORSE, TechnologyType.HORSEBACKRIDING) {
         @Override
         public void attack() {
 
         }
     },
-    SWORDSMAN(80, CombatType.MELEE, 11, 0, 0, 2, Resource.IRON, TechnologyType.IRONWORKING) {
+    SWORDSMAN(80, CombatType.MELEE, 11, 0, 1, 2, Resource.IRON, TechnologyType.IRONWORKING) {
         @Override
         public void attack() {
 
@@ -70,19 +70,19 @@ public enum UnitType implements Combatble {
 
         }
     },
-    KNIGHT(150, CombatType.MOUNTED, 18, 0, 0, 3, Resource.HORSE, TechnologyType.CHIVALRY) {
+    KNIGHT(150, CombatType.MOUNTED, 18, 0, 1, 3, Resource.HORSE, TechnologyType.CHIVALRY) {
         @Override
         public void attack() {
 
         }
     },
-    LONGSWORDMAN(150, CombatType.MELEE, 18, 0, 0, 3, Resource.IRON, TechnologyType.STEEL) {
+    LONGSWORDMAN(150, CombatType.MELEE, 18, 0, 1, 3, Resource.IRON, TechnologyType.STEEL) {
         @Override
         public void attack() {
 
         }
     },
-    PIKEMAN(100, CombatType.MELEE, 10, 0, 0, 2, null, TechnologyType.CIVILISERVICE) {
+    PIKEMAN(100, CombatType.MELEE, 10, 0, 1, 2, null, TechnologyType.CIVILISERVICE) {
         @Override
         public void attack() {
 
@@ -100,31 +100,31 @@ public enum UnitType implements Combatble {
 
         }
     },
-    CAVALRY(260, CombatType.MOUNTED, 25, 0, 0, 3, Resource.HORSE, TechnologyType.MILITARYSCIENCE) {
+    CAVALRY(260, CombatType.MOUNTED, 25, 0, 1, 3, Resource.HORSE, TechnologyType.MILITARYSCIENCE) {
         @Override
         public void attack() {
 
         }
     },
-    LANCER(220, CombatType.MOUNTED, 22, 0, 0, 4, Resource.HORSE, TechnologyType.METALLURGY) {
+    LANCER(220, CombatType.MOUNTED, 22, 0, 1, 4, Resource.HORSE, TechnologyType.METALLURGY) {
         @Override
         public void attack() {
 
         }
     },
-    MUSKETMAN(120, CombatType.GUNPOWDER, 16, 0, 0, 2, null, TechnologyType.GUNPOWDER) {
+    MUSKETMAN(120, CombatType.GUNPOWDER, 16, 0, 1, 2, null, TechnologyType.GUNPOWDER) {
         @Override
         public void attack() {
 
         }
     },
-    RIFLEMAN(200, CombatType.GUNPOWDER, 25, 0, 0, 2, null, TechnologyType.RIFLING) {
+    RIFLEMAN(200, CombatType.GUNPOWDER, 25, 0, 1, 2, null, TechnologyType.RIFLING) {
         @Override
         public void attack() {
 
         }
     },
-    ANTITANKGUN(300, CombatType.GUNPOWDER, 32, 0, 0, 2, null, TechnologyType.REPLACEABLEPARTS) {
+    ANTITANKGUN(300, CombatType.GUNPOWDER, 32, 0, 1, 2, null, TechnologyType.REPLACEABLEPARTS) {
         @Override
         public void attack() {
 
@@ -136,19 +136,19 @@ public enum UnitType implements Combatble {
 
         }
     },
-    INFANTRY(300, CombatType.GUNPOWDER, 36, 0, 0, 2, null, TechnologyType.REPLACEABLEPARTS) {
+    INFANTRY(300, CombatType.GUNPOWDER, 36, 0, 1, 2, null, TechnologyType.REPLACEABLEPARTS) {
         @Override
         public void attack() {
 
         }
     },
-    PANZER(450, CombatType.ARMORED, 60, 0, 0, 5, null, TechnologyType.COMBUSTION) {
+    PANZER(450, CombatType.ARMORED, 60, 0, 1, 5, null, TechnologyType.COMBUSTION) {
         @Override
         public void attack() {
 
         }
     },
-    TANK(450, CombatType.ARMORED, 50, 0, 0, 4, null, TechnologyType.COMBUSTION) {
+    TANK(450, CombatType.ARMORED, 50, 0, 1, 4, null, TechnologyType.COMBUSTION) {
         @Override
         public void attack() {
 

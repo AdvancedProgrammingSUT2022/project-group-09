@@ -21,6 +21,7 @@ public class Settler extends Unit {
         for (Terrain terrain : city.getSurroundingTerrain()) {
             terrain.setCivilization(getCivilization());
         }
+        delete();
     }
 
     public void foundNormalCity() {

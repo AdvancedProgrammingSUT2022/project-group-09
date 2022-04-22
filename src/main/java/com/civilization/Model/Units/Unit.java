@@ -106,7 +106,15 @@ public class Unit {
     }
 
     public void delete() {
-
+        getCivilization().removeUnit(this);
+        for (Terrain[] terrains : GameDataBase.getMainMap().getTerrains()) {
+            for (Terrain terrain : terrains) {
+                if (terrain.getMilitaryUnit() == this)
+                    terrain.setMilitaryUnit(null);
+                if (terrain.getCivilianUnit() == this)
+                    terrain.setCivilianUnit(null);
+            }
+        }
     }
 
     public int getRemainingMove() {

@@ -94,7 +94,7 @@ public class Map {
 
     public String showMap(int x, int y) {
         if (!isValidTerran(x, y)) {
-            return "ERROR x , y in show map is invalid";
+            return "ERROR x: " + x + " , y: " + y + " in show map is invalid";
         }
         return new MapController().showMap(x, y, this.getTerrainStates());
     }

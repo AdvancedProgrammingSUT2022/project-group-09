@@ -6,8 +6,10 @@ import com.civilization.Controller.LoginMenuController;
 import com.civilization.Controller.MainMenuController;
 import com.civilization.Controller.ProfileMenuController;
 import com.civilization.Controller.UserDatabase;
+import com.civilization.Model.Coordination;
 import com.civilization.Model.MainMap;
 import com.civilization.Model.Map;
+import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.Settler;
 import com.civilization.Model.User;
 import com.civilization.View.*;
@@ -23,10 +25,12 @@ public class Main {
         //           System.out.println(GameDataBase.getMainMap().showMap(i, j));
 
         Settler settler = (Settler) GameDataBase.getCivilizations().get(0).getUnits().get(0);
-        settler.foundCaptalCity();
+        Coordination coordination=settler.getTerrain().getCoordination();
         System.out.println(settler.getTerrain().getCoordination().toString());
+
+        settler.foundCaptalCity();
         GameDataBase.getCivilizations().get(0).getMap().updateExploration();
-        System.out.println(GameDataBase.getCivilizations().get(0).getMap().showMap(settler.getTerrain().getCoordination().getX(),settler.getTerrain().getCoordination().getY()));
+        System.out.println(GameDataBase.getCivilizations().get(0).getMap().showMap(coordination.getX()-1,coordination.getY()-1));
 
         UserDatabase.loadUsers();
         Scanner scanner = new Scanner(System.in);
