@@ -22,6 +22,10 @@ public class Main {
         for (int i = 0; i < 24; i++)
             for (int j = 0; j < 24; j++)
                 System.out.println(GameDataBase.getMainMap().showMap(i, j));
+        for (int i = 0; i < 24; i++)
+            for (int j = 0; j < 24; j++)
+                System.out.println(GameDataBase.getCivilizations().get(0).getMap().showMap(i, j));
+
         UserDatabase.loadUsers();
         Scanner scanner = new Scanner(System.in);
         LoginMenuView loginMenu = new LoginMenuView(scanner, new LoginMenuController());

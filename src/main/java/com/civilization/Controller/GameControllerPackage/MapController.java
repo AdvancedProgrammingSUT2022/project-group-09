@@ -12,6 +12,7 @@ import com.civilization.Model.Terrains.TerrainType;
 public class MapController {
 
     private Terrain[][] terrains;
+    private TerrainState[][] terrainStates;
 
     private String getBackgroundColor(Terrain terrain) {
         TerrainType type = terrain.getType();
@@ -88,13 +89,13 @@ public class MapController {
 
                 drawHex(mapString, istart, jstart);
 
-                if (terrains[x + i][y + j].getState() == TerrainState.FOGOFWAR) {
+                if (terrainStates[x + i][y + j] == TerrainState.FOGOFWAR) {
                     backgroundColor = ConsoleColors.GRAY_BACKGROUND;
                 }
 
                 drawMainDetails(mapString, istart, jstart, x + i, y + j, backgroundColor);
 
-                if (terrains[x + i][y + j].getState() == TerrainState.VISIBLE) {
+                if (terrainStates[x + i][y + j] == TerrainState.VISIBLE) {
                     // TODO set name in civilization constructor
                     if (terrains[x + i][y + j].getCivilization() == null) {
                         mapString[istart + 1][jstart + 5] = backgroundColor +" "+ ConsoleColors.RESET;
@@ -108,8 +109,9 @@ public class MapController {
 
     }
 
-    public String showMap(int x, int y, Terrain terrains[][]) {
-        this.terrains = terrains;
+    public String showMap(int x, int y, TerrainState terrainStates[][]) {
+        this.terrains = GameDataBase.getMainMap().getTerrains();
+        this.terrainStates=terrainStates;
         // creating mapString
         String[][] mapString = new String[21][51];
         for (int i = 0; i < mapString.length; i++) {
@@ -132,9 +134,10 @@ public class MapController {
     }
 
     public String showMap(Matcher matcher, Map map) {
-        this.terrains = map.getTerrains();
+        this.terrainStates = map.getTerrainStates();
+        this.terrains=GameDataBase.getMainMap().getTerrains();
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-        return showMap(x, y, terrains);
+        return showMap(x, y, terrainStates);
     }
 }

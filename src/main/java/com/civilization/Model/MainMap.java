@@ -12,49 +12,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MainMap extends Map {
+    private final Terrain[][] terrains = new Terrain[row][column];
     private final ArrayList<Coordination> drought = new ArrayList<>();
     private final int numberOfDrought = 400;
 
-
-    public void updateMap() {
-        int horizental = 80;
-        int vertical = 50;
-        for (int q = 0; q < GameDataBase.getCivilizations().size(); q++) {
-            for (int i = 0; i < vertical; i++)
-                for (int j = 0; j < horizental; j++) {
-                    Terrain targetTerrain = GameDataBase.getCivilizations().get(q).getMap().getTerrain(i, j);
-                    Terrain mainMapTerrain = terrains[i][j];
-                    if (targetTerrain == null)
-                        targetTerrain = new Terrain();
-                    //TADA .. !
-                    targetTerrain.setImprovement(mainMapTerrain.getImprovement());
-                    targetTerrain.setHasRoad(mainMapTerrain.isHasRoad());
-                    targetTerrain.setTerrainFeatures(mainMapTerrain.getTerrainFeatures());
-                    targetTerrain.setResources(mainMapTerrain.getResources());
-                    targetTerrain.setCivilianUnit(mainMapTerrain.getCivilianUnit());
-                    targetTerrain.setResources(mainMapTerrain.getResources());
-                    targetTerrain.setType(mainMapTerrain.getType());
-                    targetTerrain.setMilitaryUnit(mainMapTerrain.getMilitaryUnit());
-                    //if terrain=City
-                    if (mainMapTerrain instanceof City) {
-                        City mainMapCity = (City) mainMapTerrain;
-                        City targetCity;
-                        if (targetTerrain instanceof City)
-                            targetCity = (City) targetTerrain;
-                        else
-                            targetCity = new City(mainMapCity);
-                        targetCity.setCitizens(mainMapCity.getCitizens());
-                        targetCity.setCapital(mainMapCity.isCapital());
-                        targetCity.setProduction(mainMapCity.getProduction());
-                        targetCity.setFood(mainMapCity.getFood());
-                        targetCity.setGold(mainMapCity.getGold());
-                        targetCity.setTerrains(mainMapCity.getTerrains());
-                        targetCity.setMakingBuilding(mainMapCity.getMakingBuilding());
-                        targetCity.setMakingUnit(mainMapCity.getMakingUnit());
-                        targetCity.setBuildings(mainMapCity.getBuildings());
-                    }
-                }
-        }
+    public Terrain[][] getTerrains() {
+        return terrains;
     }
 
     public MainMap() {
@@ -193,4 +156,49 @@ public class MainMap extends Map {
     public ArrayList<Coordination> getDrought() {
         return drought;
     }
+
+    public void setTerrain(int x, int y, Terrain terrain) {
+        terrains[x][y] = terrain;
+    }
+
+    public Terrain getTerrain(int x, int y) {
+        return terrains[x][y];
+    }
+
+    public int getXpositionTerrain(Terrain terrain) {
+        int horizental = terrains[0].length;
+        int vertical = terrains.length;
+        for (int i = 0; i < vertical; i++)
+            for (int j = 0; j < horizental; j++) {
+                if (terrains[i][j] == terrain)
+                    return i;
+            }
+        System.err.println("ERROR! in getXpositionTerrain ");
+        throw new RuntimeException();
+    }
+
+    public int getYpositionTerrain(Terrain terrain) {
+        int horizental = terrains[0].length;
+        int vertical = terrains.length;
+        for (Terrain[] value : terrains)
+            for (int j = 0; j < horizental; j++) {
+                if (value[j] == terrain)
+                    return j;
+            }
+        System.err.println("ERROR! in getXpositionTerrain ");
+        throw new RuntimeException();
+    }
+
+    public boolean isValidTerran(Terrain terrain) {
+        int horizental = terrains[0].length;
+        int vertical = terrains.length;
+        for (Terrain[] value : terrains)
+            for (int j = 0; j < horizental; j++) {
+                if (value[j] == terrain)
+                    return true;
+            }
+        return false;
+    }
+
+
 }

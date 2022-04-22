@@ -3,6 +3,7 @@ package com.civilization.Model.Terrains;
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
+import com.civilization.Model.Coordination;
 import com.civilization.Model.Improvements.Improvement;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
@@ -15,7 +16,6 @@ public class Terrain implements CitizenCanWork {
     private Improvement improvement;
     private boolean hasRoad;
     private TerrainType type;
-    private TerrainState state;
     private ArrayList<TerrainFeature> terrainFeatures;
     private ArrayList<Resource> resources;
     private Unit civilianUnit;
@@ -26,7 +26,6 @@ public class Terrain implements CitizenCanWork {
         this.improvement = null;
         this.hasRoad = false;
         this.type = null;
-        this.state = null;
         this.terrainFeatures = new ArrayList<>();
         this.resources = new ArrayList<>();
         this.civilianUnit = null;
@@ -35,7 +34,6 @@ public class Terrain implements CitizenCanWork {
 
     public Terrain(TerrainType type) {
         this.type = type;
-        this.state = TerrainState.VISIBLE;
         this.improvement = null;
         this.hasRoad = false;
         this.terrainFeatures = new ArrayList<>();
@@ -66,14 +64,6 @@ public class Terrain implements CitizenCanWork {
 
     public void setType(TerrainType type) {
         this.type = type;
-    }
-
-    public TerrainState getState() {
-        return state;
-    }
-
-    public void setState(TerrainState state) {
-        this.state = state;
     }
 
     public ArrayList<TerrainFeature> getTerrainFeatures() {
@@ -169,66 +159,66 @@ public class Terrain implements CitizenCanWork {
     public ArrayList<Terrain> getSurroundingTerrain() {
         ArrayList<Terrain> terrains = new ArrayList<>();
         int x, y;
-        if (getCivilization().getMap().getYpositionTerrain(this) % 2 == 0) {
-            x = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            y = getCivilization().getMap().getXpositionTerrain(this);
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+        if (GameDataBase.getMainMap().getYpositionTerrain(this) % 2 == 0) {
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
+            y = GameDataBase.getMainMap().getXpositionTerrain(this);
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
-            x = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            y = getCivilization().getMap().getXpositionTerrain(this);
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
+            y = GameDataBase.getMainMap().getXpositionTerrain(this);
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
-            x = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            y = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
+            y = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
-            x = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            y = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
+            y = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
-            x = getCivilization().getMap().getXpositionTerrain(this);
-            y = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+            x = GameDataBase.getMainMap().getXpositionTerrain(this);
+            y = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
-            x = getCivilization().getMap().getXpositionTerrain(this);
-            y = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+            x = GameDataBase.getMainMap().getXpositionTerrain(this);
+            y = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
         } else {
-            x = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            y = getCivilization().getMap().getXpositionTerrain(this);
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
+            y = GameDataBase.getMainMap().getXpositionTerrain(this);
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
-            x = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            y = getCivilization().getMap().getXpositionTerrain(this);
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
+            y = GameDataBase.getMainMap().getXpositionTerrain(this);
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
-            x = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            y = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
+            y = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
-            x = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            y = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
+            y = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
-            x = getCivilization().getMap().getXpositionTerrain(this);
-            y = getCivilization().getMap().getXpositionTerrain(this) - 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+            x = GameDataBase.getMainMap().getXpositionTerrain(this);
+            y = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
-            x = getCivilization().getMap().getXpositionTerrain(this);
-            y = getCivilization().getMap().getXpositionTerrain(this) + 1;
-            if (getCivilization().getMap().isValidTerran(x, y))
-                terrains.add(getCivilization().getMap().getTerrain(x, y));
+            x = GameDataBase.getMainMap().getXpositionTerrain(this);
+            y = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
         }
         return terrains;
     }
@@ -239,6 +229,10 @@ public class Terrain implements CitizenCanWork {
 
     public int getYPosition() {
         return GameDataBase.getMainMap().getYpositionTerrain(this);
+    }
+
+    public Coordination getCoordination() {
+        return new Coordination(getXPosition(), getYPosition());
     }
 
     public String getDetails() {
