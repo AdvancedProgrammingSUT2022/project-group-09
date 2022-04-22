@@ -13,9 +13,18 @@ public class Settler extends Unit {
         super(UnitType.SETTLER, terrain, civilization);
     }
 
+    public void foundCaptalCity() {
+        City city = new City();
+        city.setCapital(true);
+        city.setCivilization(getCivilization());
+        GameDataBase.getMainMap().setTerrain(getTerrain().getXPosition(), getTerrain().getYPosition(), city);
+    }
+
     public void foundCity() {
-      //  City city = new City(getTerrain(), new ArrayList<>());
-      //  GameDataBase.getMainMap().setTerrain(getTerrain().getXpositionTerrain(), getTerrain().getYpositionTerrain(), city);
+        City city = new City();
+        city.setCapital(false);
+        city.setCivilization(getCivilization());
+        GameDataBase.getMainMap().setTerrain(getTerrain().getXPosition(), getTerrain().getYPosition(), city);
     }
 
 }
