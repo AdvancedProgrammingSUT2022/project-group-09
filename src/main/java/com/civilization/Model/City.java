@@ -25,6 +25,10 @@ public class City extends Terrain {
     private ArrayList<BuildingType> buildings;
 
     public void CreateUnit(UnitType unitType) {
+        if (!getCivilization().getTechnologies().getTechnologiesResearched().contains(unitType.getRequiredTechnology())) {
+            System.err.println("technology mored nazara ro nadari");
+            throw new RuntimeException();
+        }
         if (makingBuilding.size() != 0 || makingUnit.size() != 0) {
             System.err.println("2 ta chiz hamzaman nemitooni besazi");
             throw new RuntimeException();
@@ -33,6 +37,10 @@ public class City extends Terrain {
     }
 
     public void CreateBuilding(BuildingType buildingType) {
+        if (!getCivilization().getTechnologies().getTechnologiesResearched().contains(buildingType.getRequirement())) {
+            System.err.println("technology mored nazara ro nadari");
+            throw new RuntimeException();
+        }
         if (makingBuilding.size() != 0 || makingUnit.size() != 0) {
             System.err.println("2 ta chiz hamzaman nemitooni besazi");
             throw new RuntimeException();
