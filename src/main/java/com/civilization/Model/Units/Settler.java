@@ -18,6 +18,8 @@ public class Settler extends Unit {
         city.setCapital(true);
         city.setCivilization(getCivilization());
         GameDataBase.getMainMap().setTerrain(getTerrain().getXPosition(), getTerrain().getYPosition(), city);
+        //Todo set kardan terrain haye doresh
+       // city.getSurroundingTerrain()
     }
 
     public void foundCity() {
