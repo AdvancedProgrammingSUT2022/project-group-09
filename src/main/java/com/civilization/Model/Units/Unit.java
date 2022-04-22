@@ -60,6 +60,7 @@ public class Unit {
                     terrain1.setMilitaryUnit(null);
             }
         }
+
         if (this instanceof MilitaryUnit) {
             if (terrain.getMilitaryUnit() != null) {
                 System.err.println("ERROR! 2 ta military nemitoonan yeja bashan");
@@ -92,7 +93,7 @@ public class Unit {
         civilization.addUnit(this);
     }
 
-    public void move() {
+    public void move(Terrain destination) {
 
     }
 

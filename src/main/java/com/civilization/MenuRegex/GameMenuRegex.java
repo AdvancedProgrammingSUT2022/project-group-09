@@ -13,7 +13,10 @@ public enum GameMenuRegex {
     EXIT("^menu exit$"),
     SHOWMAP1("^show map (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
     SHOWMAP2("^show map (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
-    SHOWMAP("");
+    SHOWMAP(""),
+    MOVE1("^move unit to (--coordinates|-c) -x (?<x>->[\\d]+) -y (?<y>-?[\\d]+)$"),
+    MOVE2("^move unit to (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
+    MOVE("");
 
     private final String regex;
 
@@ -38,6 +41,13 @@ public enum GameMenuRegex {
         }
     };
 
+    private static final ArrayList<GameMenuRegex> moveRegexes = new ArrayList<GameMenuRegex>() {
+        {
+            add(MOVE1);
+            add(MOVE2);
+        }
+    };
+
     private static Matcher getMatcherShowMap(String input) {
         for (GameMenuRegex command : showmapRegexes) {
             Matcher matcher = Pattern.compile(command.regex).matcher(input);
@@ -48,9 +58,21 @@ public enum GameMenuRegex {
         return null;
     }
 
+    private static Matcher getMatcherMove(String input) {
+        for (GameMenuRegex command : moveRegexes) {
+            Matcher matcher = Pattern.compile(command.regex).matcher(input);
+            if (matcher.matches()) {
+                return matcher;
+            }
+        }
+        return null;
+    }
+
     public static Matcher getMatcher(String input, GameMenuRegex command) {
         if (command.equals(SHOWMAP)) 
-            getMatcher(input, command);
+            return getMatcherShowMap(input);
+        if (command.equals(MOVE))
+            return getMatcherMove(input);
         Matcher matcher = Pattern.compile(command.regex).matcher(input);
         if (matcher.matches()) {
             return matcher;

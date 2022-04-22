@@ -10,7 +10,7 @@ import com.civilization.Model.Terrains.TerrainState;
 import java.util.ArrayList;
 
 public class Map {
-    protected final int row = 30, column = 30, length = 30; //length for graphic
+    protected final static int row = 30, column = 30, length = 30; //length for graphic
     private final TerrainState[][] terrainStates = new TerrainState[row][column];
 
     public Civilization getCivilization() {
@@ -97,5 +97,13 @@ public class Map {
             return "ERROR x: " + x + " , y: " + y + " in show map is invalid";
         }
         return new MapController().showMap(x, y, this.getTerrainStates());
+    }
+
+    public static int getRow() {
+        return row;
+    }
+
+    public static int getColumn() {
+        return column;
     }
 }

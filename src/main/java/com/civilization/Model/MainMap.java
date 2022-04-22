@@ -32,16 +32,16 @@ public class MainMap extends Map {
                 terrains[i][j].setResources(randomResources(random, terrains[i][j]));
             }
         }
-//        for (int i = 0; i < GameDataBase.getCivilizations().size(); i++) {
-//            Coordination coordination = drought.get(random.nextInt(drought.size()));
-//            int x = coordination.getX();
-//            int y = coordination.getY();
-//            if (getTerrain(x, y).getCivilization() == null) {
-//                getTerrain(x, y).setCivilization(GameDataBase.getCivilizations().get(i));
-//            } else {
-//                i--;
-//            }
-//        }
+        // for (int i = 0; i < GameDataBase.getCivilizations().size(); i++) {
+        // Coordination coordination = drought.get(random.nextInt(drought.size()));
+        // int x = coordination.getX();
+        // int y = coordination.getY();
+        // if (getTerrain(x, y).getCivilization() == null) {
+        // getTerrain(x, y).setCivilization(GameDataBase.getCivilizations().get(i));
+        // } else {
+        // i--;
+        // }
+        // }
         // aylin oomade inja be har civilization yedoone terrain dade
     }
 
@@ -162,6 +162,10 @@ public class MainMap extends Map {
     }
 
     public Terrain getTerrain(int x, int y) {
+        if (x > Map.getRow() - 1 || x < 0 || y > Map.getColumn() - 1 || y < 0) {
+            System.err.println("ERROR: position of out bounds! MainMap.getTerrain(int x, int y)");
+            throw new RuntimeException();
+        }
         return terrains[x][y];
     }
 
@@ -199,6 +203,5 @@ public class MainMap extends Map {
             }
         return false;
     }
-
 
 }
