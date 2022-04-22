@@ -1,5 +1,6 @@
 package com.civilization.Model.Units;
 
+import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
@@ -7,13 +8,20 @@ import com.civilization.Model.Terrains.TerrainType;
 
 import java.util.ArrayList;
 
-public class Unit  {
+public class Unit {
     private UnitType myType;
     private boolean isSleep;
-    private Terrain terrain;
-    private Civilization civilization;
     private int remainingMove;
 
+    public Unit(UnitType myType) {
+        this.myType = myType;
+    }
+
+    public Unit(UnitType myType, Terrain terrain, Civilization civilization) {
+        this.myType = myType;
+        setTerrain(terrain);
+        setCivilization(civilization);
+    }
 
     public UnitType getMyType() {
         return myType;
@@ -32,25 +40,55 @@ public class Unit  {
     }
 
     public Terrain getTerrain() {
-        return terrain;
+
+        for (Terrain[] terrains : GameDataBase.getMainMap().getTerrains()) {
+            for (Terrain terrain : terrains) {
+                if (terrain.getCivilianUnit() == this || terrain.getMilitaryUnit() == this)
+                    return terrain;
+            }
+        }
+        return null;
     }
 
     public void setTerrain(Terrain terrain) {
-        this.terrain = terrain;
+        for (Terrain[] terrains : GameDataBase.getMainMap().getTerrains()) {
+            for (Terrain terrain1 : terrains) {
+                if (terrain1.getCivilianUnit() == this)
+                    terrain1.setCivilization(null);
+                if (terrain.getMilitaryUnit() == this)
+                    terrain1.setMilitaryUnit(null);
+            }
+        }
+        if (this instanceof MilitaryUnit) {
+            if (terrain.getMilitaryUnit() != null) {
+                System.err.println("ERROR! 2 ta military nemitoonan yeja bashan");
+                throw new RuntimeException();
+            } else
+                terrain.setMilitaryUnit((MilitaryUnit) this);
+        } else {
+            if (terrain.getCivilianUnit() != null) {
+                System.err.println("ERROR! 2 ta civilian unit nemitoonan yeja bashan");
+                throw new RuntimeException();
+            } else
+                terrain.setCivilianUnit(this);
+        }
+
     }
 
     public Civilization getCivilization() {
-        return civilization;
+
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            if (civilization.getUnits().contains(this))
+                return civilization;
+        }
+        return null;
     }
 
     public void setCivilization(Civilization civilization) {
-        this.civilization = civilization;
-    }
-
-    public Unit(UnitType myType, Terrain terrain, Civilization civilization) {
-        this.myType = myType;
-        this.terrain = terrain;
-        this.civilization = civilization;
+        for (Civilization civilization1 : GameDataBase.getCivilizations()) {
+            civilization1.getUnits().remove(this);
+        }
+        civilization.addUnit(this);
     }
 
     public void move() {

@@ -6,13 +6,14 @@ import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.CitizenCanWork;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
+import com.civilization.Model.Units.Settler;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class MainMap extends Map {
     private final ArrayList<Coordination> drought = new ArrayList<>();
-    private int numberOfDrought;
+    private final int numberOfDrought = 400;
 
 
     public void updateMap() {
@@ -58,8 +59,8 @@ public class MainMap extends Map {
 
     public MainMap() {
         Random random = new Random();
-        int xStart = random.nextInt() % row;
-        int yStart = random.nextInt() % column;
+        int xStart = random.nextInt(row);
+        int yStart = random.nextInt(column);
         randomDrought(random, xStart, yStart);
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
@@ -68,16 +69,17 @@ public class MainMap extends Map {
                 terrains[i][j].setResources(randomResources(random, terrains[i][j]));
             }
         }
-        for (int i = 0; i < GameDataBase.getCivilizations().size(); i++) {
-            Coordination coordination = drought.get(random.nextInt() % drought.size());
-            int x = coordination.getX();
-            int y = coordination.getY();
-            if (getTerrain(x, y).getCivilization() == null) {
-                getTerrain(x, y).setCivilization(GameDataBase.getCivilizations().get(i));
-            } else {
-                i--;
-            }
-        }
+//        for (int i = 0; i < GameDataBase.getCivilizations().size(); i++) {
+//            Coordination coordination = drought.get(random.nextInt(drought.size()));
+//            int x = coordination.getX();
+//            int y = coordination.getY();
+//            if (getTerrain(x, y).getCivilization() == null) {
+//                getTerrain(x, y).setCivilization(GameDataBase.getCivilizations().get(i));
+//            } else {
+//                i--;
+//            }
+//        }
+        // aylin oomade inja be har civilization yedoone terrain dade
     }
 
     private boolean isCoordinationUsed(int x, int y) {
@@ -154,7 +156,7 @@ public class MainMap extends Map {
                 add(TerrainType.TUNDRA);
             }
         };
-        int whichType = random.nextInt() % 7;
+        int whichType = random.nextInt(7);
         return types.get(whichType);
     }
 
@@ -186,5 +188,9 @@ public class MainMap extends Map {
             }
         }
         return resources;
+    }
+
+    public ArrayList<Coordination> getDrought() {
+        return drought;
     }
 }

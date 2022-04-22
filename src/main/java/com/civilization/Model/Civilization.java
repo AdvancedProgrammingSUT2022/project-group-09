@@ -4,7 +4,7 @@ import com.civilization.Model.Info.Gold;
 import com.civilization.Model.Info.Happiness;
 import com.civilization.Model.Info.Science;
 import com.civilization.Model.Info.Technologies;
-import com.civilization.Model.Resources.Resource;
+import com.civilization.Model.Units.Unit;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,9 @@ public class Civilization {
     private Science science;
     private Happiness happiness;
 
-    public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, Technologies technologies, Gold gold, Science science, Happiness happiness) {
+    private ArrayList<Unit> units;
+
+    public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, Technologies technologies, Gold gold, Science science, Happiness happiness, ArrayList<Unit> units) {
         this.map = map;
         this.cities = cities;
         this.wars = wars;
@@ -26,9 +28,11 @@ public class Civilization {
         this.gold = gold;
         this.science = science;
         this.happiness = happiness;
+        this.units = units;
     }
 
-    public Civilization() {
+    public Civilization(String name) {
+        this.name = name;
         this.map = new Map();
         this.cities = new ArrayList<>();
         this.wars = new ArrayList<>();
@@ -36,6 +40,7 @@ public class Civilization {
         this.gold = new Gold();
         this.science = new Science();
         this.happiness = new Happiness();
+        this.units = new ArrayList<>();
     }
 
     public ArrayList<City> getCities() {
@@ -104,6 +109,18 @@ public class Civilization {
 
     public String getName() {
         return this.name;
+    }
+
+    public ArrayList<Unit> getUnits() {
+        return units;
+    }
+
+    public void setUnits(ArrayList<Unit> units) {
+        this.units = units;
+    }
+
+    public void addUnit(Unit unit) {
+        this.units.add(unit);
     }
 
     //TODO complete all information functions

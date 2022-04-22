@@ -96,8 +96,12 @@ public class MapController {
 
                 if (terrains[x + i][y + j].getState() == TerrainState.VISIBLE) {
                     // TODO set name in civilization constructor
-                    mapString[istart + 1][jstart + 5] = backgroundColor
-                            + terrains[x + i][y + j].getCivilization().getName().charAt(0) + ConsoleColors.RESET;
+                    if (terrains[x + i][y + j].getCivilization() == null) {
+                        mapString[istart + 1][jstart + 5] = backgroundColor +" "+ ConsoleColors.RESET;
+                    } else {
+                        mapString[istart + 1][jstart + 5] = backgroundColor
+                                + terrains[x + i][y + j].getCivilization().getName().charAt(0) + ConsoleColors.RESET;
+                    }
                 }
             }
         }

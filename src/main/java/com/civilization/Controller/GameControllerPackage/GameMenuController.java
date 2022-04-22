@@ -8,12 +8,12 @@ import java.util.regex.Matcher;
 
 public class GameMenuController extends Controller {
     //GameDataBase darim
-    Cheat cheat;
-    CheatController cheatConteroller;
-    CityController cityController;
-    InfoController infoController;
-    MapController mapController;
-    Unitcontroller unitcontroller;
+    Cheat cheat=new Cheat();
+    CheatController cheatConteroller=new CheatController();
+    CityController cityController=new CityController();
+    InfoController infoController=new InfoController();
+    MapController mapController=new MapController();
+    Unitcontroller unitcontroller=new Unitcontroller();
 
     public String nextTurn(Matcher matcher) {
         //TODO INJA MIAD HARCHI GOLD O INAST RO EZAFE MIKONE BARA TURN BADI

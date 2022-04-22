@@ -1,6 +1,7 @@
 package com.civilization.Model;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
+import com.civilization.Controller.GameControllerPackage.MapController;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Terrains.TerrainType;
@@ -135,5 +136,10 @@ public class Map {
         return x < terrains.length && x >= 0 && y < terrains[0].length && y >= 0;
     }
 
-
+    public String showMap(int x, int y) {
+        if (!isValidTerran(x, y)) {
+            return "ERROR x , y in show map is invalid";
+        }
+        return new MapController().showMap(x, y, this.getTerrains());
+    }
 }

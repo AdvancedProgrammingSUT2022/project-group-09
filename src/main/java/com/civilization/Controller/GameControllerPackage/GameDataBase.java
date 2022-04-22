@@ -1,29 +1,40 @@
 package com.civilization.Controller.GameControllerPackage;
 
-import com.civilization.Model.City;
-import com.civilization.Model.Civilization;
-import com.civilization.Model.MainMap;
-import com.civilization.Model.User;
+import com.civilization.Model.*;
+import com.civilization.Model.Terrains.Terrain;
+import com.civilization.Model.Terrains.TerrainType;
+import com.civilization.Model.Units.Settler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public class GameDataBase {
     static private int turn;
     static private MainMap mainMap;
-    static private ArrayList<User> players = new ArrayList<>(); //ina bazi mikonan avalesh inja sabt mishe
-    static private User currentUser = null;
-    static private Civilization currentCivilization = null;
-    static private HashMap<User, Civilization> civilizations = new HashMap<>();
+    static private ArrayList<User> players; //ina bazi mikonan avalesh inja sabt mishe
+    static private User currentUser;
+    static private Civilization currentCivilization;
+    static private HashMap<User, Civilization> civilizations;
 
     public static void runGameForFirstTime(ArrayList<User> players) {
+        GameDataBase.civilizations = new HashMap<>();
         GameDataBase.players = players;
         setGameDataBase();
     }
 
     private static void setGameDataBase() {
-
+        for (User player : players) {
+            civilizations.put(player, new Civilization(player.getUsername()));
+        }
+        currentUser = players.get(0);
+        currentCivilization = civilizations.get(players.get(0));
+        turn = 0;
+        mainMap = new MainMap();
+        Random random = new Random();
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            Coordination coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
+            Terrain terrain = GameDataBase.getMainMap().getTerrain(coordination.getX(), coordination.getY());
+            civilization.addUnit(new Settler(terrain, civilization));
+        }
     }
 
     public static ArrayList<Civilization> getCivilizations() {
