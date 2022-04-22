@@ -224,4 +224,15 @@ public enum BuildingType implements BuildingNote {
     final int maintenance;
     final TechnologyType requirement;
 
+    public int getCost() {
+        return cost;
+    }
+
+    public int getMaintenance() {
+        return maintenance;
+    }
+
+    public TechnologyType getRequirement() {
+        return requirement;
+    }
 }

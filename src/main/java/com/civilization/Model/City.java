@@ -8,6 +8,7 @@ import com.civilization.Model.Terrains.CitizenCanWork;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
 import com.civilization.Model.Units.Unit;
+import com.civilization.Model.Units.UnitType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,9 +20,25 @@ public class City extends Terrain {
     private Food food;
     private Gold gold;
     private ArrayList<Terrain> terrains;
-    private HashMap<Integer, BuildingType> makingBuilding;//<remaining turn to build,building>
-    private HashMap<Integer, Unit> makingUnit;//<remaining turn to build,Unit>
+    private HashMap<Integer, BuildingType> makingBuilding;//<remaining Product to build,building>
+    private HashMap<Integer, UnitType> makingUnit;//<remaining Product to build,Unit>
     private ArrayList<BuildingType> buildings;
+
+    public void CreateUnit(UnitType unitType) {
+        if (makingBuilding.size() != 0 || makingUnit.size() != 0) {
+            System.err.println("2 ta chiz hamzaman nemitooni besazi");
+            throw new RuntimeException();
+        }
+        makingUnit.put(unitType.getCost(), unitType);
+    }
+
+    public void CreateBuilding(BuildingType buildingType) {
+        if (makingBuilding.size() != 0 || makingUnit.size() != 0) {
+            System.err.println("2 ta chiz hamzaman nemitooni besazi");
+            throw new RuntimeException();
+        }
+        makingBuilding.put(buildingType.getCost(), buildingType);
+    }
 
     public City() {
         this.citizens = new ArrayList<>();
@@ -107,11 +124,11 @@ public class City extends Terrain {
         this.makingBuilding = makingBuilding;
     }
 
-    public HashMap<Integer, Unit> getMakingUnit() {
+    public HashMap<Integer, UnitType> getMakingUnit() {
         return makingUnit;
     }
 
-    public void setMakingUnit(HashMap<Integer, Unit> makingUnit) {
+    public void setMakingUnit(HashMap<Integer, UnitType> makingUnit) {
         this.makingUnit = makingUnit;
     }
 

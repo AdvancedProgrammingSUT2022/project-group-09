@@ -2,7 +2,6 @@ package com.civilization.Model.Info;
 
 public class Product {
     private int currentProduct;
-    private int additionProduct;
 
     public int getCurrentProduct() {
         return currentProduct;
@@ -12,11 +11,4 @@ public class Product {
         this.currentProduct = currentProduct;
     }
 
-    public int getAdditionProduct() {
-        return additionProduct;
-    }
-
-    public void setAdditionProduct(int additionProduct) {
-        this.additionProduct= additionProduct;
-    }
 }
