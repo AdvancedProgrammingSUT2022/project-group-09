@@ -7,12 +7,14 @@ import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Unit {
     private UnitType myType;
     private boolean isSleep;
     private int remainingMove;
+    private ArrayList<Terrain> path = new ArrayList<>();
 
     public Unit(UnitType myType) {
         this.myType = myType;
@@ -38,6 +40,14 @@ public class Unit {
 
     public void setSleep(boolean sleep) {
         isSleep = sleep;
+    }
+
+    public ArrayList<Terrain> getPath() {
+        return this.path;
+    }
+
+    public void setPath(ArrayList<Terrain> path) {
+        this.path = path;
     }
 
     public Terrain getTerrain() {

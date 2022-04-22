@@ -1,6 +1,9 @@
 package com.civilization.Controller.GameControllerPackage;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
+
+import javax.print.attribute.standard.Destination;
 
 import com.civilization.Model.Coordination;
 import com.civilization.Model.Map;
@@ -20,9 +23,40 @@ public class Unitcontroller {
             return "no unit selected";
         if (unit.getCivilization() != GameDataBase.getCurrentCivilization())
             return "this unit doesn't belong to you good sir";
-        Terrain terrain = GameDataBase.getMainMap().getTerrain(x, y);
-        unit.move(terrain);
+        Terrain destination = GameDataBase.getMainMap().getTerrain(x, y);
+        return moveUnit(destination, unit);
+    }
+
+    private String moveUnit(Terrain destination, Unit unit) {
+        Terrain origin = unit.getTerrain();
+        int MP = unit.getRemainingMove();
+        ArrayList<ArrayList<Terrain>> paths = new ArrayList<>();
+        ArrayList<Terrain> path = new ArrayList<>();
+        path.add(origin);
+
+        findAllPaths(destination, origin, MP, paths, path);
         return "";
+    }
+
+    private void findAllPaths(Terrain destination, Terrain origin, int MP, ArrayList<ArrayList<Terrain>> paths,
+            ArrayList<Terrain> path) {
+        if (destination == origin) {
+            paths.add(path);
+            return;
+        }
+        for (Terrain nextTerrain : origin.getSurroundingTerrain()) {
+            if (isMovePossible(MP, nextTerrain) && !path.contains(nextTerrain)) {
+                ArrayList<Terrain> nextPath = (ArrayList<Terrain>) path.clone();
+                nextPath.add(nextTerrain);
+                findAllPaths(destination, nextTerrain, MP, paths, nextPath);
+            }
+        }
+    }
+
+    private boolean isMovePossible(int MP, Terrain terrain) {
+        if (MP > terrain.getMp())
+            return true;
+        return false;
     }
 
     public String sleep(Matcher matcher) {
