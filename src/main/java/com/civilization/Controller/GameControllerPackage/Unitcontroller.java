@@ -35,7 +35,50 @@ public class Unitcontroller {
         path.add(origin);
 
         findAllPaths(destination, origin, MP, paths, path);
+        if (paths.isEmpty())
+            return "unfortunately there is no available path for your unit to move to your desired destination";
+        
+        ArrayList<Terrain> bestPath = findBestPath(paths, unit.getMyType().getMovement());
+        if (bestPath == null)
+            return "unfortunately there is no available path for your unit to move to your desired destination";
         return "";
+    }
+
+    private ArrayList<Terrain> findBestPath(ArrayList<ArrayList<Terrain>> paths, int MP) {
+        sortPathsByMP(paths);
+        //TODO finding a path from origin to destination
+        //without breaking any rules
+        //not standing on a terrain which already has a unit in it
+        in comment ro bedune alamate comment mizaram ke bug bokhorid bekhunidesh
+        in ghesmat ro bayad yekam angulak konam o ina
+        bad baraye jabejayi o ina ham
+        serfan ghable shoorooe har round bayad ye dor unit.move() ro call konim ke
+        age taraf bayad harekat kone be harekatesh edame bede
+        return null;
+    }
+
+    private void sortPathsByMP(ArrayList<ArrayList<Terrain>> paths) {
+        //TODO finding a better way to sort except than bubble sort
+        for (int i = 0; i < paths.size(); i++) {
+            for (int j = i + 1; j < paths.size(); j++) {
+                if (getPathMP(paths.get(j)) < getPathMP(paths.get(i))) {
+                    ArrayList<Terrain> pathi = paths.get(i);
+                    ArrayList<Terrain> pathj = paths.get(j);
+                    paths.add(i, pathj);
+                    paths.remove(i);
+                    paths.add(j, pathi);
+                    paths.remove(j);
+                }
+            }
+        }
+    }
+
+    private int getPathMP(ArrayList<Terrain> path) {
+        int MP = 0;
+        for (Terrain terrain : path) {
+            MP += terrain.getMp();
+        }
+        return MP;
     }
 
     private void findAllPaths(Terrain destination, Terrain origin, int MP, ArrayList<ArrayList<Terrain>> paths,
