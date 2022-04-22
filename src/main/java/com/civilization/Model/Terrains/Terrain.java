@@ -32,6 +32,16 @@ public class Terrain implements CitizenCanWork {
         this.militaryUnit = null;
     }
 
+    public Terrain(Terrain terrain) {
+        this.improvement = terrain.getImprovement();
+        this.hasRoad = terrain.isHasRoad();
+        this.type = terrain.getType();
+        this.terrainFeatures = terrain.getTerrainFeatures();
+        this.resources = terrain.getResources();
+        this.civilianUnit = terrain.getCivilianUnit();
+        this.militaryUnit = terrain.getMilitaryUnit();
+    }
+
     public Terrain(TerrainType type) {
         this.type = type;
         this.improvement = null;

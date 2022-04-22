@@ -14,7 +14,7 @@ public class Settler extends Unit {
     }
 
     public void foundCaptalCity() {
-        City city = new City();
+        City city = new City(getTerrain());
         city.setCapital(true);
         city.setCivilization(getCivilization());
         GameDataBase.getMainMap().setTerrain(getTerrain().getXPosition(), getTerrain().getYPosition(), city);

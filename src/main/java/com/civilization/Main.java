@@ -8,23 +8,25 @@ import com.civilization.Controller.ProfileMenuController;
 import com.civilization.Controller.UserDatabase;
 import com.civilization.Model.MainMap;
 import com.civilization.Model.Map;
+import com.civilization.Model.Units.Settler;
 import com.civilization.Model.User;
 import com.civilization.View.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import java.util.Scanner;
+import java.lang.reflect.GenericArrayType;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         GameDataBase.runGameForFirstTime(new ArrayList<>(Collections.singleton(new User("s", "sd", "sdf"))));
-        for (int i = 0; i < 24; i++)
-            for (int j = 0; j < 24; j++)
-                System.out.println(GameDataBase.getMainMap().showMap(i, j));
-        for (int i = 0; i < 24; i++)
-            for (int j = 0; j < 24; j++)
-                System.out.println(GameDataBase.getCivilizations().get(0).getMap().showMap(i, j));
+        //   for (int i = 0; i < 24; i++)
+        //       for (int j = 0; j < 24; j++)
+        //           System.out.println(GameDataBase.getMainMap().showMap(i, j));
+
+        Settler settler = (Settler) GameDataBase.getCivilizations().get(0).getUnits().get(0);
+        settler.foundCaptalCity();
+        System.out.println(settler.getTerrain().getCoordination().toString());
+        GameDataBase.getCivilizations().get(0).getMap().updateExploration();
+        System.out.println(GameDataBase.getCivilizations().get(0).getMap().showMap(settler.getTerrain().getCoordination().getX(),settler.getTerrain().getCoordination().getY()));
 
         UserDatabase.loadUsers();
         Scanner scanner = new Scanner(System.in);

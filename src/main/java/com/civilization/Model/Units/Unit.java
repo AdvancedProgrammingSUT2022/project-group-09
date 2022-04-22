@@ -1,6 +1,7 @@
 package com.civilization.Model.Units;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
+import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
@@ -136,4 +137,5 @@ public class Unit {
         }
         return result;
     }
+
 }

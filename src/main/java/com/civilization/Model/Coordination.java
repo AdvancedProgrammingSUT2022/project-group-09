@@ -3,7 +3,7 @@ package com.civilization.Model;
 public class Coordination {
     int x, y;
 
-    public Coordination(int x, int y){
+    public Coordination(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -22,5 +22,9 @@ public class Coordination {
 
     public int getY() {
         return y;
+    }
+
+    public String toString() {
+        return "x : " + x + " y : " + y;
     }
 }

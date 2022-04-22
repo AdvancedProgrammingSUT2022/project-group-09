@@ -1,5 +1,6 @@
 package com.civilization.Model;
 
+import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.Info.Food;
 import com.civilization.Model.Info.Gold;
@@ -7,6 +8,7 @@ import com.civilization.Model.Info.Product;
 import com.civilization.Model.Terrains.CitizenCanWork;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
+import com.civilization.Model.Units.Settler;
 import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
 
@@ -48,6 +50,18 @@ public class City extends Terrain {
         makingBuilding.put(buildingType.getCost(), buildingType);
     }
 
+    public City(Terrain terrain) {
+        super(terrain);
+        this.citizens = new ArrayList<>();
+        this.isCapital = false;
+        this.production = new Product();
+        this.food = new Food();
+        this.gold = new Gold();
+        this.terrains = new ArrayList<>();
+        this.makingBuilding = new HashMap<>();
+        this.makingUnit = new HashMap<>();
+        this.buildings = new ArrayList<>();
+    }
     public City() {
         this.citizens = new ArrayList<>();
         this.isCapital = false;
@@ -147,4 +161,15 @@ public class City extends Terrain {
     public void setBuildings(ArrayList<BuildingType> buildings) {
         this.buildings = buildings;
     }
+
+    @Override
+    public void setCivilization(Civilization civilization) {
+        for (Civilization civilization1 : GameDataBase.getCivilizations()) {
+            for (City city : civilization1.getCities()) {
+                city.getTerrains().remove(this);
+            }
+        }
+        civilization.addCity(this);
+    }
+
 }

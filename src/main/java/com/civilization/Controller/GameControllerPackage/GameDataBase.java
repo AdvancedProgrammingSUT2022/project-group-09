@@ -33,7 +33,7 @@ public class GameDataBase {
         for (Civilization civilization : GameDataBase.getCivilizations()) {
             Coordination coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
             Terrain terrain = GameDataBase.getMainMap().getTerrain(coordination.getX(), coordination.getY());
-            civilization.addUnit(new Settler(terrain, civilization));
+            new Settler(terrain, civilization);
         }
 
     }

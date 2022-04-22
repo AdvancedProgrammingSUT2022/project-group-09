@@ -51,6 +51,10 @@ public class Civilization {
         this.cities = cities;
     }
 
+    public void addCity(City city) {
+        this.cities.add(city);
+    }
+
     public ArrayList<War> getWars() {
         return this.wars;
     }
