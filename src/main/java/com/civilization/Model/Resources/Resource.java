@@ -138,4 +138,32 @@ public enum Resource {
         this.requiredTechnology = requiredTechnology;
         this.resourceMainType = resourceMainType;
     }
+
+    public int getFood() {
+        return food;
+    }
+
+    public int getProduction() {
+        return production;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public ArrayList<TerrainTypeOrTerrainFeatureType> getCanBeFoundOn() {
+        return canBeFoundOn;
+    }
+
+    public Improvement getRequiredImprovement() {
+        return requiredImprovement;
+    }
+
+    public TechnologyType getRequiredTechnology() {
+        return requiredTechnology;
+    }
+
+    public ResourceMainType getResourceMainType() {
+        return resourceMainType;
+    }
 }

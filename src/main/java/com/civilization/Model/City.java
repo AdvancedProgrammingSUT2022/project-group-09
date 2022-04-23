@@ -5,7 +5,6 @@ import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.Info.CityFood;
 import com.civilization.Model.Info.CityGold;
 import com.civilization.Model.Info.CityProduct;
-import com.civilization.Model.Terrains.CitizenCanWork;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.*;
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class City extends Terrain implements Combatble {
-    private ArrayList<CitizenCanWork> citizens; //length=number of citizens and arraylisti az jahaei hast ke citizen ha kar mikonnand
+    private ArrayList<Terrain> citizens; //length=number of citizens and arraylisti az jahaei hast ke citizen ha kar mikonnand
     private boolean isCapital;
     private CityProduct production;
     private CityFood cityFood;
@@ -89,11 +88,11 @@ public class City extends Terrain implements Combatble {
         this.hp = 20;
     }
 
-    public ArrayList<CitizenCanWork> getCitizens() {
+    public ArrayList<Terrain> getCitizens() {
         return citizens;
     }
 
-    public void setCitizens(ArrayList<CitizenCanWork> citizens) {
+    public void setCitizens(ArrayList<Terrain> citizens) {
         this.citizens = citizens;
     }
 

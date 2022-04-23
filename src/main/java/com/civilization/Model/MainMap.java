@@ -3,7 +3,6 @@ package com.civilization.Model;
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
-import com.civilization.Model.Terrains.CitizenCanWork;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
 import com.civilization.Model.Units.Settler;

@@ -12,7 +12,7 @@ import com.civilization.Model.Units.Unit;
 
 import java.util.ArrayList;
 
-public class Terrain implements CitizenCanWork {
+public class Terrain {
     private Improvement improvement;
     private boolean hasRoad;
     private TerrainType type;
