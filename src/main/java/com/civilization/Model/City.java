@@ -1,6 +1,7 @@
 package com.civilization.Model;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
+import com.civilization.Model.Buildings.BuildingAffect;
 import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.Info.CityFood;
 import com.civilization.Model.Info.CityGold;
@@ -20,7 +21,9 @@ public class City extends Terrain implements Combatble {
     private ArrayList<Terrain> terrains;
     private HashMap<Integer, BuildingType> makingBuilding;//<remaining Product to build,building>
     private HashMap<Integer, UnitType> makingUnit;//<remaining Product to build,Unit>
-    private ArrayList<BuildingType> buildings;
+
+    private BuildingAffect buildings;
+
 
     private int hp;
 
@@ -58,7 +61,7 @@ public class City extends Terrain implements Combatble {
         this.terrains = new ArrayList<>();
         this.makingBuilding = new HashMap<>();
         this.makingUnit = new HashMap<>();
-        this.buildings = new ArrayList<>();
+        this.buildings = new BuildingAffect();
         this.hp = 20;
     }
 
@@ -71,7 +74,7 @@ public class City extends Terrain implements Combatble {
         this.terrains = new ArrayList<>();
         this.makingBuilding = new HashMap<>();
         this.makingUnit = new HashMap<>();
-        this.buildings = new ArrayList<>();
+        this.buildings = new BuildingAffect();
         this.hp = 20;
     }
 
@@ -156,11 +159,11 @@ public class City extends Terrain implements Combatble {
         this.makingUnit = makingUnit;
     }
 
-    public ArrayList<BuildingType> getBuildings() {
+    public BuildingAffect getBuildings() {
         return buildings;
     }
 
-    public void setBuildings(ArrayList<BuildingType> buildings) {
+    public void setBuildings(BuildingAffect buildings) {
         this.buildings = buildings;
     }
 
