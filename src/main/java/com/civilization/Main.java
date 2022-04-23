@@ -28,7 +28,7 @@ public class Main {
         Coordination coordination=settler.getTerrain().getCoordination();
         System.out.println(settler.getTerrain().getCoordination().toString());
 
-        settler.foundCaptalCity();
+       // settler.foundCaptalCity();
         GameDataBase.getCivilizations().get(0).getMap().updateExploration();
         System.out.println(GameDataBase.getCivilizations().get(0).getMap().showMap(coordination.getX()-1,coordination.getY()-1));
 

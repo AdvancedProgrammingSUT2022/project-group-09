@@ -13,7 +13,7 @@ public class GameMenuController extends Controller {
     CityController cityController=new CityController();
     InfoController infoController=new InfoController();
     MapController mapController=new MapController();
-    Unitcontroller unitcontroller=new Unitcontroller();
+    UnitController unitcontroller=new UnitController();
 
     public String nextTurn(Matcher matcher) {
         //TODO INJA MIAD HARCHI GOLD O INAST RO EZAFE MIKONE BARA TURN BADI

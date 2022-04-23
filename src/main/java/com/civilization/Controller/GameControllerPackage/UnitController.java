@@ -3,14 +3,12 @@ package com.civilization.Controller.GameControllerPackage;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
-import javax.print.attribute.standard.Destination;
-
 import com.civilization.Model.Coordination;
 import com.civilization.Model.Map;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.Unit;
 
-public class Unitcontroller {
+public class UnitController {
     public String move(Matcher matcher, Unit unit) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
@@ -49,11 +47,11 @@ public class Unitcontroller {
         //TODO finding a path from origin to destination
         //without breaking any rules
         //not standing on a terrain which already has a unit in it
-        in comment ro bedune alamate comment mizaram ke bug bokhorid bekhunidesh
-        in ghesmat ro bayad yekam angulak konam o ina
-        bad baraye jabejayi o ina ham
-        serfan ghable shoorooe har round bayad ye dor unit.move() ro call konim ke
-        age taraf bayad harekat kone be harekatesh edame bede
+//        in comment ro bedune alamate comment mizaram ke bug bokhorid bekhunidesh
+//        in ghesmat ro bayad yekam angulak konam o ina
+//        bad baraye jabejayi o ina ham
+//        serfan ghable shoorooe har round bayad ye dor unit.move() ro call konim ke
+//        age taraf bayad harekat kone be harekatesh edame bede
         return null;
     }
 

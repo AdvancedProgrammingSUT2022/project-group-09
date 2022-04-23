@@ -93,6 +93,13 @@ public class Map {
     }
 
     public String showMap(int x, int y) {
+        if (y % 2 == 1)
+            y++;
+        if (x > column - 6)
+            x = column - 6;
+        if (y > row - 3)
+            y = row - 3;
+
         if (!isValidTerran(x, y)) {
             return "ERROR x: " + x + " , y: " + y + " in show map is invalid";
         }
