@@ -1,6 +1,6 @@
 package com.civilization.Model.Info;
 
-public class Food {
+public class CityFood {
     private int currentFood;
     private int additionFood;
 

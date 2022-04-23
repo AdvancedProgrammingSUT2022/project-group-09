@@ -2,12 +2,11 @@ package com.civilization.Model;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Buildings.BuildingType;
-import com.civilization.Model.Info.Food;
-import com.civilization.Model.Info.Gold;
-import com.civilization.Model.Info.Product;
+import com.civilization.Model.Info.CityFood;
+import com.civilization.Model.Info.CityGold;
+import com.civilization.Model.Info.CityProduct;
 import com.civilization.Model.Terrains.CitizenCanWork;
 import com.civilization.Model.Terrains.Terrain;
-import com.civilization.Model.Terrains.TerrainType;
 import com.civilization.Model.Units.*;
 
 import java.util.ArrayList;
@@ -16,9 +15,9 @@ import java.util.HashMap;
 public class City extends Terrain implements Combatble {
     private ArrayList<CitizenCanWork> citizens; //length=number of citizens and arraylisti az jahaei hast ke citizen ha kar mikonnand
     private boolean isCapital;
-    private Product production;
-    private Food food;
-    private Gold gold;
+    private CityProduct production;
+    private CityFood cityFood;
+    private CityGold cityGold;
     private ArrayList<Terrain> terrains;
     private HashMap<Integer, BuildingType> makingBuilding;//<remaining Product to build,building>
     private HashMap<Integer, UnitType> makingUnit;//<remaining Product to build,Unit>
@@ -54,9 +53,9 @@ public class City extends Terrain implements Combatble {
         super(terrain);
         this.citizens = new ArrayList<>();
         this.isCapital = false;
-        this.production = new Product();
-        this.food = new Food();
-        this.gold = new Gold();
+        this.production = new CityProduct();
+        this.cityFood = new CityFood();
+        this.cityGold = new CityGold();
         this.terrains = new ArrayList<>();
         this.makingBuilding = new HashMap<>();
         this.makingUnit = new HashMap<>();
@@ -67,9 +66,9 @@ public class City extends Terrain implements Combatble {
     public City() {
         this.citizens = new ArrayList<>();
         this.isCapital = false;
-        this.production = new Product();
-        this.food = new Food();
-        this.gold = new Gold();
+        this.production = new CityProduct();
+        this.cityFood = new CityFood();
+        this.cityGold = new CityGold();
         this.terrains = new ArrayList<>();
         this.makingBuilding = new HashMap<>();
         this.makingUnit = new HashMap<>();
@@ -81,8 +80,8 @@ public class City extends Terrain implements Combatble {
         this.citizens = city.getCitizens();
         this.isCapital = city.isCapital();
         this.production = city.getProduction();
-        this.food = city.getFood();
-        this.gold = city.getGold();
+        this.cityFood = city.getFood();
+        this.cityGold = city.getGold();
         this.terrains = city.getTerrains();
         this.makingBuilding = city.getMakingBuilding();
         this.makingUnit = city.getMakingUnit();
@@ -106,28 +105,28 @@ public class City extends Terrain implements Combatble {
         isCapital = capital;
     }
 
-    public Product getProduction() {
+    public CityProduct getProduction() {
         return production;
     }
 
-    public void setProduction(Product production) {
+    public void setProduction(CityProduct production) {
         this.production = production;
     }
 
-    public Food getFood() {
-        return food;
+    public CityFood getFood() {
+        return cityFood;
     }
 
-    public void setFood(Food food) {
-        this.food = food;
+    public void setFood(CityFood cityFood) {
+        this.cityFood = cityFood;
     }
 
-    public Gold getGold() {
-        return gold;
+    public CityGold getGold() {
+        return cityGold;
     }
 
-    public void setGold(Gold gold) {
-        this.gold = gold;
+    public void setGold(CityGold cityGold) {
+        this.cityGold = cityGold;
     }
 
     public ArrayList<Terrain> getTerrains() {

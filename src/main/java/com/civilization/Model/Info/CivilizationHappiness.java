@@ -1,6 +1,6 @@
 package com.civilization.Model.Info;
 
-public class Happiness {
+public class CivilizationHappiness {
     private int currentHappiness;
     private int additionHappiness;
 

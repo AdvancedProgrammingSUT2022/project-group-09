@@ -1,6 +1,6 @@
 package com.civilization.Model.Info;
 
-public class Science {
+public class CityScience {
     private int currentScience;
     private int additionScience;
 

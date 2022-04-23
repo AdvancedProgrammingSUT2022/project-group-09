@@ -1,6 +1,6 @@
 package com.civilization.Model.Info;
 
-public class Product {
+public class CityProduct {
     private int currentProduct;
 
     public int getCurrentProduct() {

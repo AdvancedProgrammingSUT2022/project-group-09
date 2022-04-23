@@ -1,9 +1,9 @@
 package com.civilization.Model;
 
-import com.civilization.Model.Info.Gold;
-import com.civilization.Model.Info.Happiness;
-import com.civilization.Model.Info.Science;
-import com.civilization.Model.Info.Technologies;
+import com.civilization.Model.Info.CityGold;
+import com.civilization.Model.Info.CivilizationHappiness;
+import com.civilization.Model.Info.CityScience;
+import com.civilization.Model.Info.CivilizationTechnologies;
 import com.civilization.Model.Units.Unit;
 
 import java.util.ArrayList;
@@ -13,21 +13,21 @@ public class Civilization {
     private String name;
     private ArrayList<City> cities;
     private ArrayList<War> wars;
-    private Technologies technologies;
-    private Gold gold;
-    private Science science;
-    private Happiness happiness;
+    private CivilizationTechnologies civilizationTechnologies;
+    private CityGold cityGold;
+    private CityScience cityScience;
+    private CivilizationHappiness civilizationHappiness;
 
     private ArrayList<Unit> units;
 
-    public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, Technologies technologies, Gold gold, Science science, Happiness happiness, ArrayList<Unit> units) {
+    public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, CivilizationTechnologies civilizationTechnologies, CityGold cityGold, CityScience cityScience, CivilizationHappiness civilizationHappiness, ArrayList<Unit> units) {
         this.map = map;
         this.cities = cities;
         this.wars = wars;
-        this.technologies = technologies;
-        this.gold = gold;
-        this.science = science;
-        this.happiness = happiness;
+        this.civilizationTechnologies = civilizationTechnologies;
+        this.cityGold = cityGold;
+        this.cityScience = cityScience;
+        this.civilizationHappiness = civilizationHappiness;
         this.units = units;
     }
 
@@ -36,10 +36,10 @@ public class Civilization {
         this.map = new Map();
         this.cities = new ArrayList<>();
         this.wars = new ArrayList<>();
-        this.technologies = new Technologies();
-        this.gold = new Gold();
-        this.science = new Science();
-        this.happiness = new Happiness();
+        this.civilizationTechnologies = new CivilizationTechnologies();
+        this.cityGold = new CityGold();
+        this.cityScience = new CityScience();
+        this.civilizationHappiness = new CivilizationHappiness();
         this.units = new ArrayList<>();
     }
 
@@ -63,40 +63,40 @@ public class Civilization {
         this.wars = wars;
     }
 
-    public Technologies getTechnologies() {
-        return this.technologies;
+    public CivilizationTechnologies getTechnologies() {
+        return this.civilizationTechnologies;
     }
 
-    public void setTechnologies(Technologies technologies) {
-        this.technologies = technologies;
+    public void setTechnologies(CivilizationTechnologies civilizationTechnologies) {
+        this.civilizationTechnologies = civilizationTechnologies;
     }
 
-    public Gold getGold() {
-        return this.gold;
+    public CityGold getGold() {
+        return this.cityGold;
     }
 
-    public void setGold(Gold gold) {
-        this.gold = gold;
+    public void setGold(CityGold cityGold) {
+        this.cityGold = cityGold;
     }
 
-    public Science getScience() {
-        return this.science;
+    public CityScience getScience() {
+        return this.cityScience;
     }
 
-    public void setScience(Science science) {
-        this.science = science;
+    public void setScience(CityScience cityScience) {
+        this.cityScience = cityScience;
     }
 
     public String showInfo() {
         return "";
     }
 
-    public Happiness getHappiness() {
-        return this.happiness;
+    public CivilizationHappiness getHappiness() {
+        return this.civilizationHappiness;
     }
 
-    public void setHappiness(Happiness happiness) {
-        this.happiness = happiness;
+    public void setHappiness(CivilizationHappiness civilizationHappiness) {
+        this.civilizationHappiness = civilizationHappiness;
     }
 
     public Map getMap() {
