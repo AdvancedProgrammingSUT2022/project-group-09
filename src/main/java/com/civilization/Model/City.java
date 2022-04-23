@@ -8,6 +8,7 @@ import com.civilization.Model.Info.Product;
 import com.civilization.Model.Terrains.CitizenCanWork;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
+import com.civilization.Model.Units.Combatble;
 import com.civilization.Model.Units.Settler;
 import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
@@ -15,7 +16,7 @@ import com.civilization.Model.Units.UnitType;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class City extends Terrain {
+public class City extends Terrain implements Combatble {
     private ArrayList<CitizenCanWork> citizens; //length=number of citizens and arraylisti az jahaei hast ke citizen ha kar mikonnand
     private boolean isCapital;
     private Product production;
@@ -184,4 +185,14 @@ public class City extends Terrain {
         return null;
     }
 
+
+    @Override
+    public void attack(Combatble target) {
+
+    }
+
+    @Override
+    public void defend(Combatble target) {
+
+    }
 }

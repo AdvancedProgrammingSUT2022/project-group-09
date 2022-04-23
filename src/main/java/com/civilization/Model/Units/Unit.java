@@ -14,6 +14,8 @@ public class Unit {
     private UnitType myType;
     private boolean isSleep;
     private int remainingMove;
+
+    private int hp;
     private ArrayList<Terrain> path = new ArrayList<>();
 
     public Unit(UnitType myType) {
@@ -22,6 +24,7 @@ public class Unit {
 
     public Unit(UnitType myType, Terrain terrain, Civilization civilization) {
         this.myType = myType;
+        this.hp=10;
         setTerrain(terrain);
         setCivilization(civilization);
     }
@@ -157,4 +160,11 @@ public class Unit {
         return result;
     }
 
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
 }

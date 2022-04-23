@@ -1,5 +1,7 @@
 package com.civilization.Model.Units;
 
 public interface Combatble {
-    public void attack();
+    void attack(Combatble target);
+
+    void defend(Combatble target);
 }
