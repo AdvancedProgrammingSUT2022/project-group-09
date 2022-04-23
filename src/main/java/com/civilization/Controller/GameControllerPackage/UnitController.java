@@ -47,11 +47,11 @@ public class UnitController {
         //TODO finding a path from origin to destination
         //without breaking any rules
         //not standing on a terrain which already has a unit in it
-//        in comment ro bedune alamate comment mizaram ke bug bokhorid bekhunidesh
-//        in ghesmat ro bayad yekam angulak konam o ina
-//        bad baraye jabejayi o ina ham
-//        serfan ghable shoorooe har round bayad ye dor unit.move() ro call konim ke
-//        age taraf bayad harekat kone be harekatesh edame bede
+        in comment ro bedune alamate comment mizaram ke bug bokhorid bekhunidesh
+        in ghesmat ro bayad yekam angulak konam o ina
+        bad baraye jabejayi o ina ham
+        serfan ghable shoorooe har round bayad ye dor unit.move() ro call konim ke
+        age taraf bayad harekat kone be harekatesh edame bede
         return null;
     }
 
