@@ -7,10 +7,11 @@ import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
 
+import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Unit {
+public class Unit implements Combatble {
     private UnitType myType;
     private boolean isSleep;
     private int remainingMove;
@@ -24,7 +25,7 @@ public class Unit {
 
     public Unit(UnitType myType, Terrain terrain, Civilization civilization) {
         this.myType = myType;
-        this.hp=10;
+        this.hp = 10;
         setTerrain(terrain);
         setCivilization(civilization);
     }
@@ -167,4 +168,21 @@ public class Unit {
     public void setHp(int hp) {
         this.hp = hp;
     }
+
+
+    @Override
+    public void attack(Combatble target) {
+        System.err.println("in attack nabayad call mishod va attack military unit bayad call she");
+        throw new RuntimeException();
+    }
+
+    @Override
+    public void defend(Combatble target) {
+        System.err.println("in defend nabayad call mishod va defend military unit bayad call she");
+        throw new RuntimeException();
+    }
+    public void getConquerdedBy(Civilization civilization) {
+
+    }
+
 }

@@ -8,10 +8,7 @@ import com.civilization.Model.Info.Product;
 import com.civilization.Model.Terrains.CitizenCanWork;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
-import com.civilization.Model.Units.Combatble;
-import com.civilization.Model.Units.Settler;
-import com.civilization.Model.Units.Unit;
-import com.civilization.Model.Units.UnitType;
+import com.civilization.Model.Units.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +23,8 @@ public class City extends Terrain implements Combatble {
     private HashMap<Integer, BuildingType> makingBuilding;//<remaining Product to build,building>
     private HashMap<Integer, UnitType> makingUnit;//<remaining Product to build,Unit>
     private ArrayList<BuildingType> buildings;
+
+    private int hp;
 
     public void CreateUnit(UnitType unitType) {
         if (!getCivilization().getTechnologies().getTechnologiesResearched().contains(unitType.getRequiredTechnology())) {
@@ -62,6 +61,7 @@ public class City extends Terrain implements Combatble {
         this.makingBuilding = new HashMap<>();
         this.makingUnit = new HashMap<>();
         this.buildings = new ArrayList<>();
+        this.hp = 20;
     }
 
     public City() {
@@ -74,6 +74,7 @@ public class City extends Terrain implements Combatble {
         this.makingBuilding = new HashMap<>();
         this.makingUnit = new HashMap<>();
         this.buildings = new ArrayList<>();
+        this.hp = 20;
     }
 
     public City(City city) {
@@ -86,6 +87,7 @@ public class City extends Terrain implements Combatble {
         this.makingBuilding = city.getMakingBuilding();
         this.makingUnit = city.getMakingUnit();
         this.buildings = city.getBuildings();
+        this.hp = 20;
     }
 
     public ArrayList<CitizenCanWork> getCitizens() {
@@ -188,11 +190,35 @@ public class City extends Terrain implements Combatble {
 
     @Override
     public void attack(Combatble target) {
-
+        if (target instanceof City) {
+            System.err.println("hamle shahr be shahr nadarim");
+            throw new RuntimeException();
+        } else if (target instanceof MilitaryUnit) {
+            MilitaryUnit targetUnit = (MilitaryUnit) target;
+            //TODO ino az ghasd gozashtam 0 = ghodrat hamle shahr ke nemidoonam chande ridam be in doc naghes
+            targetUnit.setHp(targetUnit.getHp() - 0);
+            if (targetUnit.getHp() <= 0)
+                targetUnit.delete();
+        } else {
+            Unit targetUnit = (Unit) target;
+            targetUnit.getConquerdedBy(this.getCivilization());
+        }
     }
 
     @Override
     public void defend(Combatble target) {
+        //shahr defend nadare
+    }
 
+    public void getConquerdedBy(Civilization civilization) {
+
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 }
