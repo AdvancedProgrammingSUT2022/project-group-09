@@ -7,6 +7,7 @@ import com.civilization.Model.Coordination;
 import com.civilization.Model.Map;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.Unit;
+import com.civilization.Model.Units.UnitType;
 
 public class UnitController {
     public String move(Matcher matcher, Unit unit) {
@@ -28,6 +29,12 @@ public class UnitController {
     private String moveUnit(Terrain destination, Unit unit) {
         Terrain origin = unit.getTerrain();
         int MP = unit.getRemainingMove();
+        int maxMp = unit.getMyType().getMovement();
+        UnitType unitType = unit.getMyType();
+
+        if (isDestinationEmpty(unitType, destination))
+            return "destination is not empty for you";
+
         ArrayList<ArrayList<Terrain>> paths = new ArrayList<>();
         ArrayList<Terrain> path = new ArrayList<>();
         path.add(origin);
@@ -36,23 +43,71 @@ public class UnitController {
         if (paths.isEmpty())
             return "unfortunately there is no available path for your unit to move to your desired destination";
         
-        ArrayList<Terrain> bestPath = findBestPath(paths, unit.getMyType().getMovement());
+        ArrayList<Terrain> bestPath = findBestPath(paths, unit.getMyType().getMovement(), maxMp, unitType);
         if (bestPath == null)
             return "unfortunately there is no available path for your unit to move to your desired destination";
         return "";
     }
 
-    private ArrayList<Terrain> findBestPath(ArrayList<ArrayList<Terrain>> paths, int MP) {
+    private boolean isDestinationEmpty(UnitType unitType, Terrain destination) {
+        if (unitType.equals(UnitType.WORKER) || unitType.equals(UnitType.SETTLER)) {
+            if (destination.getCivilianUnit() != null)
+                return false;
+        }
+        if (destination.getMilitaryUnit() != null)
+            return false;
+        return true;
+    }
+
+    private ArrayList<Terrain> findBestPath(ArrayList<ArrayList<Terrain>> paths, int MP, int maxMp, UnitType unitType) {
         sortPathsByMP(paths);
         //TODO finding a path from origin to destination
         //without breaking any rules
         //not standing on a terrain which already has a unit in it
-//        in comment ro bedune alamate comment mizaram ke bug bokhorid bekhunidesh
-//        in ghesmat ro bayad yekam angulak konam o ina
-//        bad baraye jabejayi o ina ham
-//        serfan ghable shoorooe har round bayad ye dor unit.move() ro call konim ke
-//        age taraf bayad harekat kone be harekatesh edame bede
+        for (ArrayList<Terrain> path : paths) {
+            if (isPathAvailable(path, MP, maxMp, unitType)) {
+                return path;
+            }
+        }
         return null;
+    }
+
+    private boolean checkCivilianInPath(ArrayList<Terrain> path, int MP, int start) {
+        for (int i = start; i < path.size(); i++) {
+
+        }
+        return true;
+    }
+
+    private boolean isPathAvailable(ArrayList<Terrain> path, int MP, int MaxMp, UnitType unitType) {
+        if (path.isEmpty())
+            return false;
+        if (path.get(0).getMp() > MP)
+            return false;
+        MP -= path.get(0).getMp();
+        for (int i = 1; i < path.size(); i++) {
+            Terrain terrain = path.get(i);
+            MP -= terrain.getMp();
+            if (MP < terrain.getMp()) {
+                MP = MaxMp;
+            } else {
+                MP -= terrain.getMp();
+                if (unitType.equals(UnitType.SETTLER) || (unitType.equals(UnitType.WORKER))) {
+                    if (terrain.getCivilianUnit() != null) {
+                        if (MP < path.get(i + 1).getMp())
+                            return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean checkMilitarryInPath(ArrayList<Terrain> path, int MP, int start) {
+        for (int i = start; i < path.size(); i++) {
+            
+        }
+        return true;
     }
 
     private void sortPathsByMP(ArrayList<ArrayList<Terrain>> paths) {
