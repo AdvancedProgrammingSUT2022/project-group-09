@@ -12,12 +12,10 @@ import com.civilization.MenuRegex.MainMenuRegex;
 
 public class GameMenuView extends View {
     private final GameMenuController gameMenuController;
-    private final MapController mapController;
 
     public GameMenuView(Scanner scanner, GameMenuController gameMenuController) {
         super(scanner);
         this.gameMenuController = gameMenuController;
-        this.mapController = new MapController();
     }
 
     @Override
