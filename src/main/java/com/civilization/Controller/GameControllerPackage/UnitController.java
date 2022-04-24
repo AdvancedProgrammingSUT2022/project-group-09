@@ -10,10 +10,6 @@ import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
 
 public class UnitController {
-    private Unit unit;
-
-    public UnitController() {
-    }
 
     public String move(Matcher matcher, Unit unit) {
         int x = Integer.parseInt(matcher.group("x"));
@@ -201,13 +197,5 @@ public class UnitController {
 
     public String garrison(Matcher matcher) {
         return "";
-    }
-
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Unit unit) {
-        this.unit = unit;
     }
 }

@@ -4,6 +4,7 @@ import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.Coordination;
+import com.civilization.Model.Selectable;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
@@ -12,7 +13,7 @@ import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Unit implements Combatble {
+public class Unit implements Combatble, Selectable {
     private UnitType myType;
     private boolean isSleep;
     private int remainingMove;
@@ -117,7 +118,7 @@ public class Unit implements Combatble {
         }
         System.out.println("akhar masir");
         for (int i = 0; i < path.size(); i++) {
-            System.out.println("alan injaem "+getTerrain().getCoordination().toString());
+            System.out.println("alan injaem " + getTerrain().getCoordination().toString());
             Terrain terrain = path.get(i).getTerrain();
             if (terrain.getMp() > this.remainingMove) {
                 break;
@@ -129,7 +130,7 @@ public class Unit implements Combatble {
             }
             this.setTerrain(terrain);
             path.remove(i);
-            i=0;
+            i = 0;
         }
     }
 

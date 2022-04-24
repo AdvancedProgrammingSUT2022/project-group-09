@@ -12,7 +12,7 @@ import com.civilization.Model.Units.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class City extends Terrain implements Combatble {
+public class City extends Terrain implements Combatble, Selectable {
     private ArrayList<Terrain> citizens; //length=number of citizens and arraylisti az jahaei hast ke citizen ha kar mikonnand
     private boolean isCapital;
     private CityProduct production;
