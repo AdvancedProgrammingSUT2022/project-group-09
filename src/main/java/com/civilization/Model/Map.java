@@ -99,6 +99,10 @@ public class Map {
             x = column - 6;
         if (y > row - 3)
             y = row - 3;
+        if (y < 0)
+            y = 0;
+        if (x < 0)
+            x = 0;
 
         if (!isValidTerran(x, y)) {
             return "ERROR x: " + x + " , y: " + y + " in show map is invalid";

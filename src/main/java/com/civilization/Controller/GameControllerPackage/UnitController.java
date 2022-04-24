@@ -21,6 +21,7 @@ public class UnitController {
         int y = Integer.parseInt(matcher.group("y"));
 
         Coordination coordination = new Coordination(x, y);
+        System.out.println(coordination.toString());
         if (coordination.getX() > Map.getRow() - 1 || coordination.getX() < 0
                 || coordination.getY() > Map.getColumn() - 1 || coordination.getY() < 0)
             return "position out of bounds";
@@ -38,7 +39,7 @@ public class UnitController {
         int maxMp = unit.getMyType().getMovement();
         UnitType unitType = unit.getMyType();
 
-        if (isDestinationEmpty(unitType, destination))
+        if (!isDestinationEmpty(unitType, destination))
             return "destination is not empty for you";
 
         ArrayList<ArrayList<Terrain>> paths = new ArrayList<>();

@@ -99,7 +99,7 @@ public class MapController {
                 if (terrainStates[x + i][y + j] == TerrainState.VISIBLE) {
                     // TODO set name in civilization constructor
                     if (terrains[x + i][y + j].getCivilization() == null) {
-                        mapString[istart + 1][jstart + 5] = backgroundColor +" "+ ConsoleColors.RESET;
+                        mapString[istart + 1][jstart + 5] = backgroundColor + " " + ConsoleColors.RESET;
                     } else {
                         mapString[istart + 1][jstart + 5] = backgroundColor
                                 + terrains[x + i][y + j].getCivilization().getName().charAt(0) + ConsoleColors.RESET;
@@ -112,7 +112,7 @@ public class MapController {
 
     public String showMap(int x, int y, TerrainState terrainStates[][]) {
         this.terrains = GameDataBase.getMainMap().getTerrains();
-        this.terrainStates=terrainStates;
+        this.terrainStates = terrainStates;
         // creating mapString
         String[][] mapString = new String[21][51];
         for (int i = 0; i < mapString.length; i++) {
@@ -136,9 +136,15 @@ public class MapController {
 
     public String showMap(Matcher matcher, Map map) {
         this.terrainStates = map.getTerrainStates();
-        this.terrains=GameDataBase.getMainMap().getTerrains();
+        this.terrains = GameDataBase.getMainMap().getTerrains();
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
+        return showMap(x, y, terrainStates);
+    }
+
+    public String showMap(int x, int y, Map map) {
+        this.terrainStates = map.getTerrainStates();
+        this.terrains = GameDataBase.getMainMap().getTerrains();
         return showMap(x, y, terrainStates);
     }
 }

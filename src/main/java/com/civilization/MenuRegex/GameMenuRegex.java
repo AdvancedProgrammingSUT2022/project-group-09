@@ -14,7 +14,7 @@ public enum GameMenuRegex {
     SHOWMAP1("^show map (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
     SHOWMAP2("^show map (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
     SHOWMAP(""),
-    MOVE1("^move unit to (--coordinates|-c) -x (?<x>->[\\d]+) -y (?<y>-?[\\d]+)$"),
+    MOVE1("^move unit to (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
     MOVE2("^move unit to (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
     RESEARCH("^show research"),
     UNITS("^show units$"),
@@ -118,5 +118,9 @@ public enum GameMenuRegex {
             return matcher;
         }
         return null;
+    }
+
+    public String getRegex() {
+        return regex;
     }
 }

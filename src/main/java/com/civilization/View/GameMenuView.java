@@ -1,10 +1,12 @@
 package com.civilization.View;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Controller.GameControllerPackage.GameMenuController;
 import com.civilization.Controller.GameControllerPackage.MapController;
+import com.civilization.Main;
 import com.civilization.MenuRegex.GameMenuRegex;
 import com.civilization.MenuRegex.MainMenuRegex;
 
@@ -28,15 +30,30 @@ public class GameMenuView extends View {
             else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWCURRENTMENU)) != null)
                 System.out.println(CurrentMenu.get());
             else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWMAP)) != null)
-                System.out.print(mapController.showMap(matcher, GameDataBase.getCurrentCivilization().getMap()));
-            // TODO
+                showMap(matcher);
             else
                 System.out.println("invalid command");
 
         }
     }
 
-    private void showMenu() {
-
+    private void showMap(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        while (true) {
+            System.out.println(GameDataBase.getCurrentCivilization().getMap().showMap(x, y));
+            System.out.println("W for up \n S for down \n D for right \n A for left \n back for end showing map");
+            input = scanner.nextLine();
+            if (input == "W")
+                x--;
+            else if (input == "S")
+                x++;
+            else if (input == "D")
+                y++;
+            else if (input == "A")
+                y--;
+            else if (input == "back")
+                break;
+        }
     }
 }
