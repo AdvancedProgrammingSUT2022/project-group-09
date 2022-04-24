@@ -16,17 +16,18 @@ public enum GameMenuRegex {
     SHOWMAP(""),
     MOVE1("^move unit to (--coordinates|-c) -x (?<x>->[\\d]+) -y (?<y>-?[\\d]+)$"),
     MOVE2("^move unit to (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
-    RESEARCH("^show research"),
-    UNITS("^show units$"),
-    CITIES("^show cities$"),
-    DIPLOMACY("^show diplomacy$"),
-    VICTORY("^show victory$"),
-    DEMOGRAPHICS("^show demographics$"),
-    NOTIFICATIONS("^show notifications$"),
-    MILITARY("^show military$"),
-    ECONOMIC("^show economic$"),
-    DIPLOMATIC("^show diplomatic$"),
-    DEALS("^show deals$"),
+    MOVEUNIT(""),//ezafie ehtemalan
+    SHOWRESEARCHINFORMATION("^show research information"),
+    SHOWUNITS("^show units$"),
+    SHOWCITIES("^show cities$"),
+    SHOWDIPLOMACYINFORMATION("^show diplomacy information$"),
+    SHOWVICTORYINFORMATION("^show victory information$"),
+    SHOWDEMOGRAPHICSINFORMATION("^show demographics information$"),
+    SHOWNOTIFICATIONS("^show notifications$"),
+    SHOWMILITARYINFORMATION("^show military information$"),
+    SHOWECONOMICINFORMATION("^show economic information$"),
+    SHOWDIPLOMATICINFORMATION("^show diplomatic information$"),
+    SHOWDEALS("^show deals$"),
     SELECTUNIT("^select unit (?<x>\\d+) (?<y>\\d+)$"),
     SELECTCITY1("^select city (?<x>\\d+) (?<y>\\d+)$"),
     SELECTCITY2("^select city (?<name>\\S+)$"),
@@ -42,21 +43,20 @@ public enum GameMenuRegex {
     CANCEL("^cancel mission$"),
     WAKE("^wake unit$"),
     DELETE("^delete unit$"),
-    ROAD("^build road$"),
-    RAILROAD("^build railroad$"),
-    FARM("^build farm$"),
-    MINE("^build mine$"),
-    TRADINGPOST("^build trading post$"),
-    LUMBERMILL("^build lumber mill$"),
-    PASTURE("^build pasture$"),
-    CAMP("^build camp$"),
-    PLANTATION("^build plantation$"),
-    QUARRY("^build quarry$"),
-    jungle("^remove jungle$"),
-    ROUTE("^remove route$"),
-    SHOW1("^show (?<x>\\d+) (?<y>\\d+)$"),
-    SHOW2("^show (?<cityName>\\S+)$"),
-    MOVE("^move (?<direction>(right|left|up|down))$");
+    BUILDROAD("^build road$"),
+    BUILDRAILROAD("^build railroad$"),
+    BUILDFARM("^build farm$"),
+    BUILDMINE("^build mine$"),
+    BUILDTRADINGPOST("^build trading post$"),
+    BUILDLUMBERMILL("^build lumber mill$"),
+    BUILDPASTURE("^build pasture$"),
+    BUILDCAMP("^build camp$"),
+    BUILDPLANTATION("^build plantation$"),
+    BUILDQUARRY("^build quarry$"),
+    REMOVEjungle("^remove jungle$"),
+    REMOVEROUTE("^remove route$"),
+    SHOWMAPCITY("^show city on map (?<cityName>\\S+)$"),
+    MOVEMAP("^move map to(?<direction>(right|left|up|down))$");
 
     private final String regex;
 
@@ -111,7 +111,7 @@ public enum GameMenuRegex {
     public static Matcher getMatcher(String input, GameMenuRegex command) {
         if (command.equals(SHOWMAP)) 
             return getMatcherShowMap(input);
-        if (command.equals(MOVE))
+        if (command.equals(MOVEUNIT))
             return getMatcherMove(input);
         Matcher matcher = Pattern.compile(command.regex).matcher(input);
         if (matcher.matches()) {
