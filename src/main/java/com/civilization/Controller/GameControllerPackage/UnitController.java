@@ -72,13 +72,6 @@ public class UnitController {
         return null;
     }
 
-    private boolean checkCivilianInPath(ArrayList<Terrain> path, int MP, int start) {
-        for (int i = start; i < path.size(); i++) {
-
-        }
-        return true;
-    }
-
     private boolean isPathAvailable(ArrayList<Terrain> path, int MP, int MaxMp, UnitType unitType) {
         if (path.isEmpty())
             return false;
@@ -88,24 +81,15 @@ public class UnitController {
         for (int i = 1; i < path.size(); i++) {
             Terrain terrain = path.get(i);
             MP -= terrain.getMp();
-            if (MP < terrain.getMp()) {
+            if (MP < 0) {
                 MP = MaxMp;
-            } else {
-                MP -= terrain.getMp();
-                if (unitType.equals(UnitType.SETTLER) || (unitType.equals(UnitType.WORKER))) {
-                    if (terrain.getCivilianUnit() != null) {
-                        if (MP < path.get(i + 1).getMp())
-                            return false;
-                    }
-                }
+                if (unitType.equals(UnitType.SETTLER) || unitType.equals(UnitType.WORKER)) {
+                    if (terrain.getCivilianUnit() != null)
+                        return false;
+                } else if (terrain.getMilitaryUnit() != null)
+                    return false;
+                i--;
             }
-        }
-        return true;
-    }
-
-    private boolean checkMilitarryInPath(ArrayList<Terrain> path, int MP, int start) {
-        for (int i = start; i < path.size(); i++) {
-            
         }
         return true;
     }
