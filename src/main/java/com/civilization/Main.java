@@ -34,10 +34,11 @@ public class Main {
         System.out.println(settler.getTerrain().getCoordination().toString());
 
         String s="move unit to -c -x "+settler.getTerrain().getCoordination().getX()+
-                " -y "+(settler.getTerrain().getCoordination().getY()+1);
+                " -y "+(settler.getTerrain().getCoordination().getY()+9);
 
         Matcher matcher = GameMenuRegex.getMatcher(s ,GameMenuRegex.MOVE1);
         System.out.println(new UnitController().move(matcher, settler));
+        System.out.println(settler.getTerrain().getCoordination().toString());
 
         // settler.foundCaptalCity();
         GameDataBase.getCivilizations().get(0).getMap().updateExploration();

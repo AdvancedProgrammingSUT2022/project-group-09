@@ -48,13 +48,14 @@ public class UnitController {
         findAllPaths(destination, origin, MP, paths, path);
         if (paths.isEmpty())
             return "unfortunately there is no available path for your unit to move to your desired destination";
-        
+
         ArrayList<Terrain> bestPath = findBestPath(paths, unit.getMyType().getMovement(), maxMp, unitType);
         if (bestPath == null)
             return "unfortunately there is no available path for your unit to move to your desired destination";
 
         ArrayList<Coordination> pathCoordination = new ArrayList<>();
         setPathCoordinates(pathCoordination, bestPath);
+        pathCoordination.remove(0);
         unit.setPath(pathCoordination);
         unit.move();
         return "unit moved successfully";
@@ -136,13 +137,15 @@ public class UnitController {
     }
 
     private void findAllPaths(Terrain destination, Terrain origin, int MP, ArrayList<ArrayList<Terrain>> paths,
-            ArrayList<Terrain> path) {
+                              ArrayList<Terrain> path) {
         if (destination == origin) {
             paths.add(path);
             return;
         }
         for (Terrain nextTerrain : origin.getSurroundingTerrain()) {
             if (isMovePossible(MP, nextTerrain) && !path.contains(nextTerrain)) {
+                if(path.size()>5)
+                    continue;
                 ArrayList<Terrain> nextPath = (ArrayList<Terrain>) path.clone();
                 nextPath.add(nextTerrain);
                 findAllPaths(destination, nextTerrain, MP, paths, nextPath);

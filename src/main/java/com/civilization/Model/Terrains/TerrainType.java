@@ -60,7 +60,7 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
         }
     }),
     MOUNTAIN(0, 0, 0, 25, 9999999, null, null),
-    OCEAN(1, 0, 1, 0, 1, new ArrayList<TerrainFeature>() {
+    OCEAN(1, 0, 1, 0, 99999, new ArrayList<TerrainFeature>() {
         {
             add(TerrainFeature.ICE);
         }

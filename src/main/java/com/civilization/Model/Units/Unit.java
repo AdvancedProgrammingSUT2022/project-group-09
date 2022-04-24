@@ -16,7 +16,6 @@ public class Unit implements Combatble {
     private UnitType myType;
     private boolean isSleep;
     private int remainingMove;
-
     private int hp;
     private ArrayList<Coordination> path = new ArrayList<>();
 
@@ -27,6 +26,7 @@ public class Unit implements Combatble {
     public Unit(UnitType myType, Terrain terrain, Civilization civilization) {
         this.myType = myType;
         this.hp = 10;
+        this.remainingMove = myType.getMovement();
         setTerrain(terrain);
         setCivilization(civilization);
     }
@@ -70,7 +70,7 @@ public class Unit implements Combatble {
         for (Terrain[] terrains : GameDataBase.getMainMap().getTerrains()) {
             for (Terrain terrain1 : terrains) {
                 if (terrain1.getCivilianUnit() == this)
-                    terrain1.setCivilization(null);
+                    terrain1.setCivilianUnit(null);
                 if (terrain.getMilitaryUnit() == this)
                     terrain1.setMilitaryUnit(null);
             }
@@ -111,8 +111,14 @@ public class Unit implements Combatble {
     public void move() {
         if (path.isEmpty())
             return;
-        for (int i = path.size() - 1; i >= 0; i--) {
-            Terrain terrain = GameDataBase.getMainMap().getTerrain(path.get(i).getX(), path.get(i).getY());
+        System.out.println("aval masir");
+        for (Coordination coordination : path) {
+            System.out.println(coordination.toString());
+        }
+        System.out.println("akhar masir");
+        for (int i = 0; i < path.size(); i++) {
+            System.out.println("alan injaem "+getTerrain().getCoordination().toString());
+            Terrain terrain = path.get(i).getTerrain();
             if (terrain.getMp() > this.remainingMove) {
                 break;
             }
@@ -123,6 +129,7 @@ public class Unit implements Combatble {
             }
             this.setTerrain(terrain);
             path.remove(i);
+            i=0;
         }
     }
 
