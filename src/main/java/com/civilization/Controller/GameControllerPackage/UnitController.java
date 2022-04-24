@@ -12,8 +12,7 @@ import com.civilization.Model.Units.UnitType;
 public class UnitController {
     private Unit unit;
 
-    public UnitController(Unit unit) {
-        this.unit = unit;
+    public UnitController() {
     }
 
     public String move(Matcher matcher, Unit unit) {
@@ -201,4 +200,11 @@ public class UnitController {
         return "";
     }
 
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
 }

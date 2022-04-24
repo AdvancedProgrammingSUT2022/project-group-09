@@ -37,7 +37,8 @@ public class Main {
                 " -y "+(settler.getTerrain().getCoordination().getY()+1);
 
         Matcher matcher = GameMenuRegex.getMatcher(s ,GameMenuRegex.MOVE1);
-        System.out.println(new UnitController(null).move(matcher, settler));
+        System.out.println(new UnitController().move(matcher, settler));
+
         // settler.foundCaptalCity();
         GameDataBase.getCivilizations().get(0).getMap().updateExploration();
         System.out.println(GameDataBase.getCivilizations().get(0).getMap().showMap(coordination.getX() - 1, coordination.getY() - 1));

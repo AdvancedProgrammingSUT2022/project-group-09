@@ -14,7 +14,7 @@ public class GameMenuController extends Controller {
     CityController cityController = new CityController();
     InfoController infoController = new InfoController();
     MapController mapController = new MapController();
-    UnitController unitcontroller = new UnitController(null);
+    UnitController unitcontroller = new UnitController();
 
     public String nextTurn() {
         for (Civilization civilization : GameDataBase.getCivilizations()) {

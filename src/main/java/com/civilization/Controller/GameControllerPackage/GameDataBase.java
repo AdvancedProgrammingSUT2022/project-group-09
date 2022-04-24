@@ -32,6 +32,8 @@ public class GameDataBase {
         Random random = new Random();
         for (Civilization civilization : GameDataBase.getCivilizations()) {
             Coordination coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
+            while (coordination.getTerrain().getType() == TerrainType.MOUNTAIN)
+                coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
             Terrain terrain = GameDataBase.getMainMap().getTerrain(coordination.getX(), coordination.getY());
             new Settler(terrain, civilization);
         }
