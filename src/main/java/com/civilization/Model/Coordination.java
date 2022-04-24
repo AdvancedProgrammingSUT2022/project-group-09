@@ -1,5 +1,8 @@
 package com.civilization.Model;
 
+import com.civilization.Controller.GameControllerPackage.GameDataBase;
+import com.civilization.Model.Terrains.Terrain;
+
 public class Coordination {
     int x, y;
 
@@ -26,5 +29,9 @@ public class Coordination {
 
     public String toString() {
         return "x : " + x + " y : " + y;
+    }
+
+    public Terrain getTerrain() {
+        return GameDataBase.getMainMap().getTerrain(this.x, this.y);
     }
 }

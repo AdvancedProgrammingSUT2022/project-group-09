@@ -10,6 +10,12 @@ import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
 
 public class UnitController {
+    private Unit unit;
+
+    public UnitController(Unit unit) {
+        this.unit = unit;
+    }
+
     public String move(Matcher matcher, Unit unit) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
@@ -46,7 +52,18 @@ public class UnitController {
         ArrayList<Terrain> bestPath = findBestPath(paths, unit.getMyType().getMovement(), maxMp, unitType);
         if (bestPath == null)
             return "unfortunately there is no available path for your unit to move to your desired destination";
-        return "";
+
+        ArrayList<Coordination> pathCoordination = new ArrayList<>();
+        setPathCoordinates(pathCoordination, bestPath);
+        unit.setPath(pathCoordination);
+        unit.move();
+        return "unit moved successfully";
+    }
+
+    private void setPathCoordinates(ArrayList<Coordination> coordinates, ArrayList<Terrain> path) {
+        for (int i = 0; i < path.size(); i++) {
+            coordinates.add(path.get(i).getCoordination());
+        }
     }
 
     private boolean isDestinationEmpty(UnitType unitType, Terrain destination) {
@@ -61,9 +78,9 @@ public class UnitController {
 
     private ArrayList<Terrain> findBestPath(ArrayList<ArrayList<Terrain>> paths, int MP, int maxMp, UnitType unitType) {
         sortPathsByMP(paths);
-        //TODO finding a path from origin to destination
-        //without breaking any rules
-        //not standing on a terrain which already has a unit in it
+        // TODO finding a path from origin to destination
+        // without breaking any rules
+        // not standing on a terrain which already has a unit in it
         for (ArrayList<Terrain> path : paths) {
             if (isPathAvailable(path, MP, maxMp, unitType)) {
                 return path;
@@ -95,7 +112,7 @@ public class UnitController {
     }
 
     private void sortPathsByMP(ArrayList<ArrayList<Terrain>> paths) {
-        //TODO finding a better way to sort except than bubble sort
+        // TODO finding a better way to sort except than bubble sort
         for (int i = 0; i < paths.size(); i++) {
             for (int j = i + 1; j < paths.size(); j++) {
                 if (getPathMP(paths.get(j)) < getPathMP(paths.get(i))) {

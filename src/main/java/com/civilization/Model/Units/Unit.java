@@ -3,6 +3,7 @@ package com.civilization.Model.Units;
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
+import com.civilization.Model.Coordination;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
@@ -17,7 +18,7 @@ public class Unit implements Combatble {
     private int remainingMove;
 
     private int hp;
-    private ArrayList<Terrain> path = new ArrayList<>();
+    private ArrayList<Coordination> path = new ArrayList<>();
 
     public Unit(UnitType myType) {
         this.myType = myType;
@@ -46,11 +47,11 @@ public class Unit implements Combatble {
         isSleep = sleep;
     }
 
-    public ArrayList<Terrain> getPath() {
+    public ArrayList<Coordination> getPath() {
         return this.path;
     }
 
-    public void setPath(ArrayList<Terrain> path) {
+    public void setPath(ArrayList<Coordination> path) {
         this.path = path;
     }
 
@@ -107,14 +108,27 @@ public class Unit implements Combatble {
         civilization.addUnit(this);
     }
 
-    public void move(Terrain destination) {
-
+    public void move() {
+        if (path.isEmpty())
+            return;
+        for (int i = path.size() - 1; i >= 0; i--) {
+            Terrain terrain = GameDataBase.getMainMap().getTerrain(path.get(i).getX(), path.get(i).getY());
+            if (terrain.getMp() > this.remainingMove) {
+                break;
+            }
+            this.remainingMove -= terrain.getMp();
+            if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
+                    && this.getTerrain().getTerrainFeatures().contains(TerrainFeature.RIVER)) {
+                remainingMove = 0;
+            }
+            this.setTerrain(terrain);
+            path.remove(i);
+        }
     }
 
     public void Donothong() {
 
     }
-
 
     public void sleep() {
 
@@ -149,7 +163,8 @@ public class Unit implements Combatble {
         for (int i = 0; i < getMyType().getRange(); i++) {
 
             for (Terrain targetTerrain : targetTerrainsBackUp) {
-                if (!result.contains(targetTerrain)) result.add(targetTerrain);
+                if (!result.contains(targetTerrain))
+                    result.add(targetTerrain);
 
                 if (!(targetTerrain.getType() == TerrainType.MOUNTAIN ||
                         targetTerrain.getType() == TerrainType.HILLS ||
@@ -169,7 +184,6 @@ public class Unit implements Combatble {
         this.hp = hp;
     }
 
-
     @Override
     public void attack(Combatble target) {
         System.err.println("in attack nabayad call mishod va attack military unit bayad call she");
@@ -181,6 +195,7 @@ public class Unit implements Combatble {
         System.err.println("in defend nabayad call mishod va defend military unit bayad call she");
         throw new RuntimeException();
     }
+
     public void getConquerdedBy(Civilization civilization) {
 
     }

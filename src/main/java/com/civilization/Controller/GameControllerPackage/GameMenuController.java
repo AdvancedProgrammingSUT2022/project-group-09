@@ -14,13 +14,15 @@ public class GameMenuController extends Controller {
     CityController cityController = new CityController();
     InfoController infoController = new InfoController();
     MapController mapController = new MapController();
-    UnitController unitcontroller = new UnitController();
+    UnitController unitcontroller = new UnitController(null);
 
     public String nextTurn() {
         for (Civilization civilization : GameDataBase.getCivilizations()) {
 
         }
         //TODO yeseri chiza bayad ezafe beshe
+        //TODO set kardan mp ha
+        //call kardan unit.move() baraye hameye unit haye civilizationi k nobatesh shode
         return null;
     }
 
