@@ -62,25 +62,19 @@ public class GameMenuView extends View {
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTCITYNAME)) != null) {
                 System.out.println(gameMenuController.selectCityByName(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
-                System.out.println("");
-                //TODO
+                System.out.println(gameMenuController.sleep());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ALERT)) != null) {
-                System.out.println("");
-                //TODO
+                System.out.println(gameMenuController.alert());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FORTIFY)) != null) {
-                System.out.println("");
-                //TODO
+                System.out.println(gameMenuController.fortiry());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FORTIFYHEAL)) != null) {
-                System.out.println("");
-                //TODO
+                System.out.println(gameMenuController.fortiryHeal());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.GARRISON)) != null) {
-                System.out.println("");
-                //TODO
+                System.out.println(gameMenuController.garrison());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SETUP)) != null) {
-                System.out.println("");
-                //TODO
+                System.out.println(gameMenuController.setUp());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ATTACK)) != null) {
-                //TODO
+                System.out.println(gameMenuController.attack(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FOUND)) != null) {
                 System.out.println("");
                 //TODO

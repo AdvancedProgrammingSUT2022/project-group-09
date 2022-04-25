@@ -2,6 +2,8 @@ package com.civilization.Controller.GameControllerPackage;
 
 import com.civilization.Controller.Controller;
 import com.civilization.Model.*;
+import com.civilization.Model.Units.Combatble;
+import com.civilization.Model.Units.MilitaryUnit;
 import com.civilization.Model.Units.Unit;
 import com.civilization.View.CurrentMenu;
 
@@ -116,6 +118,125 @@ public class GameMenuController extends Controller {
         }
         selected = city;
         return "City selected successfully!";
+    }
+
+    public String sleep() {
+        if (!(selected instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) selected).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn null mikardim";
+        }
+        ((Unit) selected).setSleep(true);
+        ((Unit) selected).sleep();
+        return "Unit slept successfully!";
+    }
+
+    public String alert() {
+        if (!(selected instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) selected).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn null mikardim";
+        }
+        if (!(selected instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        ((MilitaryUnit) selected).setInAlert(true);
+        ((MilitaryUnit) selected).alert();
+        return "Unit is in alert!";
+    }
+
+    public String fortiry() {
+        if (!(selected instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) selected).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn null mikardim";
+        }
+        if (!(selected instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        ((MilitaryUnit) selected).setFortify(true);
+//        ((MilitaryUnit) selected).fortify();
+        return "Unit is fortify!";
+    }
+
+    public String fortiryHeal() {
+        if (!(selected instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) selected).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn null mikardim";
+        }
+        if (!(selected instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        ((MilitaryUnit) selected).setFortifyHeal(true);
+//        ((MilitaryUnit) selected).fortifyHeal();
+        return "Unit is fortify until heal!";
+    }
+
+    public String garrison() {
+        if (!(selected instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) selected).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn null mikardim";
+        }
+        if (!(selected instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        if (!(((MilitaryUnit) selected).getTerrain() instanceof City)){
+            return "This unit is not in city!";
+        }
+        ((MilitaryUnit) selected).garrison();
+        return "Unit is in garrison!";
+    }
+
+    public String setUp() {
+        if (!(selected instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) selected).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn null mikardim";
+        }
+        if (!(selected instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        //TODO.. setup ro nazadim
+        return "Unit is set up!";
+    }
+
+    public String attack(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        Coordination coordinate = new Coordination(x, y);
+        if (!coordinate.isValidCoordination()) {
+            return "Coordinate is not valid!";
+        }
+        if (!(selected instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) selected).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn null mikardim";
+        }
+        if (!(selected instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        if(coordinate.getTerrain() instanceof City) {
+            ((MilitaryUnit) selected).attack((City) coordinate.getTerrain());
+        }
+        else if(coordinate.getTerrain().getMilitaryUnit() != null) {
+            ((MilitaryUnit) selected).attack(coordinate.getTerrain().getMilitaryUnit());
+        }
+        else if(coordinate.getTerrain().getCivilianUnit() != null) {
+            ((MilitaryUnit) selected).attack(coordinate.getTerrain().getCivilianUnit());
+        }
+        else {
+            return "You can't attack this position!";
+        }
+        return "Attacked!";
     }
 
     protected Unit getSelectedUnit() {

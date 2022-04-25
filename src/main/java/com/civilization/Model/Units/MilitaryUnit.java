@@ -8,6 +8,7 @@ public class MilitaryUnit extends Unit {
     private boolean isInAlert;
     private boolean isInSiege;
     private boolean isFortify;
+    private boolean isFortifyHeal;
 
     public MilitaryUnit(UnitType myType, Terrain terrain, Civilization civilization) {
         super(myType, terrain, civilization);
@@ -32,6 +33,26 @@ public class MilitaryUnit extends Unit {
 
     public void fortify() {
 
+    }
+
+    public void fortifyHeal() {
+
+    }
+
+    public void garrison() {
+
+    }
+
+    public void setUp() {
+
+    }
+
+    public void setFortifyHeal(boolean fortifyHeal) {
+        isFortifyHeal = fortifyHeal;
+    }
+
+    public boolean isFortifyHeal() {
+        return isFortifyHeal;
     }
 
     public boolean isInAlert() {
