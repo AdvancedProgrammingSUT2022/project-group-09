@@ -91,4 +91,15 @@ public class GameDataBase {
     public static void setCurrentCivilization(Civilization currentCivilization) {
         GameDataBase.currentCivilization = currentCivilization;
     }
+
+    public static City getCityByName(String name) {
+        for (User player : players) {
+            for (City city : civilizations.get(player).getCities()) {
+                if (city.getName().equals(name)) {
+                    return city;
+                }
+            }
+        }
+        return null;
+    }
 }

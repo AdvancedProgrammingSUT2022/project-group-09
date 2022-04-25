@@ -6,6 +6,7 @@ import com.civilization.Model.Info.CityScience;
 import com.civilization.Model.Info.CivilizationTechnologies;
 import com.civilization.Model.Units.Unit;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 public class Civilization {
@@ -131,5 +132,12 @@ public class Civilization {
         this.units.remove(unit);
     }
 
+    public String getDemographics() {
+        int numberOfCitizens = 0;
+        for (City city : cities) {
+            numberOfCitizens += city.getCitizens().size();
+        }
+        return "civilization name: " + name + " number of citizens :" + numberOfCitizens + " happiness: " + civilizationHappiness.getCurrentHappiness();
+    }
 
 }

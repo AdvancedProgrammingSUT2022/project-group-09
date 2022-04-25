@@ -21,7 +21,7 @@ public class City extends Terrain implements Combatble, Selectable {
     private ArrayList<Terrain> terrains;
     private HashMap<Integer, BuildingType> makingBuilding;//<remaining Product to build,building>
     private HashMap<Integer, UnitType> makingUnit;//<remaining Product to build,Unit>
-
+    private String name = "default";
     private BuildingAffect buildings;
 
 
@@ -210,6 +210,11 @@ public class City extends Terrain implements Combatble, Selectable {
     public void defend(Combatble target) {
         //shahr defend nadare
     }
+    @Override
+    public String getDetails() {
+        return "city name: " + name + " number of citizens: " + citizens.size() + " x position: " + getXPosition()
+                + " y position: " + getYPosition();
+    }
 
     public void getConquerdedBy(Civilization civilization) {
 
@@ -221,5 +226,9 @@ public class City extends Terrain implements Combatble, Selectable {
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    public String getName() {
+        return name;
     }
 }

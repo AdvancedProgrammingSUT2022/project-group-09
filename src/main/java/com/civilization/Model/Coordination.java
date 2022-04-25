@@ -34,4 +34,11 @@ public class Coordination {
     public Terrain getTerrain() {
         return GameDataBase.getMainMap().getTerrain(this.x, this.y);
     }
+
+    public boolean isValidCoordination(){
+        if (x >= 0 && x < Map.row && y >= 0 && y < Map.column){
+            return true;
+        }
+        return false;
+    }
 }

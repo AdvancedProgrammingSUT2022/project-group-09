@@ -17,8 +17,7 @@ public class UnitController {
 
         Coordination coordination = new Coordination(x, y);
         System.out.println(coordination.toString());
-        if (coordination.getX() > Map.getRow() - 1 || coordination.getX() < 0
-                || coordination.getY() > Map.getColumn() - 1 || coordination.getY() < 0)
+        if (!coordination.isValidCoordination())
             return "position out of bounds";
         if (unit == null)
             return "no unit selected";
