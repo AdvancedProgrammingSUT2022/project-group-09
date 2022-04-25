@@ -43,7 +43,9 @@ public class GameMenuController extends Controller {
     }
 
     public String moveUnit(Matcher matcher) {
-        return unitcontroller.move(matcher, (Unit) selected);
+        if (selected instanceof Unit)
+            return unitcontroller.move(matcher, (Unit) selected);
+        return "no unit selected";
     }
 
     public String selectMilitaryUnit(Matcher matcher) {
