@@ -88,9 +88,12 @@ public class GameMenuController extends Controller {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         Coordination coordinate = new Coordination(x, y);
-        City city = (City) coordinate.getTerrain();
+        City city = null;
         if (!coordinate.isValidCoordination()) {
             return "Coordinate is not valid!";
+        }
+        if (coordinate.getTerrain() instanceof City) {
+            city = (City) coordinate.getTerrain();
         }
         if (city == null) {
             return "There is no city in this place!";
