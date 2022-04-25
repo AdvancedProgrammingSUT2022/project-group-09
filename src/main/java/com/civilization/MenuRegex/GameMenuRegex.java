@@ -56,6 +56,7 @@ public enum GameMenuRegex {
     BUILDQUARRY("^build quarry$"),
     REMOVEJUNGLE("^remove jungle$"),
     REMOVEROUTE("^remove route$"),
+    REPAIR("^repair$"),
     SHOWMAPCITY("^show city on map (?<cityName>\\S+)$"),
     MOVEMAP("^move map (?<number>\\d+) to (?<direction>(right|left|up|down))$");
 

@@ -136,10 +136,14 @@ public class Unit implements Combatble, Selectable {
 
 
     public void Donothong() {
-
+        path = null;
     }
 
     public void sleep() {
+
+    }
+
+    public void wake() {
 
     }
 

@@ -1,9 +1,11 @@
 package com.civilization.Model.Improvements;
 
+import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.Resources.TerrainTypeOrTerrainFeatureType;
 import com.civilization.Model.TechnologyPackage.TechnologyType;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
+import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
 
 import java.util.ArrayList;
@@ -143,5 +145,30 @@ public enum Improvement {
         this.canBeBuiltON = canBeBuiltOn;
     }
 
+    public ArrayList<Resource> getImprovesResources() {
+        return improvesResources;
+    }
+
+    public ArrayList<TerrainTypeOrTerrainFeatureType> getCanBeBuiltON() {
+        return canBeBuiltON;
+    }
+
+    public TechnologyType getRequiredTechnology() {
+        return requiredTechnology;
+    }
+
+    public boolean checkIsPossible(Terrain terrain) {
+        if (!GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesResearched().contains(requiredTechnology))
+            return false;
+        if (canBeBuiltON.contains(terrain.getType())){
+            return true;
+        }
+        for (TerrainFeature feature : terrain.getTerrainFeatures()) {
+            if (canBeBuiltON.contains(feature)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

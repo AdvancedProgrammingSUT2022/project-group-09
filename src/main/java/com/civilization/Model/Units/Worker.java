@@ -12,4 +12,16 @@ public class Worker extends Unit {
     public void makeImprovement(Improvement improvement) {
 
     }
+
+    public void removeJungle(Terrain terrain) {
+        //TODO .. controller azash estefade shode
+    }
+
+    public void removeRoute(Terrain terrain) {
+
+    }
+
+    public void repair(Terrain terrain) {
+
+    }
 }
