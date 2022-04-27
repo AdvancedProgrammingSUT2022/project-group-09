@@ -10,7 +10,10 @@ public class Worker extends Unit {
     }
 
     public void makeImprovement(Improvement improvement) {
-
+        if (improvement == Improvement.ROAD)
+            getTerrain().setHasRoad(true);
+        else
+            getTerrain().setImprovement(improvement);
     }
 
     public void removeJungle(Terrain terrain) {

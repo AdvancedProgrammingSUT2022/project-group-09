@@ -130,7 +130,6 @@ public class GameMenuController extends Controller {
         if (((Unit) selected).getCivilization() != GameDataBase.getCurrentCivilization()) {
             return "selectedo bayad har turn new mikardim";
         }
-        ((Unit) selected).setSleep(true);
         ((Unit) selected).sleep();
         return "Unit slept successfully!";
     }
@@ -145,7 +144,6 @@ public class GameMenuController extends Controller {
         if (!(selected instanceof MilitaryUnit)) {
             return "This is not a military unit!";
         }
-        ((MilitaryUnit) selected).setInAlert(true);
         ((MilitaryUnit) selected).alert();
         return "Unit is in alert!";
     }
@@ -160,8 +158,7 @@ public class GameMenuController extends Controller {
         if (!(selected instanceof MilitaryUnit)) {
             return "This is not a military unit!";
         }
-        ((MilitaryUnit) selected).setFortify(true);
-//        ((MilitaryUnit) selected).fortify();
+        ((MilitaryUnit) selected).fortify();
         return "Unit is fortify!";
     }
 
@@ -175,8 +172,7 @@ public class GameMenuController extends Controller {
         if (!(selected instanceof MilitaryUnit)) {
             return "This is not a military unit!";
         }
-        ((MilitaryUnit) selected).setFortifyHeal(true);
-//        ((MilitaryUnit) selected).fortifyHeal();
+        ((MilitaryUnit) selected).fortifyHeal();
         return "Unit is fortify until heal!";
     }
 
@@ -307,7 +303,7 @@ public class GameMenuController extends Controller {
         String command = checkWorker();
         if (command != null)
             return command;
-        if (((Worker) selected).getTerrain().getImprovement() == Improvement.ROAD) {
+        if (((Worker) selected).getTerrain().isHasRoad()) {
             return "There is road in this position!";
         }
         if (!Improvement.ROAD.checkIsPossible(((Worker) selected).getTerrain())) {
