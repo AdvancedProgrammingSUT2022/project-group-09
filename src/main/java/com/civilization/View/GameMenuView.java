@@ -57,7 +57,7 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.selectMilitaryUnit(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTCIVILIANUNIT)) != null) {
                 System.out.println(gameMenuController.selectCivilianUnit(matcher));
-            }else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTCITYCOORDINATE)) != null) {
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTCITYCOORDINATE)) != null) {
                 System.out.println(gameMenuController.selectCityByPosision(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTCITYNAME)) != null) {
                 System.out.println(gameMenuController.selectCityByName(matcher));
@@ -106,7 +106,7 @@ public class GameMenuView extends View {
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.REMOVEROUTE)) != null) {
                 System.out.println(gameMenuController.removeRoute());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.REPAIR)) != null) {
-                 System.out.println(gameMenuController.repair());
+                System.out.println(gameMenuController.repair());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWMAPCITY)) != null) {
                 System.out.println("");
                 //TODO
@@ -121,7 +121,8 @@ public class GameMenuView extends View {
         int y = Integer.parseInt(matcher.group("y"));
         while (true) {
             System.out.println(GameDataBase.getCurrentCivilization().getMap().showMap(x, y));
-            System.out.println("move map <number> to <direction>(right|left|up|down) \n back for end showing map");
+            System.out.println("move map <number> to <direction>(right|left|up|down) \nback for end showing map");
+            input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVEMAP)) != null) {
                 int number = Integer.parseInt(matcher.group("number"));
                 String direction = matcher.group("direction");
@@ -143,7 +144,6 @@ public class GameMenuView extends View {
                 break;
             else
                 System.out.println("invalid command");
-            input = scanner.nextLine();
         }
     }
 

@@ -24,25 +24,25 @@ import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
-        GameDataBase.runGameForFirstTime(new ArrayList<>(Collections.singleton(new User("s", "sd", "sdf"))));
-        //   for (int i = 0; i < 24; i++)
-        //       for (int j = 0; j < 24; j++)
-        //           System.out.println(GameDataBase.getMainMap().showMap(i, j));
-
-        Settler settler = (Settler) GameDataBase.getCivilizations().get(0).getUnits().get(0);
-        Coordination coordination = settler.getTerrain().getCoordination();
-        System.out.println(settler.getTerrain().getCoordination().toString());
-
-        String s="move unit to -c -x "+settler.getTerrain().getCoordination().getX()+
-                " -y "+(settler.getTerrain().getCoordination().getY()+9);
-
-        Matcher matcher = GameMenuRegex.getMatcher(s ,GameMenuRegex.MOVE1);
-        System.out.println(new UnitController().move(matcher, settler));
-        System.out.println(settler.getTerrain().getCoordination().toString());
+//        GameDataBase.runGameForFirstTime(new ArrayList<>(Collections.singleton(new User("s", "sd", "sdf"))));
+//        //   for (int i = 0; i < 24; i++)
+//        //       for (int j = 0; j < 24; j++)
+//        //           System.out.println(GameDataBase.getMainMap().showMap(i, j));
+//
+//        Settler settler = (Settler) GameDataBase.getCivilizations().get(0).getUnits().get(0);
+//        Coordination coordination = settler.getTerrain().getCoordination();
+//        System.out.println(settler.getTerrain().getCoordination().toString());
+//
+//        String s="move unit to -c -x "+settler.getTerrain().getCoordination().getX()+
+//                " -y "+(settler.getTerrain().getCoordination().getY()+9);
+//
+//        Matcher matcher = GameMenuRegex.getMatcher(s ,GameMenuRegex.MOVE1);
+//        System.out.println(new UnitController().move(matcher, settler));
+//        System.out.println(settler.getTerrain().getCoordination().toString());
 
         // settler.foundCaptalCity();
-        GameDataBase.getCivilizations().get(0).getMap().updateExploration();
-        System.out.println(GameDataBase.getCivilizations().get(0).getMap().showMap(coordination.getX() - 1, coordination.getY() - 1));
+        //GameDataBase.getCivilizations().get(0).getMap().updateExploration();
+        //System.out.println(GameDataBase.getCivilizations().get(0).getMap().showMap(coordination.getX() - 1, coordination.getY() - 1));
 
         UserDatabase.loadUsers();
         Scanner scanner = new Scanner(System.in);

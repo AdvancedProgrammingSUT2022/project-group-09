@@ -27,13 +27,14 @@ public class LoginMenuController extends Controller {
         if (UserDatabase.isNicknameDuplicate(newUser))
             return "user nickname " + newUser.getNickname() + " already exists";
         UserDatabase.addUser(newUser);
+        UserDatabase.saveUsers();
         return "user created successfully!";
     }
 
     public String login(Matcher matcher) {
         User user = new User(matcher.group("username"), matcher.group("password"), "");
         if (!UserDatabase.isUsernameDuplicate(user)) return "Username and Password didnt match!";
-        if (UserDatabase.isUsernameAndPasswordTrue(user)) return "Username and Password didnt match!";
+        if (!UserDatabase.isUsernameAndPasswordTrue(user)) return "Username and Password didnt match!";
         user = UserDatabase.getUserFromUsers(user);
         if (user == null) return "BUG!";
         UserDatabase.setCurrentUser(user);
