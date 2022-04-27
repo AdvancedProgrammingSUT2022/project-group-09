@@ -433,7 +433,7 @@ public class GameMenuController extends Controller {
                 !((Worker) selected).getTerrain().getTerrainFeatures().contains(TerrainFeature.FOREST)) {
             return "There is no jungle or forrest in this place!";
         }
-        ((Worker) selected).removeJungle(((Worker) selected).getTerrain());
+        ((Worker) selected).removeJungle();
         return "Jungle removed successfully!";
     }
 
@@ -444,7 +444,7 @@ public class GameMenuController extends Controller {
         if (!((Worker) selected).getTerrain().getImprovement().equals(Improvement.ROAD)) {
             return "There is no road in this place!";
         }
-        ((Worker) selected).removeRoute(((Worker) selected).getTerrain());
+        ((Worker) selected).removeRoute();
         return "Road removed successfully!";
     }
 
@@ -453,7 +453,7 @@ public class GameMenuController extends Controller {
         if (command != null)
             return command;
         //TODO kharabe kojast ?
-        ((Worker) selected).repair(((Worker) selected).getTerrain());
+        ((Worker) selected).repair();
         return "Repair successfully!";
     }
 
