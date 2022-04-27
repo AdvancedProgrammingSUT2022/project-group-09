@@ -117,6 +117,7 @@ public class GameMenuView extends View {
     }
 
     private void showMap(Matcher matcher) {
+        GameDataBase.getCurrentCivilization().getMap().updateExploration();
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         while (true) {
