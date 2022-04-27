@@ -202,7 +202,7 @@ public class City extends Terrain implements Combatble, Selectable {
                 targetUnit.delete();
         } else {
             Unit targetUnit = (Unit) target;
-            targetUnit.getConquerdedBy(this.getCivilization());
+            targetUnit.getConqueredBy(this.getCivilization());
         }
     }
 

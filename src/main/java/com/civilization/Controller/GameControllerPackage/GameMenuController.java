@@ -259,7 +259,7 @@ public class GameMenuController extends Controller {
         if (((Unit) selected).getCivilization() != GameDataBase.getCurrentCivilization()) {
             return "selectedo bayad har turn new mikardim";
         }
-        ((Unit) selected).Donothong();
+        ((Unit) selected).DoNothing();
         return "Cancelled!";
     }
 

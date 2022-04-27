@@ -1,7 +1,6 @@
 package com.civilization.Model.Units;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
-import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.Coordination;
 import com.civilization.Model.Selectable;
@@ -9,11 +8,11 @@ import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
 
-import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Unit implements Combatble, Selectable {
+
+    private boolean workDone;
     private UnitType myType;
     private boolean isSleep;
     private int remainingMove;
@@ -135,16 +134,18 @@ public class Unit implements Combatble, Selectable {
     }
 
 
-    public void Donothong() {
-        path = null;
+    public void DoNothing() {
+        workDone = true;
     }
 
     public void sleep() {
-
+        workDone = true;
+        isSleep = true;
     }
 
     public void wake() {
-
+        workDone = false;
+        isSleep = false;
     }
 
     public void delete() {
@@ -209,8 +210,18 @@ public class Unit implements Combatble, Selectable {
         throw new RuntimeException();
     }
 
-    public void getConquerdedBy(Civilization civilization) {
-
+    public void getConqueredBy(Civilization civilization) {
+        if (this instanceof MilitaryUnit)
+            delete();
+        else
+            this.setCivilization(civilization);
     }
 
+    public boolean isWorkDone() {
+        return workDone;
+    }
+
+    public void setWorkDone(boolean workDone) {
+        this.workDone = workDone;
+    }
 }

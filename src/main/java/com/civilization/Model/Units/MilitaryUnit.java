@@ -101,7 +101,7 @@ public class MilitaryUnit extends Unit {
                 targetUnit.delete();
         } else {
             Unit targetUnit = (Unit) target;
-            targetUnit.getConquerdedBy(this.getCivilization());
+            targetUnit.getConqueredBy(this.getCivilization());
         }
     }
 
