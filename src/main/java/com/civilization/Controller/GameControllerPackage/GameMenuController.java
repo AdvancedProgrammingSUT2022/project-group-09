@@ -248,7 +248,7 @@ public class GameMenuController extends Controller {
         if (((Settler) selected).getTerrain() instanceof City) {
             return "There is City in this position!";
         }
-        ((Settler) selected).foundNormalCity();//TODO.. capital nemitoone besaze ? va erroraye dige chi mitoone bokhore?
+        ((Settler) selected).foundCaptalCity();//TODO.. capital nemitoone besaze ? va erroraye dige chi mitoone bokhore?
         return "City created successfully!";
     }
 

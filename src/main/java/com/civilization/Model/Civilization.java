@@ -1,9 +1,6 @@
 package com.civilization.Model;
 
-import com.civilization.Model.Info.CityGold;
-import com.civilization.Model.Info.CivilizationHappiness;
-import com.civilization.Model.Info.CityScience;
-import com.civilization.Model.Info.CivilizationTechnologies;
+import com.civilization.Model.Info.*;
 import com.civilization.Model.Units.Unit;
 
 import java.security.PublicKey;
@@ -15,19 +12,20 @@ public class Civilization {
     private ArrayList<City> cities;
     private ArrayList<War> wars;
     private CivilizationTechnologies civilizationTechnologies;
-    private CityGold cityGold;
-    private CityScience cityScience;
+    private CivilizationGold civilizationGold;
+
+    private CivilizationScience civilizationScience;
     private CivilizationHappiness civilizationHappiness;
 
     private ArrayList<Unit> units;
 
-    public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, CivilizationTechnologies civilizationTechnologies, CityGold cityGold, CityScience cityScience, CivilizationHappiness civilizationHappiness, ArrayList<Unit> units) {
+    public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, CivilizationTechnologies civilizationTechnologies, CivilizationGold civilizationGold, CivilizationScience civilizationScience, CivilizationHappiness civilizationHappiness, ArrayList<Unit> units) {
         this.map = map;
         this.cities = cities;
         this.wars = wars;
         this.civilizationTechnologies = civilizationTechnologies;
-        this.cityGold = cityGold;
-        this.cityScience = cityScience;
+        this.civilizationGold = civilizationGold;
+        this.civilizationScience = civilizationScience;
         this.civilizationHappiness = civilizationHappiness;
         this.units = units;
     }
@@ -38,8 +36,8 @@ public class Civilization {
         this.cities = new ArrayList<>();
         this.wars = new ArrayList<>();
         this.civilizationTechnologies = new CivilizationTechnologies();
-        this.cityGold = new CityGold();
-        this.cityScience = new CityScience();
+        this.civilizationGold = new CivilizationGold();
+        this.civilizationScience = new CivilizationScience();
         this.civilizationHappiness = new CivilizationHappiness();
         this.units = new ArrayList<>();
     }
@@ -72,20 +70,20 @@ public class Civilization {
         this.civilizationTechnologies = civilizationTechnologies;
     }
 
-    public CityGold getGold() {
-        return this.cityGold;
+    public CivilizationGold getGold() {
+        return this.civilizationGold;
     }
 
-    public void setGold(CityGold cityGold) {
-        this.cityGold = cityGold;
+    public void setGold(CivilizationGold cityGold) {
+        this.civilizationGold = cityGold;
     }
 
-    public CityScience getScience() {
-        return this.cityScience;
+    public CivilizationScience getScience() {
+        return civilizationScience;
     }
 
-    public void setScience(CityScience cityScience) {
-        this.cityScience = cityScience;
+    public void setScience(CivilizationScience cityScience) {
+        this.civilizationScience = cityScience;
     }
 
     public String showInfo() {

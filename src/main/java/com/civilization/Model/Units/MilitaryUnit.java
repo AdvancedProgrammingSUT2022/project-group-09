@@ -77,7 +77,7 @@ public class MilitaryUnit extends Unit {
                 targetCity.setHp(targetCity.getHp() - getMyType().getRangedCombatStrengh());
             targetCity.defend(this);
             if (targetCity.getHp() <= 0)
-                targetCity.getConquerdedBy(getCivilization());
+                targetCity.getConqueredBy(getCivilization());
         } else if (target instanceof MilitaryUnit) {
             MilitaryUnit targetUnit = (MilitaryUnit) target;
             if (getMyType().getRangedCombatStrengh() == 0)

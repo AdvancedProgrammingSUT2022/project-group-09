@@ -11,6 +11,8 @@ import com.civilization.Model.Terrains.TerrainType;
 import java.util.ArrayList;
 
 public class Unit implements Combatble, Selectable {
+
+    private int xp;
     private boolean workDone;
     private UnitType myType;
     private boolean isSleep;
@@ -223,4 +225,14 @@ public class Unit implements Combatble, Selectable {
     public void setWorkDone(boolean workDone) {
         this.workDone = workDone;
     }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
+
 }

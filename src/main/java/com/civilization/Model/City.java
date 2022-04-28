@@ -23,8 +23,9 @@ public class City extends Terrain implements Combatble, Selectable {
     private HashMap<Integer, UnitType> makingUnit;//<remaining Product to build,Unit>
     private String name = "default";
     private BuildingAffect buildings;
+    private double hp = 50;
 
-    private int hp;
+    private boolean unHappiness;
 
     public void CreateUnit(UnitType unitType) {
         if (!getCivilization().getTechnologies().getTechnologiesResearched().contains(unitType.getRequiredTechnology())) {
@@ -221,8 +222,8 @@ public class City extends Terrain implements Combatble, Selectable {
                 + " y position: " + getYPosition();
     }
 
-    public void getConquerdedBy(Civilization civilization) {
-
+    public void getConqueredBy(Civilization civilization) {
+        setUnHappiness(true);
     }
 
     public void moveCitizen(int citizenNumber, Terrain targetTerrain) {
@@ -239,15 +240,23 @@ public class City extends Terrain implements Combatble, Selectable {
         throw new RuntimeException();
     }
 
-    public int getHp() {
+    public double getHp() {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHp(double hp) {
         this.hp = hp;
     }
 
     public String getName() {
         return name;
+    }
+
+    public boolean isUnHappiness() {
+        return unHappiness;
+    }
+
+    public void setUnHappiness(boolean unHappiness) {
+        this.unHappiness = unHappiness;
     }
 }
