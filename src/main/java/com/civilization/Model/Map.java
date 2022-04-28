@@ -79,7 +79,9 @@ public class Map {
                             terrainStates[terrain.getCoordination().getX()][terrain.getCoordination().getY()] = TerrainState.VISIBLE;
                         }
                 if (terrains[i][j].getCivilization() == getCivilization())
-                    terrainStates[i][j] = TerrainState.VISIBLE;
+                    for (Terrain terrain : terrains[i][j].getSurroundingTerrain()) {
+                        terrainStates[terrain.getCoordination().getX()][terrain.getCoordination().getY()] = TerrainState.VISIBLE;
+                    }
             }
         }
     }
