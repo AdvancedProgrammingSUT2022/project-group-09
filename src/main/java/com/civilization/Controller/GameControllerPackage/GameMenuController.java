@@ -480,4 +480,12 @@ public class GameMenuController extends Controller {
     public InfoController getInfoController() {
         return infoController;
     }
+
+    public Selectable getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Selectable selected) {
+        this.selected = selected;
+    }
 }

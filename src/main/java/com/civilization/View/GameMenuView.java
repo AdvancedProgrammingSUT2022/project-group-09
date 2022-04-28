@@ -29,9 +29,40 @@ public class GameMenuView extends View {
                 showMap(matcher);
             else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ENTER)) != null) {
                 System.out.println(gameMenuController.menuNavigate(matcher));
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVEUNIT)) != null) {
-                System.out.println(gameMenuController.moveUnit(matcher));
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWRESEARCHINFORMATION)) != null) {
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWINFO)) != null) {
+                showInfo(matcher);
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTCITYCOORDINATE)) != null) {
+                selectCity(matcher);
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTMILITARYUNIT)) != null) {
+                selectMilitaryUnit(matcher);
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTSETTLER)) != null) {
+                selectSettler(matcher);
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTWORKER)) != null) {
+                selectWorker(matcher);
+            } else
+                System.out.println("invalid command");
+
+        }
+
+    }
+
+    private void selectCity(Matcher matcher) {
+        System.out.println(gameMenuController.selectCityByPosision(matcher));
+        while (true) {
+            if (Objects.equals(input, "back")) {
+                gameMenuController.setSelected(null);
+                return;
+            } else
+                System.out.println("invalid command");
+            input = scanner.nextLine();
+        }
+
+    }
+
+    private void showInfo(Matcher matcher) {
+        System.out.println(GameDataBase.getCurrentCivilization().getName());
+        while (true) {
+            if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWRESEARCHINFORMATION)) != null) {
                 System.out.println(gameMenuController.getInfoController().showResearch());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWUNITS)) != null) {
                 System.out.println(gameMenuController.getInfoController().showUnits());
@@ -53,30 +84,51 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.getInfoController().showDiplomotics());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWDEALS)) != null) {
                 System.out.println(gameMenuController.getInfoController().showDeals());
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTMILITARYUNIT)) != null) {
-                System.out.println(gameMenuController.selectMilitaryUnit(matcher));
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTCIVILIANUNIT)) != null) {
-                System.out.println(gameMenuController.selectCivilianUnit(matcher));
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTCITYCOORDINATE)) != null) {
-                System.out.println(gameMenuController.selectCityByPosision(matcher));
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTCITYNAME)) != null) {
-                System.out.println(gameMenuController.selectCityByName(matcher));
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
+            } else if (Objects.equals(input, "back")) {
+                return;
+            } else
+                System.out.println("invalid command");
+            input = scanner.nextLine();
+        }
+    }
+
+    private void selectSettler(Matcher matcher) {
+        System.out.println(gameMenuController.selectMilitaryUnit(matcher));
+        if (gameMenuController.getSelected() == null)
+            return;
+        while (true) {
+            if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
                 System.out.println(gameMenuController.sleep());
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ALERT)) != null) {
-                System.out.println(gameMenuController.alert());
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FORTIFY)) != null) {
-                System.out.println(gameMenuController.fortiry());
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FORTIFYHEAL)) != null) {
-                System.out.println(gameMenuController.fortiryHeal());
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.GARRISON)) != null) {
-                System.out.println(gameMenuController.garrison());
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SETUP)) != null) {
-                System.out.println(gameMenuController.setUp());
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ATTACK)) != null) {
-                System.out.println(gameMenuController.attack(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVEUNIT)) != null) {
+                System.out.println(gameMenuController.moveUnit(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.CANCEL)) != null) {
+                System.out.println(gameMenuController.cancellMission());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.WAKE)) != null) {
+                System.out.println(gameMenuController.wake());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DELETE)) != null) {
+                System.out.println(gameMenuController.delete());
+
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FOUND)) != null) {
                 System.out.println(gameMenuController.foundCity());
+            } else if (Objects.equals(input, "back")) {
+                gameMenuController.setSelected(null);
+                return;
+            } else
+                System.out.println("invalid command");
+            input = scanner.nextLine();
+        }
+    }
+
+
+    private void selectWorker(Matcher matcher) {
+        System.out.println(gameMenuController.selectCivilianUnit(matcher));
+        if (gameMenuController.getSelected() == null)
+            return;
+        while (true) {
+            if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
+                System.out.println(gameMenuController.sleep());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVEUNIT)) != null) {
+                System.out.println(gameMenuController.moveUnit(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.CANCEL)) != null) {
                 System.out.println(gameMenuController.cancellMission());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.WAKE)) != null) {
@@ -107,12 +159,49 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.removeRoute());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.REPAIR)) != null) {
                 System.out.println(gameMenuController.repair());
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWMAPCITY)) != null) {
-                System.out.println("");
-                //TODO
+            } else if (Objects.equals(input, "back")) {
+                gameMenuController.setSelected(null);
+                return;
             } else
                 System.out.println("invalid command");
+            input = scanner.nextLine();
+        }
+    }
 
+
+    private void selectMilitaryUnit(Matcher matcher) {
+        System.out.println(gameMenuController.selectMilitaryUnit(matcher));
+        if (gameMenuController.getSelected() == null)
+            return;
+        while (true) {
+            if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
+                System.out.println(gameMenuController.sleep());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.CANCEL)) != null) {
+                System.out.println(gameMenuController.cancellMission());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.WAKE)) != null) {
+                System.out.println(gameMenuController.wake());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DELETE)) != null) {
+                System.out.println(gameMenuController.delete());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVEUNIT)) != null) {
+                System.out.println(gameMenuController.moveUnit(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ALERT)) != null) {
+                System.out.println(gameMenuController.alert());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FORTIFY)) != null) {
+                System.out.println(gameMenuController.fortiry());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FORTIFYHEAL)) != null) {
+                System.out.println(gameMenuController.fortiryHeal());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.GARRISON)) != null) {
+                System.out.println(gameMenuController.garrison());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SETUP)) != null) {
+                System.out.println(gameMenuController.setUp());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ATTACK)) != null) {
+                System.out.println(gameMenuController.attack(matcher));
+            } else if (Objects.equals(input, "back")) {
+                gameMenuController.setSelected(null);
+                return;
+            } else
+                System.out.println("invalid command");
+            input = scanner.nextLine();
         }
     }
 
