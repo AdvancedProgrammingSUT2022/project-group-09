@@ -24,7 +24,6 @@ public class City extends Terrain implements Combatble, Selectable {
     private String name = "default";
     private BuildingAffect buildings;
 
-
     private int hp;
 
     public void CreateUnit(UnitType unitType) {
@@ -224,6 +223,20 @@ public class City extends Terrain implements Combatble, Selectable {
 
     public void getConquerdedBy(Civilization civilization) {
 
+    }
+
+    public void moveCitizen(int citizenNumber, Terrain targetTerrain) {
+        citizens.set(citizenNumber, targetTerrain);
+    }
+
+    public void moveCitizen(Terrain currentTerrain, Terrain targetTerrain) {
+        for (int i = 0; i < citizens.size(); i++)
+            if (citizens.get(i) == currentTerrain) {
+                citizens.set(i, targetTerrain);
+                return;
+            }
+        System.err.println("citizeni ke dar inja kar konad vojood nadarad");
+        throw new RuntimeException();
     }
 
     public int getHp() {
