@@ -15,18 +15,6 @@ public class MilitaryUnit extends Unit {
         this.isInSiege = true;
     }
 
-    public void attack() {
-
-    }
-
-    public void setPosition() {
-
-    }
-
-    public void upgradeUnit() {
-
-    }
-
     public void alert() {
 
     }

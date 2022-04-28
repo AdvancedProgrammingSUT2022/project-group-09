@@ -11,7 +11,6 @@ import com.civilization.Model.Terrains.TerrainType;
 import java.util.ArrayList;
 
 public class Unit implements Combatble, Selectable {
-
     private boolean workDone;
     private UnitType myType;
     private boolean isSleep;
