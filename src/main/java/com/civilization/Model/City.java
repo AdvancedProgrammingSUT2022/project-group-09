@@ -208,8 +208,14 @@ public class City extends Terrain implements Combatble, Selectable {
 
     @Override
     public void defend(Combatble target) {
+        if (super.getMilitaryUnit() != null) {
+            //garison shode
+        } else {
+            //bedoon garison defa kon
+        }
         //shahr defend nadare
     }
+
     @Override
     public String getDetails() {
         return "city name: " + name + " number of citizens: " + citizens.size() + " x position: " + getXPosition()
