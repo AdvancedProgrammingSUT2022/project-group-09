@@ -12,30 +12,55 @@ import com.civilization.Model.Units.UnitType;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public class BuildingAffect {
-    private ArrayList<BuildingType> buildings;
+    private final ArrayList<BuildingType> buildings;
+    public void DoBuildingsWork() {
+        barracks();
+        gnarary();
+        library();
+        watermill();
+        armory();
+        burialTob();
+        circus();
+        colosseum();
+        stable();
+        garden();
+        forage();
+        market();
+        mint();
+        monastery();
+        university();
+        workshop();
+        bank();
+        militaryAcademy();
+        museum();
+        operaHouse();
+        publicSchool();
+        satrapCourt();
+        theater();
+        windMill();
+        broadcastTower();
+        arsenal();
+        hospital();
+        stockExchange();
+    }
 
-    private void Barracks() {
+    private void barracks() {
         if (buildings.contains(BuildingType.BARRACKS))
             for (Unit unit : getCivilization().getUnits()) {
                 unit.setXp(unit.getXp() + 15);
             }
     }
 
-    private void Gnarary() {
+    private void gnarary() {
         if (buildings.contains(BuildingType.GRANARY))
             getCity().getFood().setAdditionFood(getCity().getFood().getAdditionFood() + 2);
     }
 
-    private void Library() {
+    private void library() {
         if (buildings.contains(BuildingType.LIBRARY))
             getCivilization().getScience().setAdditionScience(getCivilization().getScience().getAdditionScience() + (float) ((getCity().getCitizens().size()) / 2));
-    }
-
-    private void addWall() {
-        getCity().setHp(getCity().getHp() + 5);
     }
 
     private void watermill() {
@@ -43,11 +68,8 @@ public class BuildingAffect {
             getCity().getFood().setAdditionFood(getCity().getFood().getAdditionFood() + 2);
     }
 
-    private void addCastle() {
-        getCity().setHp(getCity().getHp() + 7.5);
-    }
 
-    private void Armory() {
+    private void armory() {
         if (buildings.contains(BuildingType.ARMORY))
             for (Unit unit : getCivilization().getUnits()) {
                 unit.setXp(unit.getXp() + 15);
@@ -69,12 +91,7 @@ public class BuildingAffect {
             getCivilization().getHappiness().setAdditionHappiness(getCivilization().getHappiness().getAdditionHappiness() + 4);
     }
 
-
-    private void addCourthhouse() {
-        getCity().setUnHappiness(false);
-    }
-
-    private void Stable() {
+    private void stable() {
         if (buildings.contains(BuildingType.STABLE))
             for (Map.Entry<Integer, UnitType> entry : getCity().getMakingUnit().entrySet()) {
                 if (entry.getValue().getCombatType() == CombatType.MOUNTED)
@@ -82,7 +99,7 @@ public class BuildingAffect {
             }
     }
 
-    private void Forage() {
+    private void forage() {
         if (buildings.contains(BuildingType.FORGE))
             getCity().getProduction().setCurrentProduct(getCity().getProduction().getCurrentProduct() * 115 / 100);
     }
@@ -201,24 +218,28 @@ public class BuildingAffect {
             getCity().getFood().setAdditionFood(getCity().getFood().getAdditionFood() / 2);
     }
 
-    private void addmilitaryBase() {
-        if (buildings.contains(BuildingType.MILITARYBASE))
-            getCity().setHp(getCity().getHp() + 12);
-    }
-
     private void stockExchange() {
         if (buildings.contains(BuildingType.STOCKEXCHANGE)) {
             getCity().getGold().setAdditionGold(getCity().getGold().getAdditionGold() * 4 / 3);
         }
     }
 
-    public void DoBuildingsWork() {
-
+    private void addmilitaryBase() {
+        if (buildings.contains(BuildingType.MILITARYBASE))
+            getCity().setHp(getCity().getHp() + 12);
     }
 
 
-    public BuildingAffect(ArrayList<BuildingType> buildings) {
-        this.buildings = buildings;
+    private void addCourthouse() {
+        getCity().setUnHappiness(false);
+    }
+
+    private void addCastle() {
+        getCity().setHp(getCity().getHp() + 7.5);
+    }
+
+    private void addWall() {
+        getCity().setHp(getCity().getHp() + 5);
     }
 
     public BuildingAffect() {
@@ -229,13 +250,18 @@ public class BuildingAffect {
         return buildings;
     }
 
-    public void setBuildings(ArrayList<BuildingType> buildings) {
-        this.buildings = buildings;
-    }
-
     public void addBuildings(BuildingType building) {
+        if (building == BuildingType.WALLS)
+            addWall();
+        if (building == BuildingType.CASTLE)
+            addCastle();
+        if (building == BuildingType.COURTHOUSE)
+            addCourthouse();
+        if (building == BuildingType.MILITARYBASE)
+            addmilitaryBase();
         this.buildings.add(building);
     }
+
 
     public Civilization getCivilization() {
         for (Civilization civilization : GameDataBase.getCivilizations()) {
