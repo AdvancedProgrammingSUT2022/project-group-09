@@ -20,6 +20,8 @@ public enum GameMenuRegex {
     MOVEUNIT(""),
     SHOWRESEARCHINFORMATION("^show research information"),
     SHOWUNITS("^show units$"),
+
+    SHOWHAPPINESS("show happiness"),
     SHOWCITIES("^show cities$"),
     SHOWDIPLOMACYINFORMATION("^show diplomacy information$"),
     SHOWVICTORYINFORMATION("^show victory information$"),

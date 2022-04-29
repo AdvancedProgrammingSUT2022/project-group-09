@@ -11,6 +11,11 @@ public class InfoController {
         return null;
     }
 
+    public String showHappines() {
+        Civilization civilization = GameDataBase.getCurrentCivilization();
+        return "happines : " + civilization.getHappiness().getAdditionHappiness();
+    }
+
     public String showUnits() {
         Civilization civilization = GameDataBase.getCurrentCivilization();
         StringBuilder units = new StringBuilder();
@@ -60,5 +65,7 @@ public class InfoController {
         return null;
     }
 
-    public String showNotification(){return null;}
+    public String showNotification() {
+        return null;
+    }
 }
