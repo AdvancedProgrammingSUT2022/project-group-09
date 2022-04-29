@@ -23,9 +23,9 @@ public class City extends Terrain implements Combatble, Selectable {
     private HashMap<Integer, UnitType> makingUnit;//<remaining Product to build,Unit>
     private String name = "default";
     private BuildingAffect buildings;
+    private double hp = 50;
 
-
-    private int hp;
+    private boolean unHappiness;
 
     public void CreateUnit(UnitType unitType) {
         if (!getCivilization().getTechnologies().getTechnologiesResearched().contains(unitType.getRequiredTechnology())) {
@@ -202,33 +202,61 @@ public class City extends Terrain implements Combatble, Selectable {
                 targetUnit.delete();
         } else {
             Unit targetUnit = (Unit) target;
-            targetUnit.getConquerdedBy(this.getCivilization());
+            targetUnit.getConqueredBy(this.getCivilization());
         }
     }
 
     @Override
     public void defend(Combatble target) {
+        if (super.getMilitaryUnit() != null) {
+            //garison shode
+        } else {
+            //bedoon garison defa kon
+        }
         //shahr defend nadare
     }
+
     @Override
     public String getDetails() {
         return "city name: " + name + " number of citizens: " + citizens.size() + " x position: " + getXPosition()
                 + " y position: " + getYPosition();
     }
 
-    public void getConquerdedBy(Civilization civilization) {
-
+    public void getConqueredBy(Civilization civilization) {
+        setUnHappiness(true);
     }
 
-    public int getHp() {
+    public void moveCitizen(int citizenNumber, Terrain targetTerrain) {
+        citizens.set(citizenNumber, targetTerrain);
+    }
+
+    public void moveCitizen(Terrain currentTerrain, Terrain targetTerrain) {
+        for (int i = 0; i < citizens.size(); i++)
+            if (citizens.get(i) == currentTerrain) {
+                citizens.set(i, targetTerrain);
+                return;
+            }
+        System.err.println("citizeni ke dar inja kar konad vojood nadarad");
+        throw new RuntimeException();
+    }
+
+    public double getHp() {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHp(double hp) {
         this.hp = hp;
     }
 
     public String getName() {
         return name;
+    }
+
+    public boolean isUnHappiness() {
+        return unHappiness;
+    }
+
+    public void setUnHappiness(boolean unHappiness) {
+        this.unHappiness = unHappiness;
     }
 }

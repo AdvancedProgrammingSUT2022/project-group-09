@@ -8,22 +8,11 @@ public class MilitaryUnit extends Unit {
     private boolean isInAlert;
     private boolean isInSiege;
     private boolean isFortify;
+    private boolean isFortifyHeal;
 
     public MilitaryUnit(UnitType myType, Terrain terrain, Civilization civilization) {
         super(myType, terrain, civilization);
         this.isInSiege = true;
-    }
-
-    public void attack() {
-
-    }
-
-    public void setPosition() {
-
-    }
-
-    public void upgradeUnit() {
-
     }
 
     public void alert() {
@@ -32,6 +21,26 @@ public class MilitaryUnit extends Unit {
 
     public void fortify() {
 
+    }
+
+    public void fortifyHeal() {
+
+    }
+
+    public void garrison() {
+
+    }
+
+    public void setUp() {
+
+    }
+
+    public void setFortifyHeal(boolean fortifyHeal) {
+        isFortifyHeal = fortifyHeal;
+    }
+
+    public boolean isFortifyHeal() {
+        return isFortifyHeal;
     }
 
     public boolean isInAlert() {
@@ -68,7 +77,7 @@ public class MilitaryUnit extends Unit {
                 targetCity.setHp(targetCity.getHp() - getMyType().getRangedCombatStrengh());
             targetCity.defend(this);
             if (targetCity.getHp() <= 0)
-                targetCity.getConquerdedBy(getCivilization());
+                targetCity.getConqueredBy(getCivilization());
         } else if (target instanceof MilitaryUnit) {
             MilitaryUnit targetUnit = (MilitaryUnit) target;
             if (getMyType().getRangedCombatStrengh() == 0)
@@ -80,7 +89,7 @@ public class MilitaryUnit extends Unit {
                 targetUnit.delete();
         } else {
             Unit targetUnit = (Unit) target;
-            targetUnit.getConquerdedBy(this.getCivilization());
+            targetUnit.getConqueredBy(this.getCivilization());
         }
     }
 

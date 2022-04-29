@@ -1,13 +1,13 @@
 package com.civilization.Model.Info;
 
 public class CityProduct {
-    private int currentProduct;
+    private double currentProduct;
 
-    public int getCurrentProduct() {
+    public double getCurrentProduct() {
         return currentProduct;
     }
 
-    public void setCurrentProduct(int currentProduct) {
+    public void setCurrentProduct(double currentProduct) {
         this.currentProduct = currentProduct;
     }
 

@@ -59,8 +59,8 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
             add(Resource.SHEEP);
         }
     }),
-    MOUNTAIN(0, 0, 0, 25, 9999999, null, null),
-    OCEAN(1, 0, 1, 0, 99999, new ArrayList<TerrainFeature>() {
+    MOUNTAIN(0, 0, 0, 25, Integer.MAX_VALUE, null, null),
+    OCEAN(1, 0, 1, 0, Integer.MAX_VALUE, new ArrayList<TerrainFeature>() {
         {
             add(TerrainFeature.ICE);
         }

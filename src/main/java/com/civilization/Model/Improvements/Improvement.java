@@ -1,9 +1,11 @@
 package com.civilization.Model.Improvements;
 
+import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.Resources.TerrainTypeOrTerrainFeatureType;
 import com.civilization.Model.TechnologyPackage.TechnologyType;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
+import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public enum Improvement {
         {
             add(Resource.WHEAT);
         }
-    }, TechnologyType.ARGICULTURE, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
+    }, TechnologyType.AGRICULTURE, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
         {
             add(TerrainType.GRASSLLAND);
             add(TerrainType.PLAIN);
@@ -107,7 +109,7 @@ public enum Improvement {
             add(TerrainType.HILLS);
         }
     }),
-    TRADINGPOST(0, 0, 1, null, TechnologyType.TRAPPING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
+    TRADINGPOST(0, 0, 1, new ArrayList<>(), TechnologyType.TRAPPING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
         {
             add(TerrainType.GRASSLLAND);
             add(TerrainType.PLAIN);
@@ -115,7 +117,7 @@ public enum Improvement {
             add(TerrainType.TUNDRA);
         }
     }),
-    FACTORY(0, 2, 0, null, TechnologyType.ENGINEERING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
+    FACTORY(0, 2, 0, new ArrayList<>(), TechnologyType.ENGINEERING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
         {
             add(TerrainType.GRASSLLAND);
             add(TerrainType.PLAIN);
@@ -124,7 +126,7 @@ public enum Improvement {
             add(TerrainType.SNOW);
         }
     }),
-    ROAD(0, 0, 0, null, null, null);
+    ROAD(0, 0, 0, new ArrayList<>(), null, new ArrayList<>());
     //TODO ROAD RO HANDLE KON
 
     final int food;
@@ -143,5 +145,30 @@ public enum Improvement {
         this.canBeBuiltON = canBeBuiltOn;
     }
 
+    public ArrayList<Resource> getImprovesResources() {
+        return improvesResources;
+    }
+
+    public ArrayList<TerrainTypeOrTerrainFeatureType> getCanBeBuiltON() {
+        return canBeBuiltON;
+    }
+
+    public TechnologyType getRequiredTechnology() {
+        return requiredTechnology;
+    }
+
+    public boolean checkIsPossible(Terrain terrain) {
+        if (!GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesResearched().contains(requiredTechnology))
+            return false;
+        if (canBeBuiltON.contains(terrain.getType())){
+            return true;
+        }
+        for (TerrainFeature feature : terrain.getTerrainFeatures()) {
+            if (canBeBuiltON.contains(feature)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

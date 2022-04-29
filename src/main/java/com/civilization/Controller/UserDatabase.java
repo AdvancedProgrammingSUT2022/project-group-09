@@ -21,7 +21,7 @@ public class UserDatabase {
     static public void loadUsers() {
         try {
             File myObj = new File("UserDatabase.json");
-            if(!myObj.exists())
+            if (!myObj.exists())
                 myObj.createNewFile();
             List<User> users1 = new ArrayList<>();
             Gson gson = new Gson();
@@ -85,8 +85,7 @@ public class UserDatabase {
     static public User getUserFromUsers(User user) {
         for (User user1 : users) {
             if (Objects.equals(user1.getUsername(), user.getUsername()) &&
-                    Objects.equals(user1.getPassword(), user.getPassword())
-                    && Objects.equals(user1.getNickname(), user.getNickname()))
+                    Objects.equals(user1.getPassword(), user.getPassword()))
                 return user1;
         }
         return null;

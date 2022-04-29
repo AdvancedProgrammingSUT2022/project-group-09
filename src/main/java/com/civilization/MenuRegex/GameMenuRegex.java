@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuRegex {
+    SHOWINFO("show info"),
     TURNCHEAT1("^increase (--turn|-t) (?<amount>-?[\\d]+)$"),
     GOLDCHEAT1("^increase (--gold|-g) (?<amount>-?[\\d]+)$"),
     SHOWCURRENTMENU("^menu show-current$"),
@@ -29,10 +30,10 @@ public enum GameMenuRegex {
     SHOWDIPLOMATICINFORMATION("^show diplomatic information$"),
     SHOWDEALS("^show deals$"),
     SELECTMILITARYUNIT("^select military unit (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$$"),
-    SELECTCIVILIANUNIT("^select civilian unit (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$$"),//TODO oon yekish
+    SELECTWORKER("^select worker (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$$"), SELECTSETTLER("^select settler (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$$"),
     SELECTCITYCOORDINATE("^select city (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$$"),
     SELECTCITYNAME("^select city (--name|-n) (?<name>\\S+)$"),
-//    MOVETO("^move to (?<x>\\d+) (?<y>\\d+)$"),
+    //    MOVETO("^move to (?<x>\\d+) (?<y>\\d+)$"),
     SLEEP("^sleep unit$"),
     ALERT("^alert unit$"),
     FORTIFY("fortify unit"),
@@ -56,8 +57,11 @@ public enum GameMenuRegex {
     BUILDQUARRY("^build quarry$"),
     REMOVEJUNGLE("^remove jungle$"),
     REMOVEROUTE("^remove route$"),
-    SHOWMAPCITY("^show city on map (?<cityName>\\S+)$"),
-    MOVEMAP("^move map (?<number>\\d+) to (?<direction>(right|left|up|down))$");
+    REPAIR("^repair$"),
+    MOVEMAP("^move map (?<number>\\d+) to (?<direction>(right|left|up|down))$"),
+    CHOOSETECHNOLOGY("start working on (?<technology>[a-z ]*)"),
+    SHOWTECHNOLOGYTREE("show technology tree"),
+    TECHNOLOGYMENU("enter technology menu");
 
     private final String regex;
 
@@ -110,7 +114,7 @@ public enum GameMenuRegex {
     }
 
     public static Matcher getMatcher(String input, GameMenuRegex command) {
-        if (command.equals(SHOWMAP)) 
+        if (command.equals(SHOWMAP))
             return getMatcherShowMap(input);
         if (command.equals(MOVEUNIT))
             return getMatcherMove(input);

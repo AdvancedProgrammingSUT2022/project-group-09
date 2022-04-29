@@ -20,7 +20,7 @@ public enum MainMenuRegex {
 
     public static ArrayList<String> PlayGameRegexConvertToPlayers(String input) {
         HashMap<Integer, String> players = new HashMap<>();
-        String[] afterSplit = input.split("--");
+        String[] afterSplit = input.substring(12).split("--");
         for (String s : afterSplit) {
             players.put(Integer.parseInt(s.substring(6, 7)), s.substring(8)); // hashmap baraye inke bebinim player chandome tartibesho ok konim
         }
