@@ -29,7 +29,7 @@ public enum Improvement {
         {
             add(Resource.WHEAT);
         }
-    }, TechnologyType.ARGICULTURE, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
+    }, TechnologyType.AGRICULTURE, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
         {
             add(TerrainType.GRASSLLAND);
             add(TerrainType.PLAIN);
@@ -109,7 +109,7 @@ public enum Improvement {
             add(TerrainType.HILLS);
         }
     }),
-    TRADINGPOST(0, 0, 1, null, TechnologyType.TRAPPING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
+    TRADINGPOST(0, 0, 1, new ArrayList<>(), TechnologyType.TRAPPING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
         {
             add(TerrainType.GRASSLLAND);
             add(TerrainType.PLAIN);
@@ -117,7 +117,7 @@ public enum Improvement {
             add(TerrainType.TUNDRA);
         }
     }),
-    FACTORY(0, 2, 0, null, TechnologyType.ENGINEERING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
+    FACTORY(0, 2, 0, new ArrayList<>(), TechnologyType.ENGINEERING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
         {
             add(TerrainType.GRASSLLAND);
             add(TerrainType.PLAIN);
@@ -126,7 +126,7 @@ public enum Improvement {
             add(TerrainType.SNOW);
         }
     }),
-    ROAD(0, 0, 0, null, null, null);
+    ROAD(0, 0, 0, new ArrayList<>(), null, new ArrayList<>());
     //TODO ROAD RO HANDLE KON
 
     final int food;

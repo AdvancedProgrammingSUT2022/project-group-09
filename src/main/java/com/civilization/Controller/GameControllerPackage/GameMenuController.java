@@ -23,6 +23,7 @@ public class GameMenuController extends Controller {
     private final InfoController infoController = new InfoController();
     private final MapController mapController = new MapController();
     private final UnitController unitcontroller = new UnitController();
+    private final TechnologyMenuController technologyMenuController = new TechnologyMenuController();
 
     public String nextTurn() {
         for (Civilization civilization : GameDataBase.getCivilizations()) {
@@ -487,5 +488,9 @@ public class GameMenuController extends Controller {
 
     public void setSelected(Selectable selected) {
         this.selected = selected;
+    }
+
+    public TechnologyMenuController getTechnologyMenuController() {
+        return technologyMenuController;
     }
 }

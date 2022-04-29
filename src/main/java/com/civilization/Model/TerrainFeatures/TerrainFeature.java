@@ -20,7 +20,7 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
             add(Resource.SILK);
         }
     }),
-    ICE(0, 0, 0, 0, 99999, null),
+    ICE(0, 0, 0, 0, Integer.MAX_VALUE, null),
     JUNGLE(1, -1, 0, 25, 2, new ArrayList<Resource>() {
         {
             add(Resource.BANANA);

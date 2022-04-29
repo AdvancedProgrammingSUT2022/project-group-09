@@ -58,7 +58,10 @@ public enum GameMenuRegex {
     REMOVEJUNGLE("^remove jungle$"),
     REMOVEROUTE("^remove route$"),
     REPAIR("^repair$"),
-    MOVEMAP("^move map (?<number>\\d+) to (?<direction>(right|left|up|down))$");
+    MOVEMAP("^move map (?<number>\\d+) to (?<direction>(right|left|up|down))$"),
+    CHOOSETECHNOLOGY("start working on (?<technology>[a-z ]*)"),
+    SHOWTECHNOLOGYTREE("show technology tree"),
+    TECHNOLOGYMENU("enter technology menu");
 
     private final String regex;
 

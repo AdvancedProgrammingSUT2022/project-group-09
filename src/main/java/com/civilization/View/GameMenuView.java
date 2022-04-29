@@ -39,6 +39,8 @@ public class GameMenuView extends View {
                 selectSettler(matcher);
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SELECTWORKER)) != null) {
                 selectWorker(matcher);
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.TECHNOLOGYMENU)) != null) {
+                technologyMenu(matcher);
             } else
                 System.out.println("invalid command");
 
@@ -230,6 +232,22 @@ public class GameMenuView extends View {
                         x += number;
                         break;
                 }
+            } else if (Objects.equals(input, "back"))
+                break;
+            else
+                System.out.println("invalid command");
+            input = scanner.nextLine();
+        }
+    }
+
+    public void technologyMenu(Matcher matcher) {
+        while (true) {
+            input = scanner.nextLine();
+            System.out.println(gameMenuController.getTechnologyMenuController().showTechnologies());
+            if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.CHOOSETECHNOLOGY)) != null) {
+                System.out.println(gameMenuController.getTechnologyMenuController().chooseTechnology(matcher));
+            } else if (GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWTECHNOLOGYTREE) != null) {
+                System.out.println(gameMenuController.getTechnologyMenuController().technologyTree());
             } else if (Objects.equals(input, "back"))
                 break;
             else

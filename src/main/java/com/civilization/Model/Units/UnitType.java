@@ -38,7 +38,7 @@ public enum UnitType {
     LONGSWORDMAN(150, CombatType.MELEE, 18, 0, 1, 3, Resource.IRON, TechnologyType.STEEL) {
 
     },
-    PIKEMAN(100, CombatType.MELEE, 10, 0, 1, 2, null, TechnologyType.CIVILISERVICE) {
+    PIKEMAN(100, CombatType.MELEE, 10, 0, 1, 2, null, TechnologyType.CIVILSERVICE) {
 
     },
     TREBUCHET(170, CombatType.SIEGE, 6, 20, 2, 2, Resource.IRON, TechnologyType.PHYSICS) {

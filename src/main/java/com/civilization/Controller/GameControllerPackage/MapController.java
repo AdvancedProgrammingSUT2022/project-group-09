@@ -81,7 +81,7 @@ public class MapController {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 6; j++) {
-                String backgroundColor = getBackgroundColor(terrains[x + i][y + j]);
+                String backgroundColor = getBackgroundColor(terrains[x + i][y + j]);//inja bug dare az size ararye mizane biroon
                 int istart = i * 6;
                 int jstart = j * 8;
                 if (j % 2 == 1) {
