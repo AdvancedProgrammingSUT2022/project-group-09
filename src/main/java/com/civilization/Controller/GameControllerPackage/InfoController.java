@@ -26,7 +26,7 @@ public class InfoController {
         Civilization civilization = GameDataBase.getCurrentCivilization();
         StringBuilder cities = new StringBuilder();
         for (City city : civilization.getCities()) {
-            cities.append("x: ").append(city.getDetails()).append("\n");
+            cities.append(city.getDetails()).append("\n");
         }
         return String.valueOf(cities);
     }

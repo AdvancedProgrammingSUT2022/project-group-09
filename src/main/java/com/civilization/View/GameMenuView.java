@@ -70,6 +70,7 @@ public class GameMenuView extends View {
     private void showInfo(Matcher matcher) {
         System.out.println(GameDataBase.getCurrentCivilization().getName());
         while (true) {
+            input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWRESEARCHINFORMATION)) != null) {
                 System.out.println(gameMenuController.getInfoController().showResearch());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWUNITS)) != null) {
@@ -96,7 +97,6 @@ public class GameMenuView extends View {
                 return;
             } else
                 System.out.println("invalid command");
-            input = scanner.nextLine();
         }
     }
 
@@ -105,6 +105,7 @@ public class GameMenuView extends View {
         if (GameDataBase.getSelected() == null)
             return;
         while (true) {
+            input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().sleep());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVEUNIT)) != null) {
@@ -123,7 +124,6 @@ public class GameMenuView extends View {
                 return;
             } else
                 System.out.println("invalid command");
-            input = scanner.nextLine();
         }
     }
 

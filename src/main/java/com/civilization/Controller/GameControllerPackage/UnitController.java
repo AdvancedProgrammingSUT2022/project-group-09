@@ -180,6 +180,7 @@ public class UnitController  {
             return "selectedo bayad har turn new mikardim";
         }
         ((Unit) GameDataBase.getSelected()).delete();
+        GameDataBase.setSelected(null);
         return "Unit deleted successfully!";
     }
 
