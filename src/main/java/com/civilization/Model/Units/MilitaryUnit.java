@@ -6,12 +6,10 @@ import com.civilization.Model.Terrains.Terrain;
 
 public class MilitaryUnit extends Unit {
     private boolean isInAlert;
-    private boolean isInSiege;
     private boolean isFortifyHeal;
 
     public MilitaryUnit(UnitType myType, Terrain terrain, Civilization civilization) {
         super(myType, terrain, civilization);
-        this.isInSiege = true;
     }
 
     public void alert() {
@@ -46,10 +44,6 @@ public class MilitaryUnit extends Unit {
 
     }
 
-    public void setUp() {
-        isInSiege = true;
-        setWorkDone(true);
-    }
 
     public void setFortifyHeal(boolean fortifyHeal) {
         isFortifyHeal = fortifyHeal;
@@ -66,15 +60,6 @@ public class MilitaryUnit extends Unit {
     public void setInAlert(boolean inAlert) {
         isInAlert = inAlert;
     }
-
-    public boolean isInSiege() {
-        return isInSiege;
-    }
-
-    public void setInSiege(boolean inSiege) {
-        isInSiege = inSiege;
-    }
-
     @Override
     public void attack(Combatble target) {
         if (target instanceof City) {
