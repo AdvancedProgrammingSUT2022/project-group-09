@@ -93,7 +93,7 @@ public class GameMenuView extends View {
     }
 
     private void selectSettler(Matcher matcher) {
-        System.out.println(gameMenuController.selectMilitaryUnit(matcher));
+        System.out.println(gameMenuController.selectCivilianUnit(matcher));
         if (gameMenuController.getSelected() == null)
             return;
         while (true) {
