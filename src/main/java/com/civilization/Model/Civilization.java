@@ -153,8 +153,8 @@ public class Civilization {
         for (City city : cities) {
             getScience().add(city.getCityScience().getAdditionScience());
             getGold().add(city.getGold().getAdditionGold());
-            getHappiness().nexTurn();
         }
+        getHappiness().nexTurn();
     }
 
 }

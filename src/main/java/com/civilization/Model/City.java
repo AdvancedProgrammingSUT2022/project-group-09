@@ -285,9 +285,9 @@ public class City extends Terrain implements Combatble, Selectable {
         doCitizenWork();
         buildings.DoBuildingsWork();
         if (cityFood.getAdditionFood() < 0) {
-            //koshtan citizen ha
+            citizens.remove(0);
         } else
-            makingCitizen += cityFood.getAdditionFood();
+            makingCitizen += cityFood.getAdditionFood(); //badaz ye adadi citizen jadid miad
         if (makingCitizen > 2) {
             citizens.add(null);
             makingCitizen = 0;
@@ -302,6 +302,8 @@ public class City extends Terrain implements Combatble, Selectable {
             if (makingUnit.getKey() <= 0)
                 deployBuilding();
         }
+        if (getGold().getAdditionGold() < 0)  //age manfi shod az science kam one
+            getCivilization().getScience().add(getGold().getAdditionGold());
     }
 
     private void doCitizenWork() {

@@ -45,6 +45,9 @@ public class BuildingAffect {
         arsenal();
         hospital();
         stockExchange();
+        for (BuildingType building : buildings) {
+            getCity().getGold().add((-1) * building.getCost());
+        }
     }
 
     private void barracks() {

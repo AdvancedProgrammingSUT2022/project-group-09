@@ -39,6 +39,7 @@ public class GameMenuController extends Controller {
             for (City city : civilization.getCities()) {
                 city.nextTurn();
             }
+            civilization.nextTurn();
             for (Unit unit : civilization.getUnits()) {
                 unit.setRemainingMove(unit.getMyType().getMovement());
                 unit.move();
