@@ -36,8 +36,14 @@ public class GameMenuController extends Controller {
 
     public String nextTurn() {
         for (Civilization civilization : GameDataBase.getCivilizations()) {
-
+            for (City city : civilization.getCities()) {
+                city.nextTurn();
+            }
+            for (Unit unit : civilization.getUnits()) {
+                unit.move();
+            }
         }
+
         //TODO yeseri chiza bayad ezafe beshe
         //TODO set kardan mp ha
         //call kardan unit.move() baraye hameye unit haye civilizationi k nobatesh shode

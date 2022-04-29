@@ -2,7 +2,9 @@ package com.civilization.Model.Info;
 
 public class CityProduct {
     private double currentProduct;
-
+    public void add(double number) {
+        currentProduct += number;
+    }
     public double getCurrentProduct() {
         return currentProduct;
     }

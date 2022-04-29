@@ -7,6 +7,7 @@ import com.civilization.Model.Info.CityFood;
 import com.civilization.Model.Info.CityGold;
 import com.civilization.Model.Info.CityProduct;
 import com.civilization.Model.Info.CityScience;
+import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.*;
 
@@ -16,14 +17,16 @@ import java.util.HashMap;
 public class City extends Terrain implements Combatble, Selectable {
     private ArrayList<Terrain> citizens; //length=number of citizens and arraylisti az jahaei hast ke citizen ha kar mikonnand
     private boolean isCapital;
-    private CityProduct production;
+    private CityProduct cityProduct;
     private CityFood cityFood;
     private CityGold cityGold;
-
     private CityScience cityScience;
     private ArrayList<Terrain> terrains;
-    private HashMap<Integer, BuildingType> makingBuilding;//<remaining Product to build,building>
-    private HashMap<Integer, UnitType> makingUnit;//<remaining Product to build,Unit>
+
+    private int makingCitizen;
+    private Pair<Double, BuildingType> makingBuilding;//<remaining Product to build,building>
+
+    private Pair<Double, UnitType> makingUnit;//<remaining Product to build,Unit>
     private String name = "default";
     private BuildingAffect buildings;
     private double hp = 50;
@@ -35,11 +38,11 @@ public class City extends Terrain implements Combatble, Selectable {
             System.err.println("technology mored nazara ro nadari");
             throw new RuntimeException();
         }
-        if (makingBuilding.size() != 0 || makingUnit.size() != 0) {
+        if (makingBuilding != null || makingUnit != null) {
             System.err.println("2 ta chiz hamzaman nemitooni besazi");
             throw new RuntimeException();
         }
-        makingUnit.put(unitType.getCost(), unitType);
+        makingUnit = new Pair<>((double) unitType.getCost(), unitType);
     }
 
     public void CreateBuilding(BuildingType buildingType) {
@@ -47,24 +50,24 @@ public class City extends Terrain implements Combatble, Selectable {
             System.err.println("technology mored nazara ro nadari");
             throw new RuntimeException();
         }
-        if (makingBuilding.size() != 0 || makingUnit.size() != 0) {
+        if (makingBuilding != null || makingUnit != null) {
             System.err.println("2 ta chiz hamzaman nemitooni besazi");
             throw new RuntimeException();
         }
-        makingBuilding.put(buildingType.getCost(), buildingType);
+        makingBuilding = new Pair<>((double) buildingType.getCost(), buildingType);
     }
 
     public City(Terrain terrain) {
         super(terrain);
         this.citizens = new ArrayList<>();
         this.isCapital = false;
-        this.production = new CityProduct();
+        this.cityProduct = new CityProduct();
         this.cityFood = new CityFood();
         this.cityGold = new CityGold();
-        this.cityScience=new CityScience();
+        this.cityScience = new CityScience();
         this.terrains = new ArrayList<>();
-        this.makingBuilding = new HashMap<>();
-        this.makingUnit = new HashMap<>();
+        this.makingBuilding = null;
+        this.makingUnit = null;
         this.buildings = new BuildingAffect();
         this.hp = 20;
     }
@@ -72,13 +75,13 @@ public class City extends Terrain implements Combatble, Selectable {
     public City() {
         this.citizens = new ArrayList<>();
         this.isCapital = false;
-        this.production = new CityProduct();
+        this.cityProduct = new CityProduct();
         this.cityFood = new CityFood();
         this.cityGold = new CityGold();
-        this.cityScience=new CityScience();
+        this.cityScience = new CityScience();
         this.terrains = new ArrayList<>();
-        this.makingBuilding = new HashMap<>();
-        this.makingUnit = new HashMap<>();
+        this.makingBuilding = null;
+        this.makingUnit = null;
         this.buildings = new BuildingAffect();
         this.hp = 20;
     }
@@ -86,10 +89,10 @@ public class City extends Terrain implements Combatble, Selectable {
     public City(City city) {
         this.citizens = city.getCitizens();
         this.isCapital = city.isCapital();
-        this.production = city.getProduction();
+        this.cityProduct = city.getProduction();
         this.cityFood = city.getFood();
         this.cityGold = city.getGold();
-        this.cityScience=new CityScience();
+        this.cityScience = new CityScience();
         this.terrains = city.getTerrains();
         this.makingBuilding = city.getMakingBuilding();
         this.makingUnit = city.getMakingUnit();
@@ -114,11 +117,11 @@ public class City extends Terrain implements Combatble, Selectable {
     }
 
     public CityProduct getProduction() {
-        return production;
+        return cityProduct;
     }
 
     public void setProduction(CityProduct production) {
-        this.production = production;
+        this.cityProduct = production;
     }
 
     public CityFood getFood() {
@@ -149,19 +152,19 @@ public class City extends Terrain implements Combatble, Selectable {
         this.terrains.add(terrain);
     }
 
-    public HashMap<Integer, BuildingType> getMakingBuilding() {
+    public Pair<Double, BuildingType> getMakingBuilding() {
         return makingBuilding;
     }
 
-    public void setMakingBuilding(HashMap<Integer, BuildingType> makingBuilding) {
+    public void setMakingBuilding(Pair<Double, BuildingType> makingBuilding) {
         this.makingBuilding = makingBuilding;
     }
 
-    public HashMap<Integer, UnitType> getMakingUnit() {
+    public Pair<Double, UnitType> getMakingUnit() {
         return makingUnit;
     }
 
-    public void setMakingUnit(HashMap<Integer, UnitType> makingUnit) {
+    public void setMakingUnit(Pair<Double, UnitType> makingUnit) {
         this.makingUnit = makingUnit;
     }
 
@@ -272,5 +275,58 @@ public class City extends Terrain implements Combatble, Selectable {
 
     public void setCityScience(CityScience cityScience) {
         this.cityScience = cityScience;
+    }
+
+    public void nextTurn() {
+        cityProduct.setCurrentProduct(0);
+        cityFood.setAdditionFood(0);
+        cityGold.setAdditionGold(0);
+        cityScience.setAdditionScience(0);
+        doCitizenWork();
+        buildings.DoBuildingsWork();
+        if (cityFood.getAdditionFood() < 0) {
+            //koshtan citizen ha
+        } else
+            makingCitizen += cityFood.getAdditionFood();
+        if (makingCitizen > 2) {
+            citizens.add(null);
+            makingCitizen = 0;
+        }
+        if (makingBuilding != null) {
+            makingBuilding.setKey(makingBuilding.getKey() - getProduction().getCurrentProduct());
+            if (makingBuilding.getKey() <= 0)
+                deployUnit();
+        }
+        if (makingUnit != null) {
+            makingUnit.setKey(makingUnit.getKey() - getProduction().getCurrentProduct());
+            if (makingUnit.getKey() <= 0)
+                deployBuilding();
+        }
+    }
+
+    private void doCitizenWork() {
+        for (Terrain terrain : citizens) {
+            if (terrain != null) {
+                cityFood.add(terrain.getType().getFood());
+                cityProduct.add(terrain.getType().getProduct());
+                cityGold.add(terrain.getType().getGold());
+                for (TerrainFeature terrainFeature : terrain.getTerrainFeatures()) {
+                    cityFood.add(terrainFeature.getFood());
+                    cityProduct.add(terrainFeature.getProduct());
+                    cityGold.add(terrainFeature.getGold());
+                }
+            }
+            cityFood.add((-2) * citizens.size());
+        }
+    }
+
+    private void deployUnit() {
+        new Unit(makingUnit.getValue(), this, getCivilization());
+        makingUnit = null;
+    }
+
+    private void deployBuilding() {
+        buildings.addBuildings(makingBuilding.getValue());
+        makingBuilding = null;
     }
 }

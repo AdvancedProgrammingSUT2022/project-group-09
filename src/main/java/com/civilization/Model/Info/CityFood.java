@@ -1,22 +1,17 @@
 package com.civilization.Model.Info;
 
 public class CityFood {
-    private int currentFood;
-    private int additionFood;
+    private double additionFood;
 
-    public int getCurrentFood() {
-        return currentFood;
+    public void add(double number) {
+        additionFood += number;
     }
 
-    public void setCurrentFood(int currentFood) {
-        this.currentFood = currentFood;
-    }
-
-    public int getAdditionFood() {
+    public double getAdditionFood() {
         return additionFood;
     }
 
-    public void setAdditionFood(int additionFood) {
+    public void setAdditionFood(double additionFood) {
         this.additionFood = additionFood;
     }
 }

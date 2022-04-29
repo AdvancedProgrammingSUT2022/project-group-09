@@ -21,7 +21,7 @@ public class CityController {
         return "production : " + city.getProduction().getCurrentProduct() + "\n" +
                 "gold : " + city.getGold().getAdditionGold() + "\n" +
                 "science : " + city.getCityScience() + "\n" +
-                "food : " + city.getFood().getCurrentFood() + "\n" +
+                "food : " + city.getFood().getAdditionFood() + "\n" +
                 "citizens : " + city.getCitizens().size() + "\n" +
                 "buildings: " + buildingString;
     }

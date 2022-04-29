@@ -11,28 +11,8 @@ import com.civilization.Model.Terrains.Terrain;
 public class CityGold {
     private double additionGold;
 
-    public void updateAdditionGold() {
-        double res = 0;
-        for (Civilization civilization : GameDataBase.getCivilizations()) {
-            for (City city : civilization.getCities()) {
-                if (city.getGold() == this) {
-                    for (Terrain terrain : city.getCitizens()) {
-                        if (terrain == null)
-                            continue;
-                        for (Resource resource : terrain.getResources()) {
-                            res += resource.getGold();
-                        }
-                        for (TerrainFeature terrainFeature : terrain.getTerrainFeatures()) {
-                            res += terrainFeature.getGold();
-                        }
-                    }
-                    //TODO PAYAM buidldingo nazaDi
-                    return;
-                }
-            }
-        }
-        System.err.println("gold dar hich shahri naboode");
-        throw new RuntimeException();
+    public void add(double number) {
+        additionGold += number;
     }
 
     public double getAdditionGold() {

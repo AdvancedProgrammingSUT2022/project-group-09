@@ -1,15 +1,10 @@
 package com.civilization.Model.Info;
 
 public class CityScience {
-    private int currentScience;
     private int additionScience;
 
-    public int getCurrentScience() {
-        return currentScience;
-    }
-
-    public void updateScience() {
-        this.currentScience += this.additionScience;
+    public void add(double number) {
+        additionScience += number;
     }
 
     public int getAdditionScience() {

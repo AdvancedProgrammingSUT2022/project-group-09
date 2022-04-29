@@ -15,6 +15,7 @@ import java.util.Map;
 
 public class BuildingAffect {
     private final ArrayList<BuildingType> buildings;
+
     public void DoBuildingsWork() {
         barracks();
         gnarary();
@@ -93,10 +94,10 @@ public class BuildingAffect {
 
     private void stable() {
         if (buildings.contains(BuildingType.STABLE))
-            for (Map.Entry<Integer, UnitType> entry : getCity().getMakingUnit().entrySet()) {
-                if (entry.getValue().getCombatType() == CombatType.MOUNTED)
+            if (getCity().getMakingUnit() != null)
+                if (getCity().getMakingUnit().getValue().getCombatType() == CombatType.MOUNTED)
                     getCity().getProduction().setCurrentProduct(getCity().getProduction().getCurrentProduct() * 5 / 4);
-            }
+
     }
 
     private void forage() {
@@ -143,12 +144,11 @@ public class BuildingAffect {
 
     private void workshop() {
         if (buildings.contains(BuildingType.WORKSHOP)) {
-            for (Map.Entry<Integer, BuildingType> entry : getCity().getMakingBuilding().entrySet()) {
-                if (entry.getValue() != null)
-                    getCity().getProduction().setCurrentProduct(getCity().getProduction().getCurrentProduct() * 6 / 5);
-            }
+            if (getCity().getMakingBuilding() != null)
+                getCity().getProduction().setCurrentProduct(getCity().getProduction().getCurrentProduct() * 6 / 5);
         }
     }
+
 
     private void bank() {
         if (buildings.contains(BuildingType.BANK)) {
@@ -196,10 +196,8 @@ public class BuildingAffect {
 
     private void arsenal() {
         if (buildings.contains(BuildingType.ARSENAL)) {
-            for (Map.Entry<Integer, UnitType> entry : getCity().getMakingUnit().entrySet()) {
-                if (entry.getValue() != null)
-                    getCity().getProduction().setCurrentProduct(getCity().getProduction().getCurrentProduct() * 6 / 5);
-            }
+            if (getCity().getMakingBuilding() != null)
+                getCity().getProduction().setCurrentProduct(getCity().getProduction().getCurrentProduct() * 6 / 5);
         }
     }
 
