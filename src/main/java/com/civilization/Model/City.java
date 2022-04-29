@@ -6,6 +6,7 @@ import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.Info.CityFood;
 import com.civilization.Model.Info.CityGold;
 import com.civilization.Model.Info.CityProduct;
+import com.civilization.Model.Info.CityScience;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.*;
 
@@ -18,6 +19,8 @@ public class City extends Terrain implements Combatble, Selectable {
     private CityProduct production;
     private CityFood cityFood;
     private CityGold cityGold;
+
+    private CityScience cityScience;
     private ArrayList<Terrain> terrains;
     private HashMap<Integer, BuildingType> makingBuilding;//<remaining Product to build,building>
     private HashMap<Integer, UnitType> makingUnit;//<remaining Product to build,Unit>
@@ -58,6 +61,7 @@ public class City extends Terrain implements Combatble, Selectable {
         this.production = new CityProduct();
         this.cityFood = new CityFood();
         this.cityGold = new CityGold();
+        this.cityScience=new CityScience();
         this.terrains = new ArrayList<>();
         this.makingBuilding = new HashMap<>();
         this.makingUnit = new HashMap<>();
@@ -71,6 +75,7 @@ public class City extends Terrain implements Combatble, Selectable {
         this.production = new CityProduct();
         this.cityFood = new CityFood();
         this.cityGold = new CityGold();
+        this.cityScience=new CityScience();
         this.terrains = new ArrayList<>();
         this.makingBuilding = new HashMap<>();
         this.makingUnit = new HashMap<>();
@@ -84,6 +89,7 @@ public class City extends Terrain implements Combatble, Selectable {
         this.production = city.getProduction();
         this.cityFood = city.getFood();
         this.cityGold = city.getGold();
+        this.cityScience=new CityScience();
         this.terrains = city.getTerrains();
         this.makingBuilding = city.getMakingBuilding();
         this.makingUnit = city.getMakingUnit();
@@ -258,5 +264,13 @@ public class City extends Terrain implements Combatble, Selectable {
 
     public void setUnHappiness(boolean unHappiness) {
         this.unHappiness = unHappiness;
+    }
+
+    public CityScience getCityScience() {
+        return cityScience;
+    }
+
+    public void setCityScience(CityScience cityScience) {
+        this.cityScience = cityScience;
     }
 }

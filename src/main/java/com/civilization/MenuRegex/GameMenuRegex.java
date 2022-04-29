@@ -63,6 +63,8 @@ public enum GameMenuRegex {
     SHOWTECHNOLOGYTREE("show technology tree"),
 
     SHOWCITYINFO("show info"),
+    SETCITIZEN("set citizen to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
+    MOVECITIZEN("move citizen -x (?<x>-?\\d+) -y (?<y>-?\\d+) to -x (?<xx>-?\\d+) -y (?<yy>-?\\d+)"),
     TECHNOLOGYMENU("enter technology menu");
 
     private final String regex;

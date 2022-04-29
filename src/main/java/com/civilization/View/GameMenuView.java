@@ -51,11 +51,13 @@ public class GameMenuView extends View {
     private void selectCity(Matcher matcher) {
         System.out.println(gameMenuController.selectCityByPosision(matcher));
         while (true) {
-            if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWCITYINFO)) != null)
-            {
-               // System.out.println(gameMenuController.
-            }
-            else if (Objects.equals(input, "back")) {
+            if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWCITYINFO)) != null) {
+                System.out.println(gameMenuController.getCityController().showCityInfo());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SETCITIZEN)) != null) {
+                System.out.println(gameMenuController.getCityController().setCitizen(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVECITIZEN)) != null) {
+                System.out.println(gameMenuController.getCityController().moveCitizen(matcher));
+            } else if (Objects.equals(input, "back")) {
                 GameDataBase.setSelected(null);
                 return;
             } else
