@@ -43,6 +43,13 @@ public class GameMenuController extends Controller {
             for (Unit unit : civilization.getUnits()) {
                 unit.setRemainingMove(unit.getMyType().getMovement());
                 unit.move();
+                if (unit instanceof MilitaryUnit) {
+                    ((MilitaryUnit) unit).alert();
+                    if (((MilitaryUnit) unit).isFortifyHeal())
+                        ((MilitaryUnit) unit).fortify();
+                }
+                if (!unit.isSleep())
+                    unit.setWorkDone(false);
             }
         }
         return "next turn";

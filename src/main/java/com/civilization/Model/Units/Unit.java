@@ -137,6 +137,7 @@ public class Unit implements Combatble, Selectable {
 
     public void DoNothing() {
         workDone = true;
+        isSleep=false;
     }
 
     public void sleep() {

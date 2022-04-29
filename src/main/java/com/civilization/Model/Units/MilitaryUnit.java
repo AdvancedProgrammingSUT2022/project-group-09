@@ -7,7 +7,6 @@ import com.civilization.Model.Terrains.Terrain;
 public class MilitaryUnit extends Unit {
     private boolean isInAlert;
     private boolean isInSiege;
-    private boolean isFortify;
     private boolean isFortifyHeal;
 
     public MilitaryUnit(UnitType myType, Terrain terrain, Civilization civilization) {
@@ -16,18 +15,34 @@ public class MilitaryUnit extends Unit {
     }
 
     public void alert() {
-
+        setSleep(true);
+        setWorkDone(true);
+        for (Terrain terrain : getTerrain().getSurroundingTerrain()) {
+            if (terrain.getMilitaryUnit().getCivilization() != getCivilization())
+                wake();
+        }
     }
 
     public void fortify() {
-
+        setWorkDone(true);
+        if (getHp() < 50 - 5)
+            setHp(getHp() + 5);
     }
 
     public void fortifyHeal() {
-
+        isFortifyHeal = true;
+        setWorkDone(true);
+        setSleep(true);
     }
 
     public void garrison() {
+        if (getTerrain() instanceof City) {
+            City city = (City) getTerrain();
+            if (city.getCivilization() == getCivilization()) {
+                city.setHp(city.getHp() + this.getHp());
+                delete();
+            }
+        }
 
     }
 
@@ -49,14 +64,6 @@ public class MilitaryUnit extends Unit {
 
     public void setInAlert(boolean inAlert) {
         isInAlert = inAlert;
-    }
-
-    public boolean isFortify() {
-        return isFortify;
-    }
-
-    public void setFortify(boolean fortify) {
-        isFortify = fortify;
     }
 
     public boolean isInSiege() {
