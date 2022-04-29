@@ -17,11 +17,11 @@ public class Worker extends Unit {
     }
 
     public void makeImprovement(Improvement improvement) {
-        if (makingImprovement!=null) {
-            System.err.println( " 2 ta kar hamzaman nemishe");
+        if (makingImprovement != null) {
+            System.err.println(" 2 ta kar hamzaman nemishe");
             throw new RuntimeException();
         }
-        makingImprovement=new Pair<>(improvement, 2);
+        makingImprovement = new Pair<>(improvement, 2);
         //TODO har improvement chand turn mikhad ro nagofte
     }
 
@@ -34,7 +34,7 @@ public class Worker extends Unit {
     }
 
     public void repair() {
-        //
+        //Nemidoonam
     }
 
     public Pair<Improvement, Integer> getMakingImprovement() {
@@ -43,5 +43,22 @@ public class Worker extends Unit {
 
     public void setMakingImprovement(Pair<Improvement, Integer> makingImprovement) {
         this.makingImprovement = makingImprovement;
+    }
+
+    public void nextTurn() {
+        if (makingImprovement != null) {
+            makingImprovement.setValue(makingImprovement.getValue() - 1);
+            if (makingImprovement.getValue() <= 0) {
+                deployImprovement();
+                makingImprovement = null;
+            }
+        }
+    }
+
+    private void deployImprovement() {
+        if (makingImprovement.getKey() == Improvement.ROAD)
+            getTerrain().setHasRoad(true);
+        else
+            getTerrain().setImprovement(makingImprovement.getKey());
     }
 }

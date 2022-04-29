@@ -47,7 +47,8 @@ public class MilitaryUnit extends Unit {
     }
 
     public void setUp() {
-
+        isInSiege = true;
+        setWorkDone(true);
     }
 
     public void setFortifyHeal(boolean fortifyHeal) {
