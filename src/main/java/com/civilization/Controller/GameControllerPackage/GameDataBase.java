@@ -15,6 +15,8 @@ public class GameDataBase {
     static private Civilization currentCivilization;
     static private HashMap<User, Civilization> civilizations;
 
+    static private Selectable selected;
+
     public static void runGameForFirstTime(ArrayList<User> players) {
         GameDataBase.civilizations = new HashMap<>();
         GameDataBase.players = players;
@@ -101,5 +103,13 @@ public class GameDataBase {
             }
         }
         return null;
+    }
+
+    public static Selectable getSelected() {
+        return selected;
+    }
+
+    public static void setSelected(Selectable selected) {
+        GameDataBase.selected = selected;
     }
 }

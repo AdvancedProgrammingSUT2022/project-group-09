@@ -3,13 +3,356 @@ package com.civilization.Controller.GameControllerPackage;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
+import com.civilization.Model.City;
 import com.civilization.Model.Coordination;
+import com.civilization.Model.Improvements.Improvement;
 import com.civilization.Model.Map;
+import com.civilization.Model.Selectable;
+import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
-import com.civilization.Model.Units.Unit;
-import com.civilization.Model.Units.UnitType;
+import com.civilization.Model.Units.*;
 
-public class UnitController {
+public class UnitController  {
+
+    public String moveUnit(Matcher matcher) {
+        if (GameDataBase.getSelected() instanceof Unit)
+            return move(matcher, (Unit) GameDataBase.getSelected());
+        return "no unit selected";
+    }
+
+    public String sleep() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        ((Unit) GameDataBase.getSelected()).sleep();
+        return "Unit slept successfully!";
+    }
+
+    public String alert() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        ((MilitaryUnit) GameDataBase.getSelected()).alert();
+        return "Unit is in alert!";
+    }
+
+    public String fortiry() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        ((MilitaryUnit) GameDataBase.getSelected()).fortify();
+        return "Unit is fortify!";
+    }
+
+    public String fortiryHeal() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        ((MilitaryUnit) GameDataBase.getSelected()).fortifyHeal();
+        return "Unit is fortify until heal!";
+    }
+
+    public String garrison() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        if (!(((MilitaryUnit) GameDataBase.getSelected()).getTerrain() instanceof City)) {
+            return "This unit is not in city!";
+        }
+        ((MilitaryUnit) GameDataBase.getSelected()).garrison();
+        return "Unit is in garrison!";
+    }
+
+    public String setUp() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        //TODO.. setup ro nazadim
+        return "Unit is set up!";
+    }
+
+    public String attack(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        Coordination coordinate = new Coordination(x, y);
+        if (!coordinate.isValidCoordination()) {
+            return "Coordinate is not valid!";
+        }
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        if (coordinate.getTerrain() instanceof City) {
+            ((MilitaryUnit) GameDataBase.getSelected()).attack((City) coordinate.getTerrain());
+        } else if (coordinate.getTerrain().getMilitaryUnit() != null) {
+            ((MilitaryUnit) GameDataBase.getSelected()).attack(coordinate.getTerrain().getMilitaryUnit());
+        } else if (coordinate.getTerrain().getCivilianUnit() != null) {
+            ((MilitaryUnit) GameDataBase.getSelected()).attack(coordinate.getTerrain().getCivilianUnit());
+        } else {
+            return "You can't attack this position!";
+        }
+        return "Attacked!";
+    }
+
+    public String foundCity() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        if (!(GameDataBase.getSelected() instanceof Settler)) {
+            return "This is not a settler unit!";
+        }
+        if (((Settler) GameDataBase.getSelected()).getTerrain() instanceof City) {
+            return "There is City in this position!";
+        }
+        ((Settler) GameDataBase.getSelected()).foundCaptalCity();//TODO.. capital nemitoone besaze ? va erroraye dige chi mitoone bokhore?
+        return "City created successfully!";
+    }
+
+    public String cancellMission() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        ((Unit) GameDataBase.getSelected()).DoNothing();
+        return "Cancelled!";
+    }
+
+    public String wake() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        ((Unit) GameDataBase.getSelected()).setSleep(false);
+        ((Unit) GameDataBase.getSelected()).wake();
+        return "Unit waked up successfully!";
+    }
+
+    public String delete() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        ((Unit) GameDataBase.getSelected()).delete();
+        return "Unit deleted successfully!";
+    }
+
+    private String checkWorker() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        if (!(GameDataBase.getSelected() instanceof Worker)) {
+            return "This is not a worker unit!";
+        }
+        return null;
+    }
+
+    public String buildRoad() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (((Worker) GameDataBase.getSelected()).getTerrain().isHasRoad()) {
+            return "There is road in this position!";
+        }
+        if (!Improvement.ROAD.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
+            return "Build is not possible!";
+        }
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.ROAD);
+        return "Road created successfully!";
+    }
+
+    public String buildMine() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovement() == Improvement.FARM) {
+            return "There is mine in this position!";
+        }
+        if (!Improvement.MINE.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
+            return "Build is not possible!";
+        }
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.FARM);
+        return "Mine created successfully!";
+    }
+
+    public String buildTradingPost() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovement() == Improvement.TRADINGPOST) {
+            return "There is farm in this position!";
+        }
+        if (!Improvement.TRADINGPOST.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
+            return "Build is not possible!";
+        }
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.TRADINGPOST);
+        return "Farm created successfully!";
+    }
+
+    public String buildFarm() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovement() == Improvement.FARM) {
+            return "There is farm in this position!";
+        }
+        if (!Improvement.FARM.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
+            return "Build is not possible!";
+        }
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.FARM);
+        return "Farm created successfully!";
+    }
+
+    public String buildLumberMill() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovement() == Improvement.LUMBERMILL) {
+            return "There is lumber mill in this position!";
+        }
+        if (!Improvement.LUMBERMILL.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
+            return "Build is not possible!";
+        }
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.LUMBERMILL);
+        return "Lumber mill created successfully!";
+    }
+
+    public String buildPasture() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovement() == Improvement.PASTURE) {
+            return "There is pasture in this position!";
+        }
+        if (!Improvement.PASTURE.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
+            return "Build is not possible!";
+        }
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.PASTURE);
+        return "Pasture created successfully!";
+    }
+
+    public String buildCamp() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovement() == Improvement.CAMP) {
+            return "There is camp mill in this position!";
+        }
+        if (!Improvement.CAMP.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
+            return "Build is not possible!";
+        }
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.CAMP);
+        return "Camp created successfully!";
+    }
+
+    public String buildPlantation() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovement() == Improvement.PLANTATION) {
+            return "There is plantation in this position!";
+        }
+        if (!Improvement.PLANTATION.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
+            return "Build is not possible!";
+        }
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.PLANTATION);
+        return "Plantation created successfully!";
+    }
+
+    public String buildQuarry() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovement() == Improvement.QUARRY) {
+            return "There is quarry in this position!";
+        }
+        if (!Improvement.QUARRY.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
+            return "Build is not possible!";
+        }
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.QUARRY);
+        return "Quarry created successfully!";
+    }
+
+    public String removeJungle() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (!((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures().contains(TerrainFeature.JUNGLE) &&
+                !((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures().contains(TerrainFeature.FOREST)) {
+            return "There is no jungle or forrest in this place!";
+        }
+        ((Worker) GameDataBase.getSelected()).removeJungle();
+        return "Jungle removed successfully!";
+    }
+
+    public String removeRoute() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (!((Worker) GameDataBase.getSelected()).getTerrain().getImprovement().equals(Improvement.ROAD)) {
+            return "There is no road in this place!";
+        }
+        ((Worker) GameDataBase.getSelected()).removeRoute();
+        return "Road removed successfully!";
+    }
+
+    public String repair() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        //TODO kharabe kojast ?
+        ((Worker) GameDataBase.getSelected()).repair();
+        return "Repair successfully!";
+    }
 
     public String move(Matcher matcher, Unit unit) {
         int x = Integer.parseInt(matcher.group("x"));
@@ -139,7 +482,7 @@ public class UnitController {
         }
         for (Terrain nextTerrain : origin.getSurroundingTerrain()) {
             if (isMovePossible(MP, nextTerrain) && !path.contains(nextTerrain)) {
-                if(path.size()>5)
+                if (path.size() > 5)
                     continue;
                 ArrayList<Terrain> nextPath = (ArrayList<Terrain>) path.clone();
                 nextPath.add(nextTerrain);
@@ -154,47 +497,5 @@ public class UnitController {
         return false;
     }
 
-    public String sleep(Matcher matcher) {
-        return "";
-    }
 
-    public String alert(Matcher matcher) {
-        return "";
-    }
-
-    public String attack(Matcher matcher) {
-        return "";
-    }
-
-    public String fortify(Matcher matcher) {
-        return "";
-    }
-
-    public String repair(Matcher matcher) {
-        return "";
-    }
-
-    public String remove(Matcher matcher) {
-        return "";
-    }
-
-    public String delete(Matcher matcher) {
-        return "";
-    }
-
-    public String wake(Matcher matcher) {
-        return "";
-    }
-
-    public String cancle(Matcher matcher) {
-        return "";
-    }
-
-    public String setup(Matcher matcher) {
-        return "";
-    }
-
-    public String garrison(Matcher matcher) {
-        return "";
-    }
 }

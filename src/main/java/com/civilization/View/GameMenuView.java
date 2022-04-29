@@ -51,8 +51,12 @@ public class GameMenuView extends View {
     private void selectCity(Matcher matcher) {
         System.out.println(gameMenuController.selectCityByPosision(matcher));
         while (true) {
-            if (Objects.equals(input, "back")) {
-                gameMenuController.setSelected(null);
+            if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWCITYINFO)) != null)
+            {
+               // System.out.println(gameMenuController.
+            }
+            else if (Objects.equals(input, "back")) {
+                GameDataBase.setSelected(null);
                 return;
             } else
                 System.out.println("invalid command");
@@ -96,24 +100,24 @@ public class GameMenuView extends View {
 
     private void selectSettler(Matcher matcher) {
         System.out.println(gameMenuController.selectCivilianUnit(matcher));
-        if (gameMenuController.getSelected() == null)
+        if (GameDataBase.getSelected() == null)
             return;
         while (true) {
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
-                System.out.println(gameMenuController.sleep());
+                System.out.println(gameMenuController.getUnitcontroller().sleep());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVEUNIT)) != null) {
-                System.out.println(gameMenuController.moveUnit(matcher));
+                System.out.println(gameMenuController.getUnitcontroller().moveUnit(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.CANCEL)) != null) {
-                System.out.println(gameMenuController.cancellMission());
+                System.out.println(gameMenuController.getUnitcontroller().cancellMission());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.WAKE)) != null) {
-                System.out.println(gameMenuController.wake());
+                System.out.println(gameMenuController.getUnitcontroller().wake());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DELETE)) != null) {
-                System.out.println(gameMenuController.delete());
+                System.out.println(gameMenuController.getUnitcontroller().delete());
 
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FOUND)) != null) {
-                System.out.println(gameMenuController.foundCity());
+                System.out.println(gameMenuController.getUnitcontroller().foundCity());
             } else if (Objects.equals(input, "back")) {
-                gameMenuController.setSelected(null);
+                GameDataBase.setSelected(null);
                 return;
             } else
                 System.out.println("invalid command");
@@ -124,45 +128,45 @@ public class GameMenuView extends View {
 
     private void selectWorker(Matcher matcher) {
         System.out.println(gameMenuController.selectCivilianUnit(matcher));
-        if (gameMenuController.getSelected() == null)
+        if (GameDataBase.getSelected() == null)
             return;
         while (true) {
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
-                System.out.println(gameMenuController.sleep());
+                System.out.println(gameMenuController.getUnitcontroller().sleep());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVEUNIT)) != null) {
-                System.out.println(gameMenuController.moveUnit(matcher));
+                System.out.println(gameMenuController.getUnitcontroller().moveUnit(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.CANCEL)) != null) {
-                System.out.println(gameMenuController.cancellMission());
+                System.out.println(gameMenuController.getUnitcontroller().cancellMission());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.WAKE)) != null) {
-                System.out.println(gameMenuController.wake());
+                System.out.println(gameMenuController.getUnitcontroller().wake());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DELETE)) != null) {
-                System.out.println(gameMenuController.delete());
+                System.out.println(gameMenuController.getUnitcontroller().delete());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDROAD)) != null) {
-                System.out.println(gameMenuController.buildRoad());
+                System.out.println(gameMenuController.getUnitcontroller().buildRoad());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDFARM)) != null) {
-                System.out.println(gameMenuController.buildFarm());
+                System.out.println(gameMenuController.getUnitcontroller().buildFarm());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDMINE)) != null) {
-                System.out.println(gameMenuController.buildMine());
+                System.out.println(gameMenuController.getUnitcontroller().buildMine());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDTRADINGPOST)) != null) {
-                System.out.println(gameMenuController.buildTradingPost());
+                System.out.println(gameMenuController.getUnitcontroller().buildTradingPost());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDLUMBERMILL)) != null) {
-                System.out.println(gameMenuController.buildLumberMill());
+                System.out.println(gameMenuController.getUnitcontroller().buildLumberMill());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDPASTURE)) != null) {
-                System.out.println(gameMenuController.buildPasture());
+                System.out.println(gameMenuController.getUnitcontroller().buildPasture());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDCAMP)) != null) {
-                System.out.println(gameMenuController.buildCamp());
+                System.out.println(gameMenuController.getUnitcontroller().buildCamp());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDPLANTATION)) != null) {
-                System.out.println(gameMenuController.buildPlantation());
+                System.out.println(gameMenuController.getUnitcontroller().buildPlantation());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDQUARRY)) != null) {
-                System.out.println(gameMenuController.buildQuarry());
+                System.out.println(gameMenuController.getUnitcontroller().buildQuarry());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.REMOVEJUNGLE)) != null) {
-                System.out.println(gameMenuController.removeJungle());
+                System.out.println(gameMenuController.getUnitcontroller().removeJungle());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.REMOVEROUTE)) != null) {
-                System.out.println(gameMenuController.removeRoute());
+                System.out.println(gameMenuController.getUnitcontroller().removeRoute());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.REPAIR)) != null) {
-                System.out.println(gameMenuController.repair());
+                System.out.println(gameMenuController.getUnitcontroller().repair());
             } else if (Objects.equals(input, "back")) {
-                gameMenuController.setSelected(null);
+                GameDataBase.setSelected(null);
                 return;
             } else
                 System.out.println("invalid command");
@@ -173,33 +177,33 @@ public class GameMenuView extends View {
 
     private void selectMilitaryUnit(Matcher matcher) {
         System.out.println(gameMenuController.selectMilitaryUnit(matcher));
-        if (gameMenuController.getSelected() == null)
+        if (GameDataBase.getSelected() == null)
             return;
         while (true) {
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
-                System.out.println(gameMenuController.sleep());
+                System.out.println(gameMenuController.getUnitcontroller().sleep());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.CANCEL)) != null) {
-                System.out.println(gameMenuController.cancellMission());
+                System.out.println(gameMenuController.getUnitcontroller().cancellMission());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.WAKE)) != null) {
-                System.out.println(gameMenuController.wake());
+                System.out.println(gameMenuController.getUnitcontroller().wake());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DELETE)) != null) {
-                System.out.println(gameMenuController.delete());
+                System.out.println(gameMenuController.getUnitcontroller().delete());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVEUNIT)) != null) {
-                System.out.println(gameMenuController.moveUnit(matcher));
+                System.out.println(gameMenuController.getUnitcontroller().moveUnit(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ALERT)) != null) {
-                System.out.println(gameMenuController.alert());
+                System.out.println(gameMenuController.getUnitcontroller().alert());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FORTIFY)) != null) {
-                System.out.println(gameMenuController.fortiry());
+                System.out.println(gameMenuController.getUnitcontroller().fortiry());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FORTIFYHEAL)) != null) {
-                System.out.println(gameMenuController.fortiryHeal());
+                System.out.println(gameMenuController.getUnitcontroller().fortiryHeal());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.GARRISON)) != null) {
-                System.out.println(gameMenuController.garrison());
+                System.out.println(gameMenuController.getUnitcontroller().garrison());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SETUP)) != null) {
-                System.out.println(gameMenuController.setUp());
+                System.out.println(gameMenuController.getUnitcontroller().setUp());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ATTACK)) != null) {
-                System.out.println(gameMenuController.attack(matcher));
+                System.out.println(gameMenuController.getUnitcontroller().attack(matcher));
             } else if (Objects.equals(input, "back")) {
-                gameMenuController.setSelected(null);
+                GameDataBase.setSelected(null);
                 return;
             } else
                 System.out.println("invalid command");

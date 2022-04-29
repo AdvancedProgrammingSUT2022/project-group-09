@@ -61,6 +61,8 @@ public enum GameMenuRegex {
     MOVEMAP("^move map (?<number>\\d+) to (?<direction>(right|left|up|down))$"),
     CHOOSETECHNOLOGY("start working on (?<technology>[a-z ]*)"),
     SHOWTECHNOLOGYTREE("show technology tree"),
+
+    SHOWCITYINFO("show info"),
     TECHNOLOGYMENU("enter technology menu");
 
     private final String regex;
