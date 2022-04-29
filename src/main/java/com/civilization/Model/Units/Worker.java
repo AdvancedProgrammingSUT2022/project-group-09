@@ -2,25 +2,26 @@ package com.civilization.Model.Units;
 
 import com.civilization.Model.Civilization;
 import com.civilization.Model.Improvements.Improvement;
+import com.civilization.Model.Pair;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 
 import java.util.HashMap;
 
 public class Worker extends Unit {
-    private HashMap<Improvement, Integer> makingImprovement;
+    private Pair<Improvement, Integer> makingImprovement;
 
     public Worker(Terrain terrain, Civilization civilization) {
         super(UnitType.WORKER, terrain, civilization);
-        this.makingImprovement = new HashMap<>();
+        this.makingImprovement = null;
     }
 
     public void makeImprovement(Improvement improvement) {
-        if (makingImprovement.size() != 0) {
-            System.err.println(makingImprovement.size() + " ta kar dare sakhte mishe ke ghalate");
+        if (makingImprovement!=null) {
+            System.err.println( " 2 ta kar hamzaman nemishe");
             throw new RuntimeException();
         }
-        makingImprovement.put(improvement, 2);
+        makingImprovement=new Pair<>(improvement, 2);
         //TODO har improvement chand turn mikhad ro nagofte
     }
 
@@ -36,11 +37,11 @@ public class Worker extends Unit {
         //
     }
 
-    public HashMap<Improvement, Integer> getMakingImprovement() {
+    public Pair<Improvement, Integer> getMakingImprovement() {
         return makingImprovement;
     }
 
-    public void setMakingImprovement(HashMap<Improvement, Integer> makingImprovement) {
+    public void setMakingImprovement(Pair<Improvement, Integer> makingImprovement) {
         this.makingImprovement = makingImprovement;
     }
 }

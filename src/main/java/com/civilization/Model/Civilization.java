@@ -1,6 +1,7 @@
 package com.civilization.Model;
 
 import com.civilization.Model.Info.*;
+import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.Units.Unit;
 
 import java.security.PublicKey;
@@ -13,13 +14,13 @@ public class Civilization {
     private ArrayList<War> wars;
     private CivilizationTechnologies civilizationTechnologies;
     private CivilizationGold civilizationGold;
-
     private CivilizationScience civilizationScience;
     private CivilizationHappiness civilizationHappiness;
 
+    private ArrayList<Resource> resources;
     private ArrayList<Unit> units;
 
-    public Civilization(Map map, ArrayList<City> cities, ArrayList<War> wars, CivilizationTechnologies civilizationTechnologies, CivilizationGold civilizationGold, CivilizationScience civilizationScience, CivilizationHappiness civilizationHappiness, ArrayList<Unit> units) {
+    public Civilization(Map map, ArrayList<Resource> resources, ArrayList<City> cities, ArrayList<War> wars, CivilizationTechnologies civilizationTechnologies, CivilizationGold civilizationGold, CivilizationScience civilizationScience, CivilizationHappiness civilizationHappiness, ArrayList<Unit> units) {
         this.map = map;
         this.cities = cities;
         this.wars = wars;
@@ -27,6 +28,7 @@ public class Civilization {
         this.civilizationGold = civilizationGold;
         this.civilizationScience = civilizationScience;
         this.civilizationHappiness = civilizationHappiness;
+        this.resources = resources;
         this.units = units;
     }
 
@@ -39,6 +41,7 @@ public class Civilization {
         this.civilizationGold = new CivilizationGold();
         this.civilizationScience = new CivilizationScience();
         this.civilizationHappiness = new CivilizationHappiness();
+        this.resources = new ArrayList<>();
         this.units = new ArrayList<>();
     }
 
@@ -80,6 +83,14 @@ public class Civilization {
 
     public CivilizationScience getScience() {
         return civilizationScience;
+    }
+
+    public ArrayList<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(ArrayList<Resource> resources) {
+        this.resources = resources;
     }
 
     public void setScience(CivilizationScience cityScience) {
@@ -135,7 +146,15 @@ public class Civilization {
         for (City city : cities) {
             numberOfCitizens += city.getCitizens().size();
         }
-        return "civilization name: " + name + " number of citizens :" + numberOfCitizens + " happiness: " + civilizationHappiness.getCurrentHappiness();
+        return "civilization name: " + name + " number of citizens :" + numberOfCitizens + " happiness: " + civilizationHappiness.getAdditionHappiness();
+    }
+
+    public void nextTurn() {
+        for (City city : cities) {
+            getScience().add(city.getCityScience().getAdditionScience());
+            getGold().add(city.getGold().getAdditionGold());
+            getHappiness().nexTurn();
+        }
     }
 
 }

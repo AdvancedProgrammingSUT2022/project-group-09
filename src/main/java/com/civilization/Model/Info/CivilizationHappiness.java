@@ -1,15 +1,30 @@
 package com.civilization.Model.Info;
 
+import com.civilization.Controller.GameControllerPackage.GameDataBase;
+import com.civilization.Model.Civilization;
+import com.civilization.Model.Resources.Resource;
+
 public class CivilizationHappiness {
-    private int currentHappiness;
     private int additionHappiness;
 
-    public int getCurrentHappiness() {
-        return currentHappiness;
+    public void nexTurn() {
+        additionHappiness=0;
+        for (Resource resource : getCivilization().getResources()) {
+           // if(resource==luxury) nym+=5;
+            //TODO baghiash
+        }
     }
 
-    public void updateHappiness() {
-        this.currentHappiness += this.additionHappiness;
+    private Civilization getCivilization() {
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            if (civilization.getHappiness() == this)
+                return civilization;
+        }
+        throw new RuntimeException();
+    }
+
+    public void add(double number) {
+        additionHappiness += number;
     }
 
     public int getAdditionHappiness() {
