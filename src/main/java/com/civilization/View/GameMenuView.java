@@ -2,6 +2,7 @@ package com.civilization.View;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Controller.GameControllerPackage.GameMenuController;
+import com.civilization.Controller.GameControllerPackage.MapController;
 import com.civilization.MenuRegex.GameMenuRegex;
 
 import java.util.Objects;
@@ -129,7 +130,6 @@ public class GameMenuView extends View {
         }
     }
 
-
     private void selectWorker(Matcher matcher) {
         System.out.println(gameMenuController.selectCivilianUnit(matcher));
         if (GameDataBase.getSelected() == null)
@@ -178,7 +178,6 @@ public class GameMenuView extends View {
         }
     }
 
-
     private void selectMilitaryUnit(Matcher matcher) {
         System.out.println(gameMenuController.selectMilitaryUnit(matcher));
         if (GameDataBase.getSelected() == null)
@@ -219,8 +218,12 @@ public class GameMenuView extends View {
         GameDataBase.getCurrentCivilization().getMap().updateExploration();
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
+        MapController mapController = new MapController(GameDataBase.getMainMap().getTerrains(),
+                GameDataBase.getCurrentCivilization().getMap().getTerrainStates());
+        boolean needShowMap = true;
         while (true) {
-            System.out.println(GameDataBase.getCurrentCivilization().getMap().showMap(x, y));
+            if (needShowMap)
+                System.out.println(mapController.showMap(x, y));
             System.out.println("move map <number> to <direction>(right|left|up|down) \nback for end showing map");
             input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVEMAP)) != null) {
@@ -242,7 +245,9 @@ public class GameMenuView extends View {
                 }
             } else if (Objects.equals(input, "back"))
                 break;
-            else
+            else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWDETAILS)) != null) {
+                System.out.println(mapController.showDetails(matcher));
+            } else
                 System.out.println("invalid command");
             input = scanner.nextLine();
         }

@@ -96,36 +96,6 @@ public class Map {
         return terrainStates;
     }
 
-    private int handelXBoundaries(int x, int y) {
-        if (x > row - 3)
-            return row - 3;
-        if (x < 0)
-            return 0;
-        if (y % 2 == 1 && x > row - 4)
-            return row - 4;
-        return x;
-    }
-
-    private int handelYBoundaries(int y) {
-        if (y > column - 6)
-            return column - 6;
-        if (y < 0)
-            return 0;
-        return y;
-    }
-
-    public String showMap(int x, int y) {
-        // if (y % 2 == 1)
-        //     y++;
-        x = handelXBoundaries(x, y);
-        y = handelYBoundaries(y);
-
-        if (!isValidTerran(x, y)) {
-            return "ERROR x: " + x + " , y: " + y + " in show map is invalid";
-        }
-        return new MapController().showMap(x, y, this.getTerrainStates());
-    }
-
     public static int getRow() {
         return row;
     }

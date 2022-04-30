@@ -15,6 +15,15 @@ public class MapController {
     private Terrain[][] terrains;
     private TerrainState[][] terrainStates;
 
+    public MapController(Terrain[][] terrains, TerrainState[][] terrainStates) {
+        this.terrains = terrains;
+        this.terrainStates = terrainStates;
+    }
+
+    public MapController() {
+
+    }
+
     private String getBackgroundColor(Terrain terrain) {
         TerrainType type = terrain.getType();
         if (type == TerrainType.DESERT) {
@@ -119,9 +128,36 @@ public class MapController {
 
     }
 
-    public String showMap(int x, int y, TerrainState terrainStates[][]) {
-        this.terrains = GameDataBase.getMainMap().getTerrains();
-        this.terrainStates = terrainStates;
+    private int handelXBoundaries(int x, int y) {
+        if (x > Map.getRow() - 3)
+            return Map.getRow()- 3;
+        if (x < 0)
+            return 0;
+        if (y % 2 == 1 && x > Map.getRow() - 4)
+            return Map.getRow()- 4;
+        return x;
+    }
+
+    private int handelYBoundaries(int y) {
+        if (y > Map.getColumn() - 6)
+            return Map.getColumn() - 6;
+        if (y < 0)
+            return 0;
+        return y;
+    }
+    
+    public boolean isValidTerran(int x, int y) {
+        return x < Map.getRow() && x >= 0 && y < Map.getColumn() && y >= 0;
+    }
+
+    public String showMap(int x, int y) {
+        x = handelXBoundaries(x, y);
+        y = handelYBoundaries(y);
+        
+        if (!isValidTerran(x, y)) {
+            return "ERROR x: " + x + " , y: " + y + " in show map is invalid";
+        }
+        
         // creating mapString
         String[][] mapString = new String[21][51];
         for (int i = 0; i < mapString.length; i++) {
@@ -143,17 +179,14 @@ public class MapController {
         return mapStringBuilder.toString();
     }
 
-    public String showMap(Matcher matcher, Map map) {
-        this.terrainStates = map.getTerrainStates();
-        this.terrains = GameDataBase.getMainMap().getTerrains();
+    public String showMap(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-        return showMap(x, y, terrainStates);
+        return showMap(x, y);
     }
 
-    public String showMap(int x, int y, Map map) {
-        this.terrainStates = map.getTerrainStates();
-        this.terrains = GameDataBase.getMainMap().getTerrains();
-        return showMap(x, y, terrainStates);
+    public String showDetails(Matcher matcher) {
+        
+        return "";
     }
 }
