@@ -225,7 +225,6 @@ public class City extends Terrain implements Combatble, Selectable {
         //shahr defend nadare
     }
 
-    @Override
     public String getDetails() {
         return "city name: " + name + " number of citizens: " + citizens.size() + " x position: " + getXPosition()
                 + " y position: " + getYPosition();

@@ -120,12 +120,12 @@ public enum Resource {
     }}, Improvement.PLANTATION, null, ResourceMainType.LUXURY);
 
 
-    final int food;
-    final int production;
-    final int gold;
-    final ArrayList<TerrainTypeOrTerrainFeatureType> canBeFoundOn;
-    final Improvement requiredImprovement;
-    final TechnologyType requiredTechnology;
+    final private int food;
+    final private int production;
+    final private int gold;
+    final private ArrayList<TerrainTypeOrTerrainFeatureType> canBeFoundOn;
+    final private Improvement requiredImprovement;
+    final private TechnologyType requiredTechnology;
 
     final ResourceMainType resourceMainType;
 

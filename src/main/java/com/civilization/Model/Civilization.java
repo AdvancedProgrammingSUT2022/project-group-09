@@ -2,6 +2,7 @@ package com.civilization.Model;
 
 import com.civilization.Model.Info.*;
 import com.civilization.Model.Resources.Resource;
+import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Units.Unit;
 
 import java.security.PublicKey;
@@ -139,6 +140,10 @@ public class Civilization {
 
     public void removeUnit(Unit unit) {
         this.units.remove(unit);
+    }
+
+    public TerrainState getTerrainState(int x, int y) {
+        return this.map.getTerrainStates()[x][y];
     }
 
     public String getDemographics() {

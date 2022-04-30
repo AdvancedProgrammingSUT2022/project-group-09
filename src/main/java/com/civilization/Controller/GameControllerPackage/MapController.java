@@ -1,11 +1,14 @@
 package com.civilization.Controller.GameControllerPackage;
 
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.regex.Matcher;
 
 import com.civilization.Main;
 import com.civilization.Model.ConsoleColors;
 import com.civilization.Model.Map;
+import com.civilization.Model.Resources.Resource;
+import com.civilization.Model.TechnologyPackage.TechnologyType;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Terrains.TerrainType;
@@ -130,11 +133,11 @@ public class MapController {
 
     private int handelXBoundaries(int x, int y) {
         if (x > Map.getRow() - 3)
-            return Map.getRow()- 3;
+            return Map.getRow() - 3;
         if (x < 0)
             return 0;
         if (y % 2 == 1 && x > Map.getRow() - 4)
-            return Map.getRow()- 4;
+            return Map.getRow() - 4;
         return x;
     }
 
@@ -145,7 +148,7 @@ public class MapController {
             return 0;
         return y;
     }
-    
+
     public boolean isValidTerran(int x, int y) {
         return x < Map.getRow() && x >= 0 && y < Map.getColumn() && y >= 0;
     }
@@ -153,11 +156,11 @@ public class MapController {
     public String showMap(int x, int y) {
         x = handelXBoundaries(x, y);
         y = handelYBoundaries(y);
-        
+
         if (!isValidTerran(x, y)) {
             return "ERROR x: " + x + " , y: " + y + " in show map is invalid";
         }
-        
+
         // creating mapString
         String[][] mapString = new String[21][51];
         for (int i = 0; i < mapString.length; i++) {
@@ -185,8 +188,50 @@ public class MapController {
         return showMap(x, y);
     }
 
+    private void showVisibleDetails(StringBuilder stringBuilder, Terrain terrain) {
+        if (terrain.getCivilianUnit() == null) {
+            stringBuilder.append("there is no civilization unit in this terrain\n");
+        } else {
+            stringBuilder.append("civilzation unit: " + terrain.getCivilianUnit() + "belonging to: "
+                    + terrain.getCivilianUnit().getCivilization().getName() + "\n");
+        }
+        if (terrain.getMilitaryUnit() == null) {
+            stringBuilder.append("there is no military unit in this terrain\n");
+        } else {
+            stringBuilder.append("military unit: " + terrain.getMilitaryUnit() + "belonging to: " +
+                    terrain.getMilitaryUnit().getCivilization().getName() + "\n");
+        }
+        showBuildings(stringBuilder, terrain);
+    }
+
+    private void showBuildings(StringBuilder stringBuilder, Terrain terrain) {
+        stringBuilder.append("list of resources in this terrain:\n");
+        ArrayList<TechnologyType> technologies = GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesResearched();
+        for (Resource resource : terrain.getResources()) {
+            if (technologies.contains(resource.getRequiredTechnology())) {
+                stringBuilder.append(resource + "\n");
+            }
+        }
+    }
+
     public String showDetails(Matcher matcher) {
-        
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        isValidTerran(x, y);
+        Terrain terrain = GameDataBase.getMainMap().getTerrain(x, y);
+        TerrainState terrainState = GameDataBase.getCurrentCivilization().getTerrainState(x, y);
+
+        if (terrainState == TerrainState.FOGOFWAR)
+            return "this terrain is in fog for you";
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("this terrain belongs to: " + terrain.getCivilization().getName() + "\n" +
+                "Terrain type is: " + terrain.getType() + "\n" +
+                "Terrain features are: " + terrain.getTerrainFeatures() + "\n");
+        if (terrainState == TerrainState.VISIBLE) {
+            showVisibleDetails(stringBuilder, terrain);
+        }
         return "";
     }
 }

@@ -21,7 +21,6 @@ public class Terrain {
     private Unit civilianUnit;
     private MilitaryUnit militaryUnit;
 
-
     public Terrain() {
         this.improvement = null;
         this.hasRoad = false;
@@ -243,13 +242,6 @@ public class Terrain {
 
     public Coordination getCoordination() {
         return new Coordination(getXPosition(), getYPosition());
-    }
-
-    public String getDetails() {
-        return "this Terrain belongs to: " + this.getCivilization().getName() + "\n" +
-                "Terrain Type is: " + this.type + "\n" +
-                "Terrain Features are: " + this.terrainFeatures + "\n" +
-                "Terrain Resources are: " + this.resources + "\n";
     }
 
     public int getMp() {
