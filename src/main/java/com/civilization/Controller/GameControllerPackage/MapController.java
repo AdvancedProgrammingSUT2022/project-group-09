@@ -217,10 +217,10 @@ public class MapController {
             stringBuilder.append("military unit: " + terrain.getMilitaryUnit() + "belonging to: " +
                     terrain.getMilitaryUnit().getCivilization().getName() + "\n");
         }
-        showBuildings(stringBuilder, terrain);
+        showResources(stringBuilder, terrain);
     }
 
-    private void showBuildings(StringBuilder stringBuilder, Terrain terrain) {
+    private void showResources(StringBuilder stringBuilder, Terrain terrain) {
         stringBuilder.append("list of resources in this terrain:\n");
         ArrayList<TechnologyType> technologies = GameDataBase.getCurrentCivilization().getTechnologies()
                 .getTechnologiesResearched();
