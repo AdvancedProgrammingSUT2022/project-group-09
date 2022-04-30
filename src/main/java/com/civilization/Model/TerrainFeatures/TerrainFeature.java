@@ -34,8 +34,7 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
         }
     }),
     OASIS(3, 0, 1, -33, 1, null),
-    RIVER(0, 0, 1, 0, -1, null);
-    //TODO... -1 -> all remanining points, 999999 -> impossible
+    RIVER(0, 0, 1, 0, 0, null);
 
     TerrainFeature(int food, int product, int gold, int combatModifier, int MP, ArrayList<Resource> possibleResources) {
         this.food = food;
