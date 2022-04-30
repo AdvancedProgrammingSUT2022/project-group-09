@@ -58,7 +58,9 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.getCityController().setCitizen(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVECITIZEN)) != null) {
                 System.out.println(gameMenuController.getCityController().moveCitizen(matcher));
-            } else if (Objects.equals(input, "back")) {
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDMENU)) != null) {
+                buildMenu(matcher);
+            }else if (Objects.equals(input, "back")) {
                 GameDataBase.setSelected(null);
                 return;
             } else
@@ -66,6 +68,23 @@ public class GameMenuView extends View {
             input = scanner.nextLine();
         }
 
+    }
+
+    private void buildMenu(Matcher matcher) {
+        System.out.println("select a unit or building");
+        System.out.println(gameMenuController.getCityController().showBuildings());
+        System.out.println(gameMenuController.getCityController().showUnits());
+        while (true) {
+            if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDUNIT)) != null) {
+                System.out.println(gameMenuController.getCityController().buildUnit(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDBUILDING)) != null) {
+                System.out.println(gameMenuController.getCityController().buildBuilding(matcher));
+            } else if (Objects.equals(input, "back")) {
+                return;
+            } else
+                System.out.println("invalid command");
+            input = scanner.nextLine();
+        }
     }
 
     private void showInfo(Matcher matcher) {

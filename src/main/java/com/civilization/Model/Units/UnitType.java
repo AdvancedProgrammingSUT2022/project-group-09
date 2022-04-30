@@ -4,6 +4,8 @@ import com.civilization.Model.City;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TechnologyPackage.TechnologyType;
 
+import java.util.ArrayList;
+
 public enum UnitType {
     ARCHER(70, CombatType.ARCHERY, 4, 6, 2, 2, null, TechnologyType.ARCHERY) {
     },
@@ -127,5 +129,37 @@ public enum UnitType {
     private final int movement;
     private final Resource requiredResourse;
     private final TechnologyType requiredTechnology;
+    private final static ArrayList<UnitType> allUnits = new ArrayList<UnitType>(){
+        {
+            add(UnitType.ARCHER);
+            add(UnitType.CHARIOTARCHER);
+            add(UnitType.SCOUT);
+            add(UnitType.SETTLER);
+            add(UnitType.SPEARMAN);
+            add(UnitType.WARRIOR);
+            add(UnitType.WORKER);
+            add(UnitType.CATAPULT);
+            add(UnitType.HORSEMAN);
+            add(UnitType.SWORDSMAN);
+            add(UnitType.CROSSBOWMAN);
+            add(UnitType.KNIGHT);
+            add(UnitType.LONGSWORDMAN);
+            add(UnitType.PIKEMAN);
+            add(UnitType.TREBUCHET);
+            add(UnitType.CANON);
+            add(UnitType.CAVALRY);
+            add(UnitType.LANCER);
+            add(UnitType.MUSKETMAN);
+            add(UnitType.RIFLEMAN);
+            add(UnitType.ANTITANKGUN);
+            add(UnitType.ARTILLERY);
+            add(UnitType.INFANTRY);
+            add(UnitType.PANZER);
+            add(UnitType.TANK);
+        }
+    };
 
+    public static ArrayList<UnitType> getAllUnits() {
+        return allUnits;
+    }
 }

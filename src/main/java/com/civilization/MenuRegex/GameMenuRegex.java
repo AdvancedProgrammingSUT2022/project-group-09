@@ -71,7 +71,10 @@ public enum GameMenuRegex {
     SHOWCITYINFO("show info"),
     SETCITIZEN("set citizen to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
     MOVECITIZEN("move citizen -x (?<x>-?\\d+) -y (?<y>-?\\d+) to -x (?<xx>-?\\d+) -y (?<yy>-?\\d+)"),
-    TECHNOLOGYMENU("enter technology menu");
+    TECHNOLOGYMENU("enter technology menu"),
+    BUILDMENU("enter build menu"),
+    BUILDUNIT("build unit (?<number>\\d+)"),
+    BUILDBUILDING("build building (?<number>\\d+)");
 
     private final String regex;
 

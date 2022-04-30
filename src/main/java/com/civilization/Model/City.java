@@ -330,4 +330,14 @@ public class City extends Terrain implements Combatble, Selectable {
         buildings.addBuildings(makingBuilding.getValue());
         makingBuilding = null;
     }
+
+    public ArrayList<UnitType> unitsCanBeBuilt() {
+        ArrayList<UnitType> units = new ArrayList<>();
+        for (UnitType unit : GameDataBase.getCurrentCivilization().unitsCanBeBuilt()) {
+            if (getResources().contains(unit.getRequiredResourse())) {
+                units.add(unit);
+            }
+        }
+        return units;
+    }
 }

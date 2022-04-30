@@ -1,9 +1,11 @@
 package com.civilization.Model;
 
+import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.Info.*;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Units.Unit;
+import com.civilization.Model.Units.UnitType;
 
 import java.security.PublicKey;
 import java.util.ArrayList;
@@ -160,6 +162,26 @@ public class Civilization {
             getGold().add(city.getGold().getAdditionGold());
         }
         getHappiness().nexTurn();
+    }
+
+    public ArrayList<BuildingType> buildingsCanBeBuilt() {
+        ArrayList<BuildingType> possibleBuildings = new ArrayList<>();
+        for (BuildingType building : BuildingType.getAllBuildings()) {
+            if (civilizationTechnologies.getTechnologiesResearched().contains(building.getRequirement())) {
+                possibleBuildings.add(building);
+            }
+        }
+        return possibleBuildings;
+    }
+
+    public ArrayList<UnitType> unitsCanBeBuilt() {
+        ArrayList<UnitType> possibleUnits = new ArrayList<>();
+        for (UnitType unit : UnitType.getAllUnits()) {
+            if (civilizationTechnologies.getTechnologiesResearched().contains(unit.getRequiredTechnology())) {
+                possibleUnits.add(unit);
+            }
+        }
+        return possibleUnits;
     }
 
 }
