@@ -47,7 +47,7 @@ public class MapController {
     }
 
     private void drawMainDetails(String[][] mapString, int istart, int jstart, int xCenter, int yCenter,
-                                 String backgroundColor) {
+            String backgroundColor) {
         for (int k = 2; k > -1; k--) {
             for (int z = jstart + k + 1; z < jstart + k + 1 + 5 + 4 - 2 * k; z++) {
                 mapString[istart + 2 - k][z] = backgroundColor + " " + ConsoleColors.RESET;
@@ -79,9 +79,15 @@ public class MapController {
             }
         }
 
+        int remainder = 0;
+        if (y % 2 == 1)
+            remainder = 1;
+
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 6; j++) {
-                String backgroundColor = getBackgroundColor(terrains[x + i][y + j]);//inja bug dare az size ararye mizane biroon
+                String backgroundColor = getBackgroundColor(terrains[x + i][y + j]);// inja bug dare az size ararye
+                                                                                    // mizane biroon
+                // before entering this function we have checked if it's out of bonds or not
                 int istart = i * 6;
                 int jstart = j * 8;
                 if (j % 2 == 1) {
@@ -94,7 +100,10 @@ public class MapController {
                     backgroundColor = ConsoleColors.GRAY_BACKGROUND;
                 }
 
-                drawMainDetails(mapString, istart, jstart, x + i, y + j, backgroundColor);
+                if (j % 2 == 1)
+                    drawMainDetails(mapString, istart, jstart, x + i + remainder, y + j, backgroundColor);
+                else
+                    drawMainDetails(mapString, istart, jstart, x + i, y + j, backgroundColor);
 
                 if (terrainStates[x + i][y + j] == TerrainState.VISIBLE) {
                     // TODO set name in civilization constructor

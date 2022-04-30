@@ -10,7 +10,7 @@ import com.civilization.Model.Terrains.TerrainState;
 import java.util.ArrayList;
 
 public class Map {
-    protected final static int row = 30, column = 30, length = 30; //length for graphic
+    protected final static int row = 30, column = 30, length = 30; // length for graphic
     private final TerrainState[][] terrainStates = new TerrainState[row][column];
 
     public Civilization getCivilization() {
@@ -28,7 +28,6 @@ public class Map {
         }
         civilization.setMap(this);
     }
-
 
     public Map() {
         if (this instanceof MainMap)
@@ -71,16 +70,19 @@ public class Map {
                 if (terrains[i][j].getMilitaryUnit() != null)
                     if (terrains[i][j].getMilitaryUnit().getCivilization() == getCivilization())
                         for (Terrain terrain : terrains[i][j].getMilitaryUnit().getVisibleTerrain()) {
-                            terrainStates[terrain.getCoordination().getX()][terrain.getCoordination().getY()] = TerrainState.VISIBLE;
+                            terrainStates[terrain.getCoordination().getX()][terrain.getCoordination()
+                                    .getY()] = TerrainState.VISIBLE;
                         }
                 if (terrains[i][j].getCivilianUnit() != null)
                     if (terrains[i][j].getCivilianUnit().getCivilization() == getCivilization())
                         for (Terrain terrain : terrains[i][j].getCivilianUnit().getVisibleTerrain()) {
-                            terrainStates[terrain.getCoordination().getX()][terrain.getCoordination().getY()] = TerrainState.VISIBLE;
+                            terrainStates[terrain.getCoordination().getX()][terrain.getCoordination()
+                                    .getY()] = TerrainState.VISIBLE;
                         }
                 if (terrains[i][j].getCivilization() == getCivilization())
                     for (Terrain terrain : terrains[i][j].getSurroundingTerrain()) {
-                        terrainStates[terrain.getCoordination().getX()][terrain.getCoordination().getY()] = TerrainState.VISIBLE;
+                        terrainStates[terrain.getCoordination().getX()][terrain.getCoordination()
+                                .getY()] = TerrainState.VISIBLE;
                     }
             }
         }
@@ -94,17 +96,29 @@ public class Map {
         return terrainStates;
     }
 
-    public String showMap(int x, int y) {
-        if (y % 2 == 1)
-            y++;
-        if (x > column - 6)
-            x = column - 6;
-        if (y > row - 3)
-            y = row - 3;
-        if (y < 0)
-            y = 0;
+    private int handelXBoundaries(int x, int y) {
+        if (x > row - 3)
+            return row - 3;
         if (x < 0)
-            x = 0;
+            return 0;
+        if (y % 2 == 1 && x > row - 4)
+            return row - 4;
+        return x;
+    }
+
+    private int handelYBoundaries(int y) {
+        if (y > column - 6)
+            return column - 6;
+        if (y < 0)
+            return 0;
+        return y;
+    }
+
+    public String showMap(int x, int y) {
+        // if (y % 2 == 1)
+        //     y++;
+        x = handelXBoundaries(x, y);
+        y = handelYBoundaries(y);
 
         if (!isValidTerran(x, y)) {
             return "ERROR x: " + x + " , y: " + y + " in show map is invalid";
