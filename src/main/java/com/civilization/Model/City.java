@@ -61,7 +61,7 @@ public class City extends Terrain implements Combatble, Selectable {
         super(terrain);
         this.citizens = new ArrayList<>();
         this.citizens.add(null);
-        this.isCapital = false;
+        this.isCapital = true;
         this.cityProduct = new CityProduct();
         this.cityFood = new CityFood();
         this.cityGold = new CityGold();

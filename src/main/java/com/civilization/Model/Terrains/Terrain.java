@@ -267,10 +267,8 @@ public class Terrain {
             product += getImprovement().getProduction();
             gold += getImprovement().getGold();
         }
-        StringBuilder res = new StringBuilder();
-        res.append("food : ").append(food).append("\n")
-                .append("gold : ").append(gold).append("\n")
-                .append("product : ").append(product).append("\n");
-        return res.toString();
+        return "food : " + food +
+                "gold : " + gold +
+                "product : " + product;
     }
 }
