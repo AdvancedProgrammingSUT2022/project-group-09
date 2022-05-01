@@ -3,6 +3,7 @@ package com.civilization.Model;
 import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.Info.*;
 import com.civilization.Model.Resources.Resource;
+import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
@@ -160,11 +161,25 @@ public class Civilization {
     }
 
     public void nextTurn() {
+        updateResource();
         for (City city : cities) {
             getScience().add(city.getCityScience().getAdditionScience());
             getGold().add(city.getGold().getAdditionGold());
         }
         getHappiness().nexTurn();
+    }
+
+    private void updateResource() {
+        resources = new ArrayList<>();
+        for (City city : getCities()) {
+            for (Terrain terrain : city.getTerrains()) {
+                for (Resource resource : terrain.getResources()) {
+                    if (getTechnologies().getTechnologiesResearched().contains(resource.getRequiredTechnology())
+                            && terrain.getImprovement() == resource.getRequiredImprovement())
+                        resources.add(resource);
+                }
+            }
+        }
     }
 
     public ArrayList<BuildingType> buildingsCanBeBuilt() {
