@@ -379,9 +379,16 @@ public class UnitController {
         int maxMp = unit.getMyType().getMovement();
         UnitType unitType = unit.getMyType();
 
+        //TODO handel moving to different terrainstates
         if (!isDestinationEmpty(unitType, destination))
             return "destination is not empty for you";
-        return backTrack(destination, origin, MP, maxMp, unitType, unit);
+        // return backTrack(destination, origin, MP, maxMp, unitType, unit);
+        return DjikstraPathFind(destination, origin, MP, maxMp, unitType, unit);
+    }
+
+    private String DjikstraPathFind(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType, Unit unit) {
+        //TODO implement djikstra if needed
+        return "";
     }
 
     private String backTrack(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType, Unit unit) {

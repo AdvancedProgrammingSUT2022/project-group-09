@@ -1,1 +1,8 @@
-[{"username":"username","password":"password","nickname":"nickname","highScore":0}]
+[
+    {
+        "username": "username",
+        "password": "password",
+        "nickname": "nickname",
+        "highScore": 0
+    }
+]
