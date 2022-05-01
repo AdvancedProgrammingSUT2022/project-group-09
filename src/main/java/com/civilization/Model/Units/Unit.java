@@ -137,7 +137,7 @@ public class Unit implements Combatble, Selectable {
 
     public void DoNothing() {
         workDone = true;
-        isSleep=false;
+        isSleep = false;
     }
 
     public void sleep() {
@@ -233,6 +233,12 @@ public class Unit implements Combatble, Selectable {
 
     public void setXp(int xp) {
         this.xp = xp;
+    }
+
+    public String showInfo() {
+        return myType + "Worke done : " + workDone + "sleep : " + isSleep +
+                "remaining Mp : " + remainingMove + "hp : " + hp +
+                "size of masiri ke bayad bere : " + path.size();
     }
 
 }

@@ -100,10 +100,6 @@ public class Civilization {
         this.civilizationScience = cityScience;
     }
 
-    public String showInfo() {
-        return "";
-    }
-
     public CivilizationHappiness getHappiness() {
         return this.civilizationHappiness;
     }
@@ -126,6 +122,11 @@ public class Civilization {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getInformation() {
+        return "name : " + name + "\n" + "Gold : " + getGold().getCurrentGold() + " addition gold :" + getGold().getAdditionGold() +
+                "\n" + "happines : " + getHappiness().getAdditionHappiness() + " science : " + getScience().getAdditionScience();
     }
 
     public ArrayList<Unit> getUnits() {

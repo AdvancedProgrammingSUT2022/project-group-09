@@ -1,11 +1,9 @@
 package com.civilization.Controller.GameControllerPackage;
 
 import com.civilization.Controller.Controller;
+import com.civilization.MenuRegex.GameMenuRegex;
 import com.civilization.Model.*;
-import com.civilization.Model.Improvements.Improvement;
-import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Units.MilitaryUnit;
-import com.civilization.Model.Units.Settler;
 import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.Worker;
 import com.civilization.View.CurrentMenu;
@@ -18,7 +16,7 @@ public class GameMenuController extends Controller {
 
     //GameDataBase darim
     private final Cheat cheat = new Cheat();
-    private final CheatController cheatConteroller;
+    private final CheatController cheatController;
     private final CityController cityController;
     private final InfoController infoController;
     private final MapController mapController;
@@ -26,7 +24,7 @@ public class GameMenuController extends Controller {
     private final TechnologyMenuController technologyMenuController;
 
     public GameMenuController() {
-        cheatConteroller = new CheatController();
+        cheatController = new CheatController();
         cityController = new CityController();
         infoController = new InfoController();
         mapController = new MapController();
@@ -35,6 +33,12 @@ public class GameMenuController extends Controller {
     }
 
     public String nextTurn() {
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            for (Unit unit : civilization.getUnits()) {
+                if (!unit.isWorkDone())
+                    return "civilization :" + civilization.getName() + "unit :" + unit.getMyType() + "work done nashode";
+            }
+        }
         for (Civilization civilization : GameDataBase.getCivilizations()) {
             for (City city : civilization.getCities()) {
                 city.nextTurn();
@@ -165,7 +169,7 @@ public class GameMenuController extends Controller {
     }
 
     public CheatController getCheatConteroller() {
-        return cheatConteroller;
+        return cheatController;
     }
 
     public CityController getCityController() {

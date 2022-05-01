@@ -42,6 +42,8 @@ public class GameMenuView extends View {
                 selectWorker(matcher);
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.TECHNOLOGYMENU)) != null) {
                 technologyMenu(matcher);
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.NEXTTURN)) != null) {
+                System.out.println(gameMenuController.nextTurn());
             } else
                 System.out.println("invalid command");
 
@@ -60,7 +62,7 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.getCityController().moveCitizen(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDMENU)) != null) {
                 buildMenu(matcher);
-            }else if (Objects.equals(input, "back")) {
+            } else if (Objects.equals(input, "back")) {
                 GameDataBase.setSelected(null);
                 return;
             } else
@@ -88,7 +90,7 @@ public class GameMenuView extends View {
     }
 
     private void showInfo(Matcher matcher) {
-        System.out.println(GameDataBase.getCurrentCivilization().getName());
+        System.out.println(GameDataBase.getCurrentCivilization().getInformation());
         while (true) {
             input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWRESEARCHINFORMATION)) != null) {
@@ -268,7 +270,6 @@ public class GameMenuView extends View {
                 System.out.println(mapController.showDetails(matcher));
             } else
                 System.out.println("invalid command");
-            input = scanner.nextLine();
         }
     }
 

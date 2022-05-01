@@ -74,6 +74,7 @@ public enum GameMenuRegex {
     TECHNOLOGYMENU("enter technology menu"),
     BUILDMENU("enter build menu"),
     BUILDUNIT("build unit (?<number>\\d+)"),
+    NEXTTURN("next turn"),
     BUILDBUILDING("build building (?<number>\\d+)");
 
     private final String regex;
