@@ -171,4 +171,15 @@ public enum Improvement {
         return false;
     }
 
+    public int getFood() {
+        return food;
+    }
+
+    public int getProduction() {
+        return production;
+    }
+
+    public int getGold() {
+        return gold;
+    }
 }

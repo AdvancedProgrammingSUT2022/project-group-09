@@ -95,8 +95,6 @@ public class GameMenuView extends View {
             input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWRESEARCHINFORMATION)) != null) {
                 System.out.println(gameMenuController.getInfoController().showResearch());
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWHAPPINESS)) != null) {
-                System.out.println(gameMenuController.getInfoController().showHappines());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWUNITS)) != null) {
                 System.out.println(gameMenuController.getInfoController().showUnits());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWCITIES)) != null) {

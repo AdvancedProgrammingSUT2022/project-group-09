@@ -251,4 +251,26 @@ public class Terrain {
         }
         return sumOfMps;
     }
+
+    public String showGoldProductFood() {
+        int food = 0, gold = 0, product = 0;
+        food += getType().getFood();
+        product += getType().getProduct();
+        gold += getType().getGold();
+        for (TerrainFeature terrainFeature : getTerrainFeatures()) {
+            food += terrainFeature.getFood();
+            product += terrainFeature.getProduct();
+            gold += terrainFeature.getGold();
+        }
+        if (getImprovement() != null) {
+            food += getImprovement().getFood();
+            product += getImprovement().getProduction();
+            gold += getImprovement().getGold();
+        }
+        StringBuilder res = new StringBuilder();
+        res.append("food : ").append(food).append("\n")
+                .append("gold : ").append(gold).append("\n")
+                .append("product : ").append(product).append("\n");
+        return res.toString();
+    }
 }

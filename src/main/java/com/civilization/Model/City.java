@@ -328,6 +328,11 @@ public class City extends Terrain implements Combatble, Selectable {
                     cityProduct.add(terrainFeature.getProduct());
                     cityGold.add(terrainFeature.getGold());
                 }
+                if (terrain.getImprovement() != null) {
+                    cityFood.add(terrain.getImprovement().getFood());
+                    cityProduct.add(terrain.getImprovement().getProduction());
+                    cityGold.add(terrain.getImprovement().getGold());
+                }
             }
             cityFood.add((-2) * citizens.size());
         }
@@ -351,5 +356,19 @@ public class City extends Terrain implements Combatble, Selectable {
             }
         }
         return units;
+    }
+
+    public String getDemographics() {
+        int counter = 0;
+        StringBuilder res = new StringBuilder();
+        for (Terrain citizen : citizens) {
+            if (citizen == null)
+                res.append("citizen").append(counter).append(" bikare");
+            else
+                res.append("citizen").append(counter).append(" ").append(citizen.getCoordination().toString())
+                        .append("ke midahad : ").append(citizen.showGoldProductFood());
+            counter++;
+        }
+        return res.toString();
     }
 }

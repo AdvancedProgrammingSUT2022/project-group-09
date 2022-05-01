@@ -150,11 +150,13 @@ public class Civilization {
     }
 
     public String getDemographics() {
+        StringBuilder res = new StringBuilder();
         int numberOfCitizens = 0;
         for (City city : cities) {
-            numberOfCitizens += city.getCitizens().size();
+            res.append("city ").append(city.getName()).append("demographic:").append("\n")
+                    .append(city.getDemographics());
         }
-        return "civilization name: " + name + " number of citizens :" + numberOfCitizens + " happiness: " + civilizationHappiness.getAdditionHappiness();
+        return res.toString();
     }
 
     public void nextTurn() {
