@@ -20,9 +20,7 @@ public class InfoController {
         Civilization civilization = GameDataBase.getCurrentCivilization();
         StringBuilder units = new StringBuilder();
         for (Unit unit : civilization.getUnits()) {
-            units.append("x: ").append(unit.getTerrain().getCoordination().getX()).append(" y: ").append(unit.getTerrain().getCoordination().getY())
-                    .append(" type: ").append(unit.getMyType().toString()).append("\n");
-            //TODO .. mitoonim detail bezarim baraye unit
+            units.append(unit.showInfo());
         }
         return String.valueOf(units);
     }

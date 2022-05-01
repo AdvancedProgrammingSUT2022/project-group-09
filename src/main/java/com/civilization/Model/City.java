@@ -226,8 +226,18 @@ public class City extends Terrain implements Combatble, Selectable {
     }
 
     public String getDetails() {
+        StringBuilder buildingString = new StringBuilder();
+        for (BuildingType building : getBuildings().getBuildings()) {
+            buildingString.append(building).append(" ");
+        }
         return "city name: " + name + " number of citizens: " + citizens.size() + " x position: " + getXPosition()
-                + " y position: " + getYPosition();
+                + " y position: " + getYPosition() +
+                "production : " + getProduction().getCurrentProduct() + "\n" +
+                "gold : " + getGold().getAdditionGold() + "\n" +
+                "science : " + getCityScience() + "\n" +
+                "food : " + getFood().getAdditionFood() + "\n" +
+                "citizens : " + getCitizens().size() + "\n" +
+                "buildings: " + buildingString;
     }
 
     public void getConqueredBy(Civilization civilization) {

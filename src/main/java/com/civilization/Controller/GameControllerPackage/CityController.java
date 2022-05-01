@@ -16,15 +16,7 @@ public class CityController {
         City city = (City) GameDataBase.getSelected();
         if (city == null)
             return "city select nashode";
-        for (BuildingType building : city.getBuildings().getBuildings()) {
-            buildingString.append(building).append(" ");
-        }
-        return "production : " + city.getProduction().getCurrentProduct() + "\n" +
-                "gold : " + city.getGold().getAdditionGold() + "\n" +
-                "science : " + city.getCityScience() + "\n" +
-                "food : " + city.getFood().getAdditionFood() + "\n" +
-                "citizens : " + city.getCitizens().size() + "\n" +
-                "buildings: " + buildingString;
+        return city.getDetails();
     }
 
     public String setCitizen(Matcher matcher) {
@@ -85,7 +77,7 @@ public class CityController {
         buildingString.append("*BUILDINGS*\n");
         for (BuildingType building : GameDataBase.getCurrentCivilization().buildingsCanBeBuilt()) {
             i++;
-            buildingString.append(i).append(" ").append(building).append(" turns: ").append((building.getCost()-1)/city.getProduction().getCurrentProduct()).append("\n");//TODO turn ok nist
+            buildingString.append(i).append(" ").append(building).append(" turns: ").append((building.getCost() - 1) / city.getProduction().getCurrentProduct()).append("\n");//TODO turn ok nist
         }
         return String.valueOf(buildingString);
     }
@@ -99,7 +91,7 @@ public class CityController {
         unitString.append("*UINTS*\n");
         for (UnitType unit : city.unitsCanBeBuilt()) {
             i++;
-            unitString.append(i).append(" ").append(" turns: ").append((unit.getCost()-1)/city.getProduction().getCurrentProduct()).append(unit).append("\n");
+            unitString.append(i).append(" ").append(" turns: ").append((unit.getCost() - 1) / city.getProduction().getCurrentProduct()).append(unit).append("\n");
         }
         return String.valueOf(unitString);
     }
@@ -111,7 +103,7 @@ public class CityController {
         if (city == null) {
             return "city select nashode";
         }
-        if (number > buildings.size()|| number < 1) {
+        if (number > buildings.size() || number < 1) {
             return "invalid number";
         }
         if (!city.getCivilization().equals(GameDataBase.getCurrentCivilization())) {
@@ -128,7 +120,7 @@ public class CityController {
             return "city select nashode";
         }
         ArrayList<UnitType> units = city.unitsCanBeBuilt();
-        if (number > units.size()|| number < 1) {
+        if (number > units.size() || number < 1) {
             return "invalid number";
         }
         if (!city.getCivilization().equals(GameDataBase.getCurrentCivilization())) {

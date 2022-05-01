@@ -110,6 +110,8 @@ public class Unit implements Combatble, Selectable {
     }
 
     public void move() {
+        if (isSleep() || isWorkDone())
+            return;
         if (path.isEmpty())
             return;
         System.out.println("aval masir");
@@ -131,6 +133,8 @@ public class Unit implements Combatble, Selectable {
             this.setTerrain(terrain);
             path.remove(i);
             i = 0;
+            if (remainingMove == 0)
+                workDone = true;
         }
     }
 
@@ -236,9 +240,9 @@ public class Unit implements Combatble, Selectable {
     }
 
     public String showInfo() {
-        return myType + "Worke done : " + workDone + "sleep : " + isSleep +
-                "remaining Mp : " + remainingMove + "hp : " + hp +
-                "size of masiri ke bayad bere : " + path.size();
+        return myType + " at " + getTerrain().getCoordination().toString() + " Worke done : " + workDone + " sleep : " + isSleep +
+                " remaining Mp : " + remainingMove + " hp : " + hp +
+                " size of masiri ke bayad bere : " + path.size();
     }
 
 }

@@ -140,9 +140,9 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.getUnitcontroller().wake());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DELETE)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().delete());
-
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FOUND)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().foundCity());
+                return;
             } else if (Objects.equals(input, "back")) {
                 GameDataBase.setSelected(null);
                 return;
