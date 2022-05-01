@@ -18,6 +18,8 @@ public enum LoginMenuRegex {
     LOGIN1("^user login (--username|-u) (?<username>\\S+) (--password|-p) (?<password>\\S+)$"),
     LOGIN2("^user login (--password|-p) (?<password>\\S+) (--username|-u) (?<username>\\S+)$"),
     LOGIN(""),
+
+    LOGOUT("logout"),
     SHOWCURRENTMENU("menu show-current"),
     ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu))"),
     SHOWMENU("^menu show-current"),
