@@ -295,12 +295,7 @@ public class City extends Terrain implements Combatble, Selectable {
     }
 
     public void nextTurn() {
-        cityProduct.setCurrentProduct(5);
-        cityFood.setAdditionFood(5);
-        cityGold.setAdditionGold(5);
-        cityScience.setAdditionScience(5);
-        doCitizenWork();
-        buildings.DoBuildingsWork();
+        update();
         if (cityFood.getAdditionFood() < 0) {
             citizens.remove(0);
         } else
@@ -321,6 +316,15 @@ public class City extends Terrain implements Combatble, Selectable {
         }
         if (getGold().getAdditionGold() < 0)  //age manfi shod az science kam one
             getCivilization().getScience().add(getGold().getAdditionGold());
+    }
+
+    public void update() {
+        cityProduct.setCurrentProduct(5);
+        cityFood.setAdditionFood(5);
+        cityGold.setAdditionGold(5);
+        cityScience.setAdditionScience(5);
+        doCitizenWork();
+        buildings.DoBuildingsWork();
     }
 
     private void doCitizenWork() {

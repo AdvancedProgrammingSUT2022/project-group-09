@@ -16,6 +16,7 @@ public class CityController {
         City city = (City) GameDataBase.getSelected();
         if (city == null)
             return "city select nashode";
+        city.update();
         return city.getDetails() + city.getDemographics();
     }
 
@@ -34,6 +35,7 @@ public class CityController {
         for (int i = 0; i < city.getCitizens().size(); i++) {
             if (city.getCitizens().get(i) == null) {
                 city.getCitizens().set(i, coordination.getTerrain());
+                city.update();
                 return "anjam shod";
             }
         }
@@ -62,6 +64,7 @@ public class CityController {
         for (int i = 0; i < city.getCitizens().size(); i++) {
             if (city.getCitizens().get(i) == first.getTerrain()) {
                 city.getCitizens().set(i, second.getTerrain());
+                city.update();
                 return "move shod";
             }
         }

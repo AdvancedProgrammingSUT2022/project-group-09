@@ -161,11 +161,15 @@ public class Civilization {
     }
 
     public void nextTurn() {
+        update();
+        getHappiness().nexTurn();
+        getGold().setCurrentGold(getGold().getCurrentGold() + getGold().getAdditionGold());
+    }
+
+    private void update() {
         updateResource();
         updateGold();
         updateScience();
-        getHappiness().nexTurn();
-        getGold().setCurrentGold(getGold().getCurrentGold() + getGold().getAdditionGold());
     }
 
     private void updateGold() {
