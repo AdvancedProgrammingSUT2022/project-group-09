@@ -91,6 +91,7 @@ public class GameMenuView extends View {
     }
 
     private void showInfo(Matcher matcher) {
+        GameDataBase.getCurrentCivilization().update();
         System.out.println(GameDataBase.getCurrentCivilization().getInformation());
         while (true) {
             input = scanner.nextLine();

@@ -165,7 +165,7 @@ public class Civilization {
         getGold().setCurrentGold(getGold().getCurrentGold() + getGold().getAdditionGold());
     }
 
-    private void update() {
+    public void update() {
         updateResource();
         updateGold();
         updateScience();
