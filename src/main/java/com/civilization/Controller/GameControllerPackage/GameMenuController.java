@@ -57,7 +57,7 @@ public class GameMenuController extends Controller {
                     unit.setWorkDone(false);
             }
         }
-        return "next turn";
+        return "next turn done";
     }
 
     @Override

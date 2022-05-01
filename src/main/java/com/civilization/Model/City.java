@@ -344,8 +344,8 @@ public class City extends Terrain implements Combatble, Selectable {
                     cityGold.add(terrain.getImprovement().getGold());
                 }
             }
-            cityFood.add((-2) * citizens.size());
         }
+        cityFood.add((-2) * citizens.size());
     }
 
     private void deployUnit() {
