@@ -16,7 +16,7 @@ public class CityController {
         City city = (City) GameDataBase.getSelected();
         if (city == null)
             return "city select nashode";
-        return city.getDetails();
+        return city.getDetails() + city.getDemographics();
     }
 
     public String setCitizen(Matcher matcher) {

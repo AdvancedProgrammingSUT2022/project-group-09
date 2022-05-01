@@ -52,23 +52,24 @@ public class GameMenuView extends View {
     }
 
     private void selectCity(Matcher matcher) {
-        System.out.println(gameMenuController.selectCityByPosision(matcher));
-        while (true) {
-            input = scanner.nextLine();
-            if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWCITYINFO)) != null) {
-                System.out.println(gameMenuController.getCityController().showCityInfo());
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SETCITIZEN)) != null) {
-                System.out.println(gameMenuController.getCityController().setCitizen(matcher));
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVECITIZEN)) != null) {
-                System.out.println(gameMenuController.getCityController().moveCitizen(matcher));
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDMENU)) != null) {
-                buildMenu(matcher);
-            } else if (Objects.equals(input, "back")) {
-                GameDataBase.setSelected(null);
-                return;
-            } else
-                System.out.println("invalid command");
-        }
+        System.out.println(gameMenuController.selectCityByPosition(matcher));
+        if (gameMenuController.selectCityIsValid(matcher))
+            while (true) {
+                input = scanner.nextLine();
+                if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWCITYINFO)) != null) {
+                    System.out.println(gameMenuController.getCityController().showCityInfo());
+                } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SETCITIZEN)) != null) {
+                    System.out.println(gameMenuController.getCityController().setCitizen(matcher));
+                } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVECITIZEN)) != null) {
+                    System.out.println(gameMenuController.getCityController().moveCitizen(matcher));
+                } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDMENU)) != null) {
+                    buildMenu(matcher);
+                } else if (Objects.equals(input, "back")) {
+                    GameDataBase.setSelected(null);
+                    return;
+                } else
+                    System.out.println("invalid command");
+            }
 
     }
 
@@ -272,6 +273,7 @@ public class GameMenuView extends View {
     }
 
     public void technologyMenu(Matcher matcher) {
+        System.out.println("entered technology menu");
         while (true) {
             input = scanner.nextLine();
             System.out.println(gameMenuController.getTechnologyMenuController().showTechnologies());

@@ -1,7 +1,6 @@
 package com.civilization.Controller.GameControllerPackage;
 
 import com.civilization.Controller.Controller;
-import com.civilization.MenuRegex.GameMenuRegex;
 import com.civilization.Model.*;
 import com.civilization.Model.Units.MilitaryUnit;
 import com.civilization.Model.Units.Unit;
@@ -111,7 +110,24 @@ public class GameMenuController extends Controller {
         return "Unit selected successfully!";
     }
 
-    public String selectCityByPosision(Matcher matcher) {
+    public boolean selectCityIsValid(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        Coordination coordinate = new Coordination(x, y);
+        City city = null;
+        if (!coordinate.isValidCoordination()) {
+            return false;
+        }
+        if (coordinate.getTerrain() instanceof City) {
+            city = (City) coordinate.getTerrain();
+        }
+        if (city == null) {
+            return false;
+        }
+        return city.getCivilization() == GameDataBase.getCurrentCivilization();
+    }
+
+    public String selectCityByPosition(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         Coordination coordinate = new Coordination(x, y);
