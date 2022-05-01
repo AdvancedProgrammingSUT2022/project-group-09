@@ -1,5 +1,7 @@
 package com.civilization.Model.Info;
 
+import com.civilization.Model.City;
+
 public class CivilizationGold {
     private double additionGold;
     private double currentGold;

@@ -8,10 +8,6 @@ public class CivilizationHappiness {
     private int additionHappiness;
 
     public void nexTurn() {
-        additionHappiness = 10;//starting
-        for (Resource resource : getCivilization().getResources()) {
-            if (resource.getGold() != 0) additionHappiness += 5; //luxury ha
-        }
         additionHappiness -= 2 * getCivilization().getCities().size();//unhappines baraye shahr ha
     }
 

@@ -8,7 +8,6 @@ import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 
 public class Civilization {
@@ -170,6 +169,14 @@ public class Civilization {
         updateResource();
         updateGold();
         updateScience();
+        updateHappiness();
+    }
+
+    private void updateHappiness() {
+        getHappiness().setAdditionHappiness(10);//starting
+        for (Resource resource : getResources()) {
+            if (resource.getGold() != 0) getHappiness().add(5); //luxury ha
+        }
     }
 
     private void updateGold() {
