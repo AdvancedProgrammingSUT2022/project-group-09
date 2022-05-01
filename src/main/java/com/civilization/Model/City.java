@@ -60,6 +60,7 @@ public class City extends Terrain implements Combatble, Selectable {
     public City(Terrain terrain) {
         super(terrain);
         this.citizens = new ArrayList<>();
+        this.citizens.add(null);
         this.isCapital = false;
         this.cityProduct = new CityProduct();
         this.cityFood = new CityFood();
@@ -74,6 +75,7 @@ public class City extends Terrain implements Combatble, Selectable {
 
     public City() {
         this.citizens = new ArrayList<>();
+        this.citizens.add(null);
         this.isCapital = false;
         this.cityProduct = new CityProduct();
         this.cityFood = new CityFood();
@@ -234,7 +236,7 @@ public class City extends Terrain implements Combatble, Selectable {
                 + " y position: " + getYPosition() +
                 "production : " + getProduction().getCurrentProduct() + "\n" +
                 "gold : " + getGold().getAdditionGold() + "\n" +
-                "science : " + getCityScience() + "\n" +
+                "science : " + getCityScience().getAdditionScience() + "\n" +
                 "food : " + getFood().getAdditionFood() + "\n" +
                 "citizens : " + getCitizens().size() + "\n" +
                 "buildings: " + buildingString;
@@ -287,10 +289,10 @@ public class City extends Terrain implements Combatble, Selectable {
     }
 
     public void nextTurn() {
-        cityProduct.setCurrentProduct(0);
-        cityFood.setAdditionFood(0);
-        cityGold.setAdditionGold(0);
-        cityScience.setAdditionScience(0);
+        cityProduct.setCurrentProduct(5);
+        cityFood.setAdditionFood(5);
+        cityGold.setAdditionGold(5);
+        cityScience.setAdditionScience(5);
         doCitizenWork();
         buildings.DoBuildingsWork();
         if (cityFood.getAdditionFood() < 0) {

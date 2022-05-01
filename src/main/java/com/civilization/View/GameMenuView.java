@@ -54,6 +54,7 @@ public class GameMenuView extends View {
     private void selectCity(Matcher matcher) {
         System.out.println(gameMenuController.selectCityByPosision(matcher));
         while (true) {
+            input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWCITYINFO)) != null) {
                 System.out.println(gameMenuController.getCityController().showCityInfo());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SETCITIZEN)) != null) {
@@ -67,7 +68,6 @@ public class GameMenuView extends View {
                 return;
             } else
                 System.out.println("invalid command");
-            input = scanner.nextLine();
         }
 
     }
