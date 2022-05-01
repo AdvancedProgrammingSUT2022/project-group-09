@@ -162,12 +162,24 @@ public class Civilization {
 
     public void nextTurn() {
         updateResource();
-        for (City city : cities) {
-            getScience().add(city.getCityScience().getAdditionScience());
-            getGold().add(city.getGold().getAdditionGold());
-        }
+        updateGold();
+        updateScience();
         getHappiness().nexTurn();
         getGold().setCurrentGold(getGold().getCurrentGold() + getGold().getAdditionGold());
+    }
+
+    private void updateGold() {
+        getGold().setAdditionGold(0);
+        for (City city : cities) {
+            getGold().add(city.getGold().getAdditionGold());
+        }
+    }
+
+    private void updateScience() {
+        getScience().setAdditionScience(0);
+        for (City city : cities) {
+            getScience().add(city.getCityScience().getAdditionScience());
+        }
     }
 
     private void updateResource() {
