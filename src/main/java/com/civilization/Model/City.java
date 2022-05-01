@@ -298,6 +298,7 @@ public class City extends Terrain implements Combatble, Selectable {
         update();
         if (cityFood.getAdditionFood() < 0) {
             citizens.remove(0);
+            cityFood.setAdditionFood(0);
         } else
             makingCitizen += cityFood.getAdditionFood(); //badaz ye adadi citizen jadid miad
         if (makingCitizen > 2) {

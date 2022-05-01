@@ -46,6 +46,7 @@ public class Civilization {
         this.civilizationHappiness = new CivilizationHappiness();
         this.resources = new ArrayList<>();
         this.units = new ArrayList<>();
+        civilizationGold.setCurrentGold(50);
     }
 
     public ArrayList<City> getCities() {
@@ -187,7 +188,7 @@ public class Civilization {
     }
 
     private void updateScience() {
-        getScience().setAdditionScience(0);
+        getScience().setAdditionScience(50);
         for (City city : cities) {
             getScience().add(city.getCityScience().getAdditionScience());
         }
