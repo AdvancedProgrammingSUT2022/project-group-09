@@ -167,6 +167,7 @@ public class Civilization {
             getGold().add(city.getGold().getAdditionGold());
         }
         getHappiness().nexTurn();
+        getGold().setCurrentGold(getGold().getCurrentGold() + getGold().getAdditionGold());
     }
 
     private void updateResource() {

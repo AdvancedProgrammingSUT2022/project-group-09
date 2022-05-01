@@ -60,7 +60,6 @@ public class City extends Terrain implements Combatble, Selectable {
     public City(Terrain terrain) {
         super(terrain);
         this.citizens = new ArrayList<>();
-        this.citizens.add(null);
         this.isCapital = true;
         this.cityProduct = new CityProduct();
         this.cityFood = new CityFood();
@@ -71,6 +70,13 @@ public class City extends Terrain implements Combatble, Selectable {
         this.makingUnit = null;
         this.buildings = new BuildingAffect();
         this.hp = 20;
+
+        this.citizens.add(null);
+        cityProduct.setCurrentProduct(5);
+        cityFood.setAdditionFood(5);
+        cityGold.setAdditionGold(5);
+        cityScience.setAdditionScience(5);
+
     }
 
     public City() {
