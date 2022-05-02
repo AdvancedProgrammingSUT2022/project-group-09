@@ -36,7 +36,8 @@ public class City extends Terrain implements Combatble, Selectable {
     private boolean unHappiness;
 
     public void CreateUnit(UnitType unitType) {
-        if (!getCivilization().getTechnologies().getTechnologiesResearched().contains(unitType.getRequiredTechnology())) {
+        if (!getCivilization().getTechnologies().getTechnologiesResearched().contains(unitType.getRequiredTechnology())
+                || unitType.getRequiredTechnology() == null) {
             System.err.println("technology mored nazara ro nadari");
             throw new RuntimeException();
         }
@@ -48,7 +49,8 @@ public class City extends Terrain implements Combatble, Selectable {
     }
 
     public void CreateBuilding(BuildingType buildingType) {
-        if (!getCivilization().getTechnologies().getTechnologiesResearched().contains(buildingType.getRequirement())) {
+        if (!getCivilization().getTechnologies().getTechnologiesResearched().contains(buildingType.getRequirement())
+                || buildingType.getRequirement() == null) {
             System.err.println("technology mored nazara ro nadari");
             throw new RuntimeException();
         }
@@ -382,7 +384,7 @@ public class City extends Terrain implements Combatble, Selectable {
 
     public ArrayList<UnitType> unitsCanBeBuilt() {
         ArrayList<UnitType> possibleUnits = new ArrayList<>();
-        ArrayList<UnitType> all=UnitType.getAllUnits();
+        ArrayList<UnitType> all = UnitType.getAllUnits();
         for (UnitType unit : all) {
             if (getCivilization().getTechnologies().getTechnologiesResearched().contains(unit.getRequiredTechnology())
                     || unit.getRequiredTechnology() == null) {
