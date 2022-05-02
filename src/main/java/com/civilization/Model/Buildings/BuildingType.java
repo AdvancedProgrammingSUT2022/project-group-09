@@ -225,45 +225,6 @@ public enum BuildingType implements BuildingNote {
     final int cost;
     final int maintenance;
     final TechnologyType requirement;
-    private final static ArrayList<BuildingType> allBuildings = new ArrayList<BuildingType>() {
-        {
-            add(BuildingType.BARRACKS);
-            add(BuildingType.GRANARY);
-            add(BuildingType.LIBRARY);
-            add(BuildingType.MONUMENT);
-            add(BuildingType.WALLS);
-            add(BuildingType.WATERMILL);
-            add(BuildingType.ARMORY);
-            add(BuildingType.BURIALTOMB);
-            add(BuildingType.CIRCUS);
-            add(BuildingType.COLOSSEUM);
-            add(BuildingType.COURTHOUSE);
-            add(BuildingType.STABLE);
-            add(BuildingType.TEMPLE);
-            add(BuildingType.CASTLE);
-            add(BuildingType.FORGE);
-            add(BuildingType.GARDEN);
-            add(BuildingType.MARKET);
-            add(BuildingType.MINT);
-            add(BuildingType.MONASTERY);
-            add(BuildingType.UNIVERSITY);
-            add(BuildingType.WORKSHOP);
-            add(BuildingType.BANK);
-            add(BuildingType.MILITARYACADEMY);
-            add(BuildingType.MUSEUM);
-            add(BuildingType.OPERAHOUSE);
-            add(BuildingType.PUBLICSCHOOL);
-            add(BuildingType.SATRAPSCOURT);
-            add(BuildingType.THEATER);
-            add(BuildingType.WINDMILL);
-            add(BuildingType.ARSENAL);
-            add(BuildingType.BROADCASTTOWER);
-            add(BuildingType.FACTORY);
-            add(BuildingType.HOSPITAL);
-            add(BuildingType.MILITARYBASE);
-            add(BuildingType.STOCKEXCHANGE);
-        }
-    };
 
     public int getCost() {
         return cost;
@@ -278,6 +239,9 @@ public enum BuildingType implements BuildingNote {
     }
 
     public static ArrayList<BuildingType> getAllBuildings() {
+        ArrayList<BuildingType> allBuildings = new ArrayList<>();
+        for (BuildingType building : BuildingType.values())
+            allBuildings.add(building);
         return allBuildings;
     }
 }
