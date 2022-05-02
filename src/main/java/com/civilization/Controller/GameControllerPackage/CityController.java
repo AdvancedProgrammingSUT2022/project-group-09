@@ -115,9 +115,6 @@ public class CityController {
         if (!city.getCivilization().equals(GameDataBase.getCurrentCivilization())) {
             return "in tile male shoma nist";
         }
-        if (!GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesResearched().contains(
-                buildings.get(number - 1).getRequirement()))
-            return "technology sho nadari";
         city.CreateBuilding(buildings.get(number - 1));
         return "building created successfully!";
     }
@@ -135,12 +132,6 @@ public class CityController {
         if (!city.getCivilization().equals(GameDataBase.getCurrentCivilization())) {
             return "in tile male shoma nist";
         }
-        if (!GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesResearched().contains(
-                units.get(number - 1).getRequiredTechnology()))
-            return "technology sho nadari";
-        if (!GameDataBase.getCurrentCivilization().getResources().contains(
-                units.get(number - 1).getRequiredResourse()))
-            return "resource sho nadari";
         city.CreateUnit(units.get(number - 1));
         return "unit created successfully!";
     }
