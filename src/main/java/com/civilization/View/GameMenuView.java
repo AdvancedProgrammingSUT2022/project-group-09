@@ -275,8 +275,9 @@ public class GameMenuView extends View {
 
     public void technologyMenu(Matcher matcher) {
         System.out.println("entered technology menu");
+        System.out.println(gameMenuController.getTechnologyMenuController().showTechnologies());
         while (true) {
-            System.out.println(gameMenuController.getTechnologyMenuController().showTechnologies());
+            input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.CHOOSETECHNOLOGY)) != null) {
                 System.out.println(gameMenuController.getTechnologyMenuController().chooseTechnology(matcher));
             } else if (GameMenuRegex.getMatcher(input, GameMenuRegex.SHOWTECHNOLOGYTREE) != null) {
@@ -285,7 +286,6 @@ public class GameMenuView extends View {
                 break;
             else
                 System.out.println("invalid command");
-            input = scanner.nextLine();
         }
     }
 

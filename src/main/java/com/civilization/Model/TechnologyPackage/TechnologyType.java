@@ -1,6 +1,7 @@
 package com.civilization.Model.TechnologyPackage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.Improvements.Improvement;
@@ -441,59 +442,9 @@ public enum TechnologyType {
     final ArrayList<Object> unlocks;
     final String name;
 
-    final private static ArrayList<TechnologyType> allTechnologies = new ArrayList<TechnologyType>() {
-        {
-            add(TechnologyType.AGRICULTURE);
-            add(TechnologyType.ANIMALHUSBANDARY);
-            add(TechnologyType.ARCHERY);
-            add(TechnologyType.BRONZEWORKING);
-            add(TechnologyType.CALENDER);
-            add(TechnologyType.MASONRY);
-            add(TechnologyType.MINING);
-            add(TechnologyType.POTTERY);
-            add(TechnologyType.THEWHEEL);
-            add(TechnologyType.TRAPPING);
-            add(TechnologyType.WRITING);
-            add(TechnologyType.CONSTRUCTION);
-            add(TechnologyType.HORSEBACKRIDING);
-            add(TechnologyType.IRONWORKING);
-            add(TechnologyType.MATHEMATICS);
-            add(TechnologyType.PHILOSOPHY);
-            add(TechnologyType.CHIVALRY);
-            add(TechnologyType.CIVILSERVICE);
-            add(TechnologyType.CURRENCY);
-            add(TechnologyType.EDUCATION);
-            add(TechnologyType.ENGINEERING);
-            add(TechnologyType.MACHINERY);
-            add(TechnologyType.METALCASTING);
-            add(TechnologyType.PHYSICS);
-            add(TechnologyType.STEEL);
-            add(TechnologyType.THEOLOGY);
-            add(TechnologyType.ACOUSTICS);
-            add(TechnologyType.ARCHAEOLOGY);
-            add(TechnologyType.BANKING);
-            add(TechnologyType.CHEMISTRY);
-            add(TechnologyType.ECONOMICS);
-            add(TechnologyType.FERTILIZER);
-            add(TechnologyType.GUNPOWDER);
-            add(TechnologyType.METALLURGY);
-            add(TechnologyType.MILITARYSCIENCE);
-            add(TechnologyType.PRINTINGPRESS);
-            add(TechnologyType.RIFLING);
-            add(TechnologyType.SCIENTIFICTHEORY);
-            add(TechnologyType.BIOLOGY);
-            add(TechnologyType.COMBUSTION);
-            add(TechnologyType.DYNAMITE);
-            add(TechnologyType.ELECTRICITY);
-            add(TechnologyType.RADIO);
-            add(TechnologyType.REPLACEABLEPARTS);
-            add(TechnologyType.STEAMPOWER);
-            add(TechnologyType.TELEGRAPH);
-        }
-    };
-
     public static ArrayList<TechnologyType> getAllTechnologies() {
-        return allTechnologies;
+        TechnologyType[] yourEnums = TechnologyType.class.getEnumConstants();
+        return new ArrayList<>(Arrays.asList(yourEnums));
     }
 
     public int getCost() {
@@ -514,7 +465,7 @@ public enum TechnologyType {
 
     public ArrayList<TechnologyType> getTechnologyUnlocks() {
         ArrayList<TechnologyType> unlocks = new ArrayList<>();
-        for (TechnologyType allTechnology : allTechnologies) {
+        for (TechnologyType allTechnology : getAllTechnologies()) {
             if (allTechnology.getRequirement().contains(this))
                 unlocks.add(allTechnology);
         }

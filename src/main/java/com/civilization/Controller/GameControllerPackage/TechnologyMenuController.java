@@ -59,7 +59,8 @@ public class TechnologyMenuController {
 
     public TechnologyType findTechnologyByName(String name) {
         for (TechnologyType technology : TechnologyType.getAllTechnologies()) {
-            if (technology.getName().equals(name)){
+            System.out.println(name +"  "+technology.getName());
+            if (technology.getName().toLowerCase().equals(name)){
                 return technology;
             }
         }
