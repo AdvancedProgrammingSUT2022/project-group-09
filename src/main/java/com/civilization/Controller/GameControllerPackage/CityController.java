@@ -18,7 +18,7 @@ public class CityController {
         if (city == null)
             return "city select nashode";
         city.update();
-        return city.getDetails() + city.getDemographics();
+        return city.getDetails() + city.getDemographics() + "\\n" + city.showMakingUnit();
     }
 
     public String setCitizen(Matcher matcher) {
@@ -81,7 +81,7 @@ public class CityController {
         buildingString.append("*BUILDINGS*\n");
         for (BuildingType building : city.buildingsCanBeBuilt()) {
             i++;
-            buildingString.append(i).append(" ").append(building.toString().toLowerCase()).append(" turns: ").append((int)((building.getCost()) / city.getProduction().getCurrentProduct())).append("\n");
+            buildingString.append(i).append(" ").append(building.toString().toLowerCase()).append(" turns: ").append((int) ((building.getCost()) / city.getProduction().getCurrentProduct())).append("\n");
             //TODO turn ok nist
         }
         return String.valueOf(buildingString);

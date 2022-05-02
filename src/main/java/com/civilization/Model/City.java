@@ -237,13 +237,21 @@ public class City extends Terrain implements Combatble, Selectable {
         //shahr defend nadare
     }
 
+    public String showMakingUnit() {
+        if (makingUnit == null && makingBuilding == null)
+            return "chizi nemisaze";
+        if (makingBuilding != null)
+            return makingBuilding.getKey() + " product moonde baraye " + makingBuilding.getValue();
+        return makingUnit.getKey() + " product moonde baraye " + makingUnit.getValue();
+    }
+
     public String getDetails() {
         StringBuilder buildingString = new StringBuilder();
         for (BuildingType building : getBuildings().getBuildings()) {
             buildingString.append(building).append(" ");
         }
         return "city name: " + name + " number of citizens: " + citizens.size() + " x position: " + getXPosition()
-                + " y position: " + getYPosition() +
+                + " y position: " + getYPosition() + "\n" +
                 "production : " + getProduction().getCurrentProduct() + "\n" +
                 "gold : " + getGold().getAdditionGold() + "\n" +
                 "science : " + getCityScience().getAdditionScience() + "\n" +
