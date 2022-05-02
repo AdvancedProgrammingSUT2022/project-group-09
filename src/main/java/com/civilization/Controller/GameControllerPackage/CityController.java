@@ -3,6 +3,7 @@ package com.civilization.Controller.GameControllerPackage;
 import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.City;
 import com.civilization.Model.Coordination;
+import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
 
 import java.util.ArrayList;
@@ -92,7 +93,8 @@ public class CityController {
             return "city select nashode";
         int i = 0;
         unitString.append("*UINTS*\n");
-        for (UnitType unit : city.unitsCanBeBuilt()) {
+        ArrayList<UnitType> unitTypes = city.unitsCanBeBuilt();
+        for (UnitType unit : unitTypes) {
             i++;
             unitString.append(i).append(" ").append(" turns: ").append((unit.getCost() - 1) / city.getProduction().getCurrentProduct()).append(unit).append("\n");
         }
