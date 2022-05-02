@@ -110,6 +110,7 @@ public class Unit implements Combatble, Selectable {
     }
 
     public void move() {
+        getCivilization().getMap().updateExploration();
         if (isSleep() || isWorkDone())
             return;
         if (path.isEmpty())

@@ -136,4 +136,24 @@ public enum UnitType {
         UnitType[] yourEnums = UnitType.class.getEnumConstants();
         return new ArrayList<>(Arrays.asList(yourEnums));
     }
+
+    public static ArrayList<UnitType> getNormalMilitaryUnit() {
+        ArrayList<UnitType> res = getAllUnits();
+        res.remove(CATAPULT);
+        res.remove(TREBUCHET);
+        res.remove(CANON);
+        res.remove(ARTILLERY);
+        res.remove(SETTLER);
+        res.remove(WORKER);
+        return res;
+    }
+
+    public static ArrayList<UnitType> getSiegeMilitaryUnit() {
+        ArrayList<UnitType> res = new ArrayList<>();
+        res.add(CATAPULT);
+        res.add(TREBUCHET);
+        res.add(CANON);
+        res.add(ARTILLERY);
+        return res;
+    }
 }

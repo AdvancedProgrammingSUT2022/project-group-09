@@ -13,6 +13,7 @@ import com.civilization.Model.Units.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class City extends Terrain implements Combatble, Selectable {
     private ArrayList<Terrain> citizens; //length=number of citizens and arraylisti az jahaei hast ke citizen ha kar mikonnand
@@ -350,7 +351,15 @@ public class City extends Terrain implements Combatble, Selectable {
     }
 
     private void deployUnit() {
-        new Unit(makingUnit.getValue(), this, getCivilization());
+        UnitType unitType = makingUnit.getValue();
+        if (UnitType.getNormalMilitaryUnit().contains(unitType))
+            new MilitaryUnit(makingUnit.getValue(), this, getCivilization());
+        if (UnitType.getSiegeMilitaryUnit().contains(unitType))
+            new SiegeMilitaryUnit(makingUnit.getValue(), this, getCivilization());
+        if (unitType == UnitType.SETTLER)
+            new Settler(this, getCivilization());
+        if (unitType == UnitType.WORKER)
+            new Worker(this, getCivilization());
         makingUnit = null;
     }
 
