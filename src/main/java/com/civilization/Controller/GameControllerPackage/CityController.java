@@ -78,7 +78,7 @@ public class CityController {
             return "city select nashode";
         int i = 0;
         buildingString.append("*BUILDINGS*\n");
-        for (BuildingType building : GameDataBase.getCurrentCivilization().buildingsCanBeBuilt()) {
+        for (BuildingType building : city.buildingsCanBeBuilt()) {
             i++;
             buildingString.append(i).append(" ").append(building).append(" turns: ").append((building.getCost() - 1) / city.getProduction().getCurrentProduct()).append("\n");//TODO turn ok nist
         }
@@ -101,11 +101,11 @@ public class CityController {
 
     public String buildBuilding(Matcher matcher) {
         int number = Integer.parseInt(matcher.group("number"));
-        ArrayList<BuildingType> buildings = GameDataBase.getCurrentCivilization().buildingsCanBeBuilt();
         City city = (City) GameDataBase.getSelected();
         if (city == null) {
             return "city select nashode";
         }
+        ArrayList<BuildingType> buildings = city.buildingsCanBeBuilt();
         if (number > buildings.size() || number < 1) {
             return "invalid number";
         }
