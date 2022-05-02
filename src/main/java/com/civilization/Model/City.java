@@ -7,6 +7,7 @@ import com.civilization.Model.Info.CityFood;
 import com.civilization.Model.Info.CityGold;
 import com.civilization.Model.Info.CityProduct;
 import com.civilization.Model.Info.CityScience;
+import com.civilization.Model.TechnologyPackage.TechnologyType;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.*;
@@ -383,7 +384,6 @@ public class City extends Terrain implements Combatble, Selectable {
         ArrayList<UnitType> possibleUnits = new ArrayList<>();
         ArrayList<UnitType> all=UnitType.getAllUnits();
         for (UnitType unit : all) {
-            System.out.println(unit + " "+ unit.getRequiredTechnology());
             if (getCivilization().getTechnologies().getTechnologiesResearched().contains(unit.getRequiredTechnology())
                     || unit.getRequiredTechnology() == null) {
                 if (getCivilization().getResources().contains(unit.getRequiredResourse()) ||

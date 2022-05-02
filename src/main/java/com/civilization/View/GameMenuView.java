@@ -78,6 +78,7 @@ public class GameMenuView extends View {
         System.out.println(gameMenuController.getCityController().showBuildings());
         System.out.println(gameMenuController.getCityController().showUnits());
         while (true) {
+            input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDUNIT)) != null) {
                 System.out.println(gameMenuController.getCityController().buildUnit(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILDBUILDING)) != null) {
@@ -86,7 +87,6 @@ public class GameMenuView extends View {
                 return;
             } else
                 System.out.println("invalid command");
-            input = scanner.nextLine();
         }
     }
 

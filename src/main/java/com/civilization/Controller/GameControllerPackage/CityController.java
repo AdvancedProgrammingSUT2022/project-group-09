@@ -81,7 +81,8 @@ public class CityController {
         buildingString.append("*BUILDINGS*\n");
         for (BuildingType building : city.buildingsCanBeBuilt()) {
             i++;
-            buildingString.append(i).append(" ").append(building).append(" turns: ").append((building.getCost() - 1) / city.getProduction().getCurrentProduct()).append("\n");//TODO turn ok nist
+            buildingString.append(i).append(" ").append(building.toString().toLowerCase()).append(" turns: ").append((int)((building.getCost()) / city.getProduction().getCurrentProduct())).append("\n");
+            //TODO turn ok nist
         }
         return String.valueOf(buildingString);
     }
@@ -96,7 +97,7 @@ public class CityController {
         ArrayList<UnitType> unitTypes = city.unitsCanBeBuilt();
         for (UnitType unit : unitTypes) {
             i++;
-            unitString.append(i).append(" ").append(" turns: ").append((unit.getCost() - 1) / city.getProduction().getCurrentProduct()).append(unit).append("\n");
+            unitString.append(i).append(" ").append(" turns: ").append((int) (unit.getCost() / city.getProduction().getCurrentProduct())).append(" ").append(unit).append("\n");
         }
         return String.valueOf(unitString);
     }

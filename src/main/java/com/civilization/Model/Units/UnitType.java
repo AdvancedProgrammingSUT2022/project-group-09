@@ -4,6 +4,7 @@ import com.civilization.Model.City;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TechnologyPackage.TechnologyType;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -84,10 +85,10 @@ public enum UnitType {
         this.combatType = combatType;
         this.combatStrength = combatStrengh;
         this.rangedCombatStrengh = rangedCombatStrengh;
-        Range = range;
+        this.Range = range;
         this.movement = movement;
-        this.requiredResourse = requiredResourse;
         this.requiredTechnology = requiredTechnology;
+        this.requiredResourse = requiredResourse;
     }
 
     public int getCost() {
@@ -133,8 +134,7 @@ public enum UnitType {
     private final TechnologyType requiredTechnology;
 
     public static ArrayList<UnitType> getAllUnits() {
-        UnitType[] yourEnums = UnitType.class.getEnumConstants();
-        return new ArrayList<>(Arrays.asList(yourEnums));
+        return new ArrayList<>(List.of(UnitType.values()));
     }
 
     public static ArrayList<UnitType> getNormalMilitaryUnit() {
