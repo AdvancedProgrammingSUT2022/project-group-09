@@ -41,7 +41,7 @@ public class UnitController {
         if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
             return "This is not a military unit!";
         }
-        ((MilitaryUnit) GameDataBase.getSelected()).alert();
+        ((MilitaryUnit) GameDataBase.getSelected()).setInAlert(true);
         return "Unit is in alert!";
     }
 
@@ -69,7 +69,7 @@ public class UnitController {
         if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
             return "This is not a military unit!";
         }
-        ((MilitaryUnit) GameDataBase.getSelected()).fortifyHeal();
+        ((MilitaryUnit) GameDataBase.getSelected()).setFortifyHeal(true);
         return "Unit is fortify until heal!";
     }
 

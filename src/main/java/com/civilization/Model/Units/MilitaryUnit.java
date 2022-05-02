@@ -13,11 +13,15 @@ public class MilitaryUnit extends Unit {
     }
 
     public void alert() {
+        //har roound call she
         setSleep(true);
         setWorkDone(true);
         for (Terrain terrain : getTerrain().getSurroundingTerrain()) {
-            if (terrain.getMilitaryUnit().getCivilization() != getCivilization())
-                wake();
+            if (terrain.getMilitaryUnit() != null)
+                if (terrain.getMilitaryUnit().getCivilization() != getCivilization()) {
+                    isInAlert = false;
+                    wake();
+                }
         }
     }
 
@@ -28,9 +32,10 @@ public class MilitaryUnit extends Unit {
     }
 
     public void fortifyHeal() {
-        isFortifyHeal = true;
+        //har round call she
         setWorkDone(true);
         setSleep(true);
+        fortify();
     }
 
     public void garrison() {
@@ -60,6 +65,7 @@ public class MilitaryUnit extends Unit {
     public void setInAlert(boolean inAlert) {
         isInAlert = inAlert;
     }
+
     @Override
     public void attack(Combatble target) {
         if (target instanceof City) {

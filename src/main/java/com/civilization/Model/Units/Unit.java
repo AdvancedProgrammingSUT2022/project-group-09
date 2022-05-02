@@ -246,4 +246,24 @@ public class Unit implements Combatble, Selectable {
                 " size of masiri ke bayad bere : " + path.size();
     }
 
+    public void nextTurn() {
+        setRemainingMove(getMyType().getMovement());
+        move();
+        if (this instanceof Worker) {
+            Worker worker = (Worker) this;
+            worker.nextTurn();
+        }
+
+        if (this instanceof MilitaryUnit) {
+            if (((MilitaryUnit) this).isInAlert())
+                ((MilitaryUnit) this).alert();
+
+            if (((MilitaryUnit) this).isFortifyHeal())
+                ((MilitaryUnit) this).fortify();
+        }
+
+        if (!this.isSleep())
+            this.setWorkDone(false);
+    }
+
 }
