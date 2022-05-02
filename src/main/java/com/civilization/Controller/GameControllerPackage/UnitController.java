@@ -12,7 +12,7 @@ import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.*;
 
-public class UnitController  {
+public class UnitController {
 
     public String moveUnit(Matcher matcher) {
         if (GameDataBase.getSelected() instanceof Unit)
@@ -100,7 +100,7 @@ public class UnitController  {
         if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
             return "This is not a military unit!";
         }
-        //TODO.. setup ro nazadim
+        // TODO.. setup ro nazadim
         return "Unit is set up!";
     }
 
@@ -145,7 +145,8 @@ public class UnitController  {
         if (((Settler) GameDataBase.getSelected()).getTerrain() instanceof City) {
             return "There is City in this position!";
         }
-        ((Settler) GameDataBase.getSelected()).foundCaptalCity();//TODO.. capital nemitoone besaze ? va erroraye dige chi mitoone bokhore?
+        ((Settler) GameDataBase.getSelected()).foundCaptalCity();// TODO.. capital nemitoone besaze ? va erroraye dige
+                                                                 // chi mitoone bokhore?
         return "City created successfully!";
     }
 
@@ -328,7 +329,8 @@ public class UnitController  {
         if (command != null)
             return command;
         if (!((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures().contains(TerrainFeature.JUNGLE) &&
-                !((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures().contains(TerrainFeature.FOREST)) {
+                !((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures()
+                        .contains(TerrainFeature.FOREST)) {
             return "There is no jungle or forrest in this place!";
         }
         ((Worker) GameDataBase.getSelected()).removeJungle();
@@ -350,7 +352,7 @@ public class UnitController  {
         String command = checkWorker();
         if (command != null)
             return command;
-        //TODO kharabe kojast ?
+        // TODO kharabe kojast ?
         ((Worker) GameDataBase.getSelected()).repair();
         return "Repair successfully!";
     }
@@ -377,9 +379,19 @@ public class UnitController  {
         int maxMp = unit.getMyType().getMovement();
         UnitType unitType = unit.getMyType();
 
+        //TODO handel moving to different terrainstates
         if (!isDestinationEmpty(unitType, destination))
             return "destination is not empty for you";
+        // return backTrack(destination, origin, MP, maxMp, unitType, unit);
+        return DjikstraPathFind(destination, origin, MP, maxMp, unitType, unit);
+    }
 
+    private String DjikstraPathFind(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType, Unit unit) {
+        //TODO implement djikstra if needed
+        return "";
+    }
+
+    private String backTrack(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType, Unit unit) {
         ArrayList<ArrayList<Terrain>> paths = new ArrayList<>();
         ArrayList<Terrain> path = new ArrayList<>();
         path.add(origin);
@@ -476,13 +488,13 @@ public class UnitController  {
     }
 
     private void findAllPaths(Terrain destination, Terrain origin, int MP, ArrayList<ArrayList<Terrain>> paths,
-                              ArrayList<Terrain> path) {
+            ArrayList<Terrain> path) {
         if (destination == origin) {
             paths.add(path);
             return;
         }
         for (Terrain nextTerrain : origin.getSurroundingTerrain()) {
-            if (isMovePossible(MP, nextTerrain) && !path.contains(nextTerrain)) {
+            if (isMovePossible(MP, nextTerrain, origin) && !path.contains(nextTerrain)) {
                 if (path.size() > 5)
                     continue;
                 ArrayList<Terrain> nextPath = (ArrayList<Terrain>) path.clone();
@@ -492,7 +504,10 @@ public class UnitController  {
         }
     }
 
-    private boolean isMovePossible(int MP, Terrain terrain) {
+    private boolean isMovePossible(int MP, Terrain nextTerrain, Terrain terrain) {
+        if (nextTerrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
+                && terrain.getTerrainFeatures().contains(TerrainFeature.RIVER))
+            return false;
         if (MP > terrain.getMp())
             return true;
         return false;

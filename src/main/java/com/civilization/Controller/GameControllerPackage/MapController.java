@@ -97,8 +97,12 @@ public class MapController {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 6; j++) {
-                String backgroundColor = getBackgroundColor(terrains[x + i][y + j]);// inja bug dare az size ararye
-                                                                                    // mizane biroon
+                String backgroundColor;
+                if (j % 2 == 1)
+                    backgroundColor = getBackgroundColor(terrains[x + i + remainder][y + j]);// inja bug dare az size
+                                                                                             // ararye mizane biroon
+                else
+                    backgroundColor = getBackgroundColor(terrains[x + i][y + j]);
                 // before entering this function we have checked if it's out of bonds or not
                 int istart = i * 6;
                 int jstart = j * 8;
@@ -108,22 +112,34 @@ public class MapController {
 
                 drawHex(mapString, istart, jstart);
 
-                if (terrainStates[x + i][y + j] == TerrainState.FOGOFWAR) {
-                    backgroundColor = ConsoleColors.GRAY_BACKGROUND;
-                }
+                if (j % 2 == 1)
+                    if (terrainStates[x + i + remainder][y + j] == TerrainState.FOGOFWAR) {
+                        backgroundColor = ConsoleColors.GRAY_BACKGROUND;
+                    }
+                else 
+                    if (terrainStates[x + i][y + j] == TerrainState.FOGOFWAR) {
+                        backgroundColor = ConsoleColors.GRAY_BACKGROUND;
+                    }
 
                 if (j % 2 == 1)
                     drawMainDetails(mapString, istart, jstart, x + i + remainder, y + j, backgroundColor);
                 else
                     drawMainDetails(mapString, istart, jstart, x + i, y + j, backgroundColor);
 
-                if (terrainStates[x + i][y + j] == TerrainState.VISIBLE) {
+                if (j % 2 == 0 & terrainStates[x + i][y + j] == TerrainState.VISIBLE) {
                     // TODO set name in civilization constructor
                     if (terrains[x + i][y + j].getCivilization() == null) {
                         mapString[istart + 1][jstart + 5] = backgroundColor + " " + ConsoleColors.RESET;
                     } else {
                         mapString[istart + 1][jstart + 5] = backgroundColor
                                 + terrains[x + i][y + j].getCivilization().getName().charAt(0) + ConsoleColors.RESET;
+                    }
+                } else {
+                    if (terrains[x + i + remainder][y + j].getCivilization() == null) {
+                        mapString[istart + 1][jstart + 5] = backgroundColor + " " + ConsoleColors.RESET;
+                    } else {
+                        mapString[istart + 1][jstart + 5] = backgroundColor
+                                + terrains[x + i + remainder][y + j].getCivilization().getName().charAt(0) + ConsoleColors.RESET;
                     }
                 }
             }
@@ -201,12 +217,13 @@ public class MapController {
             stringBuilder.append("military unit: " + terrain.getMilitaryUnit() + "belonging to: " +
                     terrain.getMilitaryUnit().getCivilization().getName() + "\n");
         }
-        showBuildings(stringBuilder, terrain);
+        showResources(stringBuilder, terrain);
     }
 
-    private void showBuildings(StringBuilder stringBuilder, Terrain terrain) {
+    private void showResources(StringBuilder stringBuilder, Terrain terrain) {
         stringBuilder.append("list of resources in this terrain:\n");
-        ArrayList<TechnologyType> technologies = GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesResearched();
+        ArrayList<TechnologyType> technologies = GameDataBase.getCurrentCivilization().getTechnologies()
+                .getTechnologiesResearched();
         for (Resource resource : terrain.getResources()) {
             if (technologies.contains(resource.getRequiredTechnology())) {
                 stringBuilder.append(resource + "\n");

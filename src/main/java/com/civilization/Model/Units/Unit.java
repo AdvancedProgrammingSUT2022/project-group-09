@@ -128,7 +128,7 @@ public class Unit implements Combatble, Selectable {
             this.remainingMove -= terrain.getMp();
             if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
                     && this.getTerrain().getTerrainFeatures().contains(TerrainFeature.RIVER)) {
-                remainingMove = 0;
+                this.remainingMove = 0;
             }
             this.setTerrain(terrain);
             path.remove(i);
