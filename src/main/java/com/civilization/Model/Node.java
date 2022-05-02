@@ -7,9 +7,19 @@ import java.util.List;
 public class Node{
     private Integer price;
     private Coordination coordination;
-    private List<Node> path;
     private HashMap<Node, Integer> adjNodes;
     private Node parentNode;
+
+    public Node(Integer price, Coordination coordination, HashMap<Node, Integer> adjNodes, Node parentNode) {
+        this.price = price;
+        this.coordination = coordination;
+        this.adjNodes = adjNodes;
+        this.parentNode = parentNode;
+    }
+
+    public HashMap<Node, Integer> getAdjNodes() {
+        return this.adjNodes;
+    }
 
     public Node getParentNode() {
         return this.parentNode;
@@ -27,15 +37,7 @@ public class Node{
         return this.coordination;
     }
 
-    public List<Node> getPath() {
-        return this.path;
-    }
-
     public void setCoordination(Coordination coordination) {
         this.coordination = coordination;
-    }
-    
-    public void setPath(List<Node> path) {
-        this.path = path;
     }
 }
