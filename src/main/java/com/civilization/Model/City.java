@@ -320,12 +320,12 @@ public class City extends Terrain implements Combatble, Selectable {
         if (makingBuilding != null) {
             makingBuilding.setKey(makingBuilding.getKey() - getProduction().getCurrentProduct());
             if (makingBuilding.getKey() <= 0)
-                deployUnit();
+                deployBuilding();
         }
         if (makingUnit != null) {
             makingUnit.setKey(makingUnit.getKey() - getProduction().getCurrentProduct());
             if (makingUnit.getKey() <= 0)
-                deployBuilding();
+                deployUnit();
         }
         if (getGold().getAdditionGold() < 0)  //age manfi shod az science kam one
             getCivilization().getScience().add(getGold().getAdditionGold());
