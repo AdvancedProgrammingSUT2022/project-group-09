@@ -207,24 +207,6 @@ public class Civilization {
         }
     }
 
-    public ArrayList<BuildingType> buildingsCanBeBuilt() {
-        ArrayList<BuildingType> possibleBuildings = new ArrayList<>();
-        for (BuildingType building : BuildingType.getAllBuildings()) {
-            if (civilizationTechnologies.getTechnologiesResearched().contains(building.getRequirement())) {
-                possibleBuildings.add(building);
-            }
-        }
-        return possibleBuildings;
-    }
 
-    public ArrayList<UnitType> unitsCanBeBuilt() {
-        ArrayList<UnitType> possibleUnits = new ArrayList<>();
-        for (UnitType unit : UnitType.getAllUnits()) {
-            if (civilizationTechnologies.getTechnologiesResearched().contains(unit.getRequiredTechnology())) {
-                possibleUnits.add(unit);
-            }
-        }
-        return possibleUnits;
-    }
 
 }

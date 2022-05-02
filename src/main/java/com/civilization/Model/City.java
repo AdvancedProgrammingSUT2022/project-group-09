@@ -359,14 +359,26 @@ public class City extends Terrain implements Combatble, Selectable {
         makingBuilding = null;
     }
 
-    public ArrayList<UnitType> unitsCanBeBuilt() {
-        ArrayList<UnitType> units = new ArrayList<>();
-        for (UnitType unit : GameDataBase.getCurrentCivilization().unitsCanBeBuilt()) {
-            if (getResources().contains(unit.getRequiredResourse())) {
-                units.add(unit);
+    public ArrayList<BuildingType> buildingsCanBeBuilt() {
+        ArrayList<BuildingType> possibleBuildings = new ArrayList<>();
+        for (BuildingType building : BuildingType.getAllBuildings()) {
+            if (getCivilization().getTechnologies().getTechnologiesResearched().contains(building.getRequirement())) {
+                possibleBuildings.add(building);
             }
         }
-        return units;
+        return possibleBuildings;
+    }
+
+    public ArrayList<UnitType> unitsCanBeBuilt() {
+        ArrayList<UnitType> possibleUnits = new ArrayList<>();
+        for (UnitType unit : UnitType.getAllUnits()) {
+            if (getCivilization().getTechnologies().getTechnologiesResearched().contains(unit.getRequiredTechnology())) {
+                if (getCivilization().getResources().contains(unit.getRequiredResourse())) {
+                    possibleUnits.add(unit);
+                }
+            }
+        }
+        return possibleUnits;
     }
 
     public String getDemographics() {
