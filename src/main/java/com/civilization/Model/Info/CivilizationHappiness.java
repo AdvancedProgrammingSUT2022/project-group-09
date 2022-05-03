@@ -6,6 +6,15 @@ import com.civilization.Model.Resources.Resource;
 
 public class CivilizationHappiness {
     private int additionHappiness;
+    private double addedFromCheat;
+
+    public double getAddedFromCheat() {
+        return addedFromCheat;
+    }
+
+    public void setAddedFromCheat(double addedFromCheat) {
+        this.addedFromCheat = addedFromCheat;
+    }
 
     public void nexTurn() {
         additionHappiness -= 2 * getCivilization().getCities().size();//unhappines baraye shahr ha

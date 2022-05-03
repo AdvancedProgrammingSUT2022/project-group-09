@@ -1,12 +1,10 @@
 package com.civilization.Model;
 
-import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.Info.*;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Units.Unit;
-import com.civilization.Model.Units.UnitType;
 
 import java.util.ArrayList;
 
@@ -163,7 +161,7 @@ public class Civilization {
     public void nextTurn() {
         update();
         getHappiness().nexTurn();
-        getGold().setCurrentGold(getGold().getCurrentGold() + getGold().getAdditionGold());
+        getGold().addCurrentGold(getGold().getAdditionGold());
     }
 
     public void update() {
@@ -183,7 +181,7 @@ public class Civilization {
     private void updateGold() {
         getGold().setAdditionGold(0);
         for (City city : cities) {
-            getGold().add(city.getGold().getAdditionGold());
+            getGold().addAdditionGold(city.getGold().getAdditionGold());
         }
     }
 

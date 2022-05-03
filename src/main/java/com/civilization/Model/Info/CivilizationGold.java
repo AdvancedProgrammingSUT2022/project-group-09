@@ -1,12 +1,25 @@
 package com.civilization.Model.Info;
 
-import com.civilization.Model.City;
-
 public class CivilizationGold {
     private double additionGold;
     private double currentGold;
-    public void add(double number) {
+
+    private double addedFromCheat;
+
+    public double getAddedFromCheat() {
+        return addedFromCheat;
+    }
+
+    public void setAddedFromCheat(double addedFromCheat) {
+        this.addedFromCheat = addedFromCheat;
+    }
+
+    public void addAdditionGold(double number) {
         additionGold += number;
+    }
+
+    public void addCurrentGold(double number) {
+        currentGold += number;
     }
 
     public double getAdditionGold() {
