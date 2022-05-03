@@ -6,81 +6,88 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuRegex {
-    SHOWINFO("show info"),
-    TURNCHEAT1("^increase (--turn|-t) (?<amount>-?[\\d]+)$"),
-    GOLDCHEAT1("^increase (--gold|-g) (?<amount>-?[\\d]+)$"),
-    SHOWCURRENTMENU("^menu show-current$"),
+    SHOW_INFO("show info"),
+    SHOW_CURRENT_MENU("^menu show-current$"),
     ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu))$"),
     EXIT("^menu exit$"),
-    SHOWMAP1("^show map (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
-    SHOWMAP2("^show map (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
-    SHOWMAP(""),
-    SHOWDETAILS1("^show details (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
-    SHOWDETAILS2("^show details (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
-    SHOWDETAILS(""),
+    SHOW_MAP1("^show map (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
+    SHOW_MAP2("^show map (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
+    SHOW_MAP(""),
+    SHOW_DETAILS1("^show details (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
+    SHOW_DETAILS2("^show details (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
+    SHOW_DETAILS(""),
     MOVE1("^move unit to (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
     MOVE2("^move unit to (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
-    MOVEUNIT(""),
-    SHOWRESEARCHINFORMATION("^show research information"),
-    SHOWUNITS("^show units$"),
+    MOVE_UNIT(""),
+    SHOW_RESEARCH_INFORMATION("^show research information"),
+    SHOW_UNITS("^show units$"),
 
-    SHOWHAPPINESS("show happiness"),
-    SHOWCITIES("^show cities$"),
-    SHOWDIPLOMACYINFORMATION("^show diplomacy information$"),
-    SHOWVICTORYINFORMATION("^show victory information$"),
-    SHOWDEMOGRAPHICSINFORMATION("^show demographics information$"),
-    SHOWNOTIFICATIONS("^show notifications$"),
-    SHOWMILITARYINFORMATION("^show military information$"),
-    SHOWECONOMICINFORMATION("^show economic information$"),
-    SHOWDIPLOMATICINFORMATION("^show diplomatic information$"),
-    SHOWDEALS("^show deals$"),
-    SELECTMILITARYUNIT("^select military unit (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$$"),
-    SELECTWORKER("^select worker (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$$"),
-    SELECTSETTLER("^select settler (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$$"),
-    SELECTCITYCOORDINATE("^select city (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$$"),
-    SELECTCITYNAME("^select city (--name|-n) (?<name>\\S+)$"),
-    //    MOVETO("^move to (?<x>\\d+) (?<y>\\d+)$"),
+    SHOW_HAPPINESS("show happiness"),
+    SHOW_CITIES("^show cities$"),
+    SHOW_DIPLOMACY_INFORMATION("^show diplomacy information$"),
+    SHOW_VICTORY_INFORMATION("^show victory information$"),
+    SHOW_DEMOGRAPHICS_INFORMATION("^show demographics information$"),
+    SHOW_NOTIFICATIONS("^show notifications$"),
+    SHOW_MILITARY_INFORMATION("^show military information$"),
+    SHOW_ECONOMIC_INFORMATION("^show economic information$"),
+    SHOW_DIPLOMATIC_INFORMATION("^show diplomatic information$"),
+    SHOW_DEALS("^show deals$"),
+    SELECT_MILITARY_UNIT("^select military unit (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
+    SELECT_WORKER("^select worker (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
+    SELECT_SETTLER("^select settler (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
+    SELECT_CITY_COORDINATE1("^select city (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
+    SELECT_CITY_COORDINATE2("^select city (--coordinates|-c) -y (?<y>-?[\\d]+)-x (?<x>-?[\\d]+)$"),
+    SELECT_CITY_COORDINATE(""),//TODO
+    SELECT_CITY_NAME("^select city (--name|-n) (?<name>\\S+)$"),
     SLEEP("^sleep unit$"),
     ALERT("^alert unit$"),
     FORTIFY("fortify unit"),
-    FORTIFYHEAL("^fortify heal$"),
+    FORTIFY_UNTIL_HEAL("^fortify heal$"),
     GARRISON("^garrison unit$"),
     SETUP("^setup ranged$"),
-    ATTACK("^attack (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
+    ATTACK1("^attack (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
+    ATTACK2("^attack (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
+    ATTACK(""),//TODO
     FOUND("^found city$"),
     CANCEL("^cancel mission$"),
     WAKE("^wake unit$"),
     DELETE("^delete unit$"),
-    BUILDROAD("^build road$"),
-    BUILDRAILROAD("^build railroad$"),
-    BUILDFARM("^build farm$"),
-    BUILDMINE("^build mine$"),
-    BUILDTRADINGPOST("^build trading post$"),
-    BUILDLUMBERMILL("^build lumber mill$"),
-    BUILDPASTURE("^build pasture$"),
-    BUILDCAMP("^build camp$"),
-    BUILDPLANTATION("^build plantation$"),
-    BUILDQUARRY("^build quarry$"),
-    REMOVEJUNGLE("^remove jungle$"),
-    REMOVEROUTE("^remove route$"),
+    BUILD_ROAD("^build road$"),
+    BUILD_RAILROAD("^build railroad$"),
+    BUILD_FARM("^build farm$"),
+    BUILD_MINE("^build mine$"),
+    BUILD_TRADING_POST("^build trading post$"),
+    BUILD_LUMBER_MILL("^build lumber mill$"),
+    BUILD_PASTURE("^build pasture$"),
+    BUILD_CAMP("^build camp$"),
+    BUILD_PLANTATION("^build plantation$"),
+    BUILD_QUARRY("^build quarry$"),
+    REMOVE_JUNGLE("^remove jungle$"),
+    REMOVE_ROUTE("^remove route$"),
     REPAIR("^repair$"),
-    MOVEMAP("^move map (?<number>\\d+) to (?<direction>(right|left|up|down))$"),
-    CHOOSETECHNOLOGY("start working on (?<technology>[a-z ]*)"),
-    SHOWTECHNOLOGYTREE("show technology tree"),
+    MOVE_MAP("^move map (--number|-n) (?<number>\\d+) to (--direction|-d) (?<direction>(right|left|up|down))$"),
+    CHOOSE_TECHNOLOGY("start working on (--technology|-tch) (?<technology>[a-z ]*)"),
+    SHOW_TECHNOLOGY_TREE("show technology tree"),
 
-    SHOWCITYINFO("show info"),
-    SETCITIZEN("set citizen to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
-    MOVECITIZEN("move citizen -x (?<x>-?\\d+) -y (?<y>-?\\d+) to -x (?<xx>-?\\d+) -y (?<yy>-?\\d+)"),
-    TECHNOLOGYMENU("enter technology menu"),
-    BUILDMENU("enter build menu"),
-    BUILDUNIT("build unit (?<number>\\d+)"),
-    NEXTTURN("next turn"),
-    BUILDBUILDING("build building (?<number>\\d+)"),
+    SHOW_CITY_INFO("show info"),
+    SET_CITIZEN1("set citizen to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
+    SET_CITIZEN2("set citizen to -y (?<y>-?\\d+) -x (?<x>-?\\d+)"),
+    SET_CITIZEN(""),//TODO
+    MOVE_CITIZEN1("move citizen -x (?<x>-?\\d+) -y (?<y>-?\\d+) to -x (?<xx>-?\\d+) -y (?<yy>-?\\d+)"),
+    MOVE_CITIZEN2("move citizen -y (?<y>-?\\d+) -x (?<x>-?\\d+) to -x (?<xx>-?\\d+) -y (?<yy>-?\\d+)"),
+    MOVE_CITIZEN3("move citizen -x (?<x>-?\\d+) -y (?<y>-?\\d+) to -y (?<yy>-?\\d+) -x (?<xx>-?\\d+)"),
+    MOVE_CITIZEN4("move citizen -y (?<y>-?\\d+) -x (?<x>-?\\d+) to -y (?<yy>-?\\d+) -x (?<xx>-?\\d+)"),
+    MOVE_CITIZEN(""),//TODO
+    TECHNOLOGY_MENU("enter technology menu"),
+    BUILD_MENU("enter build menu"),
+    BUILD_UNIT("build unit (--number|-n) (?<number>\\d+)"),
+    NEXT_TURN("next turn"),
+    BUILD_BUILDING("build building (--number|-n) (?<number>\\d+)"),
     ENTER_CHEAT_MENU("enter cheat menu"),
-    INCREASE_GOLD("increase gold (?<number>\\d+)"),
-    INCREASE_SCIENCE("increase science (?<number>\\d+)"),
-    INCREASE_TURN("increase turn (?<number>\\d+)"),
-    INCREASE_HAPPINESS("increase happiness (?<number>\\d+)"),
+    INCREASE_GOLD("increase gold (--number|-n) (?<number>\\d+)"),
+    INCREASE_SCIENCE("increase science (--number|-n) (?<number>\\d+)"),
+    INCREASE_TURN("increase turn (--number|-n) (?<number>\\d+)"),
+    INCREASE_HAPPINESS("increase happiness (--number|-n) (?<number>\\d+)"),
     UNIT_RESET("unit reset");
 
 
@@ -90,39 +97,59 @@ public enum GameMenuRegex {
         this.regex = regex;
     }
 
-    public static HashMap<String, Integer> playGameGetAllPlayerFromRegex(String input) {
-        HashMap<String, Integer> usernames = new HashMap<>();
-        String[] afterSplit = input.split("--");
-        for (String s : afterSplit) {
-            usernames.keySet().add(s.substring(10));
-            usernames.put(s.substring(10), Integer.parseInt(s.substring(8, 9))); // hashmap baraye inke bebinim player chandome tartibesho ok konim
-        }
-        return usernames;
-    }
-
-    private static final ArrayList<GameMenuRegex> showmapRegexes = new ArrayList<GameMenuRegex>() {
+    private static final ArrayList<GameMenuRegex> showMapRegexes = new ArrayList<>() {
         {
-            add(SHOWMAP1);
-            add(SHOWMAP2);
+            add(SHOW_MAP1);
+            add(SHOW_MAP2);
         }
     };
 
-    private static final ArrayList<GameMenuRegex> moveRegexes = new ArrayList<GameMenuRegex>() {
+    private static final ArrayList<GameMenuRegex> moveRegexes = new ArrayList<>() {
         {
             add(MOVE1);
             add(MOVE2);
         }
     };
 
-    private static final ArrayList<GameMenuRegex> showDetailsRegexes = new ArrayList<GameMenuRegex>() {
+    private static final ArrayList<GameMenuRegex> showDetailsRegexes = new ArrayList<>() {
         {
-            add(SHOWDETAILS1);
-            add(SHOWDETAILS2);
+            add(SHOW_DETAILS1);
+            add(SHOW_DETAILS2);
+        }
+    };
+
+    private static final ArrayList<GameMenuRegex> attackRegexes = new ArrayList<>() {
+        {
+            add(ATTACK1);
+            add(ATTACK2);
+        }
+    };
+
+    private static final ArrayList<GameMenuRegex> selectCityCoordinateRegexes = new ArrayList<>() {
+        {
+            add(SELECT_CITY_COORDINATE1);
+            add(SELECT_CITY_COORDINATE2);
+        }
+    };
+
+    private static final ArrayList<GameMenuRegex> setCitizenRegexes = new ArrayList<>() {
+        {
+            add(SET_CITIZEN1);
+            add(SET_CITIZEN2);
+        }
+    };
+
+    private static final ArrayList<GameMenuRegex> moveCitizenRegexes = new ArrayList<>() {
+        {
+            add(MOVE_CITIZEN1);
+            add(MOVE_CITIZEN2);
+            add(MOVE_CITIZEN3);
+            add(MOVE_CITIZEN4);
         }
     };
 
     private static Matcher getMatcherShowMap(String input) {
-        for (GameMenuRegex command : showmapRegexes) {
+        for (GameMenuRegex command : showMapRegexes) {
             Matcher matcher = Pattern.compile(command.regex).matcher(input);
             if (matcher.matches()) {
                 return matcher;
@@ -151,12 +178,60 @@ public enum GameMenuRegex {
         return null;
     }
 
+    private static Matcher getMatcherAttack(String input) {
+        for (GameMenuRegex command : attackRegexes) {
+            Matcher matcher = Pattern.compile(command.regex).matcher(input);
+            if (matcher.matches()) {
+                return matcher;
+            }
+        }
+        return null;
+    }
+
+    private static Matcher getMatcherSelectCityCoordinate(String input) {
+        for (GameMenuRegex command : selectCityCoordinateRegexes) {
+            Matcher matcher = Pattern.compile(command.regex).matcher(input);
+            if (matcher.matches()) {
+                return matcher;
+            }
+        }
+        return null;
+    }
+
+    private static Matcher getMatcherSetCitizen(String input) {
+        for (GameMenuRegex command : setCitizenRegexes) {
+            Matcher matcher = Pattern.compile(command.regex).matcher(input);
+            if (matcher.matches()) {
+                return matcher;
+            }
+        }
+        return null;
+    }
+
+    private static Matcher getMatcherMoveCitizen(String input) {
+        for (GameMenuRegex command : moveCitizenRegexes) {
+            Matcher matcher = Pattern.compile(command.regex).matcher(input);
+            if (matcher.matches()) {
+                return matcher;
+            }
+        }
+        return null;
+    }
+
     public static Matcher getMatcher(String input, GameMenuRegex command) {
-        if (command.equals(SHOWMAP))
+        if (command.equals(SHOW_MAP))
             return getMatcherShowMap(input);
-        if (command.equals(MOVEUNIT))
+        if (command.equals(MOVE_UNIT))
             return getMatcherMove(input);
-        if (command.equals(SHOWDETAILS))
+        if (command.equals(SHOW_DETAILS))
+            return getMatcherShowDetails(input);
+        if (command.equals(ATTACK))
+            return getMatcherShowDetails(input);
+        if (command.equals(SELECT_CITY_COORDINATE))
+            return getMatcherShowDetails(input);
+        if (command.equals(SET_CITIZEN))
+            return getMatcherShowDetails(input);
+        if (command.equals(MOVE_CITIZEN))
             return getMatcherShowDetails(input);
         Matcher matcher = Pattern.compile(command.regex).matcher(input);
         if (matcher.matches()) {

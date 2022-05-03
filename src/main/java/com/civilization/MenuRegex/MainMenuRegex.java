@@ -6,8 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum MainMenuRegex {
-    PLAYGAME("^play game (--player\\d \\S+)*$"),
-    SHOWCURRENTMENU("menu show-current"),
+    PLAY_GAME("^play game (--player\\d \\S+)*$"),
+    SHOW_CURRENT_MENU("menu show-current"),
     ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu))"),
     LOGOUT("logout"),
     EXIT("^menu exit");

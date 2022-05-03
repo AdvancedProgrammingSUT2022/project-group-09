@@ -24,11 +24,11 @@ public class MainMenuView extends View {
                 System.out.println(MainMenuController.menuNavigate(matcher));
             else if ((matcher = MainMenuRegex.getMatcher(input, MainMenuRegex.EXIT)) != null)
                 System.out.println("use logout method");
-            else if ((matcher = MainMenuRegex.getMatcher(input, MainMenuRegex.SHOWCURRENTMENU)) != null)
+            else if ((matcher = MainMenuRegex.getMatcher(input, MainMenuRegex.SHOW_CURRENT_MENU)) != null)
                 System.out.println(CurrentMenu.get());
             else if ((matcher = MainMenuRegex.getMatcher(input, MainMenuRegex.LOGOUT)) != null)
                 System.out.println(MainMenuController.logout());
-            else if ((matcher = MainMenuRegex.getMatcher(input, MainMenuRegex.PLAYGAME)) != null)
+            else if ((matcher = MainMenuRegex.getMatcher(input, MainMenuRegex.PLAY_GAME)) != null)
                 System.out.println(MainMenuController.playGame(input));
             else
                 System.out.println("invalid command");

@@ -28,7 +28,7 @@ public class LoginMenuView extends View {
                 System.out.println(LoginMenuController.exit());
             else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.ENTER)) != null)
                 System.out.println(LoginMenuController.menuNavigate(matcher));
-            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.SHOWMENU)) != null)
+            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.SHOW_MENU)) != null)
                 System.out.println(CurrentMenu.get());
             else
                 System.out.println("invalid command");

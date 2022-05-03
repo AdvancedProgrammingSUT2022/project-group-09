@@ -12,17 +12,16 @@ public enum LoginMenuRegex {
     CREATE5("^user create (--password|-p) (?<password>[\\S]+) (--username|-u) (?<username>[\\S]+) (--nickname|-n) (?<nickname>[\\S]+)$"),
     CREATE6("^user create (--password|-p) (?<password>[\\S]+) (--nickname|-n) (?<nickname>[\\S]+) (--username|-u) (?<username>[\\S]+)$"),
     CREATE(""),
-    USERNAMEFORMATREGEX("[a-zA-Z0-9_]+"),
-    NICKNAMEFORMATREGEX("[a-zA-Z ]+"),
-    PASSWORDFORMATREGEX("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\\*\\.\\!\\@\\$\\%\\^\\&\\(\\)\\{\\}\\[\\]\\:\\;\\<\\>\\,\\?\\/\\~\\_\\+\\-\\=\\|]).{8,32}"),
+    USERNAME_FORMAT_REGEX("[a-zA-Z0-9_]+"),
+    NICKNAME_FORMAT_REGEX("[a-zA-Z ]+"),
+    PASSWORD_FORMAT_REGEX("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\\*\\.\\!\\@\\$\\%\\^\\&\\(\\)\\{\\}\\[\\]\\:\\;\\<\\>\\,\\?\\/\\~\\_\\+\\-\\=\\|]).{8,32}"),
     LOGIN1("^user login (--username|-u) (?<username>\\S+) (--password|-p) (?<password>\\S+)$"),
     LOGIN2("^user login (--password|-p) (?<password>\\S+) (--username|-u) (?<username>\\S+)$"),
     LOGIN(""),
 
     LOGOUT("logout"),
-    SHOWCURRENTMENU("menu show-current"),
     ENTER("^menu enter (?<menuname>(Profile menu)|(Game menu)|(Main menu)|(Login menu))"),
-    SHOWMENU("^menu show-current"),
+    SHOW_MENU("^menu show-current"),
     EXIT("^menu exit");
     //TODO complete enter menu regex
 

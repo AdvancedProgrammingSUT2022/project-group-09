@@ -1,5 +1,6 @@
 package com.civilization.Controller;
 
+import com.civilization.MenuRegex.LoginMenuRegex;
 import com.civilization.Model.User;
 import com.civilization.View.CurrentMenu;
 
@@ -21,7 +22,19 @@ public class LoginMenuController extends Controller {
     }
 
     public String register(Matcher matcher) {
-        User newUser = new User(matcher.group("username"), matcher.group("password"), matcher.group("nickname"));
+        String username = matcher.group("username");
+        String nickname =  matcher.group("nickname");
+        String password = matcher.group("password");
+        if (LoginMenuRegex.getMatcher(username, LoginMenuRegex.USERNAME_FORMAT_REGEX) == null) {
+            return "username format is invalid";
+        }
+        if (LoginMenuRegex.getMatcher(nickname, LoginMenuRegex.NICKNAME_FORMAT_REGEX) == null) {
+            return "nickname format is invalid";
+        }
+        if (LoginMenuRegex.getMatcher(password, LoginMenuRegex.USERNAME_FORMAT_REGEX) == null) {
+            return "password format is invalid";
+        }
+        User newUser = new User(username, password, nickname);
         if (UserDatabase.isUsernameDuplicate(newUser))
             return "user with username " + newUser.getUsername() + " already exists";
         if (UserDatabase.isNicknameDuplicate(newUser))

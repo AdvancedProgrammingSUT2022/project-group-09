@@ -22,11 +22,11 @@ public class ProfileMenuView extends View {
                 System.out.println(ProfileMenuController.menuNavigate(matcher));
             else if ((matcher = ProfileMenuRegex.getMatcher(input, ProfileMenuRegex.EXIT)) != null)
                 System.out.println(ProfileMenuController.exit());
-            else if ((matcher = ProfileMenuRegex.getMatcher(input, ProfileMenuRegex.CHANGENICKNAME)) != null)
+            else if ((matcher = ProfileMenuRegex.getMatcher(input, ProfileMenuRegex.CHANGE_NICKNAME)) != null)
                 System.out.println(ProfileMenuController.changeNickname(matcher));
-            else if ((matcher = ProfileMenuRegex.getMatcher(input, ProfileMenuRegex.SHOWCURRENTMENU)) != null)
+            else if ((matcher = ProfileMenuRegex.getMatcher(input, ProfileMenuRegex.SHOW_CURRENT_MENU)) != null)
                 System.out.println(CurrentMenu.get());
-            else if ((matcher = ProfileMenuRegex.getMatcher(input, ProfileMenuRegex.CHANGEPASSWORD)) != null)
+            else if ((matcher = ProfileMenuRegex.getMatcher(input, ProfileMenuRegex.CHANGE_PASSWORD)) != null)
                 System.out.println(ProfileMenuController.changePassword(matcher));
             else
                 System.out.println("invalid command");
