@@ -32,6 +32,11 @@ public class GameMenuController extends Controller {
             if (!unit.isWorkDone())
                 return GameDataBase.getCurrentCivilization().getName() + "unit :" + unit.getMyType() + "work done nashode";
         }
+        doNextTurn();
+        return "next turn done";
+    }
+
+    public void doNextTurn() {
         GameDataBase.nextTurn();
         for (Civilization civilization : GameDataBase.getCivilizations()) {
             for (City city : civilization.getCities()) {
@@ -42,7 +47,6 @@ public class GameMenuController extends Controller {
                 unit.nextTurn();
             }
         }
-        return "next turn done";
     }
 
     @Override

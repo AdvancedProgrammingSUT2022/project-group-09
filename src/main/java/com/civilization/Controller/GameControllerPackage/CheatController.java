@@ -44,16 +44,7 @@ public class CheatController {
     public String increaseTurn(Matcher matcher) {
         int number = Integer.parseInt(matcher.group("number"));
         for (int i = 0; i < number; i++) {
-            GameDataBase.nextTurn();
-            for (Civilization civilization : GameDataBase.getCivilizations()) {
-                for (City city : civilization.getCities()) {
-                    city.nextTurn();
-                }
-                civilization.nextTurn();
-                for (Unit unit : civilization.getUnits()) {
-                    unit.nextTurn();
-                }
-            }
+            new GameMenuController().doNextTurn();
         }
         return "done";
 
