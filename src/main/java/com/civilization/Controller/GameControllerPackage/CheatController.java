@@ -12,7 +12,7 @@ public class CheatController {
         GameDataBase.getCurrentCivilization().getScience().setAddedFromCheat(
                 GameDataBase.getCurrentCivilization().getScience().getAddedFromCheat() + number
         );
-        return "added. your current science is : " + GameDataBase.getCurrentCivilization().getScience().getAdditionScience();
+        return "added. your current science was : " + GameDataBase.getCurrentCivilization().getScience().getAdditionScience();
     }
 
     public String increaseGold(Matcher matcher) {
@@ -20,7 +20,7 @@ public class CheatController {
         GameDataBase.getCurrentCivilization().getGold().setAddedFromCheat(
                 GameDataBase.getCurrentCivilization().getScience().getAddedFromCheat() + number
         );
-        return "added. your current gold is : " + GameDataBase.getCurrentCivilization().getGold().getCurrentGold();
+        return "added. your current gold was : " + GameDataBase.getCurrentCivilization().getGold().getCurrentGold();
 
     }
 
@@ -37,7 +37,7 @@ public class CheatController {
         GameDataBase.getCurrentCivilization().getHappiness().setAddedFromCheat(
                 GameDataBase.getCurrentCivilization().getScience().getAddedFromCheat() + number
         );
-        return "added. your current science is : " + GameDataBase.getCurrentCivilization().getScience().getAdditionScience();
+        return "added. your current science was : " + GameDataBase.getCurrentCivilization().getScience().getAdditionScience();
 
     }
 

@@ -360,9 +360,7 @@ public class UnitController {
     public String move(Matcher matcher, Unit unit) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-
         Coordination coordination = new Coordination(x, y);
-        System.out.println(coordination.toString());
         if (!coordination.isValidCoordination())
             return "position out of bounds";
         if (unit == null)
@@ -378,7 +376,6 @@ public class UnitController {
         int MP = unit.getRemainingMove();
         int maxMp = unit.getMyType().getMovement();
         UnitType unitType = unit.getMyType();
-
         //TODO handel moving to different terrainstates
         if (!isDestinationEmpty(unitType, destination))
             return "destination is not empty for you";
