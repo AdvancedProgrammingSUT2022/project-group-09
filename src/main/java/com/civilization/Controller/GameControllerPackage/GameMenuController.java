@@ -14,7 +14,7 @@ public class GameMenuController extends Controller {
 
 
     //GameDataBase darim
-    private final Cheat cheat = new Cheat();
+    private final Cheat cheat;
     private final CheatController cheatController;
     private final CityController cityController;
     private final InfoController infoController;
@@ -29,6 +29,7 @@ public class GameMenuController extends Controller {
         mapController = new MapController();
         unitcontroller = new UnitController();
         technologyMenuController = new TechnologyMenuController();
+        cheat = new Cheat();
     }
 
     public String nextTurn() {
