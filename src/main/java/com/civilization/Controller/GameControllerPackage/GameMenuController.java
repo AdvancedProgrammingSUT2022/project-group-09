@@ -38,6 +38,7 @@ public class GameMenuController extends Controller {
                     return "civilization :" + civilization.getName() + "unit :" + unit.getMyType() + "work done nashode";
             }
         }
+        GameDataBase.nextTurn();
         for (Civilization civilization : GameDataBase.getCivilizations()) {
             for (City city : civilization.getCities()) {
                 city.nextTurn();

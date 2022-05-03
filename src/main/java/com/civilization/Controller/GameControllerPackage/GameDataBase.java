@@ -112,4 +112,9 @@ public class GameDataBase {
     public static void setSelected(Selectable selected) {
         GameDataBase.selected = selected;
     }
+
+    public static void nextTurn() {
+        turn++;
+        setCurrentCivilization(getCivilizations().get(turn % getCivilizations().size()));
+    }
 }
