@@ -42,6 +42,8 @@ public class GameMenuView extends View {
                 selectWorker(matcher);
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.TECHNOLOGYMENU)) != null) {
                 technologyMenu(matcher);
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ENTER_CHEAT_MENU)) != null) {
+                cheat();
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.NEXTTURN)) != null) {
                 System.out.println(gameMenuController.nextTurn());
             } else
@@ -49,6 +51,27 @@ public class GameMenuView extends View {
 
         }
 
+    }
+
+    private void cheat() {
+        System.out.println("entered cheat menu");
+        while (true) {
+            input = scanner.nextLine();
+            if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.INCREASE_GOLD)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().increaseGold(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.INCREASE_HAPPINESS)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().increaseHappiness(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.INCREASE_SCIENCE)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().increaseScience(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.INCREASE_TURN)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().increaseTurn(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.UNIT_RESET)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().resetUnit(matcher));
+            } else if (Objects.equals(input, "back")) {
+                return;
+            } else
+                System.out.println("invalid command");
+        }
     }
 
     private void selectCity(Matcher matcher) {

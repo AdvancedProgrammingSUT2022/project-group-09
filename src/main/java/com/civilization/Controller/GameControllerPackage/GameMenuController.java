@@ -11,10 +11,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 
 public class GameMenuController extends Controller {
-
-
-    //GameDataBase darim
-    private final Cheat cheat;
     private final CheatController cheatController;
     private final CityController cityController;
     private final InfoController infoController;
@@ -29,7 +25,6 @@ public class GameMenuController extends Controller {
         mapController = new MapController();
         unitcontroller = new UnitController();
         technologyMenuController = new TechnologyMenuController();
-        cheat = new Cheat();
     }
 
     public String nextTurn() {
@@ -171,10 +166,6 @@ public class GameMenuController extends Controller {
         return infoController;
     }
 
-
-    public Cheat getCheat() {
-        return cheat;
-    }
 
     public CheatController getCheatConteroller() {
         return cheatController;

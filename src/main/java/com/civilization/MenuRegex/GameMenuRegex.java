@@ -75,7 +75,14 @@ public enum GameMenuRegex {
     BUILDMENU("enter build menu"),
     BUILDUNIT("build unit (?<number>\\d+)"),
     NEXTTURN("next turn"),
-    BUILDBUILDING("build building (?<number>\\d+)");
+    BUILDBUILDING("build building (?<number>\\d+)"),
+    ENTER_CHEAT_MENU("enter cheat menu"),
+    INCREASE_GOLD("increase gold (?<number>\\d+)"),
+    INCREASE_SCIENCE("increase science (?<number>\\d+)"),
+    INCREASE_TURN("increase turn (?<number>\\d+)"),
+    INCREASE_HAPPINESS("increase happiness (?<number>\\d+)"),
+    UNIT_RESET("unit reset");
+
 
     private final String regex;
 
