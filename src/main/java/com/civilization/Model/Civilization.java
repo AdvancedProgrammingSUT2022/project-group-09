@@ -169,6 +169,11 @@ public class Civilization {
         updateGold();
         updateScience();
         updateHappiness();
+        updateResearch();
+    }
+
+    private void updateResearch() {
+        civilizationTechnologies.checkTechnologyCurrentlyResearching();
     }
 
     private void updateHappiness() {
@@ -204,7 +209,6 @@ public class Civilization {
             }
         }
     }
-
 
 
 }

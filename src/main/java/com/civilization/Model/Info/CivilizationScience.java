@@ -1,5 +1,8 @@
 package com.civilization.Model.Info;
 
+import com.civilization.Controller.GameControllerPackage.GameDataBase;
+import com.civilization.Model.Civilization;
+
 public class CivilizationScience {
     private double additionScience;
     private double addedFromCheat;
@@ -22,5 +25,13 @@ public class CivilizationScience {
 
     public void setAdditionScience(double additionScience) {
         this.additionScience = additionScience;
+    }
+
+    public Civilization getCivilization() {
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            if (civilization.getScience() == this)
+                return civilization;
+        }
+        return null;
     }
 }

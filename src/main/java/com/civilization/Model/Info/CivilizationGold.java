@@ -1,5 +1,8 @@
 package com.civilization.Model.Info;
 
+import com.civilization.Controller.GameControllerPackage.GameDataBase;
+import com.civilization.Model.Civilization;
+
 public class CivilizationGold {
     private double additionGold;
     private double currentGold;
@@ -36,5 +39,13 @@ public class CivilizationGold {
 
     public void setCurrentGold(double currentGold) {
         this.currentGold = currentGold;
+    }
+
+    public Civilization getCivilization() {
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            if (civilization.getGold() == this)
+                return civilization;
+        }
+        return null;
     }
 }

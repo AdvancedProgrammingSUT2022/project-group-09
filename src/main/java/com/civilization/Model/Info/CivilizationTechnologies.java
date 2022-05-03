@@ -1,6 +1,7 @@
 package com.civilization.Model.Info;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
+import com.civilization.Model.Civilization;
 import com.civilization.Model.TechnologyPackage.TechnologyType;
 
 import java.util.ArrayList;
@@ -92,5 +93,13 @@ public class CivilizationTechnologies {
 
     public void setTechnologiesUnavailable(ArrayList<TechnologyType> technologiesUnavailable) {
         this.technologiesUnavailable = technologiesUnavailable;
+    }
+
+    public Civilization getCivilization() {
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            if (civilization.getTechnologies() == this)
+                return civilization;
+        }
+        return null;
     }
 }

@@ -28,11 +28,9 @@ public class GameMenuController extends Controller {
     }
 
     public String nextTurn() {
-        for (Civilization civilization : GameDataBase.getCivilizations()) {
-            for (Unit unit : civilization.getUnits()) {
-                if (!unit.isWorkDone())
-                    return "civilization :" + civilization.getName() + "unit :" + unit.getMyType() + "work done nashode";
-            }
+        for (Unit unit : GameDataBase.getCurrentCivilization().getUnits()) {
+            if (!unit.isWorkDone())
+                return GameDataBase.getCurrentCivilization().getName() + "unit :" + unit.getMyType() + "work done nashode";
         }
         GameDataBase.nextTurn();
         for (Civilization civilization : GameDataBase.getCivilizations()) {
