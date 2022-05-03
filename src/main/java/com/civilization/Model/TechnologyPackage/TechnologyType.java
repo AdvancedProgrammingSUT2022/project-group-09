@@ -247,8 +247,28 @@ public enum TechnologyType {
     }
 
     public ArrayList<Object> getUnlocks() {
-        //TODO naghese
-        return null;
+        ArrayList<Object> unlocks = new ArrayList<>();
+        for (UnitType unit : UnitType.getAllUnits()) {
+            if (unit.getRequiredTechnology() == this) {
+                unlocks.add(unit);
+            }
+        }
+        for (Improvement improvement : Improvement.getAllImprovements()) {
+            if (improvement.getRequiredTechnology() == this) {
+                unlocks.add(improvement);
+            }
+        }
+        for (Resource resource : Resource.getAllResources()) {
+            if (resource.getRequiredTechnology() == this) {
+                unlocks.add(resource);
+            }
+        }
+        for (BuildingType building : BuildingType.getAllBuildings()) {
+            if (building.getRequirement() == this) {
+                unlocks.add(building);
+            }
+        }
+        return unlocks;
     }
 
     public ArrayList<TechnologyType> getTechnologyUnlocks() {

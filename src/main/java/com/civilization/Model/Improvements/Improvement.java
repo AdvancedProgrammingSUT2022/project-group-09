@@ -9,6 +9,7 @@ import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public enum Improvement {
     CAMP(0, 0, 0, new ArrayList<Resource>() {
@@ -126,7 +127,10 @@ public enum Improvement {
             add(TerrainType.SNOW);
         }
     }),
-    ROAD(0, 0, 0, new ArrayList<>(), null, new ArrayList<>());
+    ROAD(0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
+    REMOVEFOREST(0, 0, 0, new ArrayList<>(), TechnologyType.MATHEMATICS, new ArrayList<>()),//JANGAL ANBOOH
+    REMOVEJUNGLE(0, 0, 0, new ArrayList<>(), TechnologyType.BRONZEWORKING, new ArrayList<>()),
+    REMOVEROUTE(0, 0, 0, new ArrayList<>(), null, new ArrayList<>());
     //TODO ROAD RO HANDLE KON
 
     final int food;
@@ -181,5 +185,10 @@ public enum Improvement {
 
     public int getGold() {
         return gold;
+    }
+
+    public static ArrayList<Improvement> getAllImprovements() {
+        Improvement[] yourEnums = Improvement.class.getEnumConstants();
+        return new ArrayList<>(Arrays.asList(yourEnums));
     }
 }

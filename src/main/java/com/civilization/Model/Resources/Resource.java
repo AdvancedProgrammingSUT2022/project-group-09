@@ -6,6 +6,7 @@ import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.TerrainType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public enum Resource {
     BANANA(1, 0, 0, new ArrayList<TerrainTypeOrTerrainFeatureType>() {{
@@ -165,5 +166,11 @@ public enum Resource {
 
     public ResourceMainType getResourceMainType() {
         return resourceMainType;
+    }
+
+
+    public static ArrayList<Resource> getAllResources() {
+        Resource[] yourEnums = Resource.class.getEnumConstants();
+        return new ArrayList<>(Arrays.asList(yourEnums));
     }
 }
