@@ -178,6 +178,7 @@ public class Civilization {
 
     private void updateHappiness() {
         getHappiness().setAdditionHappiness(10);//starting
+        getHappiness().add(getHappiness().getAddedFromCheat());
         for (Resource resource : getResources()) {
             if (resource.getGold() != 0) getHappiness().add(5); //luxury ha
         }
@@ -185,6 +186,7 @@ public class Civilization {
 
     private void updateGold() {
         getGold().setAdditionGold(0);
+        getGold().addCurrentGold(getGold().getAddedFromCheat());
         for (City city : cities) {
             getGold().addAdditionGold(city.getGold().getAdditionGold());
         }
@@ -192,6 +194,7 @@ public class Civilization {
 
     private void updateScience() {
         getScience().setAdditionScience(50);
+        getScience().add(getScience().getAddedFromCheat());
         for (City city : cities) {
             getScience().add(city.getCityScience().getAdditionScience());
         }
