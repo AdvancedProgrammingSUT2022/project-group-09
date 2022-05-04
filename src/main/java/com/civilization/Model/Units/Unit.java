@@ -118,7 +118,7 @@ public class Unit implements Combatble, Selectable {
         // for debugging purposes
         // System.out.println("aval masir");
         // for (Coordination coordination : path) {
-        //     System.out.println(coordination.toString());
+        // System.out.println(coordination.toString());
         // }
         // System.out.println("akhar masir");
         for (int i = 0; i < path.size(); i++) {
@@ -128,7 +128,9 @@ public class Unit implements Combatble, Selectable {
                 path.clear();
                 break;
             }
-            if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
+            if (this.getTerrain().isHasRoad() && terrain.isHasRoad()) {
+
+            } else if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
                     && this.getTerrain().getTerrainFeatures().contains(TerrainFeature.RIVER)) {
                 this.remainingMove = 0;
             } else {
@@ -148,12 +150,12 @@ public class Unit implements Combatble, Selectable {
         if (this.myType == UnitType.SETTLER || this.myType == UnitType.WORKER)
             if (nextTerrain.getCivilianUnit() != null)
                 return false;
-        else if (nextTerrain.getMilitaryUnit() != null)
-            if (nextTerrain.getMilitaryUnit().getCivilization() == this.getCivilization())
-                return false;
-            else 
-                return false;
-            //TODO implement combat
+            else if (nextTerrain.getMilitaryUnit() != null)
+                if (nextTerrain.getMilitaryUnit().getCivilization() == this.getCivilization())
+                    return false;
+                else
+                    return false;
+        // TODO implement combat
         return true;
     }
 
@@ -258,7 +260,8 @@ public class Unit implements Combatble, Selectable {
     }
 
     public String showInfo() {
-        return myType + " at " + getTerrain().getCoordination().toString() + " Worke done : " + workDone + " sleep : " + isSleep +
+        return myType + " at " + getTerrain().getCoordination().toString() + " Worke done : " + workDone + " sleep : "
+                + isSleep +
                 " remaining Mp : " + remainingMove + " hp : " + hp +
                 " size of masiri ke bayad bere : " + path.size();
     }

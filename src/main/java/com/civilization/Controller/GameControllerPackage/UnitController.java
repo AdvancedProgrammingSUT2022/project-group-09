@@ -458,8 +458,15 @@ public class UnitController {
         MP -= path.get(0).getMp();
         for (int i = 1; i < path.size(); i++) {
             Terrain terrain = path.get(i);
-            MP -= terrain.getMp();
-            if (MP < 0) {
+            if (terrain.isHasRoad() && path.get(i - 1).isHasRoad()) {
+
+            } else if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
+                    && path.get(i - 1).getTerrainFeatures().contains(TerrainFeature.RIVER)) {
+                MP = 0;
+            } else {
+                MP -= terrain.getMp();
+            }
+            if (MP <= 0) {
                 MP = MaxMp;
                 if (unitType.equals(UnitType.SETTLER) || unitType.equals(UnitType.WORKER)) {
                     if (terrain.getCivilianUnit() != null)
@@ -528,8 +535,8 @@ public class UnitController {
 
     private boolean isMovePossible(int MP, Terrain nextTerrain, Terrain terrain) {
         // if (nextTerrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
-        //         && terrain.getTerrainFeatures().contains(TerrainFeature.RIVER))
-        //     return false;
+        // && terrain.getTerrainFeatures().contains(TerrainFeature.RIVER))
+        // return false;
         if (MP > terrain.getMp())
             return true;
         if (GameDataBase.getCurrentCivilization().getTerrainState(nextTerrain.getXPosition(),
