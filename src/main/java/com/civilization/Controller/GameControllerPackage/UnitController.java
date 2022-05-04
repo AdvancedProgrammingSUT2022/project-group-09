@@ -150,7 +150,7 @@ public class UnitController {
         return "City created successfully!";
     }
 
-    public String cancellMission() {
+    public String cancelMission() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
             return "No unit selected!";
         }
