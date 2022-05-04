@@ -144,7 +144,7 @@ public class Unit implements Combatble, Selectable {
         }
     }
 
-    public boolean isMovePossible(Terrain nextTerrain) {
+    private boolean isMovePossible(Terrain nextTerrain) {
         if (this.myType == UnitType.SETTLER || this.myType == UnitType.WORKER)
             if (nextTerrain.getCivilianUnit() != null)
                 return false;
