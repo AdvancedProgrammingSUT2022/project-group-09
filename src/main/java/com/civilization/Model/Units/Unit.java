@@ -118,7 +118,7 @@ public class Unit implements Combatble, Selectable {
         // for debugging purposes
         // System.out.println("aval masir");
         // for (Coordination coordination : path) {
-        //     System.out.println(coordination.toString());
+        // System.out.println(coordination.toString());
         // }
         // System.out.println("akhar masir");
         for (int i = 0; i < path.size(); i++) {
@@ -128,7 +128,9 @@ public class Unit implements Combatble, Selectable {
                 path.clear();
                 break;
             }
-            if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
+            if (this.getTerrain().isHasRoad() && terrain.isHasRoad()) {
+
+            } else if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
                     && this.getTerrain().getTerrainFeatures().contains(TerrainFeature.RIVER)) {
                 this.remainingMove = 0;
             } else {
@@ -153,7 +155,7 @@ public class Unit implements Combatble, Selectable {
                     return false;
                 else
                     return false;
-        //TODO implement combat
+        // TODO implement combat
         return true;
     }
 
