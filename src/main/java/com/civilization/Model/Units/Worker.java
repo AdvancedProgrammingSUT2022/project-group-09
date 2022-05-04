@@ -66,4 +66,12 @@ public class Worker extends Unit {
         else
             getTerrain().setImprovement(makingImprovement.getKey());
     }
+
+    @Override
+    public void DoNothing() {
+        getPath().clear();
+        setWorkDone(true);
+        setSleep(false);
+        makingImprovement = null;
+    }
 }
