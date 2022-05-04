@@ -115,29 +115,47 @@ public class Unit implements Combatble, Selectable {
             return;
         if (path.isEmpty())
             return;
-        System.out.println("aval masir");
-        for (Coordination coordination : path) {
-            System.out.println(coordination.toString());
-        }
-        System.out.println("akhar masir");
+        // for debugging purposes
+        // System.out.println("aval masir");
+        // for (Coordination coordination : path) {
+        //     System.out.println(coordination.toString());
+        // }
+        // System.out.println("akhar masir");
         for (int i = 0; i < path.size(); i++) {
             System.out.println("alan injaem " + getTerrain().getCoordination().toString());
             Terrain terrain = path.get(i).getTerrain();
-            this.remainingMove -= terrain.getMp();
-            if (this.remainingMove < 0)
-                this.remainingMove = 0;
+            if (isMovePossible(terrain)) {
+                path.clear();
+                break;
+            }
             if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
                     && this.getTerrain().getTerrainFeatures().contains(TerrainFeature.RIVER)) {
                 this.remainingMove = 0;
+            } else {
+                this.remainingMove -= terrain.getMp();
             }
             this.setTerrain(terrain);
             path.remove(i);
             i = 0;
-            if (remainingMove == 0)
+            if (remainingMove < 0) {
                 workDone = true;
+                break;
+            }
         }
     }
 
+    public boolean isMovePossible(Terrain nextTerrain) {
+        if (this.myType == UnitType.SETTLER || this.myType == UnitType.WORKER)
+            if (nextTerrain.getCivilianUnit() != null)
+                return false;
+        else if (nextTerrain.getMilitaryUnit() != null)
+            if (nextTerrain.getMilitaryUnit().getCivilization() == this.getCivilization())
+                return false;
+            else 
+                return false;
+            //TODO implement combat
+        return true;
+    }
 
     public void DoNothing() {
         workDone = true;
