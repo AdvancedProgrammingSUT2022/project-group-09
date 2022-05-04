@@ -123,10 +123,9 @@ public class Unit implements Combatble, Selectable {
         for (int i = 0; i < path.size(); i++) {
             System.out.println("alan injaem " + getTerrain().getCoordination().toString());
             Terrain terrain = path.get(i).getTerrain();
-            if (terrain.getMp() > this.remainingMove) {
-                break;
-            }
             this.remainingMove -= terrain.getMp();
+            if (this.remainingMove < 0)
+                this.remainingMove = 0;
             if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
                     && this.getTerrain().getTerrainFeatures().contains(TerrainFeature.RIVER)) {
                 this.remainingMove = 0;

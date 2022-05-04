@@ -10,6 +10,7 @@ import com.civilization.Model.Map;
 import com.civilization.Model.Selectable;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
+import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Units.*;
 
 public class UnitController {
@@ -376,15 +377,21 @@ public class UnitController {
         int MP = unit.getRemainingMove();
         int maxMp = unit.getMyType().getMovement();
         UnitType unitType = unit.getMyType();
-        //TODO handel moving to different terrainstates
+        // TODO handle moving to different terrainstates
+        Coordination coordination = destination.getCoordination();
+        TerrainState state = GameDataBase.getCurrentCivilization().getTerrainState(coordination.getX(),
+                coordination.getY());
+        if (state == TerrainState.FOGOFWAR)
+            return "your destination is in fog of war";
         if (!isDestinationEmpty(unitType, destination))
             return "destination is not empty for you";
-        // return backTrack(destination, origin, MP, maxMp, unitType, unit);
-        return DjikstraPathFind(destination, origin, MP, maxMp, unitType, unit);
+        return backTrack(destination, origin, MP, maxMp, unitType, unit);
+        // return DjikstraPathFind(destination, origin, MP, maxMp, unitType, unit);
     }
 
-    private String DjikstraPathFind(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType, Unit unit) {
-        //TODO implement djikstra if needed
+    private String DjikstraPathFind(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType,
+            Unit unit) {
+        // TODO implement djikstra if needed
         return "";
     }
 
@@ -393,7 +400,12 @@ public class UnitController {
         ArrayList<Terrain> path = new ArrayList<>();
         path.add(origin);
 
-        findAllPaths(destination, origin, MP, paths, path);
+        Coordination minimum = new Coordination(Math.min(origin.getXPosition(), destination.getXPosition()),
+                Math.min(origin.getYPosition(), destination.getYPosition()));
+        Coordination maximum = new Coordination(Math.max(origin.getXPosition(), destination.getXPosition()),
+                Math.max(origin.getYPosition(), destination.getYPosition()));
+
+        findAllPaths(destination, origin, MP, paths, path, maximum, minimum);
         if (paths.isEmpty())
             return "unfortunately there is no available path for your unit to move to your desired destination";
 
@@ -485,20 +497,32 @@ public class UnitController {
     }
 
     private void findAllPaths(Terrain destination, Terrain origin, int MP, ArrayList<ArrayList<Terrain>> paths,
-            ArrayList<Terrain> path) {
+            ArrayList<Terrain> path, Coordination maximum, Coordination minimum) {
         if (destination == origin) {
             paths.add(path);
             return;
         }
         for (Terrain nextTerrain : origin.getSurroundingTerrain()) {
             if (isMovePossible(MP, nextTerrain, origin) && !path.contains(nextTerrain)) {
-                if (path.size() > 5)
+                if (path.size() > 10)
+                    continue;
+                if (!isPathWorthChecking(path, nextTerrain, maximum, minimum))
                     continue;
                 ArrayList<Terrain> nextPath = (ArrayList<Terrain>) path.clone();
                 nextPath.add(nextTerrain);
-                findAllPaths(destination, nextTerrain, MP, paths, nextPath);
+                findAllPaths(destination, nextTerrain, MP, paths, nextPath, maximum, minimum);
             }
         }
+    }
+
+    private boolean isPathWorthChecking(ArrayList<Terrain> path, Terrain terrain, Coordination maximum, Coordination minimum) {
+        if (path.size() > 8)
+            return false;
+        if (terrain.getXPosition() - maximum.getX() > 3 || terrain.getYPosition() - maximum.getY() > 3)
+            return false;
+        if (minimum.getX() - terrain.getXPosition() > 3 || minimum.getY() - terrain.getYPosition() > 3)
+            return false;
+        return true;
     }
 
     private boolean isMovePossible(int MP, Terrain nextTerrain, Terrain terrain) {
