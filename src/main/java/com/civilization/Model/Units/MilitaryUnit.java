@@ -33,7 +33,11 @@ public class MilitaryUnit extends Unit {
 
     public void fortifyHeal() {
         //har round call she
-        setWorkDone(true);
+        if (getHp() == 50) {
+            isFortifyHeal = false;
+            setSleep(false);
+            setWorkDone(false);
+        }
         setSleep(true);
         fortify();
     }

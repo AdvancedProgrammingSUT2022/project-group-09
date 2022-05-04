@@ -276,7 +276,7 @@ public class Unit implements Combatble, Selectable {
                 ((MilitaryUnit) this).alert();
 
             if (((MilitaryUnit) this).isFortifyHeal())
-                ((MilitaryUnit) this).fortify();
+                ((MilitaryUnit) this).fortifyHeal();
         }
 
         if (!this.isSleep())
