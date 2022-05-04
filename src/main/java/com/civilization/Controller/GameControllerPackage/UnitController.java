@@ -6,8 +6,6 @@ import java.util.regex.Matcher;
 import com.civilization.Model.City;
 import com.civilization.Model.Coordination;
 import com.civilization.Model.Improvements.Improvement;
-import com.civilization.Model.Map;
-import com.civilization.Model.Selectable;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
@@ -46,7 +44,7 @@ public class UnitController {
         return "Unit is in alert!";
     }
 
-    public String fortiry() {
+    public String fortify() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
             return "No unit selected!";
         }
@@ -101,7 +99,9 @@ public class UnitController {
         if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
             return "This is not a military unit!";
         }
-        // TODO.. setup ro nazadim
+        if (!UnitType.getSiegeMilitaryUnit().contains(((Unit) GameDataBase.getSelected()).getMyType()))
+            return "this unit can not siege";
+        ((SiegeMilitaryUnit) GameDataBase.getSelected()).setUp();
         return "Unit is set up!";
     }
 
@@ -146,8 +146,7 @@ public class UnitController {
         if (((Settler) GameDataBase.getSelected()).getTerrain() instanceof City) {
             return "There is City in this position!";
         }
-        ((Settler) GameDataBase.getSelected()).foundCaptalCity();// TODO.. capital nemitoone besaze ? va erroraye dige
-                                                                 // chi mitoone bokhore?
+        ((Settler) GameDataBase.getSelected()).foundCity();
         return "City created successfully!";
     }
 
@@ -390,7 +389,7 @@ public class UnitController {
     }
 
     private String DjikstraPathFind(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType,
-            Unit unit) {
+                                    Unit unit) {
         // TODO implement djikstra if needed
         return "";
     }
@@ -497,7 +496,7 @@ public class UnitController {
     }
 
     private void findAllPaths(Terrain destination, Terrain origin, int MP, ArrayList<ArrayList<Terrain>> paths,
-            ArrayList<Terrain> path, Coordination maximum, Coordination minimum) {
+                              ArrayList<Terrain> path, Coordination maximum, Coordination minimum) {
         if (destination == origin) {
             paths.add(path);
             return;
@@ -516,7 +515,7 @@ public class UnitController {
     }
 
     private boolean isPathWorthChecking(ArrayList<Terrain> path, Terrain terrain, Coordination maximum,
-            Coordination minimum) {
+                                        Coordination minimum) {
         if (path.size() > 8)
             return false;
         if (terrain.getXPosition() - maximum.getX() > 3 || terrain.getYPosition() - maximum.getY() > 3)
