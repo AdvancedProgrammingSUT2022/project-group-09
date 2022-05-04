@@ -9,6 +9,7 @@ import com.civilization.Model.ConsoleColors;
 import com.civilization.Model.Map;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TechnologyPackage.TechnologyType;
+import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Terrains.TerrainType;
@@ -204,6 +205,17 @@ public class MapController {
         return showMap(x, y);
     }
 
+    public void showRivers(StringBuilder stringBuilder, Terrain terrain) {
+        if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)) {
+            stringBuilder.append("this terrain has a river with following terrains:\n");
+            for(Terrain adjTerrain : terrain.getSurroundingTerrain()) {
+                if (adjTerrain.getTerrainFeatures().contains(TerrainFeature.RIVER)) {
+                    stringBuilder.append("terrain on x: " + adjTerrain.getXPosition() + " y: " + adjTerrain.getYPosition() + "\n");
+                }
+            }
+        }
+    }
+
     private void showVisibleDetails(StringBuilder stringBuilder, Terrain terrain) {
         if (terrain.getCivilianUnit() == null) {
             stringBuilder.append("there is no civilization unit in this terrain\n");
@@ -218,6 +230,7 @@ public class MapController {
                     terrain.getMilitaryUnit().getCivilization().getName() + "\n");
         }
         showResources(stringBuilder, terrain);
+        showRivers(stringBuilder, terrain);
     }
 
     private void showResources(StringBuilder stringBuilder, Terrain terrain) {
