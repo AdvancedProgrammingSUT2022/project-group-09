@@ -515,7 +515,8 @@ public class UnitController {
         }
     }
 
-    private boolean isPathWorthChecking(ArrayList<Terrain> path, Terrain terrain, Coordination maximum, Coordination minimum) {
+    private boolean isPathWorthChecking(ArrayList<Terrain> path, Terrain terrain, Coordination maximum,
+            Coordination minimum) {
         if (path.size() > 8)
             return false;
         if (terrain.getXPosition() - maximum.getX() > 3 || terrain.getYPosition() - maximum.getY() > 3)
@@ -526,11 +527,14 @@ public class UnitController {
     }
 
     private boolean isMovePossible(int MP, Terrain nextTerrain, Terrain terrain) {
-        if (nextTerrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
-                && terrain.getTerrainFeatures().contains(TerrainFeature.RIVER))
-            return false;
+        // if (nextTerrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
+        //         && terrain.getTerrainFeatures().contains(TerrainFeature.RIVER))
+        //     return false;
         if (MP > terrain.getMp())
             return true;
+        if (GameDataBase.getCurrentCivilization().getTerrainState(nextTerrain.getXPosition(),
+                nextTerrain.getYPosition()) == TerrainState.FOGOFWAR)
+            return false;
         return false;
     }
 
