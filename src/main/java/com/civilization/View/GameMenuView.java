@@ -157,8 +157,8 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.getUnitcontroller().sleep());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVE_UNIT)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().moveUnit(matcher));
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.CANCEL)) != null) {
-                System.out.println(gameMenuController.getUnitcontroller().cancelMission());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DO_NOTHING)) != null) {
+                System.out.println(gameMenuController.getUnitcontroller().doNothing());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.WAKE)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().wake());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DELETE)) != null) {
@@ -183,8 +183,8 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.getUnitcontroller().sleep());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVE_UNIT)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().moveUnit(matcher));
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.CANCEL)) != null) {
-                System.out.println(gameMenuController.getUnitcontroller().cancelMission());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DO_NOTHING)) != null) {
+                System.out.println(gameMenuController.getUnitcontroller().doNothing());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.WAKE)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().wake());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DELETE)) != null) {
@@ -229,8 +229,8 @@ public class GameMenuView extends View {
         while (true) {
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().sleep());
-            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.CANCEL)) != null) {
-                System.out.println(gameMenuController.getUnitcontroller().cancelMission());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DO_NOTHING)) != null) {
+                System.out.println(gameMenuController.getUnitcontroller().doNothing());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.WAKE)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().wake());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DELETE)) != null) {

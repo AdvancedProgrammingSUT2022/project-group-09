@@ -124,7 +124,7 @@ public class Unit implements Combatble, Selectable {
         for (int i = 0; i < path.size(); i++) {
             System.out.println("alan injaem " + getTerrain().getCoordination().toString());
             Terrain terrain = path.get(i).getTerrain();
-            if (isMovePossible(terrain)) {
+            if (!isMovePossible(terrain)) {
                 path.clear();
                 break;
             }
@@ -148,16 +148,17 @@ public class Unit implements Combatble, Selectable {
         if (this.myType == UnitType.SETTLER || this.myType == UnitType.WORKER)
             if (nextTerrain.getCivilianUnit() != null)
                 return false;
-        else if (nextTerrain.getMilitaryUnit() != null)
-            if (nextTerrain.getMilitaryUnit().getCivilization() == this.getCivilization())
-                return false;
-            else 
-                return false;
-            //TODO implement combat
+            else if (nextTerrain.getMilitaryUnit() != null)
+                if (nextTerrain.getMilitaryUnit().getCivilization() == this.getCivilization())
+                    return false;
+                else
+                    return false;
+        //TODO implement combat
         return true;
     }
 
     public void DoNothing() {
+        path.clear();
         workDone = true;
         isSleep = false;
     }

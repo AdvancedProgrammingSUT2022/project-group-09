@@ -49,7 +49,7 @@ public enum GameMenuRegex {
     ATTACK2("^attack (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
     ATTACK(""),//TODO
     FOUND("^found city$"),
-    CANCEL("^cancel mission$"),
+    DO_NOTHING("^do nothing$"),
     WAKE("^wake unit$"),
     DELETE("^delete unit$"),
     BUILD_ROAD("^build road$"),

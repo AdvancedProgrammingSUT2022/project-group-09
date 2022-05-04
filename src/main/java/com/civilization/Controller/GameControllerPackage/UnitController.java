@@ -150,7 +150,7 @@ public class UnitController {
         return "City created successfully!";
     }
 
-    public String cancelMission() {
+    public String doNothing() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
             return "No unit selected!";
         }
@@ -158,7 +158,7 @@ public class UnitController {
             return "selectedo bayad har turn new mikardim";
         }
         ((Unit) GameDataBase.getSelected()).DoNothing();
-        return "Cancelled!";
+        return "done!";
     }
 
     public String wake() {
