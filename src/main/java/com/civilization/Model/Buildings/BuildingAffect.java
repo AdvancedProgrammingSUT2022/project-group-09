@@ -44,7 +44,7 @@ public class BuildingAffect {
         hospital();
         stockExchange();
         for (BuildingType building : buildings) {
-            getCity().getGold().add((-1) * building.getCost());
+            getCity().getGold().add((-1) * building.getMaintenance());
         }
     }
 
