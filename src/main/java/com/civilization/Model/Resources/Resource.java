@@ -173,4 +173,13 @@ public enum Resource {
         Resource[] yourEnums = Resource.class.getEnumConstants();
         return new ArrayList<>(Arrays.asList(yourEnums));
     }
+
+    public static ArrayList<Resource> getLuxuryResources() {
+        ArrayList<Resource> resources = new ArrayList<>();
+        for (Resource allResource : getAllResources()) {
+            if (allResource.getGold() != 0)
+                resources.add(allResource);
+        }
+        return resources;
+    }
 }

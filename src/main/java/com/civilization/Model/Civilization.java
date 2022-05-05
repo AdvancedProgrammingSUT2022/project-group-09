@@ -179,8 +179,13 @@ public class Civilization {
     private void updateHappiness() {
         getHappiness().setAdditionHappiness(10);//starting
         getHappiness().add(getHappiness().getAddedFromCheat());
+
+        ArrayList<Resource> luxuryResource = new ArrayList<>(Resource.getLuxuryResources());
         for (Resource resource : getResources()) {
-            if (resource.getGold() != 0) getHappiness().add(5); //luxury ha
+            if (luxuryResource.contains(resource)) {
+                getHappiness().add(4); //luxury ha
+                luxuryResource.remove(resource);
+            }
         }
     }
 
