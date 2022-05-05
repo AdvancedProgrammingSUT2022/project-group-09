@@ -7,6 +7,7 @@ import com.civilization.Model.Info.CityFood;
 import com.civilization.Model.Info.CityGold;
 import com.civilization.Model.Info.CityProduct;
 import com.civilization.Model.Info.CityScience;
+import com.civilization.Model.Info.CivilizationGold;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.*;
@@ -14,7 +15,8 @@ import com.civilization.Model.Units.*;
 import java.util.ArrayList;
 
 public class City extends Terrain implements Combatble, Selectable {
-    private ArrayList<Terrain> citizens; //length=number of citizens and arraylisti az jahaei hast ke citizen ha kar mikonnand
+    private ArrayList<Terrain> citizens; // length=number of citizens and arraylisti az jahaei hast ke citizen ha kar
+                                         // mikonnand
     private boolean isCapital;
     private CityProduct cityProduct;
     private CityFood cityFood;
@@ -23,9 +25,9 @@ public class City extends Terrain implements Combatble, Selectable {
     private ArrayList<Terrain> terrains;
 
     private int makingCitizen;
-    private Pair<Double, BuildingType> makingBuilding;//<remaining Product to build,building>
+    private Pair<Double, BuildingType> makingBuilding;// <remaining Product to build,building>
 
-    private Pair<Double, UnitType> makingUnit;//<remaining Product to build,Unit>
+    private Pair<Double, UnitType> makingUnit;// <remaining Product to build,Unit>
     private String name = "default";
     private BuildingAffect buildings;
     private double hp = 50;
@@ -64,6 +66,8 @@ public class City extends Terrain implements Combatble, Selectable {
         if (unitType == UnitType.WORKER && getCivilianUnit() == null) {
             new Worker(this, this.getCivilization());
         }
+        GameDataBase.getCurrentCivilization().getGold().setCurrentGold(
+                GameDataBase.getCurrentCivilization().getGold().getCurrentGold() - unitType.getCost());
     }
 
     public void CreateBuilding(BuildingType buildingType) {
@@ -90,6 +94,8 @@ public class City extends Terrain implements Combatble, Selectable {
             throw new RuntimeException();
         }
         buildings.addBuilding(buildingType);
+        GameDataBase.getCurrentCivilization().getGold().setCurrentGold(
+                GameDataBase.getCurrentCivilization().getGold().getCurrentGold() - buildingType.getCost());
     }
 
     public City(Terrain terrain) {
@@ -240,7 +246,6 @@ public class City extends Terrain implements Combatble, Selectable {
         return null;
     }
 
-
     @Override
     public void attack(Combatble target) {
         if (target instanceof City) {
@@ -248,7 +253,8 @@ public class City extends Terrain implements Combatble, Selectable {
             throw new RuntimeException();
         } else if (target instanceof MilitaryUnit) {
             MilitaryUnit targetUnit = (MilitaryUnit) target;
-            //TODO ino az ghasd gozashtam 0 = ghodrat hamle shahr ke nemidoonam chande ridam be in doc naghes
+            // TODO ino az ghasd gozashtam 0 = ghodrat hamle shahr ke nemidoonam chande
+            // ridam be in doc naghes
             targetUnit.setHp(targetUnit.getHp() - 0);
             if (targetUnit.getHp() <= 0)
                 targetUnit.delete();
@@ -261,11 +267,11 @@ public class City extends Terrain implements Combatble, Selectable {
     @Override
     public void defend(Combatble target) {
         if (super.getMilitaryUnit() != null) {
-            //garison shode
+            // garison shode
         } else {
-            //bedoon garison defa kon
+            // bedoon garison defa kon
         }
-        //shahr defend nadare
+        // shahr defend nadare
     }
 
     public String showMakingUnit() {
@@ -343,7 +349,7 @@ public class City extends Terrain implements Combatble, Selectable {
             citizens.remove(0);
             cityFood.setAdditionFood(0);
         } else
-            makingCitizen += cityFood.getAdditionFood(); //badaz ye adadi citizen jadid miad
+            makingCitizen += cityFood.getAdditionFood(); // badaz ye adadi citizen jadid miad
         if (makingCitizen > 2) {
             citizens.add(null);
             makingCitizen = 0;
