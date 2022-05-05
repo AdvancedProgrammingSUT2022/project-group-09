@@ -7,7 +7,6 @@ import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Units.Unit;
 
 import java.util.ArrayList;
-
 public class Civilization {
     private Map map;//faghat baraye showmap
     private String name;
@@ -159,12 +158,12 @@ public class Civilization {
     }
 
     public void nextTurn() {
-        update();
+        updateData();
         getHappiness().nexTurn();
         getGold().addCurrentGold(getGold().getAdditionGold());
     }
 
-    public void update() {
+    public void updateData() {
         updateResource();
         updateGold();
         updateScience();
