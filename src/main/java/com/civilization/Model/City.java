@@ -402,10 +402,12 @@ public class City extends Terrain implements Combatble, Selectable {
         UnitType unitType = makingUnit.getValue();
         if (UnitType.getNormalMilitaryUnit().contains(unitType) && getMilitaryUnit() == null) {
             new MilitaryUnit(makingUnit.getValue(), this, getCivilization());
+            getResources().remove(unitType.getRequiredResourse());
             makingUnit = null;
         }
         if (UnitType.getSiegeMilitaryUnit().contains(unitType) && getMilitaryUnit() == null) {
             new SiegeMilitaryUnit(makingUnit.getValue(), this, getCivilization());
+            getResources().remove(unitType.getRequiredResourse());
             makingUnit = null;
         }
         if (unitType == UnitType.SETTLER && getCivilianUnit() == null) {

@@ -252,7 +252,7 @@ public class GameMenuView extends View {
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FORTIFY)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().fortify());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.FORTIFY_UNTIL_HEAL)) != null) {
-                System.out.println(gameMenuController.getUnitcontroller().fortiryHeal());
+                System.out.println(gameMenuController.getUnitcontroller().fortifyHeal());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.GARRISON)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().garrison());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SETUP)) != null) {

@@ -1,7 +1,6 @@
 package com.civilization.Controller.GameControllerPackage;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 
 import com.civilization.Model.City;
@@ -59,7 +58,7 @@ public class UnitController {
         return "Unit is fortify!";
     }
 
-    public String fortiryHeal() {
+    public String fortifyHeal() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
             return "No unit selected!";
         }
