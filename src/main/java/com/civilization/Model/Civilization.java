@@ -7,6 +7,7 @@ import com.civilization.Model.Terrains.TerrainState;
 import com.civilization.Model.Units.Unit;
 
 import java.util.ArrayList;
+
 public class Civilization {
     private Map map;//faghat baraye showmap
     private String name;
@@ -161,6 +162,11 @@ public class Civilization {
         updateData();
         getHappiness().nexTurn();
         getGold().addCurrentGold(getGold().getAdditionGold());
+        if (getGold().getAdditionGold() < 0)  //age manfi shod az science kam one
+        {
+            getScience().add(getGold().getAdditionGold());
+            getGold().setCurrentGold(0);
+        }
     }
 
     public void updateData() {
