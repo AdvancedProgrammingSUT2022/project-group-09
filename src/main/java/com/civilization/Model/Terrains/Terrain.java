@@ -23,7 +23,7 @@ public class Terrain {
     private MilitaryUnit militaryUnit;
 
     public Terrain() {
-        this.improvement = null;
+        this.improvement=new Pair<>(null,true);
         this.hasRoad = false;
         this.type = null;
         this.terrainFeatures = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Terrain {
 
     public Terrain(TerrainType type) {
         this.type = type;
-        this.improvement = null;
+        this.improvement=new Pair<>(null,true);
         this.hasRoad = false;
         this.terrainFeatures = new ArrayList<>();
         this.resources = new ArrayList<>();
