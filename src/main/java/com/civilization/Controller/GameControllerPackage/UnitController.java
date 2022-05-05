@@ -1,6 +1,7 @@
 package com.civilization.Controller.GameControllerPackage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 
 import com.civilization.Model.City;
@@ -350,9 +351,8 @@ public class UnitController {
 
     public String repair() {
         String command = checkWorker();
-        if (command != null)
-            return command;
-        // TODO kharabe kojast ?
+        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovementPair().getValue())
+            return "salem hast in improvement";
         ((Worker) GameDataBase.getSelected()).repair();
         return "Repair successfully!";
     }

@@ -27,19 +27,23 @@ public class Worker extends Unit {
             throw new RuntimeException();
         }
         makingImprovement = new Pair<>(improvement, 2);
+        setWorkDone(true);
         //TODO har improvement chand turn mikhad ro nagofte
     }
 
     public void removeJungle() {
         getTerrain().getTerrainFeatures().remove(TerrainFeature.JUNGLE);
+        setWorkDone(true);
     }
 
     public void removeRoute() {
         getTerrain().setHasRoad(false);
+        setWorkDone(true);
     }
 
     public void repair() {
-        //Nemidoonam
+        getTerrain().getImprovementPair().setValue(true);
+        setWorkDone(true);
     }
 
     public Pair<Improvement, Integer> getMakingImprovement() {
