@@ -108,6 +108,8 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.getCityController().buildUnit(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILD_BUILDING)) != null) {
                 System.out.println(gameMenuController.getCityController().buildBuilding(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILD_UNIT_GOLD)) != null) {
+                System.out.println(gameMenuController.getCityController().buildUnitWithGold(matcher));
             } else if (Objects.equals(input, "back")) {
                 return;
             } else
