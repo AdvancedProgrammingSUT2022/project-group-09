@@ -145,6 +145,26 @@ public class CityController {
         return "building created successfully!";
     }
 
+    public String buildBuildingWithGold(Matcher matcher) {
+        int number = Integer.parseInt(matcher.group("number"));
+        City city = (City) GameDataBase.getSelected();
+        if (city == null) {
+            return "city select nashode";
+        }
+        ArrayList<BuildingType> buildings = city.buildingsCanBeBuilt();
+        if (number > buildings.size() || number < 1) {
+            return "invalid number";
+        }
+        if (!city.getCivilization().equals(GameDataBase.getCurrentCivilization())) {
+            return "in tile male shoma nist";
+        }
+        if (buildings.get(number - 1).getCost() > GameDataBase.getCurrentCivilization().getGold().getCurrentGold()) {
+            return "You don't have enough money to buy this unit";
+        }
+        city.CreateBuilding(buildings.get(number - 1));
+        return "building created successfully!";
+    }
+
     public String buildUnit(Matcher matcher) {
         int number = Integer.parseInt(matcher.group("number"));
         City city = (City) GameDataBase.getSelected();

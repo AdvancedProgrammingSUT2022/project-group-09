@@ -79,6 +79,19 @@ public class City extends Terrain implements Combatble, Selectable {
         makingBuilding = new Pair<>((double) buildingType.getCost(), buildingType);
     }
 
+    public void createBuilding(BuildingType buildingType) {
+        if (!(getCivilization().getTechnologies().getTechnologiesResearched().contains(buildingType.getRequirement())
+                || buildingType.getRequirement() == null)) {
+            System.err.println("technology mored nazara ro nadari");
+            throw new RuntimeException();
+        }
+        if (makingBuilding != null || makingUnit != null) {
+            System.err.println("2 ta chiz hamzaman nemitooni besazi");
+            throw new RuntimeException();
+        }
+        buildings.addBuilding(buildingType);
+    }
+
     public City(Terrain terrain) {
         super(terrain);
         this.citizens = new ArrayList<>();
