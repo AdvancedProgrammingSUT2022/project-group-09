@@ -8,10 +8,8 @@ import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.CombatType;
 import com.civilization.Model.Units.Unit;
-import com.civilization.Model.Units.UnitType;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class BuildingAffect {
     private final ArrayList<BuildingType> buildings;
@@ -251,7 +249,7 @@ public class BuildingAffect {
         return buildings;
     }
 
-    public void addBuildings(BuildingType building) {
+    public void addBuilding(BuildingType building) {
         if (building == BuildingType.WALLS)
             addWall();
         if (building == BuildingType.CASTLE)

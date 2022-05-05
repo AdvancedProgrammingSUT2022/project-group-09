@@ -7,14 +7,11 @@ import com.civilization.Model.Info.CityFood;
 import com.civilization.Model.Info.CityGold;
 import com.civilization.Model.Info.CityProduct;
 import com.civilization.Model.Info.CityScience;
-import com.civilization.Model.TechnologyPackage.TechnologyType;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 
 public class City extends Terrain implements Combatble, Selectable {
     private ArrayList<Terrain> citizens; //length=number of citizens and arraylisti az jahaei hast ke citizen ha kar mikonnand
@@ -382,7 +379,7 @@ public class City extends Terrain implements Combatble, Selectable {
     }
 
     private void deployBuilding() {
-        buildings.addBuildings(makingBuilding.getValue());
+        buildings.addBuilding(makingBuilding.getValue());
         makingBuilding = null;
     }
 
