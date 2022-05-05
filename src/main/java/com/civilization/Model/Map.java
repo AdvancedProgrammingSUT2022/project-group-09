@@ -1,13 +1,8 @@
 package com.civilization.Model;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
-import com.civilization.Controller.GameControllerPackage.MapController;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
-import com.civilization.Model.Terrains.TerrainType;
-import com.civilization.Model.Terrains.TerrainState;
-
-import java.util.ArrayList;
 
 public class Map {
     protected final static int row = 30, column = 30, length = 30; // length for graphic
@@ -39,7 +34,7 @@ public class Map {
         else
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < column; j++) {
-                    terrainStates[i][j] = TerrainState.FOGOFWAR;
+                    terrainStates[i][j] = TerrainState.FOG_OF_WAR;
                 }
             }
     }

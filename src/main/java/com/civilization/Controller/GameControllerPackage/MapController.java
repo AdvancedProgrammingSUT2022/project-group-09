@@ -1,10 +1,8 @@
 package com.civilization.Controller.GameControllerPackage;
 
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 import java.util.regex.Matcher;
 
-import com.civilization.Main;
 import com.civilization.Model.ConsoleColors;
 import com.civilization.Model.Map;
 import com.civilization.Model.Resources.Resource;
@@ -114,11 +112,11 @@ public class MapController {
                 drawHex(mapString, istart, jstart);
 
                 if (j % 2 == 1)
-                    if (terrainStates[x + i + remainder][y + j] == TerrainState.FOGOFWAR) {
+                    if (terrainStates[x + i + remainder][y + j] == TerrainState.FOG_OF_WAR) {
                         backgroundColor = ConsoleColors.GRAY_BACKGROUND;
                     }
                 else 
-                    if (terrainStates[x + i][y + j] == TerrainState.FOGOFWAR) {
+                    if (terrainStates[x + i][y + j] == TerrainState.FOG_OF_WAR) {
                         backgroundColor = ConsoleColors.GRAY_BACKGROUND;
                     }
 
@@ -251,7 +249,7 @@ public class MapController {
         Terrain terrain = GameDataBase.getMainMap().getTerrain(x, y);
         TerrainState terrainState = GameDataBase.getCurrentCivilization().getTerrainState(x, y);
 
-        if (terrainState == TerrainState.FOGOFWAR)
+        if (terrainState == TerrainState.FOG_OF_WAR)
             return "this terrain is in fog for you";
 
         StringBuilder stringBuilder = new StringBuilder();

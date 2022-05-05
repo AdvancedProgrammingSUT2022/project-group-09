@@ -408,7 +408,7 @@ public class UnitController {
         Coordination coordination = destination.getCoordination();
         TerrainState state = GameDataBase.getCurrentCivilization().getTerrainState(coordination.getX(),
                 coordination.getY());
-        if (state == TerrainState.FOGOFWAR)
+        if (state == TerrainState.FOG_OF_WAR)
             return "your destination is in fog of war";
         if (!isDestinationEmpty(unitType, destination))
             return "destination is not empty for you";
@@ -567,7 +567,7 @@ public class UnitController {
         if (MP > terrain.getMp())
             return true;
         if (GameDataBase.getCurrentCivilization().getTerrainState(nextTerrain.getXPosition(),
-                nextTerrain.getYPosition()) == TerrainState.FOGOFWAR)
+                nextTerrain.getYPosition()) == TerrainState.FOG_OF_WAR)
             return false;
         return false;
     }
