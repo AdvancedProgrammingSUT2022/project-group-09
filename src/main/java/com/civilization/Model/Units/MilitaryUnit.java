@@ -73,27 +73,44 @@ public class MilitaryUnit extends Unit {
     @Override
     public void attack(Combatble target) {
         if (target instanceof City) {
-            City targetCity = (City) target;
-            if (getMyType().getRangedCombatStrengh() == 0)
-                targetCity.setHp(targetCity.getHp() - getMyType().getCombatStrengh());
-            else
-                targetCity.setHp(targetCity.getHp() - getMyType().getRangedCombatStrengh());
-            targetCity.defend(this);
-            if (targetCity.getHp() <= 0)
-                targetCity.getConqueredBy(getCivilization());
+            attack((City) target);
         } else if (target instanceof MilitaryUnit) {
-            MilitaryUnit targetUnit = (MilitaryUnit) target;
-            if (getMyType().getRangedCombatStrengh() == 0)
-                targetUnit.setHp(targetUnit.getHp() - getMyType().getCombatStrengh());
-            else
-                targetUnit.setHp(targetUnit.getHp() - getMyType().getRangedCombatStrengh());
-            targetUnit.defend(this);
-            if (targetUnit.getHp() <= 0)
-                targetUnit.delete();
+            attack((MilitaryUnit) target);
         } else {
-            Unit targetUnit = (Unit) target;
-            targetUnit.getConqueredBy(this.getCivilization());
+            attack((Unit) target);
         }
+    }
+
+
+    private void attack(Unit civilianUnit) {
+        if (civilianUnit instanceof MilitaryUnit) {
+            System.err.println("civilian unit jaye military dade shode");
+            throw new RuntimeException();
+        }
+        (civilianUnit).getConqueredBy(this.getCivilization());
+    }
+
+
+    private void attack(MilitaryUnit militaryUnit) {
+        if (getMyType().getRangedCombatStrengh() == 0)
+            militaryUnit.setHp(militaryUnit.getHp() - getMyType().getCombatStrengh());
+        else
+            militaryUnit.setHp(militaryUnit.getHp() - getMyType().getRangedCombatStrengh());
+        militaryUnit.defend(this);
+        if (militaryUnit.getHp() <= 0)
+            militaryUnit.delete();
+
+    }
+
+
+    private void attack(City city) {
+        if (getMyType().getRangedCombatStrengh() == 0)
+            city.setHp(city.getHp() - getMyType().getCombatStrengh());
+        else
+            city.setHp(city.getHp() - getMyType().getRangedCombatStrengh());
+        city.defend(this);
+        if (city.getHp() <= 0)
+            city.getConqueredBy(getCivilization());
     }
 
     public void defend(Combatble target) {

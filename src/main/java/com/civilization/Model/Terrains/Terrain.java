@@ -5,6 +5,7 @@ import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.Coordination;
 import com.civilization.Model.Improvements.Improvement;
+import com.civilization.Model.Pair;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Units.MilitaryUnit;
@@ -13,7 +14,7 @@ import com.civilization.Model.Units.Unit;
 import java.util.ArrayList;
 
 public class Terrain {
-    private Improvement improvement;
+    private Pair<Improvement, Boolean> improvement; // boolean salem boodan roo mide ke age kharabe bayad repair beshe
     private boolean hasRoad;
     private TerrainType type;
     private ArrayList<TerrainFeature> terrainFeatures;
@@ -32,7 +33,7 @@ public class Terrain {
     }
 
     public Terrain(Terrain terrain) {
-        this.improvement = terrain.getImprovement();
+        this.improvement = terrain.getImprovementPair();
         this.hasRoad = terrain.isHasRoad();
         this.type = terrain.getType();
         this.terrainFeatures = terrain.getTerrainFeatures();
@@ -52,11 +53,11 @@ public class Terrain {
     }
 
     public Improvement getImprovement() {
-        return improvement;
+        return improvement.getKey();
     }
 
     public void setImprovement(Improvement improvement) {
-        this.improvement = improvement;
+        this.improvement.setKey(improvement);
     }
 
     public boolean isHasRoad() {
@@ -270,5 +271,13 @@ public class Terrain {
         return "food : " + food +
                 "gold : " + gold +
                 "product : " + product;
+    }
+
+    public void setImprovement(Pair<Improvement, Boolean> improvement) {
+        this.improvement = improvement;
+    }
+
+    public Pair<Improvement, Boolean> getImprovementPair() {
+        return improvement;
     }
 }
