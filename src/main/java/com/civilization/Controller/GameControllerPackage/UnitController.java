@@ -329,9 +329,7 @@ public class UnitController {
         String command = checkWorker();
         if (command != null)
             return command;
-        if (!((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures().contains(TerrainFeature.JUNGLE) &&
-                !((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures()
-                        .contains(TerrainFeature.FOREST)) {
+        if (!((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures().contains(TerrainFeature.JUNGLE)) {
             return "There is no jungle or forrest in this place!";
         }
         ((Worker) GameDataBase.getSelected()).removeJungle();
@@ -342,11 +340,34 @@ public class UnitController {
         String command = checkWorker();
         if (command != null)
             return command;
-        if (!((Worker) GameDataBase.getSelected()).getTerrain().getImprovement().equals(Improvement.ROAD)) {
+        if (!((Worker) GameDataBase.getSelected()).getTerrain().isHasRoad()) {
             return "There is no road in this place!";
         }
         ((Worker) GameDataBase.getSelected()).removeRoute();
         return "Road removed successfully!";
+    }
+
+    public String removeMarsh() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (!((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures().contains(TerrainFeature.MARSH)) {
+            return "There is no marsh or forrest in this place!";
+        }
+        ((Worker) GameDataBase.getSelected()).removeMarsh();
+        return "marsh removed successfully!";
+    }
+
+    public String removeForest() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        if (!((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures()
+                .contains(TerrainFeature.FOREST)) {
+            return "There is no forest or forrest in this place!";
+        }
+        ((Worker) GameDataBase.getSelected()).removeForest();
+        return "forest removed successfully!";
     }
 
     public String repair() {

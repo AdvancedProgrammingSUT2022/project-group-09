@@ -213,6 +213,10 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.getUnitcontroller().removeJungle());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.REMOVE_ROUTE)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().removeRoute());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.REMOVE_MARSH)) != null) {
+                System.out.println(gameMenuController.getUnitcontroller().removeMarsh());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.REMOVE_FOREST)) != null) {
+                System.out.println(gameMenuController.getUnitcontroller().removeForest());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.REPAIR)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().repair());
             } else if (Objects.equals(input, "back")) {

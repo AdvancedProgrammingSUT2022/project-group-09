@@ -36,6 +36,18 @@ public class Worker extends Unit {
         setWorkDone(true);
     }
 
+    public void removeForest() {
+        getTerrain().getTerrainFeatures().remove(TerrainFeature.FOREST);
+        setWorkDone(true);
+    }
+
+
+    public void removeMarsh() {
+        getTerrain().getTerrainFeatures().remove(TerrainFeature.MARSH);
+        setWorkDone(true);
+    }
+
+
     public void removeRoute() {
         getTerrain().setHasRoad(false);
         setWorkDone(true);

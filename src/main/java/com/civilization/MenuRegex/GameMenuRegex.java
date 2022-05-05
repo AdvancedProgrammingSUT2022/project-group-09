@@ -64,6 +64,8 @@ public enum GameMenuRegex {
     BUILD_QUARRY("^build quarry$"),
     REMOVE_JUNGLE("^remove jungle$"),
     REMOVE_ROUTE("^remove route$"),
+    REMOVE_MARSH("remove marsh"),
+    REMOVE_FOREST("remove forest"),
     REPAIR("^repair$"),
     MOVE_MAP("^move map (--number|-n) (?<number>\\d+) to (--direction|-d) (?<direction>(right|left|up|down))$"),
     CHOOSE_TECHNOLOGY("start working on (--technology|-tch) (?<technology>[a-z ]*)"),
