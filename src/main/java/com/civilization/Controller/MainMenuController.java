@@ -44,6 +44,8 @@ public class MainMenuController extends Controller {
                 return "user with username " + username + " doesn't exist";
             users.add(UserDatabase.findUserByUsername(username));
         }
+        if (users.size() <= 1)
+            return "ba kam tar az 2 nafar nemishe bazi kard";
         GameDataBase.runGameForFirstTime(users);
         CurrentMenu.set(CurrentMenu.GameMenu);
         return "you entered Game Menu";
