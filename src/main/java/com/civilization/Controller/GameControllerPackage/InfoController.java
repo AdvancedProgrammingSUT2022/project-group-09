@@ -3,6 +3,7 @@ package com.civilization.Controller.GameControllerPackage;
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.Units.Unit;
+import com.civilization.Model.Units.UnitType;
 
 import java.util.regex.Matcher;
 
@@ -48,7 +49,12 @@ public class InfoController {
     }
 
     public String showMilitary() {
-        return null;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Unit unit : GameDataBase.getCurrentCivilization().getUnits()) {
+            if (UnitType.getSiegeMilitaryUnit().contains(unit.getMyType()))
+                stringBuilder.append(unit.showInfo());
+        }
+        return String.valueOf(stringBuilder);
     }
 
     public String showEconomy() {
