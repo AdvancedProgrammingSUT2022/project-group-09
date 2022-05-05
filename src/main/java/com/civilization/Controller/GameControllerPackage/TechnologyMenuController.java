@@ -39,32 +39,19 @@ public class TechnologyMenuController {
         return String.valueOf(technologies);
     }
 
-    public String technologyTree() {
-        StringBuilder map = new StringBuilder();
-        map.append("*Researched*\n");
-        for (TechnologyType technologyResearched : GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesResearched()) {
-            map.append(technologyResearched.getName()).append("\t");
-        }
-        map.append("\n*Available*\n");
-        for (Map.Entry<TechnologyType, Integer> technologyAvailable : GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesAvailable().entrySet()) {
-            map.append(technologyAvailable.getKey().getName()).append("\t");
-        }
-        map.append("\n*Unavailable*\n");
-        for (TechnologyType technologyResearched : GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesUnavailable()) {
-            map.append(technologyResearched.getName()).append("\t");
-        }
-        map.append("\n");
-        return String.valueOf(map);
-    }
-
     public TechnologyType findTechnologyByName(String name) {
         for (TechnologyType technology : TechnologyType.getAllTechnologies()) {
-            if (technology.getName().toLowerCase().equals(name)){
+            if (technology.getName().toLowerCase().equals(name)) {
                 return technology;
             }
         }
         return null;
     }
+
+    public String technologyTree() {
+        return GameDataBase.getCurrentCivilization().getTechnologies().technologyTree();
+    }
+
 
     public String chooseTechnology(Matcher matcher) {
         TechnologyType technology = findTechnologyByName(matcher.group("technology").toLowerCase());

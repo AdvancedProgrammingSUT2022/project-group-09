@@ -6,6 +6,7 @@ import com.civilization.Model.TechnologyPackage.TechnologyType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class CivilizationTechnologies {
     private ArrayList<TechnologyType> technologiesResearched;
@@ -18,10 +19,10 @@ public class CivilizationTechnologies {
         technologiesUnavailable = TechnologyType.getAllTechnologies();
         technologiesAvailable = new HashMap<>();
         technologiesResearched = new ArrayList<>();
-        loookingForAvailable();
+        lookingForAvailable();
     }
 
-    public void loookingForAvailable() {
+    public void lookingForAvailable() {
         boolean isAvalable;
         TechnologyType technology;
         for (int i = technologiesUnavailable.size() - 1; i >= 0; i--) {
@@ -58,7 +59,7 @@ public class CivilizationTechnologies {
                 remainCost = 0;
                 technologyCurrentlyResearching = null;
                 GameDataBase.getCurrentCivilization().getScience().setAdditionScience(0);
-                loookingForAvailable();
+                lookingForAvailable();
             }
         }
     }
@@ -101,5 +102,23 @@ public class CivilizationTechnologies {
                 return civilization;
         }
         return null;
+    }
+
+    public String technologyTree() {
+        StringBuilder map = new StringBuilder();
+        map.append("*Researched*\n");
+        for (TechnologyType technologyResearched : GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesResearched()) {
+            map.append(technologyResearched.getName()).append("\t");
+        }
+        map.append("\n*Available*\n");
+        for (Map.Entry<TechnologyType, Integer> technologyAvailable : GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesAvailable().entrySet()) {
+            map.append(technologyAvailable.getKey().getName()).append("\t");
+        }
+        map.append("\n*Unavailable*\n");
+        for (TechnologyType technologyResearched : GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesUnavailable()) {
+            map.append(technologyResearched.getName()).append("\t");
+        }
+        map.append("\n");
+        return String.valueOf(map);
     }
 }

@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 
 public class InfoController {
     public String showResearch() {
-        return null;
+        return GameDataBase.getCurrentCivilization().getTechnologies().technologyTree();
     }
 
     public String showHappines() {
