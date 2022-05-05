@@ -84,8 +84,10 @@ public enum GameMenuRegex {
 
     BUY_TILE("buy terrain -x (?<x>-?\\d+) -y (?<y>-?\\d+) "),
     BUILD_UNIT("build unit (--number|-n) (?<number>\\d+)"),
+    BUILD_UNIT_GOLD("build unit (--gold|-g) (--number|-n) (?<number>\\d+)"),
     NEXT_TURN("next turn"),
     BUILD_BUILDING("build building (--number|-n) (?<number>\\d+)"),
+    BUILD_BUILDING_GOLD("build building (--gold|-g) (--number|-n) (?<number>\\d+)"),
     ENTER_CHEAT_MENU("enter cheat menu"),
     INCREASE_GOLD("increase gold (--number|-n) (?<number>\\d+)"),
     INCREASE_SCIENCE("increase science (--number|-n) (?<number>\\d+)"),
