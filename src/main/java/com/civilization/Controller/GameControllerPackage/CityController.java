@@ -75,7 +75,7 @@ public class CityController {
         int xx = Integer.parseInt(matcher.group("xx"));
         int yy = Integer.parseInt(matcher.group("yy"));
         Coordination first = new Coordination(x, y);
-        Coordination second = new Coordination(x, y);
+        Coordination second = new Coordination(xx, yy);
         if (!first.isValidCoordination())
             return "coordination is invalid";
         if (!second.isValidCoordination())
