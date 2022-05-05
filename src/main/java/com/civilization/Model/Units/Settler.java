@@ -4,6 +4,7 @@ import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.Terrains.Terrain;
+import com.civilization.Model.Terrains.TerrainType;
 
 public class Settler extends Unit {
     public Settler(Terrain terrain, Civilization civilization) {
@@ -28,6 +29,8 @@ public class Settler extends Unit {
         for (Terrain terrain : city.getSurroundingTerrain()) {
             terrain.setCivilization(getCivilization());
         }
+        if (getTerrain().getType() == TerrainType.HILLS)
+            city.setHp(city.getHp() + 20);
         delete();
     }
 
@@ -39,6 +42,9 @@ public class Settler extends Unit {
         for (Terrain terrain : city.getSurroundingTerrain()) {
             terrain.setCivilization(getCivilization());
         }
+        if (getTerrain().getType() == TerrainType.HILLS)
+            city.setHp(city.getHp() + 20);
+        delete();
     }
 
 }
