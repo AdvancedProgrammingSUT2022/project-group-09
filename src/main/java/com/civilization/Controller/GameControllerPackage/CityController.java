@@ -3,6 +3,7 @@ package com.civilization.Controller.GameControllerPackage;
 import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.City;
 import com.civilization.Model.Coordination;
+import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
 
@@ -11,6 +12,31 @@ import java.util.regex.Matcher;
 
 public class CityController {
 
+
+    public String buyTerrain(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        Coordination coordination = new Coordination(x, y);
+        if (!coordination.isValidCoordination())
+            return "coordination is invalid";
+        City city = (City) GameDataBase.getSelected();
+        if (city == null)
+            return "city select nashode";
+        for (Terrain terrain : city.getTerrains()) {
+            for (Terrain terrain1 : terrain.getSurroundingTerrain()) {
+                if (terrain1 == coordination.getTerrain()) {
+                    if (terrain1.getCivilization() == null) {
+                        GameDataBase.getCurrentCivilization().getGold().addCurrentGold(-10);
+                        ///gheimat tile =  10;
+                        city.addTerrain(terrain1);
+                        return "kharide shod";
+                    } else
+                        return "in terrain sahab dare";
+                }
+            }
+        }
+        return "in terrain dar mahdoode kharid shoma nist va ddoore";
+    }
 
     public String showCityInfo() {
         StringBuilder buildingString = new StringBuilder();

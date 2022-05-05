@@ -80,6 +80,8 @@ public enum GameMenuRegex {
     MOVE_CITIZEN(""),//TODO
     TECHNOLOGY_MENU("enter technology menu"),
     BUILD_MENU("enter build menu"),
+
+    BUY_TILE("buy terrain -x (?<x>-?\\d+) -y (?<y>-?\\d+) "),
     BUILD_UNIT("build unit (--number|-n) (?<number>\\d+)"),
     NEXT_TURN("next turn"),
     BUILD_BUILDING("build building (--number|-n) (?<number>\\d+)"),
