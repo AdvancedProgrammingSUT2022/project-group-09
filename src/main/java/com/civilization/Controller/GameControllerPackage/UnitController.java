@@ -147,6 +147,11 @@ public class UnitController {
         if (((Settler) GameDataBase.getSelected()).getTerrain() instanceof City) {
             return "There is City in this position!";
         }
+        for (Terrain terrain : ((Settler) GameDataBase.getSelected()).getTerrain().getSurroundingTerrain()) {
+            if (terrain instanceof City) {
+                return "There is City around this position!";
+            }
+        }
         ((Settler) GameDataBase.getSelected()).foundCity();
         return "City created successfully!";
     }
@@ -195,6 +200,9 @@ public class UnitController {
         }
         if (!(GameDataBase.getSelected() instanceof Worker)) {
             return "This is not a worker unit!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getTerrain().getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "This terrain is not yours!";
         }
         return null;
     }
