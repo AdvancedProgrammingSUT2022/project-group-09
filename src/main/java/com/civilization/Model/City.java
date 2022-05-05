@@ -68,6 +68,7 @@ public class City extends Terrain implements Combatble, Selectable {
         if (unitType == UnitType.WORKER && getCivilianUnit() == null) {
             new Worker(this, this.getCivilization());
         }
+        getResources().remove(unitType.getRequiredResourse());
         GameDataBase.getCurrentCivilization().getGold().setCurrentGold(
                 GameDataBase.getCurrentCivilization().getGold().getCurrentGold() - unitType.getCost());
     }
