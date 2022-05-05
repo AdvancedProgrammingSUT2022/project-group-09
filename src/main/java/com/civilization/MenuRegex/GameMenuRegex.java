@@ -1,7 +1,6 @@
 package com.civilization.MenuRegex;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,7 +36,7 @@ public enum GameMenuRegex {
     SELECT_SETTLER("^select settler (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
     SELECT_CITY_COORDINATE1("^select city (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
     SELECT_CITY_COORDINATE2("^select city (--coordinates|-c) -y (?<y>-?[\\d]+)-x (?<x>-?[\\d]+)$"),
-    SELECT_CITY_COORDINATE(""),//TODO
+    SELECT_CITY_COORDINATE(""),
     SELECT_CITY_NAME("^select city (--name|-n) (?<name>\\S+)$"),
     SLEEP("^sleep unit$"),
     ALERT("^alert unit$"),
@@ -47,7 +46,7 @@ public enum GameMenuRegex {
     SETUP("^setup ranged$"),
     ATTACK1("^attack (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
     ATTACK2("^attack (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
-    ATTACK(""),//TODO
+    ATTACK(""),
     FOUND("^found city$"),
     DO_NOTHING("^do nothing$"),
     WAKE("^wake unit$"),
@@ -74,12 +73,12 @@ public enum GameMenuRegex {
     SHOW_CITY_INFO("show info"),
     SET_CITIZEN1("set citizen to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
     SET_CITIZEN2("set citizen to -y (?<y>-?\\d+) -x (?<x>-?\\d+)"),
-    SET_CITIZEN(""),//TODO
+    SET_CITIZEN(""),
     MOVE_CITIZEN1("move citizen -x (?<x>-?\\d+) -y (?<y>-?\\d+) to -x (?<xx>-?\\d+) -y (?<yy>-?\\d+)"),
     MOVE_CITIZEN2("move citizen -y (?<y>-?\\d+) -x (?<x>-?\\d+) to -x (?<xx>-?\\d+) -y (?<yy>-?\\d+)"),
     MOVE_CITIZEN3("move citizen -x (?<x>-?\\d+) -y (?<y>-?\\d+) to -y (?<yy>-?\\d+) -x (?<xx>-?\\d+)"),
     MOVE_CITIZEN4("move citizen -y (?<y>-?\\d+) -x (?<x>-?\\d+) to -y (?<yy>-?\\d+) -x (?<xx>-?\\d+)"),
-    MOVE_CITIZEN(""),//TODO
+    MOVE_CITIZEN(""),
     TECHNOLOGY_MENU("enter technology menu"),
     BUILD_MENU("enter build menu"),
 
@@ -230,13 +229,13 @@ public enum GameMenuRegex {
         if (command.equals(SHOW_DETAILS))
             return getMatcherShowDetails(input);
         if (command.equals(ATTACK))
-            return getMatcherShowDetails(input);
+            return getMatcherAttack(input);
         if (command.equals(SELECT_CITY_COORDINATE))
-            return getMatcherShowDetails(input);
+            return getMatcherSelectCityCoordinate(input);
         if (command.equals(SET_CITIZEN))
-            return getMatcherShowDetails(input);
+            return getMatcherSetCitizen(input);
         if (command.equals(MOVE_CITIZEN))
-            return getMatcherShowDetails(input);
+            return getMatcherMoveCitizen(input);
         Matcher matcher = Pattern.compile(command.regex).matcher(input);
         if (matcher.matches()) {
             return matcher;
