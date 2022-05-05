@@ -4,7 +4,6 @@ import com.civilization.Model.Buildings.BuildingType;
 import com.civilization.Model.City;
 import com.civilization.Model.Coordination;
 import com.civilization.Model.Terrains.Terrain;
-import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
 
 import java.util.ArrayList;
@@ -141,7 +140,7 @@ public class CityController {
         if (!city.getCivilization().equals(GameDataBase.getCurrentCivilization())) {
             return "in tile male shoma nist";
         }
-        city.CreateBuilding(buildings.get(number - 1));
+        city.createBuilding(buildings.get(number - 1));
         return "building created successfully!";
     }
 
@@ -161,7 +160,7 @@ public class CityController {
         if (buildings.get(number - 1).getCost() > GameDataBase.getCurrentCivilization().getGold().getCurrentGold()) {
             return "You don't have enough money to buy this unit";
         }
-        city.CreateBuilding(buildings.get(number - 1));
+        city.createBuildingInstantly(buildings.get(number - 1));
         return "building created successfully!";
     }
 

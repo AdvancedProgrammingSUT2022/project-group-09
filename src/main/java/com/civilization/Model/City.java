@@ -7,7 +7,6 @@ import com.civilization.Model.Info.CityFood;
 import com.civilization.Model.Info.CityGold;
 import com.civilization.Model.Info.CityProduct;
 import com.civilization.Model.Info.CityScience;
-import com.civilization.Model.Info.CivilizationGold;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Units.*;
@@ -57,8 +56,11 @@ public class City extends Terrain implements Combatble, Selectable {
             System.err.println("2 ta chiz hamzaman nemitooni besazi");
             throw new RuntimeException();
         }
+        if (UnitType.getNormalMilitaryUnit().contains(unitType) && this.getMilitaryUnit() == null) {
+            new MilitaryUnit(unitType, this, this.getCivilization());
+        }
         if (UnitType.getSiegeMilitaryUnit().contains(unitType) && this.getMilitaryUnit() == null) {
-            new SiegeMilitaryUnit(makingUnit.getValue(), this, this.getCivilization());
+            new SiegeMilitaryUnit(unitType, this, this.getCivilization());
         }
         if (unitType == UnitType.SETTLER && this.getCivilianUnit() == null) {
             new Settler(this, this.getCivilization());
@@ -70,7 +72,7 @@ public class City extends Terrain implements Combatble, Selectable {
                 GameDataBase.getCurrentCivilization().getGold().getCurrentGold() - unitType.getCost());
     }
 
-    public void CreateBuilding(BuildingType buildingType) {
+    public void createBuilding(BuildingType buildingType) {
         if (!(getCivilization().getTechnologies().getTechnologiesResearched().contains(buildingType.getRequirement())
                 || buildingType.getRequirement() == null)) {
             System.err.println("technology mored nazara ro nadari");
@@ -83,7 +85,7 @@ public class City extends Terrain implements Combatble, Selectable {
         makingBuilding = new Pair<>((double) buildingType.getCost(), buildingType);
     }
 
-    public void createBuilding(BuildingType buildingType) {
+    public void createBuildingInstantly(BuildingType buildingType) {
         if (!(getCivilization().getTechnologies().getTechnologiesResearched().contains(buildingType.getRequirement())
                 || buildingType.getRequirement() == null)) {
             System.err.println("technology mored nazara ro nadari");
