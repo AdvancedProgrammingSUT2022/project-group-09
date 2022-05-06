@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class City extends Terrain implements Combatble, Selectable {
     private ArrayList<Terrain> citizens; // length=number of citizens and arraylisti az jahaei hast ke citizen ha kar
-                                         // mikonnand
+    // mikonnand
     private boolean isCapital;
     private CityProduct cityProduct;
     private CityFood cityFood;
@@ -376,6 +376,8 @@ public class City extends Terrain implements Combatble, Selectable {
         cityScience.setAdditionScience(5);
         doCitizenWork();
         buildings.DoBuildingsWork();
+        if (makingUnit.getValue() == UnitType.SETTLER)
+            cityFood.add(-2); // kam kardan ghaza agar settler boodi
     }
 
     private void doCitizenWork() {
