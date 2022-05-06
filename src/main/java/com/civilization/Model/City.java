@@ -302,6 +302,7 @@ public class City extends Terrain implements Combatble, Selectable {
 
     public void getConqueredBy(Civilization civilization) {
         setUnHappiness(true);
+        setCivilization(civilization);
     }
 
     public void moveCitizen(int citizenNumber, Terrain targetTerrain) {
