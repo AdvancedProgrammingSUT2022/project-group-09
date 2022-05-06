@@ -152,7 +152,7 @@ public class GameMenuView extends View {
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOW_ECONOMIC_INFORMATION)) != null) {
                 System.out.println(gameMenuController.getInfoController().showEconomy());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOW_DIPLOMATIC_INFORMATION)) != null) {
-                System.out.println(gameMenuController.getInfoController().showDiplomotics());
+                System.out.println(gameMenuController.getInfoController().showDiplomatics());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOW_DEALS)) != null) {
                 System.out.println(gameMenuController.getInfoController().showDeals());
             } else if (Objects.equals(input, "back")) {

@@ -58,18 +58,23 @@ public class InfoController {
     }
 
     public String showEconomy() {
-        return null;
+        StringBuilder economy = new StringBuilder();
+        economy.append(GameDataBase.getCurrentCivilization().getInformation());
+        for (City city : GameDataBase.getCurrentCivilization().getCities()) {
+            economy.append("\n").append(city.getDetails());
+        }
+        return String.valueOf(economy);
     }
 
-    public String showDiplomotics() {
+    public String showDiplomatics() {
         return null;
     }
 
     public String showDeals() {
-        return null;
+        return "you don't have any deal!";
     }
 
     public String showNotification() {
-        return null;
+        return "you don't have any notification!";
     }
 }

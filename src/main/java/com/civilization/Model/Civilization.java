@@ -152,8 +152,8 @@ public class Civilization {
         StringBuilder res = new StringBuilder();
         int numberOfCitizens = 0;
         for (City city : cities) {
-            res.append("city ").append(city.getName()).append("demographic:").append("\n")
-                    .append(city.getDemographics());
+            res.append("city ").append(city.getName()).append("demographic:")
+                    .append(city.getDemographics()).append("\n");
         }
         return res.toString();
     }
