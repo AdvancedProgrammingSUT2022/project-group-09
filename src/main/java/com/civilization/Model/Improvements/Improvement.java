@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public enum Improvement {
-    CAMP(0, 0, 0, new ArrayList<Resource>() {
+    //TODO .. bazaiash vaght sakhte shodan jangal ya chizaye digaro az bein mibare
+    CAMP(6, 0, 0, 0, new ArrayList<Resource>() {
         {
             add(Resource.IVORY);
             add(Resource.FURS);
@@ -26,7 +27,7 @@ public enum Improvement {
             add(TerrainType.HILLS);
         }
     }),
-    FARM(1, 0, 0, new ArrayList<Resource>() {
+    FARM(6, 1, 0, 0, new ArrayList<Resource>() {
         {
             add(Resource.WHEAT);
         }
@@ -37,12 +38,12 @@ public enum Improvement {
             add(TerrainType.DESERT);
         }
     }),
-    LUMBERMILL(0, 1, 0, null, TechnologyType.ENGINEERING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
+    LUMBERMILL(6, 0, 1, 0, null, TechnologyType.ENGINEERING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
         {
             add(TerrainFeature.FOREST);
         }
     }),
-    MINE(0, 1, 0, new ArrayList<Resource>() {
+    MINE(6, 0, 1, 0, new ArrayList<Resource>() {
         {
             add(Resource.WHEAT);
             add(Resource.IRON);
@@ -62,7 +63,7 @@ public enum Improvement {
             add(TerrainType.HILLS);
         }
     }),
-    PASTURE(0, 0, 0, new ArrayList<Resource>() {
+    PASTURE(7, 0, 0, 0, new ArrayList<Resource>() {
         {
             add(Resource.HORSE);
             add(Resource.CATTLE);
@@ -77,7 +78,7 @@ public enum Improvement {
             add(TerrainType.HILLS);
         }
     }),
-    PLANTATION(0, 0, 0, new ArrayList<Resource>() {
+    PLANTATION(5, 0, 0, 0, new ArrayList<Resource>() {
         {
             add(Resource.BANANA);
             add(Resource.DYES);
@@ -97,7 +98,7 @@ public enum Improvement {
             add(TerrainFeature.JUNGLE);
         }
     }),
-    QUARRY(0, 0, 0, new ArrayList<Resource>() {
+    QUARRY(7, 0, 0, 0, new ArrayList<Resource>() {
         {
             add(Resource.MARBLE);
         }
@@ -110,7 +111,7 @@ public enum Improvement {
             add(TerrainType.HILLS);
         }
     }),
-    TRADINGPOST(0, 0, 1, new ArrayList<>(), TechnologyType.TRAPPING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
+    TRADINGPOST(8, 0, 0, 1, new ArrayList<>(), TechnologyType.TRAPPING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
         {
             add(TerrainType.GRASSLLAND);
             add(TerrainType.PLAIN);
@@ -118,7 +119,7 @@ public enum Improvement {
             add(TerrainType.TUNDRA);
         }
     }),
-    FACTORY(0, 2, 0, new ArrayList<>(), TechnologyType.ENGINEERING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {
+    FACTORY(0, 0, 2, 0, new ArrayList<>(), TechnologyType.ENGINEERING, new ArrayList<TerrainTypeOrTerrainFeatureType>() {//turn nadasht
         {
             add(TerrainType.GRASSLLAND);
             add(TerrainType.PLAIN);
@@ -127,26 +128,30 @@ public enum Improvement {
             add(TerrainType.SNOW);
         }
     }),
-    ROAD(0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
-    REMOVEFOREST(0, 0, 0, new ArrayList<>(), TechnologyType.MATHEMATICS, new ArrayList<>()),//JANGAL ANBOOH
-    REMOVEJUNGLE(0, 0, 0, new ArrayList<>(), TechnologyType.BRONZEWORKING, new ArrayList<>()),
-    REMOVEROUTE(0, 0, 0, new ArrayList<>(), null, new ArrayList<>());
+    ROAD(3, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
+    REMOVEJUNGLE(6, 0, 0, 0, new ArrayList<>(), TechnologyType.MATHEMATICS, new ArrayList<>()),//JANGAL ANBOOH
+    REMOVEFOREST(3, 0, 0, 0, new ArrayList<>(), TechnologyType.BRONZEWORKING, new ArrayList<>()),
+    REMOVEROUTE(0, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
+    REPAIR(3, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),//turn nadasht
+    DRAINMARSH(5, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>());
     //TODO ROAD RO HANDLE KON
 
     final int food;
     final int production;
     final int gold;
+    final int turn;
     final ArrayList<Resource> improvesResources;
     final TechnologyType requiredTechnology;
     final ArrayList<TerrainTypeOrTerrainFeatureType> canBeBuiltON; //TODO ... terraintype and terrainfeaturetype
 
-    Improvement(int food, int production, int gold, ArrayList<Resource> improvesResources, TechnologyType requiredTechnology, ArrayList<TerrainTypeOrTerrainFeatureType> canBeBuiltOn) {
+    Improvement(int turn, int food, int production, int gold, ArrayList<Resource> improvesResources, TechnologyType requiredTechnology, ArrayList<TerrainTypeOrTerrainFeatureType> canBeBuiltOn) {
         this.food = food;
         this.production = production;
         this.gold = gold;
         this.improvesResources = improvesResources;
         this.requiredTechnology = requiredTechnology;
         this.canBeBuiltON = canBeBuiltOn;
+        this.turn = turn;
     }
 
     public ArrayList<Resource> getImprovesResources() {

@@ -12,7 +12,7 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
             add(Resource.SUGAR);
         }
     }),
-    FOREST(1, 1, 0, 25, 2, new ArrayList<Resource>() {
+    FOREST(1, 1, 0, 25, 2, new ArrayList<Resource>() {//jangal
         {
             add(Resource.DEER);
             add(Resource.FURS);
@@ -21,7 +21,7 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
         }
     }),
     ICE(0, 0, 0, 0, Integer.MAX_VALUE, null),
-    JUNGLE(1, -1, 0, 25, 2, new ArrayList<Resource>() {
+    JUNGLE(1, -1, 0, 25, 2, new ArrayList<Resource>() {//jangal anbooh
         {
             add(Resource.BANANA);
             add(Resource.GEMS);
