@@ -9,6 +9,7 @@ import com.civilization.Model.Info.CityProduct;
 import com.civilization.Model.Info.CityScience;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
+import com.civilization.Model.Terrains.TerrainType;
 import com.civilization.Model.Units.*;
 
 import java.util.ArrayList;
@@ -303,6 +304,16 @@ public class City extends Terrain implements Combatble, Selectable {
     public void getConqueredBy(Civilization civilization) {
         setUnHappiness(true);
         setCivilization(civilization);
+    }
+
+    public void deleteCity() {
+        Terrain terrain = new Terrain(this);
+        GameDataBase.getMainMap().setTerrain(getXPosition(), getYPosition(), terrain);
+        for (Civilization civilization1 : GameDataBase.getCivilizations()) {
+            for (City city : civilization1.getCities()) {
+                city.getTerrains().remove(this);
+            }
+        }
     }
 
     public void moveCitizen(int citizenNumber, Terrain targetTerrain) {

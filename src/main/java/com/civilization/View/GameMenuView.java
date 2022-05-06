@@ -89,6 +89,11 @@ public class GameMenuView extends View {
                     buildMenu(matcher);
                 } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUY_TILE)) != null) {
                     System.out.println(gameMenuController.getCityController().buyTerrain(matcher));
+                } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DELETE_CITY)) != null) {
+                    {
+                        System.out.println(gameMenuController.getCityController().delete());
+                        return;
+                    }
                 } else if (Objects.equals(input, "back")) {
                     GameDataBase.setSelected(null);
                     return;

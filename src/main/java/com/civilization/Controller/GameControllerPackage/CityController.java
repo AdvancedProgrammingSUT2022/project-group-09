@@ -11,6 +11,13 @@ import java.util.regex.Matcher;
 
 public class CityController {
 
+    public String delete() {
+        City city = (City) GameDataBase.getSelected();
+        if (city == null)
+            return "city select nashode";
+        city.deleteCity();
+        return "city deleted";
+    }
 
     public String buyTerrain(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
