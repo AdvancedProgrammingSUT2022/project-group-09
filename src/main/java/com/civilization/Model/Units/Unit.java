@@ -17,7 +17,7 @@ public class Unit implements Combatble, Selectable {
     private UnitType myType;
     private boolean isSleep;
     private int remainingMove;
-    private int hp;
+    private double hp;
     private ArrayList<Coordination> path = new ArrayList<>();
 
     public Unit(UnitType myType) {
@@ -217,11 +217,11 @@ public class Unit implements Combatble, Selectable {
         return result;
     }
 
-    public int getHp() {
+    public double getHp() {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHp(double hp) {
         this.hp = hp;
     }
 

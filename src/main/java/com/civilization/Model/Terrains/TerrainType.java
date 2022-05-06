@@ -144,8 +144,8 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
         return MP;
     }
 
-    public int getCombatModifier() {
-        return combatModifier;
+    public double getCombatModifier() {
+        return (combatModifier + 100) / (double) 100;
     }
 
     public ArrayList<TerrainFeature> getPossibleFeatures() {

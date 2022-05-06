@@ -93,9 +93,11 @@ public class MilitaryUnit extends Unit {
 
     private void attack(MilitaryUnit militaryUnit) {
         if (getMyType().getRangedCombatStrengh() == 0)
-            militaryUnit.setHp(militaryUnit.getHp() - getMyType().getCombatStrengh());
+            militaryUnit.setHp(militaryUnit.getHp() - getMyType().getCombatStrengh()
+                    * getTerrain().getType().getCombatModifier());
         else
-            militaryUnit.setHp(militaryUnit.getHp() - getMyType().getRangedCombatStrengh());
+            militaryUnit.setHp(militaryUnit.getHp() - getMyType().getRangedCombatStrengh()
+                    * getTerrain().getType().getCombatModifier());
         militaryUnit.defend(this);
         if (militaryUnit.getHp() <= 0)
             militaryUnit.delete();
@@ -104,9 +106,11 @@ public class MilitaryUnit extends Unit {
 
     private void attack(City city) {
         if (getMyType().getRangedCombatStrengh() == 0)
-            city.setHp(city.getHp() - getMyType().getCombatStrengh());
+            city.setHp(city.getHp() - getMyType().getCombatStrengh()
+                    * getTerrain().getType().getCombatModifier());
         else
-            city.setHp(city.getHp() - getMyType().getRangedCombatStrengh());
+            city.setHp(city.getHp() - getMyType().getRangedCombatStrengh()
+                    * getTerrain().getType().getCombatModifier());
         city.defend(this);
         if (city.getHp() <= 0)
             city.getConqueredBy(getCivilization());
@@ -116,7 +120,8 @@ public class MilitaryUnit extends Unit {
         if (target instanceof MilitaryUnit) {
             MilitaryUnit targetMilitaryUnit = (MilitaryUnit) target;
             if (targetMilitaryUnit.getMyType().getRangedCombatStrengh() == 0)
-                targetMilitaryUnit.setHp(targetMilitaryUnit.getHp() - getMyType().getCombatStrengh());
+                targetMilitaryUnit.setHp(targetMilitaryUnit.getHp() - getMyType().getCombatStrengh()
+                        * getTerrain().getType().getCombatModifier());
             if (targetMilitaryUnit.getHp() <= 0)
                 targetMilitaryUnit.delete();
         } else {
