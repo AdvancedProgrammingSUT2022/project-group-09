@@ -476,14 +476,14 @@ public class UnitController {
             for (int i = 0; i < path.size(); i++) {
                 Terrain terrain = path.get(i).getTerrain();
                 if (currentTerrain.isHasRoad() && terrain.isHasRoad()) {
-                    //TODO poiya kamel kon
+                    
                 } else if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
                         && currentTerrain.getTerrainFeatures().contains(TerrainFeature.RIVER)) {
                     remainingMove = 0;
                 } else {
                     remainingMove -= terrain.getMp();
                 }
-                currentTerrain=terrain;
+                currentTerrain = terrain;
                 path.remove(i);
                 i = 0;
                 if (remainingMove < 0) {
@@ -514,9 +514,7 @@ public class UnitController {
 
     private ArrayList<Terrain> findBestPath(ArrayList<ArrayList<Terrain>> paths, int MP, int maxMp, UnitType unitType) {
         sortPathsByMP(paths);
-        // TODO finding a path from origin to destination
-        // without breaking any rules
-        // not standing on a terrain which already has a unit in it
+        
         for (ArrayList<Terrain> path : paths) {
             if (isPathAvailable(path, MP, maxMp, unitType)) {
                 return path;
