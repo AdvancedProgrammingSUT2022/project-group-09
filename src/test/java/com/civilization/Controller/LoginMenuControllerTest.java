@@ -37,5 +37,13 @@ public class LoginMenuControllerTest {
         Matcher matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.CREATE1);
         assertEquals(loginMenuController.register(matcher), "nickname format is invalid");
     }
+
+    @Test
+    void registerInvalidPasswordFormat() {
+        LoginMenuController loginMenuController = new LoginMenuController();
+        String input = "user create -u username123 -n nicknameHastam -p 8";
+        Matcher matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.CREATE1);
+        assertEquals(loginMenuController.register(matcher), "nickname format is invalid");
+    }
     
 }
