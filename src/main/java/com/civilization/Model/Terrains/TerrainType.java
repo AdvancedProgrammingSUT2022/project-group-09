@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
     DESERT(0, 0, 0, -33, 1, new ArrayList<TerrainFeature>() {
         {
+            add(TerrainFeature.RIVER);
             add(TerrainFeature.OASIS);
             add(TerrainFeature.FLOODPLAINS);
         }
@@ -26,6 +27,7 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
     }),
     GRASSLLAND(2, 0, 0, -33, 1, new ArrayList<TerrainFeature>() {
         {
+            add(TerrainFeature.RIVER);
             add(TerrainFeature.FOREST);
             add(TerrainFeature.MARSH);
         }
@@ -44,6 +46,7 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
     }),
     HILLS(0, 2, 0, 25, 2, new ArrayList<TerrainFeature>() {
         {
+            add(TerrainFeature.RIVER);
             add(TerrainFeature.FOREST);
             add(TerrainFeature.JUNGLE);
         }
@@ -71,6 +74,7 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
     }),
     PLAIN(1, 1, 0, -33, 1, new ArrayList<TerrainFeature>() {
         {
+            add(TerrainFeature.RIVER);
             add(TerrainFeature.FOREST);
             add(TerrainFeature.JUNGLE);
         }
@@ -89,7 +93,7 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
             add(Resource.SHEEP);
         }
     }),
-    SNOW(0, 0, 0, -33, 1, null, new ArrayList<Resource>() {
+    SNOW(0, 0, 0, -33, 1, new ArrayList<TerrainFeature>(), new ArrayList<Resource>() {
         {
             add(Resource.IRON);
         }

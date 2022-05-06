@@ -124,10 +124,11 @@ public class MainMap extends Map {
 
     private ArrayList<TerrainFeature> randomTerrainFeature(Random random, Terrain terrain) {
         ArrayList<TerrainFeature> features = new ArrayList<>();
-        for (TerrainFeature terrainFeature : terrain.getTerrainFeatures()) {
+        for (TerrainFeature terrainFeature : terrain.getType().getPossibleFeatures()) {
             boolean state = random.nextBoolean();
             if (state) {
-                features.add(terrainFeature);
+                if (!terrainFeature.equals(TerrainFeature.FLOODPLAINS) || features.contains(TerrainFeature.RIVER))
+                    features.add(terrainFeature);
             }
         }
         return features;
@@ -135,7 +136,7 @@ public class MainMap extends Map {
 
     private ArrayList<Resource> randomResources(Random random, Terrain terrain) {
         ArrayList<Resource> resources = new ArrayList<>();
-        for (Resource resource : terrain.getResources()) {
+        for (Resource resource : terrain.getType().getPossibleResources()) {
             boolean state = random.nextBoolean();
             if (state) {
                 resources.add(resource);
