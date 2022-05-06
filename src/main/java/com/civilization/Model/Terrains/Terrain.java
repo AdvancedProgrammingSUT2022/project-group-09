@@ -23,7 +23,7 @@ public class Terrain {
     private MilitaryUnit militaryUnit;
 
     public Terrain() {
-        this.improvement=new Pair<>(null,true);
+        this.improvement = new Pair<>(null, true);
         this.hasRoad = false;
         this.type = null;
         this.terrainFeatures = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Terrain {
 
     public Terrain(TerrainType type) {
         this.type = type;
-        this.improvement=new Pair<>(null,true);
+        this.improvement = new Pair<>(null, true);
         this.hasRoad = false;
         this.terrainFeatures = new ArrayList<>();
         this.resources = new ArrayList<>();
@@ -279,5 +279,14 @@ public class Terrain {
 
     public Pair<Improvement, Boolean> getImprovementPair() {
         return improvement;
+    }
+
+    public double getCombatModifier() {
+        int mao = 0;
+        mao += getType().getCombatModifier();
+        for (TerrainFeature terrainFeature : getTerrainFeatures()) {
+            mao += terrainFeature.getCombatModifier();
+        }
+        return (mao + 100) / (double) 100;
     }
 }

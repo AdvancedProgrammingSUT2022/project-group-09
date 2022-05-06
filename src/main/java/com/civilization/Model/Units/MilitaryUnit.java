@@ -94,10 +94,10 @@ public class MilitaryUnit extends Unit {
     private void attack(MilitaryUnit militaryUnit) {
         if (getMyType().getRangedCombatStrengh() == 0)
             militaryUnit.setHp(militaryUnit.getHp() - getMyType().getCombatStrengh()
-                    * getTerrain().getType().getCombatModifier());
+                    * getTerrain().getCombatModifier());
         else
             militaryUnit.setHp(militaryUnit.getHp() - getMyType().getRangedCombatStrengh()
-                    * getTerrain().getType().getCombatModifier());
+                    * getTerrain().getCombatModifier());
         militaryUnit.defend(this);
         if (militaryUnit.getHp() <= 0)
             militaryUnit.delete();
@@ -107,10 +107,10 @@ public class MilitaryUnit extends Unit {
     private void attack(City city) {
         if (getMyType().getRangedCombatStrengh() == 0)
             city.setHp(city.getHp() - getMyType().getCombatStrengh()
-                    * getTerrain().getType().getCombatModifier());
+                    * getTerrain().getCombatModifier());
         else
             city.setHp(city.getHp() - getMyType().getRangedCombatStrengh()
-                    * getTerrain().getType().getCombatModifier());
+                    * getTerrain().getCombatModifier());
         city.defend(this);
         if (city.getHp() <= 0)
             city.getConqueredBy(getCivilization());
@@ -121,7 +121,7 @@ public class MilitaryUnit extends Unit {
             MilitaryUnit targetMilitaryUnit = (MilitaryUnit) target;
             if (targetMilitaryUnit.getMyType().getRangedCombatStrengh() == 0)
                 targetMilitaryUnit.setHp(targetMilitaryUnit.getHp() - getMyType().getCombatStrengh()
-                        * getTerrain().getType().getCombatModifier());
+                        * getTerrain().getCombatModifier());
             if (targetMilitaryUnit.getHp() <= 0)
                 targetMilitaryUnit.delete();
         } else {
