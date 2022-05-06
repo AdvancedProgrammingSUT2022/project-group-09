@@ -102,7 +102,6 @@ public class MilitaryUnit extends Unit {
 
     }
 
-
     private void attack(City city) {
         if (getMyType().getRangedCombatStrengh() == 0)
             city.setHp(city.getHp() - getMyType().getCombatStrengh());
@@ -120,14 +119,10 @@ public class MilitaryUnit extends Unit {
                 targetMilitaryUnit.setHp(targetMilitaryUnit.getHp() - getMyType().getCombatStrengh());
             if (targetMilitaryUnit.getHp() <= 0)
                 targetMilitaryUnit.delete();
-        } else if (target instanceof City) {
-
-            //dar moghabel shahr defaei nadarim
         } else {
             System.err.println("defend dar moghabel military va city nist");
             throw new RuntimeException();
         }
-
     }
 
     public void pillage() {

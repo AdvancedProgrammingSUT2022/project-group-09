@@ -257,9 +257,7 @@ public class City extends Terrain implements Combatble, Selectable {
             throw new RuntimeException();
         } else if (target instanceof MilitaryUnit) {
             MilitaryUnit targetUnit = (MilitaryUnit) target;
-            // TODO ino az ghasd gozashtam 0 = ghodrat hamle shahr ke nemidoonam chande
-            // ridam be in doc naghes
-            targetUnit.setHp(targetUnit.getHp() - 0);
+            targetUnit.setHp(targetUnit.getHp() - 20);
             if (targetUnit.getHp() <= 0)
                 targetUnit.delete();
         } else {
@@ -270,12 +268,7 @@ public class City extends Terrain implements Combatble, Selectable {
 
     @Override
     public void defend(Combatble target) {
-        if (super.getMilitaryUnit() != null) {
-            // garison shode
-        } else {
-            // bedoon garison defa kon
-        }
-        // shahr defend nadare
+        attack(target);
     }
 
     public String showMakingUnit() {

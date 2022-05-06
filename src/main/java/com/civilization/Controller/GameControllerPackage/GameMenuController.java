@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 
 public class GameMenuController extends Controller {
+    private final CombatController combatController;
     private final CheatController cheatController;
     private final CityController cityController;
     private final InfoController infoController;
@@ -19,6 +20,7 @@ public class GameMenuController extends Controller {
     private final TechnologyMenuController technologyMenuController;
 
     public GameMenuController() {
+        combatController = new CombatController();
         cheatController = new CheatController();
         cityController = new CityController();
         infoController = new InfoController();
@@ -188,5 +190,9 @@ public class GameMenuController extends Controller {
 
     public TechnologyMenuController getTechnologyMenuController() {
         return technologyMenuController;
+    }
+
+    public CombatController getCombatController() {
+        return combatController;
     }
 }
