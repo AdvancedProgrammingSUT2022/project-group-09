@@ -10,11 +10,10 @@ import java.util.regex.Matcher;
 
 public class CombatController {
 
-    public String attack(Matcher matcher) {
+    public String militaryAttack(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         Coordination coordinate = new Coordination(x, y);
-
         if (!coordinate.isValidCoordination()) {
             return "Coordinate is not valid!";
         }
@@ -36,6 +35,27 @@ public class CombatController {
             ((MilitaryUnit) GameDataBase.getSelected()).attack(coordinate.getTerrain().getMilitaryUnit());
         } else if (coordinate.getTerrain().getCivilianUnit() != null) {
             ((MilitaryUnit) GameDataBase.getSelected()).attack(coordinate.getTerrain().getCivilianUnit());
+        } else {
+            return "You can't attack this position!";
+        }
+        return "Attacked!";
+    }
+
+
+    public String cityAttack(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        Coordination coordinate = new Coordination(x, y);
+        if (!coordinate.isValidCoordination()) {
+            return "Coordinate is not valid!";
+        }
+        if (!(GameDataBase.getSelected() instanceof City)) {
+            return "This is not a city";
+        }
+        if (coordinate.getTerrain().getMilitaryUnit() != null) {
+            ((City) GameDataBase.getSelected()).attack(coordinate.getTerrain().getMilitaryUnit());
+        } else if (coordinate.getTerrain().getCivilianUnit() != null) {
+            ((City) GameDataBase.getSelected()).attack(coordinate.getTerrain().getCivilianUnit());
         } else {
             return "You can't attack this position!";
         }

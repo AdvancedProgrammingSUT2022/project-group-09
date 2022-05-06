@@ -89,6 +89,8 @@ public class GameMenuView extends View {
                     buildMenu(matcher);
                 } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUY_TILE)) != null) {
                     System.out.println(gameMenuController.getCityController().buyTerrain(matcher));
+                } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ATTACK)) != null) {
+                    System.out.println(gameMenuController.getCombatController().cityAttack(matcher));
                 } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DELETE_CITY)) != null) {
                     {
                         System.out.println(gameMenuController.getCityController().delete());
@@ -263,7 +265,7 @@ public class GameMenuView extends View {
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SETUP)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().setUp());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ATTACK)) != null) {
-                System.out.println(gameMenuController.getCombatController().attack(matcher));
+                System.out.println(gameMenuController.getCombatController().militaryAttack(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.PILLAGE)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().pillage());
             } else if (Objects.equals(input, "back")) {
