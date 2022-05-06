@@ -54,8 +54,26 @@ public class CoordinationTest {
     }
 
     @Test
+    void seventhInvalidCoordination() {
+        Coordination coordination = new Coordination(Map.getRow() + 10, -10);
+        assertFalse(coordination.isValidCoordination());
+    }
+
+    @Test
+    void eightthInvalidCoordination() {
+        Coordination coordination = new Coordination(-10, Map.getColumn() + 100);
+        assertFalse(coordination.isValidCoordination());
+    }
+
+    @Test
     void firstValidCoordination() {
         Coordination coordination = new Coordination(10, 20);
+        assertTrue(coordination.isValidCoordination());
+    }
+
+    @Test
+    void secondValidCoordination() {
+        Coordination coordination = new Coordination(2, 8);
         assertTrue(coordination.isValidCoordination());
     }
 }
