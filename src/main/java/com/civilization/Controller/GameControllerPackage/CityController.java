@@ -208,6 +208,9 @@ public class CityController {
         if (!city.getCivilization().equals(GameDataBase.getCurrentCivilization())) {
             return "in tile male shoma nist";
         }
+        if (units.get(number - 1).equals(UnitType.SETTLER) && ((City) GameDataBase.getSelected()).getCitizens().size() < 2) {
+            return "number of citizens is not enough!";
+        }
         city.CreateUnit(units.get(number - 1));
         return "unit created successfully!";
     }
@@ -227,6 +230,9 @@ public class CityController {
         }
         if (units.get(number - 1).getCost() > GameDataBase.getCurrentCivilization().getGold().getCurrentGold()) {
             return "You don't have enough money to buy this unit";
+        }
+        if (units.get(number - 1).equals(UnitType.SETTLER) && ((City) GameDataBase.getSelected()).getCitizens().size() < 2) {
+            return "number of citizens is not enough!";
         }
         city.createUnitInstantly(units.get(number - 1));
         return "unit created successfully!";
