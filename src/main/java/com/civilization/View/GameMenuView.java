@@ -259,6 +259,8 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.getUnitcontroller().setUp());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ATTACK)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().attack(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.PILLAGE)) != null) {
+                System.out.println(gameMenuController.getUnitcontroller().pillage());
             } else if (Objects.equals(input, "back")) {
                 GameDataBase.setSelected(null);
                 return;

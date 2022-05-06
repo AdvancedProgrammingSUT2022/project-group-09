@@ -129,4 +129,12 @@ public class MilitaryUnit extends Unit {
         }
 
     }
+
+    public void pillage() {
+        if (getTerrain().getImprovementPair().getKey() == null
+                && getTerrain().getImprovementPair().getValue())
+            getTerrain().getImprovementPair().setValue(false);
+        else
+            throw new RuntimeException();
+    }
 }

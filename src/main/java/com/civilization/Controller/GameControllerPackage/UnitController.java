@@ -133,6 +133,26 @@ public class UnitController {
         return "Attacked!";
     }
 
+    public String pillage() {
+        if (!(GameDataBase.getSelected() instanceof Unit)) {
+            return "No unit selected!";
+        }
+        if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
+            return "selectedo bayad har turn new mikardim";
+        }
+        if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
+            return "This is not a military unit!";
+        }
+        if (((MilitaryUnit) GameDataBase.getSelected()).getTerrain().getImprovement() == null) {
+            return "There is not improvement in this position!";
+        }
+        if (!((MilitaryUnit) GameDataBase.getSelected()).getTerrain().getImprovementPair().getValue()) {
+            return "improvement kharab shode va dobare pillage nemishe";
+        }
+        ((MilitaryUnit) GameDataBase.getSelected()).pillage();
+        return "City created successfully!";
+    }
+
     public String foundCity() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
             return "No unit selected!";

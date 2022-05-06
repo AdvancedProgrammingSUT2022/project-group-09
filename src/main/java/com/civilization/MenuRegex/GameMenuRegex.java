@@ -47,6 +47,7 @@ public enum GameMenuRegex {
     ATTACK1("^attack (--coordinates|-c) -x (?<x>-?[\\d]+) -y (?<y>-?[\\d]+)$"),
     ATTACK2("^attack (--coordinates|-c) -y (?<y>-?[\\d]+) -x (?<x>-?[\\d]+)$"),
     ATTACK(""),
+    PILLAGE("pillage"),
     FOUND("^found city$"),
     DO_NOTHING("^do nothing$"),
     WAKE("^wake unit$"),
