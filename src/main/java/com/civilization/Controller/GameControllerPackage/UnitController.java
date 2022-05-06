@@ -106,7 +106,6 @@ public class UnitController {
     }
 
 
-
     public String pillage() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
             return "No unit selected!";
@@ -440,6 +439,61 @@ public class UnitController {
         unit.setPath(pathCoordination);
         unit.move();
         return "unit moved successfully";
+    }
+
+    public ArrayList<Coordination> getBestPath(Terrain destination, Terrain origin, Unit unit) {
+        int MP = unit.getRemainingMove();
+        int maxMp = unit.getMyType().getMovement();
+        UnitType unitType = unit.getMyType();
+        ArrayList<ArrayList<Terrain>> paths = new ArrayList<>();
+        ArrayList<Terrain> path = new ArrayList<>();
+        path.add(origin);
+
+        Coordination minimum = new Coordination(Math.min(origin.getXPosition(), destination.getXPosition()),
+                Math.min(origin.getYPosition(), destination.getYPosition()));
+        Coordination maximum = new Coordination(Math.max(origin.getXPosition(), destination.getXPosition()),
+                Math.max(origin.getYPosition(), destination.getYPosition()));
+        findAllPaths(destination, origin, MP, paths, path, maximum, minimum);
+        if (paths.isEmpty())
+            return null;
+
+        ArrayList<Terrain> bestPath = findBestPath(paths, unitType.getMovement(), maxMp, unitType);
+        if (bestPath == null)
+            return null;
+
+        ArrayList<Coordination> pathCoordination = new ArrayList<>();
+        setPathCoordinates(pathCoordination, bestPath);
+        pathCoordination.remove(0);
+        return pathCoordination;
+    }
+
+    public int turnNeedToMove(Terrain destination, Terrain origin, Unit unit) {
+        Terrain currentTerrain=unit.getTerrain();
+        int res = 0;
+        int remainingMove = unit.getMyType().getMovement();
+        ArrayList<Coordination> path = getBestPath(destination, origin, unit);
+        while (path.size() != 0) {
+            for (int i = 0; i < path.size(); i++) {
+                Terrain terrain = path.get(i).getTerrain();
+                if (currentTerrain.isHasRoad() && terrain.isHasRoad()) {
+                    //TODO poiya kamel kon
+                } else if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
+                        && currentTerrain.getTerrainFeatures().contains(TerrainFeature.RIVER)) {
+                    remainingMove = 0;
+                } else {
+                    remainingMove -= terrain.getMp();
+                }
+                currentTerrain=terrain;
+                path.remove(i);
+                i = 0;
+                if (remainingMove < 0) {
+                    break;
+                }
+            }
+            remainingMove = unit.getMyType().getMovement();
+            res++;
+        }
+        return res;
     }
 
     private void setPathCoordinates(ArrayList<Coordination> coordinates, ArrayList<Terrain> path) {

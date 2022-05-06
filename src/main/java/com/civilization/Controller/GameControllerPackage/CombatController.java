@@ -1,11 +1,13 @@
 package com.civilization.Controller.GameControllerPackage;
 
+import com.civilization.MenuRegex.GameMenuRegex;
 import com.civilization.Model.City;
 import com.civilization.Model.Coordination;
 import com.civilization.Model.Units.MilitaryUnit;
 import com.civilization.Model.Units.SiegeMilitaryUnit;
 import com.civilization.Model.Units.Unit;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class CombatController {
@@ -13,8 +15,21 @@ public class CombatController {
     public String militaryAttack(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-        Coordination coordinate = new Coordination(x, y);
-        if (!coordinate.isValidCoordination()) {
+        Coordination coordinate2 = new Coordination(x, y);
+        MilitaryUnit militaryUnit = ((MilitaryUnit) GameDataBase.getSelected());
+        Coordination coordinate1 = militaryUnit.getTerrain().getCoordination();
+        ArrayList<Coordination> path = new UnitController().getBestPath(coordinate2.getTerrain(), coordinate1.getTerrain(),
+                militaryUnit);
+        int turnNeed = new UnitController().turnNeedToMove(coordinate2.getTerrain(), coordinate1.getTerrain(),
+                militaryUnit);
+        if (turnNeed <= 1)
+            while (path.size() > militaryUnit.getMyType().getRange()) {
+                militaryUnit.setTerrain(path.get(0).getTerrain());
+                path.remove(0);
+            }
+        else
+            return "bish az 1 turn mikhad va mojaz nist";
+        if (!coordinate2.isValidCoordination()) {
             return "Coordinate is not valid!";
         }
         if (!(GameDataBase.getSelected() instanceof Unit)) {
@@ -29,12 +44,12 @@ public class CombatController {
         if (GameDataBase.getSelected() instanceof SiegeMilitaryUnit &&
                 !((SiegeMilitaryUnit) GameDataBase.getSelected()).isInSiege())
             return "first you have to setup";
-        if (coordinate.getTerrain() instanceof City) {
-            ((MilitaryUnit) GameDataBase.getSelected()).attack((City) coordinate.getTerrain());
-        } else if (coordinate.getTerrain().getMilitaryUnit() != null) {
-            ((MilitaryUnit) GameDataBase.getSelected()).attack(coordinate.getTerrain().getMilitaryUnit());
-        } else if (coordinate.getTerrain().getCivilianUnit() != null) {
-            ((MilitaryUnit) GameDataBase.getSelected()).attack(coordinate.getTerrain().getCivilianUnit());
+        if (coordinate2.getTerrain() instanceof City) {
+            ((MilitaryUnit) GameDataBase.getSelected()).attack((City) coordinate2.getTerrain());
+        } else if (coordinate2.getTerrain().getMilitaryUnit() != null) {
+            ((MilitaryUnit) GameDataBase.getSelected()).attack(coordinate2.getTerrain().getMilitaryUnit());
+        } else if (coordinate2.getTerrain().getCivilianUnit() != null) {
+            ((MilitaryUnit) GameDataBase.getSelected()).attack(coordinate2.getTerrain().getCivilianUnit());
         } else {
             return "You can't attack this position!";
         }
@@ -46,6 +61,15 @@ public class CombatController {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         Coordination coordinate = new Coordination(x, y);
+//        Coordination coordinate2 = new Coordination(x, y);
+//        City city = (City) GameDataBase.getSelected();
+//        Coordination coordinate1 = city.getCoordination();
+//        ArrayList<Coordination> path = new UnitController().getBestPath(coordinate2.getTerrain(),
+//                coordinate1.getTerrain(),
+//                militaryUnit);
+//         TODO fasele city ta oon cordinate ro mikham
+//        if (path.size() > 2)
+//            return "doore va attack nemishe";
         if (!coordinate.isValidCoordination()) {
             return "Coordinate is not valid!";
         }
