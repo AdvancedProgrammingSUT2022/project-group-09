@@ -80,6 +80,8 @@ public enum GameMenuRegex {
     MOVE_CITIZEN3("move citizen -x (?<x>-?\\d+) -y (?<y>-?\\d+) to -y (?<yy>-?\\d+) -x (?<xx>-?\\d+)"),
     MOVE_CITIZEN4("move citizen -y (?<y>-?\\d+) -x (?<x>-?\\d+) to -y (?<yy>-?\\d+) -x (?<xx>-?\\d+)"),
     MOVE_CITIZEN(""),
+
+    REMOVE_CITIZEN("remove citizen -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
     TECHNOLOGY_MENU("enter technology menu"),
     BUILD_MENU("enter build menu"),
 

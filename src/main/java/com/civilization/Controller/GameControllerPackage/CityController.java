@@ -75,6 +75,29 @@ public class CityController {
         return "hame citizen ha mashghool kar hastand";
     }
 
+    public String removeCitizen(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        Coordination coordination = new Coordination(x, y);
+        if (!coordination.isValidCoordination())
+            return "coordination is invalid";
+        City city = (City) GameDataBase.getSelected();
+        if (city == null)
+            return "city select nashode";
+        if (!city.getTerrains().contains(coordination.getTerrain()))
+            return "in tile male shoma nist";
+        for (int i = 0; i < city.getCitizens().size(); i++) {
+            if (city.getCitizens().get(i).getCoordination().equal(coordination))
+                if (city.getCitizens().get(i) == null)
+                    return "in bikar bood az ghabl";
+                else {
+                    city.getCitizens().set(i, null);
+                    return "in citizen bikar shod";
+                }
+        }
+        return "hich citizeni inja aslan kar nemikone";
+    }
+
     public String moveCitizen(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));

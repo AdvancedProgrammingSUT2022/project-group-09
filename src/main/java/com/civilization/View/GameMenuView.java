@@ -85,6 +85,8 @@ public class GameMenuView extends View {
                     System.out.println(gameMenuController.getCityController().setCitizen(matcher));
                 } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVE_CITIZEN)) != null) {
                     System.out.println(gameMenuController.getCityController().moveCitizen(matcher));
+                } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.REMOVE_CITIZEN)) != null) {
+                    System.out.println(gameMenuController.getCityController().removeCitizen(matcher));
                 } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUILD_MENU)) != null) {
                     buildMenu(matcher);
                 } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.BUY_TILE)) != null) {
