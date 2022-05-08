@@ -289,6 +289,7 @@ public class GameMenuView extends View {
         while (true) {
             if (needShowMap)
                 System.out.println(mapController.showMap(x, y));
+            needShowMap = true;
             System.out.println("move map <number> to <direction>(right|left|up|down) \nback for end showing map");
             input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVE_MAP)) != null) {
@@ -312,6 +313,7 @@ public class GameMenuView extends View {
                 break;
             else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOW_DETAILS)) != null) {
                 System.out.println(mapController.showDetails(matcher));
+                needShowMap = false;
             } else
                 System.out.println("invalid command");
         }

@@ -111,12 +111,13 @@ public class MapController {
 
                 drawHex(mapString, istart, jstart);
 
-                if (j % 2 == 1)
+                if (j % 2 == 1) {
                     if (terrainStates[x + i + remainder][y + j] == TerrainState.FOG_OF_WAR) {
                         backgroundColor = ConsoleColors.GRAY_BACKGROUND;
-                    } else if (terrainStates[x + i][y + j] == TerrainState.FOG_OF_WAR) {
-                        backgroundColor = ConsoleColors.GRAY_BACKGROUND;
                     }
+                } else if (terrainStates[x + i][y + j] == TerrainState.FOG_OF_WAR) {
+                    backgroundColor = ConsoleColors.GRAY_BACKGROUND;
+                }
 
                 if (j % 2 == 1)
                     drawMainDetails(mapString, istart, jstart, x + i + remainder, y + j, backgroundColor);
