@@ -2,7 +2,7 @@ package com.civilization.Controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+//import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,7 +12,7 @@ import com.civilization.MenuRegex.LoginMenuRegex;
 import com.civilization.Model.User;
 
 public class LoginMenuControllerTest {
-    @Mock
+//    @Mock
     UserDatabase userDatabase;
 
     @BeforeEach
@@ -43,7 +43,7 @@ public class LoginMenuControllerTest {
         LoginMenuController loginMenuController = new LoginMenuController();
         String input = "user create -u username123 -n nicknameHastam -p 8";
         Matcher matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.CREATE1);
-        assertEquals(loginMenuController.register(matcher), "nickname format is invalid");
+        assertEquals(loginMenuController.register(matcher), "password format is invalid");
     }
     
 }

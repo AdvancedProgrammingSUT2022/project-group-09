@@ -31,7 +31,7 @@ public class LoginMenuController extends Controller {
         if (LoginMenuRegex.getMatcher(nickname, LoginMenuRegex.NICKNAME_FORMAT_REGEX) == null) {
             return "nickname format is invalid";
         }
-        if (LoginMenuRegex.getMatcher(password, LoginMenuRegex.USERNAME_FORMAT_REGEX) == null) {
+        if (LoginMenuRegex.getMatcher(password, LoginMenuRegex.PASSWORD_FORMAT_REGEX) == null) {
             return "password format is invalid";
         }
         User newUser = new User(username, password, nickname);
