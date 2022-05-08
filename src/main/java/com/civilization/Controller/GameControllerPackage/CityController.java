@@ -50,7 +50,7 @@ public class CityController {
         if (city == null)
             return "city select nashode";
         city.update();
-        return city.getDetails() + city.getDemographics() + "\\n" + city.showMakingUnit();
+        return city.getDetails() + city.getDemographics() + "\n" + city.showMakingUnit();
     }
 
     public String setCitizen(Matcher matcher) {
