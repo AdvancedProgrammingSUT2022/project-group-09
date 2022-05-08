@@ -393,6 +393,7 @@ public class UnitController {
     }
 
     private String moveUnit(Terrain destination, Unit unit) {
+        GameDataBase.getCurrentCivilization().getMap().updateExploration();
         Terrain origin = unit.getTerrain();
         int MP = unit.getRemainingMove();
         int maxMp = unit.getMyType().getMovement();
