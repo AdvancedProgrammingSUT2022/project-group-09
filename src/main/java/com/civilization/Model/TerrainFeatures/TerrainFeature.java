@@ -20,7 +20,7 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
             add(Resource.SILK);
         }
     }),
-    ICE(0, 0, 0, 0, Integer.MAX_VALUE, null),
+    ICE(0, 0, 0, 0, Integer.MAX_VALUE, new ArrayList<>()),
     JUNGLE(1, -1, 0, 25, 2, new ArrayList<Resource>() {//jangal anbooh
         {
             add(Resource.BANANA);
@@ -33,8 +33,8 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
             add(Resource.SUGAR);
         }
     }),
-    OASIS(3, 0, 1, -33, 1, null),
-    RIVER(0, 0, 1, 0, 0, null);
+    OASIS(3, 0, 1, -33, 1, new ArrayList<>()),
+    RIVER(0, 0, 1, 0, 0, new ArrayList<>());
 
     TerrainFeature(int food, int product, int gold, int combatModifier, int MP, ArrayList<Resource> possibleResources) {
         this.food = food;
