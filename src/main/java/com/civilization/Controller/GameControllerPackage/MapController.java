@@ -58,7 +58,7 @@ public class MapController {
     }
 
     private void drawMainDetails(String[][] mapString, int istart, int jstart, int xCenter, int yCenter,
-            String backgroundColor) {
+                                 String backgroundColor) {
         for (int k = 2; k > -1; k--) {
             for (int z = jstart + k + 1; z < jstart + k + 1 + 5 + 4 - 2 * k; z++) {
                 mapString[istart + 2 - k][z] = backgroundColor + " " + ConsoleColors.RESET;
@@ -99,7 +99,7 @@ public class MapController {
                 String backgroundColor;
                 if (j % 2 == 1)
                     backgroundColor = getBackgroundColor(terrains[x + i + remainder][y + j]);// inja bug dare az size
-                                                                                             // ararye mizane biroon
+                    // ararye mizane biroon
                 else
                     backgroundColor = getBackgroundColor(terrains[x + i][y + j]);
                 // before entering this function we have checked if it's out of bonds or not
@@ -114,9 +114,7 @@ public class MapController {
                 if (j % 2 == 1)
                     if (terrainStates[x + i + remainder][y + j] == TerrainState.FOG_OF_WAR) {
                         backgroundColor = ConsoleColors.GRAY_BACKGROUND;
-                    }
-                else 
-                    if (terrainStates[x + i][y + j] == TerrainState.FOG_OF_WAR) {
+                    } else if (terrainStates[x + i][y + j] == TerrainState.FOG_OF_WAR) {
                         backgroundColor = ConsoleColors.GRAY_BACKGROUND;
                     }
 
@@ -206,7 +204,7 @@ public class MapController {
     public void showRivers(StringBuilder stringBuilder, Terrain terrain) {
         if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)) {
             stringBuilder.append("this terrain has a river with following terrains:\n");
-            for(Terrain adjTerrain : terrain.getSurroundingTerrain()) {
+            for (Terrain adjTerrain : terrain.getSurroundingTerrain()) {
                 if (adjTerrain.getTerrainFeatures().contains(TerrainFeature.RIVER)) {
                     stringBuilder.append("terrain on x: " + adjTerrain.getXPosition() + " y: " + adjTerrain.getYPosition() + "\n");
                 }
@@ -253,10 +251,15 @@ public class MapController {
             return "this terrain is in fog for you";
 
         StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append("this terrain belongs to: " + terrain.getCivilization().getName() + "\n" +
-                "Terrain type is: " + terrain.getType() + "\n" +
-                "Terrain features are: " + terrain.getTerrainFeatures() + "\n");
+        if (terrain.getCivilization() == null)
+            stringBuilder.append("this terrain belongs to: no one");
+        else
+            stringBuilder.append("this terrain belongs to: ").append(terrain.getCivilization().getName());
+        stringBuilder.append("\n" + "Terrain type is: ")
+                .append(terrain.getType()).append("\n").
+                append("Terrain features are: ")
+                .append(terrain.getTerrainFeatures())
+                .append("\n");
         if (terrainState == TerrainState.VISIBLE) {
             showVisibleDetails(stringBuilder, terrain);
         }
