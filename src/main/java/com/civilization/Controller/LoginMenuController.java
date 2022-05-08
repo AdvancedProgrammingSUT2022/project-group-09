@@ -32,7 +32,7 @@ public class LoginMenuController extends Controller {
             return "nickname format is invalid";
         }
         if (LoginMenuRegex.getMatcher(password, LoginMenuRegex.PASSWORD_FORMAT_REGEX) == null) {
-            return "password format is invalid";
+            return "password is weak";
         }
         User newUser = new User(username, password, nickname);
         if (UserDatabase.isUsernameDuplicate(newUser))
@@ -46,8 +46,8 @@ public class LoginMenuController extends Controller {
 
     public String login(Matcher matcher) {
         User user = new User(matcher.group("username"), matcher.group("password"), "");
-        if (!UserDatabase.isUsernameDuplicate(user)) return "Username and Password didnt match!";
-        if (!UserDatabase.isUsernameAndPasswordTrue(user)) return "Username and Password didnt match!";
+        if (!UserDatabase.isUsernameDuplicate(user)) return "Username and Password didn't match!";
+        if (!UserDatabase.isUsernameAndPasswordTrue(user)) return "Username and Password didn't match!";
         user = UserDatabase.getUserFromUsers(user);
         if (user == null) return "BUG!";
         UserDatabase.setCurrentUser(user);

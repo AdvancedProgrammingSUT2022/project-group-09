@@ -18,15 +18,15 @@ public class MainMenuController extends Controller {
     @Override
     public String menuNavigate(Matcher matcher) {
         String menu = matcher.group("menuname");
-        if (Objects.equals(menu, "Game Menu"))
+        if (Objects.equals(menu, "Game menu"))
             return "use play game method";
-        if (Objects.equals(menu, "Profile Menu")) {
+        if (Objects.equals(menu, "Profile menu")) {
             CurrentMenu.set(CurrentMenu.ProfileMenu);
-            return "entered Profile Menu";
+            return "entered Profile menu";
         }
-        if (Objects.equals(menu, "Login Menu"))
+        if (Objects.equals(menu, "Login menu"))
             return "use logout method";
-        return "menu navigation is not possible";
+        return "menu name is not valid";
     }
 
     public String logout() {

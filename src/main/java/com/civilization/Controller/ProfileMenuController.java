@@ -1,5 +1,6 @@
 package com.civilization.Controller;
 
+import com.civilization.MenuRegex.LoginMenuRegex;
 import com.civilization.View.CurrentMenu;
 
 import java.util.Objects;
@@ -23,6 +24,9 @@ public class ProfileMenuController extends Controller {
         String newNickname = matcher.group("nickname");
         if (UserDatabase.isNicknameDuplicate(newNickname))
             return "user with nickname " + newNickname + " already exists";
+        if (LoginMenuRegex.getMatcher(newNickname, LoginMenuRegex.NICKNAME_FORMAT_REGEX) == null) {
+            return "nickname format is invalid";
+        }
         UserDatabase.getCurrentUser().setNickname(newNickname);
         return "nickname changed successfully!";
     }
@@ -34,6 +38,9 @@ public class ProfileMenuController extends Controller {
             return "current password is invalid";
         if (Objects.equals(oldPassword, newPassword))
             return "please enter a new password";
+        if (LoginMenuRegex.getMatcher(newPassword, LoginMenuRegex.PASSWORD_FORMAT_REGEX) == null) {
+            return "password is weak";
+        }
         return "password changed successfuly";
     }
 
