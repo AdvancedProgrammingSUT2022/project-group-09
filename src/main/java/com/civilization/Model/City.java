@@ -381,8 +381,9 @@ public class City extends Terrain implements Combatble, Selectable {
         cityScience.setAdditionScience(5);
         doCitizenWork();
         buildings.DoBuildingsWork();
-        if (makingUnit.getValue() == UnitType.SETTLER)
-            cityFood.add(-2); // kam kardan ghaza agar settler boodi
+        if (makingUnit != null)
+            if (makingUnit.getValue() == UnitType.SETTLER)
+                cityFood.add(-2); // kam kardan ghaza agar settler boodi
     }
 
     private void doCitizenWork() {

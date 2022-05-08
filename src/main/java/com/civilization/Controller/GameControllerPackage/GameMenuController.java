@@ -35,7 +35,7 @@ public class GameMenuController extends Controller {
                 return GameDataBase.getCurrentCivilization().getName() + "unit :" + unit.getMyType() + "work done nashode";
         }
         doNextTurn();
-        return GameDataBase.getCurrentCivilization().getInformation() + "\\n next turn done";
+        return GameDataBase.getCurrentCivilization().getInformation() + "\n next turn done";
 
     }
 
