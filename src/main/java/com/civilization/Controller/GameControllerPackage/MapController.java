@@ -240,6 +240,9 @@ public class MapController {
             if (technologies.contains(resource.getRequiredTechnology())) {
                 stringBuilder.append(resource + "\n");
             }
+            if (resource.getRequiredTechnology() == null) {
+                stringBuilder.append(resource + "\n");
+            }
         }
     }
 
