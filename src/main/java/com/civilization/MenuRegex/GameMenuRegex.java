@@ -98,7 +98,15 @@ public enum GameMenuRegex {
     INCREASE_SCIENCE("increase science (--number|-n) (?<number>\\d+)"),
     INCREASE_TURN("increase turn (--number|-n) (?<number>\\d+)"),
     INCREASE_HAPPINESS("increase happiness (--number|-n) (?<number>\\d+)"),
-    UNIT_RESET("unit reset");
+    UNIT_RESET("unit reset"),
+
+    SET_ARCHER("set archer to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
+    SET_TANK("set tank to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
+    SET_ARTILLERY("set artillery to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
+    SET_CANNON("set cannon to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
+    SET_LANCER("set lancer to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
+    SET_SETTLER("set settler to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
+    ;
 
 
     private final String regex;

@@ -2,7 +2,10 @@ package com.civilization.Controller.GameControllerPackage;
 
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
+import com.civilization.Model.Coordination;
+import com.civilization.Model.Units.MilitaryUnit;
 import com.civilization.Model.Units.Unit;
+import com.civilization.Model.Units.UnitType;
 
 import java.util.regex.Matcher;
 
@@ -49,6 +52,61 @@ public class CheatController {
         return "done";
 
     }
+    public String setArcher(Matcher matcher)
+    {
+        int x= Integer.parseInt(matcher.group("x"));
+        int y= Integer.parseInt(matcher.group("y"));
+        new MilitaryUnit(UnitType.ARCHER,
+                new Coordination(x,y).getTerrain(),
+                GameDataBase.getCurrentCivilization());
+        return "archer added";
+    }
+    public String setTank(Matcher matcher)
+    {
+        int x= Integer.parseInt(matcher.group("x"));
+        int y= Integer.parseInt(matcher.group("y"));
+        new MilitaryUnit(UnitType.ARCHER,
+                new Coordination(x,y).getTerrain(),
+                GameDataBase.getCurrentCivilization());
+        return "tank added";
+    }
+    public String setArtillery(Matcher matcher)
+    {
+        int x= Integer.parseInt(matcher.group("x"));
+        int y= Integer.parseInt(matcher.group("y"));
+        new MilitaryUnit(UnitType.ARCHER,
+                new Coordination(x,y).getTerrain(),
+                GameDataBase.getCurrentCivilization());
+        return "artillery added";
+    }
+    public String setCannon(Matcher matcher)
+    {
+        int x= Integer.parseInt(matcher.group("x"));
+        int y= Integer.parseInt(matcher.group("y"));
+        new MilitaryUnit(UnitType.ARCHER,
+                new Coordination(x,y).getTerrain(),
+                GameDataBase.getCurrentCivilization());
+        return "cannon added";
+    }
+    public String setLancer(Matcher matcher)
+    {
+        int x= Integer.parseInt(matcher.group("x"));
+        int y= Integer.parseInt(matcher.group("y"));
+        new MilitaryUnit(UnitType.ARCHER,
+                new Coordination(x,y).getTerrain(),
+                GameDataBase.getCurrentCivilization());
+        return "lancer added";
+    }
+    public String setSettler(Matcher matcher)
+    {
+        int x= Integer.parseInt(matcher.group("x"));
+        int y= Integer.parseInt(matcher.group("y"));
+        new MilitaryUnit(UnitType.ARCHER,
+                new Coordination(x,y).getTerrain(),
+                GameDataBase.getCurrentCivilization());
+        return "setller added";
+    }
+
 
 
 }
