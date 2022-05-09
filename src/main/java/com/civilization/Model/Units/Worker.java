@@ -76,7 +76,6 @@ public class Worker extends Unit {
         }
     }
 
-
     private void deployImprovement() {
         if (makingImprovement.getKey() == Improvement.ROAD)
             getTerrain().setHasRoad(true);
