@@ -5,6 +5,8 @@ import java.util.regex.Matcher;
 
 import com.civilization.Model.ConsoleColors;
 import com.civilization.Model.Map;
+import com.civilization.Model.Pair;
+import com.civilization.Model.Improvements.Improvement;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TechnologyPackage.TechnologyType;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
@@ -229,7 +231,21 @@ public class MapController {
                     terrain.getMilitaryUnit().getCivilization().getName() + "\n");
         }
         showResources(stringBuilder, terrain);
+        showImprovements(stringBuilder, terrain);
         showRivers(stringBuilder, terrain);
+    }
+
+    private void showImprovements(StringBuilder stringBuilder, Terrain terrain) {
+        Pair<Improvement, Boolean> improvementPair = terrain.getImprovementPair();
+        if (improvementPair != null) {
+            Improvement improvement = improvementPair.getKey();
+            if (improvement != null && improvementPair.getValue() == true) {
+                if (improvement.getRequiredTechnology() == null || GameDataBase.getCurrentCivilization()
+                        .getTechnologies().getTechnologiesResearched().contains(improvement.getRequiredTechnology())) {
+                            stringBuilder.append("this terrain has " + improvement.name() + " improvement\n");
+                }
+            }
+        }
     }
 
     private void showResources(StringBuilder stringBuilder, Terrain terrain) {
@@ -238,6 +254,9 @@ public class MapController {
                 .getTechnologiesResearched();
         for (Resource resource : terrain.getResources()) {
             if (technologies.contains(resource.getRequiredTechnology())) {
+                stringBuilder.append(resource + "\n");
+            }
+            if (resource.getRequiredTechnology() == null) {
                 stringBuilder.append(resource + "\n");
             }
         }

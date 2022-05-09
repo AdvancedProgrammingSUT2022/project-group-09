@@ -6,13 +6,14 @@ import org.junit.jupiter.api.Test;
 //import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.regex.Matcher;
 
 import com.civilization.MenuRegex.LoginMenuRegex;
 import com.civilization.Model.User;
 
 public class RegisterTest {
+
+    // MockedStatic<UserDatabase> userDatabase = Mockito.mockStatic(UserDatabase.class);
 
     @BeforeEach
     void loadUsers() {
@@ -30,6 +31,7 @@ public class RegisterTest {
 
     @Test
     void registerInvalidUsernameFormat() {
+        // userDatabase.when(() -> UserDatabase.getUsers()).thenReturn(new ArrayList<User>());
         LoginMenuController loginMenuController = new LoginMenuController();
         String input = "user create -u hello***0sad -n nicknameHastam -p password123";
         Matcher matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.CREATE1);
