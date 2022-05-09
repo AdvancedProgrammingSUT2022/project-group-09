@@ -118,7 +118,10 @@ public class CivilizationTechnologies {
         for (TechnologyType technologyUnavailable : GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesUnavailable()) {
             map.append(technologyUnavailable.getName()).append(" requirements:");
             for (TechnologyType technologyType : technologyUnavailable.getRequirement()) {
-                map.append(" ").append(technologyType.getName());
+                if (technologyType != null)
+                    map.append(" ").append(technologyType.getName());
+                else
+                    map.append(" null");
             }
             map.append("\n");
         }

@@ -41,7 +41,7 @@ public class ProfileMenuController extends Controller {
         if (LoginMenuRegex.getMatcher(newPassword, LoginMenuRegex.PASSWORD_FORMAT_REGEX) == null) {
             return "password is weak";
         }
-        return "password changed successfuly";
+        return "password changed successfully";
     }
 
 
