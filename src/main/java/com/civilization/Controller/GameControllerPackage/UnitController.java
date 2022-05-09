@@ -19,6 +19,7 @@ public class UnitController {
         return "no unit selected";
     }
 
+
     public String sleep() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
             return "No unit selected!";
@@ -196,6 +197,13 @@ public class UnitController {
             return "This terrain is not yours!";
         }
         return null;
+    }
+
+    public String showWorkerInfo() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        return ((Worker) GameDataBase.getSelected()).showInfo();
     }
 
     public String buildRoad() {

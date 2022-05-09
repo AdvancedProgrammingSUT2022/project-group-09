@@ -98,4 +98,10 @@ public class Worker extends Unit {
         setSleep(false);
         makingImprovement = null;
     }
+
+    public String getWorkingDetail() {
+        if (makingImprovement == null)
+            return "chzi nemisaze";
+        return makingImprovement.getKey() + " " + makingImprovement.getValue() + " turn baghimoonde";
+    }
 }
