@@ -71,20 +71,25 @@ public enum TechnologyType {
         {
             add(TechnologyType.WRITING);
         }
+    }), CIVILSERVICE("civil service", 400, new ArrayList<TechnologyType>() {
+        {
+            add(TechnologyType.PHILOSOPHY);
+            add(TechnologyType.TRAPPING);
+        }
     }), CHIVALRY("chivalry", 440, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.CIVILSERVICE);
             add(TechnologyType.HORSEBACKRIDING);
             add(TechnologyType.CURRENCY);
         }
-    }), CIVILSERVICE("civil service", 400, new ArrayList<TechnologyType>() {
-        {
-            add(TechnologyType.PHILOSOPHY);
-            add(TechnologyType.TRAPPING);
-        }
     }), CURRENCY("currency", 250, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.MATHEMATICS);
+        }
+    }),THEOLOGY("theology", 250, new ArrayList<TechnologyType>() {
+        {
+            add(TechnologyType.CALENDER);
+            add(TechnologyType.PHILOSOPHY);
         }
     }), EDUCATION("education", 440, new ArrayList<TechnologyType>() {
         {
@@ -117,12 +122,7 @@ public enum TechnologyType {
         {
             add(TechnologyType.METALCASTING);
         }
-    }), THEOLOGY("theology", 250, new ArrayList<TechnologyType>() {
-        {
-            add(TechnologyType.CALENDER);
-            add(TechnologyType.PHILOSOPHY);
-        }
-    }), ACOUSTICS("acoustics", 650, new ArrayList<TechnologyType>() {
+    }),  ACOUSTICS("acoustics", 650, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.EDUCATION);
         }
@@ -135,9 +135,19 @@ public enum TechnologyType {
             add(TechnologyType.EDUCATION);
             add(TechnologyType.CHIVALRY);
         }
+    }), GUNPOWDER("gunpowder", 680, new ArrayList<TechnologyType>() {
+        {
+            add(TechnologyType.PHYSICS);
+            add(TechnologyType.STEEL);
+        }
     }), CHEMISTRY("chemistry", 900, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.GUNPOWDER);
+        }
+    }), PRINTINGPRESS("printing press", 650, new ArrayList<TechnologyType>() {
+        {
+            add(TechnologyType.MACHINERY);
+            add(TechnologyType.PHYSICS);
         }
     }), ECONOMICS("economics", 900, new ArrayList<TechnologyType>() {
         {
@@ -148,11 +158,6 @@ public enum TechnologyType {
         {
             add(TechnologyType.CHEMISTRY);
         }
-    }), GUNPOWDER("gunpowder", 680, new ArrayList<TechnologyType>() {
-        {
-            add(TechnologyType.PHYSICS);
-            add(TechnologyType.STEEL);
-        }
     }), METALLURGY("metallurgy", 900, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.GUNPOWDER);
@@ -161,11 +166,6 @@ public enum TechnologyType {
         {
             add(TechnologyType.ECONOMICS);
             add(TechnologyType.CHEMISTRY);
-        }
-    }), PRINTINGPRESS("printing press", 650, new ArrayList<TechnologyType>() {
-        {
-            add(TechnologyType.MACHINERY);
-            add(TechnologyType.PHYSICS);
         }
     }), RIFLING("rifling", 1425, new ArrayList<TechnologyType>() {
         {
@@ -180,16 +180,10 @@ public enum TechnologyType {
             add(TechnologyType.ARCHAEOLOGY);
             add(TechnologyType.SCIENTIFICTHEORY);
         }
-    }), COMBUSTION("combustion", 2200, new ArrayList<TechnologyType>() {
+    }), STEAMPOWER("steam power", 1680, new ArrayList<TechnologyType>() {
         {
-            add(TechnologyType.REPLACEABLEPARTS);
-            add(TechnologyType.RAILROAD);
-            add(TechnologyType.DYNAMITE);
-        }
-    }), DYNAMITE("dynamite", 1900, new ArrayList<TechnologyType>() {
-        {
-            add(TechnologyType.FERTILIZER);
-            add(TechnologyType.RIFLING);
+            add(TechnologyType.SCIENTIFICTHEORY);
+            add(TechnologyType.MILITARYSCIENCE);
         }
     }), ELECTRICITY("electricity", 1900, new ArrayList<TechnologyType>() {
         {
@@ -208,14 +202,20 @@ public enum TechnologyType {
         {
             add(TechnologyType.STEAMPOWER);
         }
-    }), STEAMPOWER("steam power", 1680, new ArrayList<TechnologyType>() {
-        {
-            add(TechnologyType.SCIENTIFICTHEORY);
-            add(TechnologyType.MILITARYSCIENCE);
-        }
     }), TELEGRAPH("telegraph", 2200, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.ELECTRICITY);
+        }
+    }), DYNAMITE("dynamite", 1900, new ArrayList<TechnologyType>() {
+        {
+            add(TechnologyType.FERTILIZER);
+            add(TechnologyType.RIFLING);
+        }
+    }), COMBUSTION("combustion", 2200, new ArrayList<TechnologyType>() {
+        {
+            add(TechnologyType.REPLACEABLEPARTS);
+            add(TechnologyType.RAILROAD);
+            add(TechnologyType.DYNAMITE);
         }
     });
 
