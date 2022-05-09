@@ -194,6 +194,7 @@ public class GameMenuView extends View {
         if (GameDataBase.getSelected() == null)
             return;
         while (true) {
+            input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().sleep());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVE_UNIT)) != null) {
@@ -237,7 +238,6 @@ public class GameMenuView extends View {
                 return;
             } else
                 System.out.println("invalid command");
-            input = scanner.nextLine();
         }
     }
 
@@ -246,6 +246,7 @@ public class GameMenuView extends View {
         if (GameDataBase.getSelected() == null)
             return;
         while (true) {
+            input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().sleep());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DO_NOTHING)) != null) {
@@ -275,7 +276,6 @@ public class GameMenuView extends View {
                 return;
             } else
                 System.out.println("invalid command");
-            input = scanner.nextLine();
         }
     }
 

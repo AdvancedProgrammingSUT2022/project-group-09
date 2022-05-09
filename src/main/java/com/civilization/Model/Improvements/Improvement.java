@@ -167,13 +167,14 @@ public enum Improvement {
     }
 
     public boolean checkIsPossible(Terrain terrain) {
-        if (!GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesResearched().contains(requiredTechnology))
+        if (!(GameDataBase.getCurrentCivilization().getTechnologies().
+                getTechnologiesResearched().contains(requiredTechnology) || requiredTechnology == null))
             return false;
-        if (canBeBuiltON.contains(terrain.getType())){
+        if (canBeBuiltON.contains(terrain.getType())) {
             return true;
         }
         for (TerrainFeature feature : terrain.getTerrainFeatures()) {
-            if (canBeBuiltON.contains(feature)){
+            if (canBeBuiltON.contains(feature)) {
                 return true;
             }
         }

@@ -85,7 +85,7 @@ public enum GameMenuRegex {
     TECHNOLOGY_MENU("enter technology menu"),
     BUILD_MENU("enter build menu"),
 
-    BUY_TILE("buy terrain -x (?<x>-?\\d+) -y (?<y>-?\\d+) "),
+    BUY_TILE("buy terrain -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
 
     DELETE_CITY("delete city"),
     BUILD_UNIT("build unit (--number|-n) (?<number>\\d+)"),

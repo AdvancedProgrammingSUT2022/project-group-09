@@ -67,6 +67,7 @@ public class MilitaryUnit extends Unit {
     }
 
     public void setInAlert(boolean inAlert) {
+        super.setSleep(true);
         isInAlert = inAlert;
     }
 
