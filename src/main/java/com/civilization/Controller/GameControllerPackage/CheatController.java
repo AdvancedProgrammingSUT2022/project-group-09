@@ -4,6 +4,7 @@ import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.Coordination;
 import com.civilization.Model.Units.MilitaryUnit;
+import com.civilization.Model.Units.Settler;
 import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
 
@@ -65,7 +66,7 @@ public class CheatController {
     {
         int x= Integer.parseInt(matcher.group("x"));
         int y= Integer.parseInt(matcher.group("y"));
-        new MilitaryUnit(UnitType.ARCHER,
+        new MilitaryUnit(UnitType.TANK,
                 new Coordination(x,y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "tank added";
@@ -74,7 +75,7 @@ public class CheatController {
     {
         int x= Integer.parseInt(matcher.group("x"));
         int y= Integer.parseInt(matcher.group("y"));
-        new MilitaryUnit(UnitType.ARCHER,
+        new MilitaryUnit(UnitType.ARTILLERY,
                 new Coordination(x,y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "artillery added";
@@ -83,7 +84,7 @@ public class CheatController {
     {
         int x= Integer.parseInt(matcher.group("x"));
         int y= Integer.parseInt(matcher.group("y"));
-        new MilitaryUnit(UnitType.ARCHER,
+        new MilitaryUnit(UnitType.CANON,
                 new Coordination(x,y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "cannon added";
@@ -92,7 +93,7 @@ public class CheatController {
     {
         int x= Integer.parseInt(matcher.group("x"));
         int y= Integer.parseInt(matcher.group("y"));
-        new MilitaryUnit(UnitType.ARCHER,
+        new MilitaryUnit(UnitType.LANCER,
                 new Coordination(x,y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "lancer added";
@@ -101,7 +102,7 @@ public class CheatController {
     {
         int x= Integer.parseInt(matcher.group("x"));
         int y= Integer.parseInt(matcher.group("y"));
-        new MilitaryUnit(UnitType.ARCHER,
+        new Settler(
                 new Coordination(x,y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "setller added";

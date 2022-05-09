@@ -526,6 +526,8 @@ public class UnitController {
         int res = 0;
         int remainingMove = unit.getMyType().getMovement();
         ArrayList<Coordination> path = getBestPath(destination, origin, unit);
+        if (path == null)
+            return res;
         while (path.size() != 0) {
             for (int i = 0; i < path.size(); i++) {
                 Terrain terrain = path.get(i).getTerrain();
