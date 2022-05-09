@@ -14,7 +14,7 @@ import com.civilization.Model.Units.Unit;
 import java.util.ArrayList;
 
 public class Terrain {
-    private Pair<Improvement, Boolean> improvement; // boolean salem boodan roo mide ke age kharabe bayad repair beshe
+    private final Pair<Improvement, Boolean> improvement; // boolean salem boodan roo mide ke age kharabe bayad repair beshe
     private boolean hasRoad;
     private TerrainType type;
     private ArrayList<TerrainFeature> terrainFeatures;
@@ -271,10 +271,6 @@ public class Terrain {
         return "food : " + food +
                 "gold : " + gold +
                 "product : " + product;
-    }
-
-    public void setImprovement(Pair<Improvement, Boolean> improvement) {
-        this.improvement = improvement;
     }
 
     public Pair<Improvement, Boolean> getImprovementPair() {

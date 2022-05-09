@@ -129,6 +129,7 @@ public enum Improvement {
         }
     }),
     ROAD(3, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
+    REMOVEMARSH(6, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
     REMOVEJUNGLE(6, 0, 0, 0, new ArrayList<>(), TechnologyType.MATHEMATICS, new ArrayList<>()),//JANGAL ANBOOH
     REMOVEFOREST(3, 0, 0, 0, new ArrayList<>(), TechnologyType.BRONZEWORKING, new ArrayList<>()),
     REMOVEROUTE(0, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
@@ -196,5 +197,9 @@ public enum Improvement {
     public static ArrayList<Improvement> getAllImprovements() {
         Improvement[] yourEnums = Improvement.class.getEnumConstants();
         return new ArrayList<>(Arrays.asList(yourEnums));
+    }
+
+    public int getTurn() {
+        return turn;
     }
 }

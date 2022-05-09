@@ -361,7 +361,7 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).removeJungle();
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVEJUNGLE);
         return "Jungle removed successfully!";
     }
 
@@ -375,7 +375,7 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).removeRoute();
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVEROUTE);
         return "Road removed successfully!";
     }
 
@@ -389,7 +389,7 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).removeMarsh();
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVEMARSH);
         return "marsh removed successfully!";
     }
 
@@ -404,7 +404,7 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).removeForest();
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVEFOREST);
         return "forest removed successfully!";
     }
 
@@ -419,7 +419,7 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).repair();
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REPAIR);
         return "Repair successfully!";
     }
 

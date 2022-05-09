@@ -27,34 +27,33 @@ public class Worker extends Unit {
             System.err.println(" 2 ta kar hamzaman nemishe");
             throw new RuntimeException();
         }
-        makingImprovement = new Pair<>(improvement, 2);
+        makingImprovement = new Pair<>(improvement, improvement.getTurn());
         setWorkDone(true);
-        //TODO har improvement chand turn mikhad ro nagofte
     }
 
-    public void removeJungle() {
+    private void removeJungle() {
         getTerrain().getTerrainFeatures().remove(TerrainFeature.JUNGLE);
         setWorkDone(true);
     }
 
-    public void removeForest() {
+    private void removeForest() {
         getTerrain().getTerrainFeatures().remove(TerrainFeature.FOREST);
         setWorkDone(true);
     }
 
 
-    public void removeMarsh() {
+    private void removeMarsh() {
         getTerrain().getTerrainFeatures().remove(TerrainFeature.MARSH);
         setWorkDone(true);
     }
 
 
-    public void removeRoute() {
+    private void removeRoute() {
         getTerrain().setHasRoad(false);
         setWorkDone(true);
     }
 
-    public void repair() {
+    private void repair() {
         getTerrain().getImprovementPair().setValue(true);
         setWorkDone(true);
     }
@@ -77,9 +76,20 @@ public class Worker extends Unit {
         }
     }
 
+
     private void deployImprovement() {
         if (makingImprovement.getKey() == Improvement.ROAD)
             getTerrain().setHasRoad(true);
+        else if (makingImprovement.getKey() == Improvement.REMOVEFOREST)
+            removeForest();
+        else if (makingImprovement.getKey() == Improvement.REPAIR)
+            repair();
+        else if (makingImprovement.getKey() == Improvement.REMOVEROUTE)
+            removeRoute();
+        else if (makingImprovement.getKey() == Improvement.REMOVEMARSH)
+            removeMarsh();
+        else if (makingImprovement.getKey() == Improvement.REMOVEJUNGLE)
+            removeJungle();
         else
             getTerrain().setImprovement(makingImprovement.getKey());
     }
