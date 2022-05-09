@@ -18,7 +18,7 @@ public class CheatController {
     public String increaseGold(Matcher matcher) {
         int number = Integer.parseInt(matcher.group("number"));
         GameDataBase.getCurrentCivilization().getGold().setAddedFromCheat(
-                GameDataBase.getCurrentCivilization().getScience().getAddedFromCheat() + number
+                GameDataBase.getCurrentCivilization().getGold().getAddedFromCheat() + number
         );
         return "added. your current gold was : " + GameDataBase.getCurrentCivilization().getGold().getCurrentGold();
 
@@ -35,7 +35,7 @@ public class CheatController {
     public String increaseHappiness(Matcher matcher) {
         int number = Integer.parseInt(matcher.group("number"));
         GameDataBase.getCurrentCivilization().getHappiness().setAddedFromCheat(
-                GameDataBase.getCurrentCivilization().getScience().getAddedFromCheat() + number
+                GameDataBase.getCurrentCivilization().getHappiness().getAddedFromCheat() + number
         );
         return "added. your current science was : " + GameDataBase.getCurrentCivilization().getScience().getAdditionScience();
 

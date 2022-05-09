@@ -162,7 +162,7 @@ public class Civilization {
         updateData();
         getHappiness().nexTurn();
         getGold().addCurrentGold(getGold().getAdditionGold());
-        if (getGold().getAdditionGold() < 0)  //age manfi shod az science kam one
+        if (getGold().getAdditionGold() < 0)  //age manfi shod az scien`ce kam one
         {
             getScience().add(getGold().getAdditionGold());
             getGold().setCurrentGold(0);
@@ -196,7 +196,7 @@ public class Civilization {
 
     private void updateGold() {
         getGold().setAdditionGold(0);
-        getGold().addCurrentGold(getGold().getAddedFromCheat());
+        getGold().addAdditionGold(getGold().getAddedFromCheat());
         for (City city : cities) {
             getGold().addAdditionGold(city.getGold().getAdditionGold());
         }
