@@ -108,15 +108,15 @@ public class CivilizationTechnologies {
         StringBuilder map = new StringBuilder();
         map.append("*Researched*\n");
         for (TechnologyType technologyResearched : GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesResearched()) {
-            map.append(technologyResearched.getName()).append("   ");
+            map.append(technologyResearched.getName()).append("\n");
         }
         map.append("\n*Available*\n");
         for (Map.Entry<TechnologyType, Integer> technologyAvailable : GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesAvailable().entrySet()) {
-            map.append(technologyAvailable.getKey().getName()).append("   ");
+            map.append(technologyAvailable.getKey().getName()).append("\n");
         }
         map.append("\n*Unavailable*\n");
         for (TechnologyType technologyUnavailable : GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesUnavailable()) {
-            map.append(technologyUnavailable.getName()).append(" requirements:");
+            map.append(technologyUnavailable.getName()).append(" - requirements:");
             for (TechnologyType technologyType : technologyUnavailable.getRequirement()) {
                 if (technologyType != null)
                     map.append(" ").append(technologyType.getName());
