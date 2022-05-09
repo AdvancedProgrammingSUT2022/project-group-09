@@ -129,10 +129,10 @@ public enum Improvement {
         }
     }),
     ROAD(3, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
-    REMOVEMARSH(6, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
-    REMOVEJUNGLE(6, 0, 0, 0, new ArrayList<>(), TechnologyType.MATHEMATICS, new ArrayList<>()),//JANGAL ANBOOH
-    REMOVEFOREST(3, 0, 0, 0, new ArrayList<>(), TechnologyType.BRONZEWORKING, new ArrayList<>()),
-    REMOVEROUTE(0, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
+    REMOVE_MARSH(6, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
+    REMOVE_JUNGLE(6, 0, 0, 0, new ArrayList<>(), TechnologyType.MATHEMATICS, new ArrayList<>()),//JANGAL ANBOOH
+    REMOVE_FOREST(3, 0, 0, 0, new ArrayList<>(), TechnologyType.BRONZEWORKING, new ArrayList<>()),
+    REMOVE_ROUTE(0, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),
     REPAIR(3, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>()),//turn nadasht
     DRAINMARSH(5, 0, 0, 0, new ArrayList<>(), null, new ArrayList<>());
     //TODO ROAD RO HANDLE KON

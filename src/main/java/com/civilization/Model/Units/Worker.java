@@ -6,8 +6,6 @@ import com.civilization.Model.Pair;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 
-import java.util.HashMap;
-
 public class Worker extends Unit {
     private Pair<Improvement, Integer> makingImprovement;
 
@@ -79,15 +77,15 @@ public class Worker extends Unit {
     private void deployImprovement() {
         if (makingImprovement.getKey() == Improvement.ROAD)
             getTerrain().setHasRoad(true);
-        else if (makingImprovement.getKey() == Improvement.REMOVEFOREST)
+        else if (makingImprovement.getKey() == Improvement.REMOVE_FOREST)
             removeForest();
         else if (makingImprovement.getKey() == Improvement.REPAIR)
             repair();
-        else if (makingImprovement.getKey() == Improvement.REMOVEROUTE)
+        else if (makingImprovement.getKey() == Improvement.REMOVE_ROUTE)
             removeRoute();
-        else if (makingImprovement.getKey() == Improvement.REMOVEMARSH)
+        else if (makingImprovement.getKey() == Improvement.REMOVE_MARSH)
             removeMarsh();
-        else if (makingImprovement.getKey() == Improvement.REMOVEJUNGLE)
+        else if (makingImprovement.getKey() == Improvement.REMOVE_JUNGLE)
             removeJungle();
         else
             getTerrain().setImprovement(makingImprovement.getKey());
