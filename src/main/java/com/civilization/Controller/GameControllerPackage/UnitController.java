@@ -166,7 +166,6 @@ public class UnitController {
         if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
             return "selectedo bayad har turn new mikardim";
         }
-        ((Unit) GameDataBase.getSelected()).setSleep(false);
         ((Unit) GameDataBase.getSelected()).wake();
         return "Unit waked up successfully!";
     }
@@ -206,8 +205,11 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getTerrain().isHasRoad()) {
             return "There is road in this position!";
         }
-        if (!Improvement.ROAD.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
-            return "Build is not possible!";
+        if (((Worker) GameDataBase.getSelected()).getTerrain().isHasRoad()) {
+            return "There is road in this position!";
+        }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
         }
         ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.ROAD);
         return "Road created successfully!";
@@ -223,6 +225,9 @@ public class UnitController {
         if (!Improvement.MINE.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
             return "Build is not possible!";
         }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
+        }
         ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.FARM);
         return "Mine created successfully!";
     }
@@ -236,6 +241,9 @@ public class UnitController {
         }
         if (!Improvement.TRADINGPOST.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
             return "Build is not possible!";
+        }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
         }
         ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.TRADINGPOST);
         return "Farm created successfully!";
@@ -251,6 +259,9 @@ public class UnitController {
         if (!Improvement.FARM.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
             return "Build is not possible!";
         }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
+        }
         ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.FARM);
         return "Farm created successfully!";
     }
@@ -264,6 +275,9 @@ public class UnitController {
         }
         if (!Improvement.LUMBERMILL.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
             return "Build is not possible!";
+        }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
         }
         ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.LUMBERMILL);
         return "Lumber mill created successfully!";
@@ -279,6 +293,9 @@ public class UnitController {
         if (!Improvement.PASTURE.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
             return "Build is not possible!";
         }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
+        }
         ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.PASTURE);
         return "Pasture created successfully!";
     }
@@ -292,6 +309,9 @@ public class UnitController {
         }
         if (!Improvement.CAMP.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
             return "Build is not possible!";
+        }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
         }
         ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.CAMP);
         return "Camp created successfully!";
@@ -307,6 +327,9 @@ public class UnitController {
         if (!Improvement.PLANTATION.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
             return "Build is not possible!";
         }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
+        }
         ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.PLANTATION);
         return "Plantation created successfully!";
     }
@@ -321,6 +344,9 @@ public class UnitController {
         if (!Improvement.QUARRY.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
             return "Build is not possible!";
         }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
+        }
         ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.QUARRY);
         return "Quarry created successfully!";
     }
@@ -331,6 +357,9 @@ public class UnitController {
             return command;
         if (!((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures().contains(TerrainFeature.JUNGLE)) {
             return "There is no jungle or forrest in this place!";
+        }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
         }
         ((Worker) GameDataBase.getSelected()).removeJungle();
         return "Jungle removed successfully!";
@@ -343,6 +372,9 @@ public class UnitController {
         if (!((Worker) GameDataBase.getSelected()).getTerrain().isHasRoad()) {
             return "There is no road in this place!";
         }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
+        }
         ((Worker) GameDataBase.getSelected()).removeRoute();
         return "Road removed successfully!";
     }
@@ -353,6 +385,9 @@ public class UnitController {
             return command;
         if (!((Worker) GameDataBase.getSelected()).getTerrain().getTerrainFeatures().contains(TerrainFeature.MARSH)) {
             return "There is no marsh or forrest in this place!";
+        }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
         }
         ((Worker) GameDataBase.getSelected()).removeMarsh();
         return "marsh removed successfully!";
@@ -366,14 +401,24 @@ public class UnitController {
                 .contains(TerrainFeature.FOREST)) {
             return "There is no forest or forrest in this place!";
         }
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
+        }
         ((Worker) GameDataBase.getSelected()).removeForest();
         return "forest removed successfully!";
     }
 
     public String repair() {
         String command = checkWorker();
+        if (command != null)
+            return command;
+        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovementPair() == null)
+            return "improvementi nadarim";
         if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovementPair().getValue())
             return "salem hast in improvement";
+        if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
+            return "kargaran mashghool karand";
+        }
         ((Worker) GameDataBase.getSelected()).repair();
         return "Repair successfully!";
     }
@@ -469,7 +514,7 @@ public class UnitController {
     }
 
     public int turnNeedToMove(Terrain destination, Terrain origin, Unit unit) {
-        Terrain currentTerrain=unit.getTerrain();
+        Terrain currentTerrain = unit.getTerrain();
         int res = 0;
         int remainingMove = unit.getMyType().getMovement();
         ArrayList<Coordination> path = getBestPath(destination, origin, unit);
@@ -477,7 +522,7 @@ public class UnitController {
             for (int i = 0; i < path.size(); i++) {
                 Terrain terrain = path.get(i).getTerrain();
                 if (currentTerrain.isHasRoad() && terrain.isHasRoad()) {
-                    
+
                 } else if (terrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
                         && currentTerrain.getTerrainFeatures().contains(TerrainFeature.RIVER)) {
                     remainingMove = 0;
@@ -515,7 +560,7 @@ public class UnitController {
 
     private ArrayList<Terrain> findBestPath(ArrayList<ArrayList<Terrain>> paths, int MP, int maxMp, UnitType unitType) {
         sortPathsByMP(paths);
-        
+
         for (ArrayList<Terrain> path : paths) {
             if (isPathAvailable(path, MP, maxMp, unitType)) {
                 return path;

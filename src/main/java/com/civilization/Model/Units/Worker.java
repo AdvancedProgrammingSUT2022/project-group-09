@@ -17,7 +17,8 @@ public class Worker extends Unit {
     }
 
     public void makeImprovement(Improvement improvement) {
-        if (!getCivilization().getTechnologies().getTechnologiesResearched().contains(improvement.getRequiredTechnology())) {
+        if (!(getCivilization().getTechnologies().getTechnologiesResearched().contains(improvement.getRequiredTechnology()) ||
+                improvement.getRequiredTechnology() == null)) {
             System.err.println("technology sho nadari");
             throw new RuntimeException();
         }
