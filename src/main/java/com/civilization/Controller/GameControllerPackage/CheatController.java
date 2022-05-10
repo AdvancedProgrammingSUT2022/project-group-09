@@ -3,11 +3,15 @@ package com.civilization.Controller.GameControllerPackage;
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.Coordination;
+import com.civilization.Model.Info.CivilizationTechnologies;
+import com.civilization.Model.TechnologyPackage.TechnologyType;
 import com.civilization.Model.Units.MilitaryUnit;
 import com.civilization.Model.Units.Settler;
 import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class CheatController {
@@ -107,7 +111,15 @@ public class CheatController {
                 GameDataBase.getCurrentCivilization());
         return "setller added";
     }
-
-
-
+    public String openTechnologies() {
+        CivilizationTechnologies technologies = GameDataBase.getCurrentCivilization().getTechnologies();
+        technologies.getTechnologiesResearched().addAll(technologies.getTechnologiesUnavailable());
+        technologies.getTechnologiesResearched().addAll(technologies.getTechnologiesAvailable().keySet());
+        technologies.getTechnologiesResearched().add(technologies.getTechnologyCurrentlyResearching());
+        technologies.setTechnologiesAvailable(new HashMap<>());
+        technologies.setTechnologiesUnavailable(new ArrayList<>());
+        technologies.setTechnologyCurrentlyResearching(null);
+        technologies.setRemainCost(0);
+        return "all technologies were opened!";
+    }
 }

@@ -106,6 +106,7 @@ public enum GameMenuRegex {
     SET_CANNON("set cannon to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
     SET_LANCER("set lancer to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
     SET_SETTLER("set settler to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
+    OPEN_ALL_TECHNOLOGIES("open all technologies")
     ;
 
 
