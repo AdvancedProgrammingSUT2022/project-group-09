@@ -34,4 +34,10 @@ public class MenuNavigateLoginMenuTest {
         Matcher matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.ENTER);
         assertEquals("menu navigation is not possible!", loginMenuController.menuNavigate(matcher));
     }
+
+    @Test
+    public void exit() {
+        LoginMenuController loginMenuController = new LoginMenuController();
+        assertEquals("Game Ended!", loginMenuController.exit());
+    }
 }

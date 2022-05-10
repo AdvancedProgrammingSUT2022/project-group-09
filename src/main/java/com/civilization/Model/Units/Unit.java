@@ -111,6 +111,7 @@ public class Unit implements Combatble, Selectable {
 
     public void move() {
         getCivilization().getMap().updateExploration();
+        // System.out.println(this.path);
         if (isSleep() || isWorkDone())
             return;
         if (path.isEmpty())
@@ -122,7 +123,7 @@ public class Unit implements Combatble, Selectable {
         // }
         // System.out.println("akhar masir");
         for (int i = 0; i < path.size(); i++) {
-            System.out.println("alan injaem " + getTerrain().getCoordination().toString());
+            // System.out.println("alan injaem " + getTerrain().getCoordination().toString());
             Terrain terrain = path.get(i).getTerrain();
             if (!isMovePossible(terrain)) {
                 path.clear();
@@ -137,10 +138,12 @@ public class Unit implements Combatble, Selectable {
                 this.remainingMove -= terrain.getMp();
             }
             this.setTerrain(terrain);
-            path.remove(i);
+            // System.out.println("unit move setTerrain()" + terrain.getCoordination());    
+            this.path.remove(i);
             i = 0;
-            if (remainingMove < 0) {
-                workDone = true;
+            if (this.remainingMove < 0) {
+                this.remainingMove = 0;
+                this.workDone = true;
                 break;
             }
         }

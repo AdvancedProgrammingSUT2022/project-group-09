@@ -9,6 +9,7 @@ import com.civilization.Model.Improvements.Improvement;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
+import com.civilization.Model.Terrains.TerrainType;
 import com.civilization.Model.Units.*;
 
 public class UnitController {
@@ -455,6 +456,8 @@ public class UnitController {
         Coordination coordination = destination.getCoordination();
         TerrainState state = GameDataBase.getCurrentCivilization().getTerrainState(coordination.getX(),
                 coordination.getY());
+        if (unit.getRemainingMove() <= 0)
+            return "unfortunately you don't have enough moving point to move your unit";
         if (state == TerrainState.FOG_OF_WAR)
             return "your destination is in fog of war";
         if (!isDestinationEmpty(unitType, destination))
@@ -479,19 +482,20 @@ public class UnitController {
         Coordination maximum = new Coordination(Math.max(origin.getXPosition(), destination.getXPosition()),
                 Math.max(origin.getYPosition(), destination.getYPosition()));
 
-        findAllPaths(destination, origin, MP, paths, path, maximum, minimum);
+        findAllPaths(destination, origin, maxMp, paths, path, maximum, minimum);
         if (paths.isEmpty())
             return "unfortunately there is no available path for your unit to move to your desired destination";
-
+            // System.out.println("ok");
         ArrayList<Terrain> bestPath = findBestPath(paths, unit.getMyType().getMovement(), maxMp, unitType);
         if (bestPath == null)
             return "unfortunately there is no available path for your unit to move to your desired destination";
-
+        // System.out.println("found best path");
         ArrayList<Coordination> pathCoordination = new ArrayList<>();
         setPathCoordinates(pathCoordination, bestPath);
         pathCoordination.remove(0);
         unit.setPath(pathCoordination);
         unit.move();
+        // System.out.println(pathCoordination);
         return "unit moved successfully";
     }
 
@@ -507,7 +511,7 @@ public class UnitController {
                 Math.min(origin.getYPosition(), destination.getYPosition()));
         Coordination maximum = new Coordination(Math.max(origin.getXPosition(), destination.getXPosition()),
                 Math.max(origin.getYPosition(), destination.getYPosition()));
-        findAllPaths(destination, origin, MP, paths, path, maximum, minimum);
+        findAllPaths(destination, origin, maxMp, paths, path, maximum, minimum);
         if (paths.isEmpty())
             return null;
 
@@ -570,7 +574,8 @@ public class UnitController {
 
     private ArrayList<Terrain> findBestPath(ArrayList<ArrayList<Terrain>> paths, int MP, int maxMp, UnitType unitType) {
         sortPathsByMP(paths);
-
+        // System.out.println("------------------------------");
+        // System.out.println(paths);
         for (ArrayList<Terrain> path : paths) {
             if (isPathAvailable(path, MP, maxMp, unitType)) {
                 return path;
@@ -581,8 +586,6 @@ public class UnitController {
 
     private boolean isPathAvailable(ArrayList<Terrain> path, int MP, int MaxMp, UnitType unitType) {
         if (path.isEmpty())
-            return false;
-        if (path.get(0).getMp() > MP)
             return false;
         MP -= path.get(0).getMp();
         for (int i = 1; i < path.size(); i++) {
@@ -602,7 +605,6 @@ public class UnitController {
                         return false;
                 } else if (terrain.getMilitaryUnit() != null)
                     return false;
-                i--;
             }
         }
         return true;
@@ -639,11 +641,13 @@ public class UnitController {
             return;
         }
         for (Terrain nextTerrain : origin.getSurroundingTerrain()) {
+            // System.out.println("hello darling");
             if (isMovePossible(MP, nextTerrain, origin) && !path.contains(nextTerrain)) {
-                if (path.size() > 10)
-                    continue;
+                // System.out.println("maximum " + maximum);
+                // System.out.println("minimum " + minimum);
                 if (!isPathWorthChecking(path, nextTerrain, maximum, minimum))
                     continue;
+                // System.out.println("wtf is happening mate");
                 ArrayList<Terrain> nextPath = (ArrayList<Terrain>) path.clone();
                 nextPath.add(nextTerrain);
                 findAllPaths(destination, nextTerrain, MP, paths, nextPath, maximum, minimum);
@@ -666,12 +670,15 @@ public class UnitController {
         // if (nextTerrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
         // && terrain.getTerrainFeatures().contains(TerrainFeature.RIVER))
         // return false;
-        if (MP > terrain.getMp())
-            return true;
-        if (GameDataBase.getCurrentCivilization().getTerrainState(nextTerrain.getXPosition(),
-                nextTerrain.getYPosition()) == TerrainState.FOG_OF_WAR)
+        // if (MP < nextTerrain.getMp())
+        //     return false;
+        if (nextTerrain.getType() == TerrainType.MOUNTAIN || nextTerrain.getType() == TerrainType.OCEAN)
             return false;
-        return false;
+        if (GameDataBase.getCurrentCivilization().getTerrainState(nextTerrain.getXPosition(),
+                nextTerrain.getYPosition()) == TerrainState.FOG_OF_WAR) {
+                    return false;
+                }
+        return true;
     }
 
 }
