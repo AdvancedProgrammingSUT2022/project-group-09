@@ -20,6 +20,8 @@ public class CombatController {
         Coordination coordinate1 = militaryUnit.getTerrain().getCoordination();
         ArrayList<Coordination> path = new UnitController().getBestPath(coordinate2.getTerrain(), coordinate1.getTerrain(),
                 militaryUnit);
+        if(path==null)
+            return "unfortunately there is no available path for your unit to move to your desired destination";
         int turnNeed = new UnitController().turnNeedToMove(coordinate2.getTerrain(), coordinate1.getTerrain(),
                 militaryUnit);
         if (turnNeed <= 1)

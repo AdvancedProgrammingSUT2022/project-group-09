@@ -41,14 +41,13 @@ public class GameMenuController extends Controller {
 
     public void doNextTurn() {
         GameDataBase.nextTurn();
-        for (Civilization civilization : GameDataBase.getCivilizations()) {
-            for (City city : civilization.getCities()) {
-                city.nextTurn();
-            }
-            civilization.nextTurn();
-            for (Unit unit : civilization.getUnits()) {
-                unit.nextTurn();
-            }
+        Civilization civilization = GameDataBase.getCurrentCivilization();
+        for (City city : civilization.getCities()) {
+            city.nextTurn();
+        }
+        civilization.nextTurn();
+        for (Unit unit : civilization.getUnits()) {
+            unit.nextTurn();
         }
     }
 

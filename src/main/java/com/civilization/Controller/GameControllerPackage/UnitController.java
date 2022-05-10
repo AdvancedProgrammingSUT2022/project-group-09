@@ -532,7 +532,7 @@ public class UnitController {
         ArrayList<Coordination> path = getBestPath(destination, origin, unit);
         if (path == null)
             return res;
-        while (path.size() != 0) {
+        while (path.size() != 1) {
             for (int i = 0; i < path.size(); i++) {
                 Terrain terrain = path.get(i).getTerrain();
                 if (currentTerrain.isHasRoad() && terrain.isHasRoad()) {
