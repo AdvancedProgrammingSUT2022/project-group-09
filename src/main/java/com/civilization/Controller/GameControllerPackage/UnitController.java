@@ -9,6 +9,7 @@ import com.civilization.Model.Improvements.Improvement;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainState;
+import com.civilization.Model.Terrains.TerrainType;
 import com.civilization.Model.Units.*;
 
 public class UnitController {
@@ -661,6 +662,8 @@ public class UnitController {
         // return false;
         // if (MP < nextTerrain.getMp())
         //     return false;
+        if (nextTerrain.getType() == TerrainType.MOUNTAIN || nextTerrain.getType() == TerrainType.OCEAN)
+            return false;
         if (GameDataBase.getCurrentCivilization().getTerrainState(nextTerrain.getXPosition(),
                 nextTerrain.getYPosition()) == TerrainState.FOG_OF_WAR) {
                     return false;
