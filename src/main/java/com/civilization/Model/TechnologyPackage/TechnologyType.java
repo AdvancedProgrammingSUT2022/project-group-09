@@ -76,17 +76,17 @@ public enum TechnologyType {
             add(TechnologyType.PHILOSOPHY);
             add(TechnologyType.TRAPPING);
         }
+    }), CURRENCY("currency", 250, new ArrayList<TechnologyType>() {
+        {
+            add(TechnologyType.MATHEMATICS);
+        }
     }), CHIVALRY("chivalry", 440, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.CIVILSERVICE);
             add(TechnologyType.HORSEBACKRIDING);
             add(TechnologyType.CURRENCY);
         }
-    }), CURRENCY("currency", 250, new ArrayList<TechnologyType>() {
-        {
-            add(TechnologyType.MATHEMATICS);
-        }
-    }),THEOLOGY("theology", 250, new ArrayList<TechnologyType>() {
+    }), THEOLOGY("theology", 250, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.CALENDER);
             add(TechnologyType.PHILOSOPHY);
@@ -122,7 +122,7 @@ public enum TechnologyType {
         {
             add(TechnologyType.METALCASTING);
         }
-    }),  ACOUSTICS("acoustics", 650, new ArrayList<TechnologyType>() {
+    }), ACOUSTICS("acoustics", 650, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.EDUCATION);
         }
