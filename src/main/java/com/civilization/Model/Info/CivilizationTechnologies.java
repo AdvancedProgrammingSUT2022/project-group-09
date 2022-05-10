@@ -127,4 +127,8 @@ public class CivilizationTechnologies {
         }
         return String.valueOf(map);
     }
+
+    public void setRemainCost(int remainCost) {
+        this.remainCost = remainCost;
+    }
 }

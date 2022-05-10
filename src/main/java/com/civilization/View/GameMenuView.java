@@ -78,6 +78,8 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.getCheatConteroller().increaseTurn(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.UNIT_RESET)) != null) {
                 System.out.println(gameMenuController.getCheatConteroller().resetUnit());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.OPEN_ALL_TECHNOLOGIES)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().openTechnologies());
             } else if (Objects.equals(input, "back")) {
                 return;
             } else
