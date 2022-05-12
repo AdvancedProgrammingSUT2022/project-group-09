@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 
 import com.civilization.Model.User;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,6 +32,19 @@ public class LoginTest {
 
     @BeforeAll
     public static void init() {
+    }
+
+    @Test
+    public void logoutUnsuccesfull() {
+        LoginMenuController loginMenuController = new LoginMenuController();
+        Assertions.assertEquals("useri login nakarde hanooz", loginMenuController.logout());
+    }
+
+    @Test
+    public void logoutSuccessfull() {
+        LoginMenuController loginMenuController = new LoginMenuController();
+        UserDatabase.setCurrentUser(user);
+        Assertions.assertEquals("logged out", loginMenuController.logout());
     }
 
     // try (MockedStatic<ProgramController> theMock = Mockito.mockStatic(ProgramController.class)) {
