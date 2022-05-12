@@ -37,4 +37,10 @@ public class MenuNavigateMainMenuTest {
         Assertions.assertEquals("menu name is not valid", mainMenuController.menuNavigate(matcher));
     }
 
+    @Test
+    public void logout() {
+        MainMenuController mainMenuController = new MainMenuController();
+        Assertions.assertEquals("user logged out successfully", mainMenuController.logout());
+    }
+
 }
