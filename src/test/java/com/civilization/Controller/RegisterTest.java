@@ -13,8 +13,6 @@ import com.civilization.Model.User;
 
 public class RegisterTest {
 
-    // MockedStatic<UserDatabase> userDatabase = Mockito.mockStatic(UserDatabase.class);
-
     @BeforeEach
     void loadUsers() {
         UserDatabase.loadUsers();

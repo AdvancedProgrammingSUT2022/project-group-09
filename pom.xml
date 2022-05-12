@@ -21,6 +21,7 @@
     <jacoco.unit-tests.limit.branch-ratio>0%</jacoco.unit-tests.limit.branch-ratio>
     <jacoco.unit-tests.limit.class-complexity>20</jacoco.unit-tests.limit.class-complexity>
     <jacoco.unit-tests.limit.method-complexity>5</jacoco.unit-tests.limit.method-complexity>
+    <powermock.version>1.7.4</powermock.version>
   </properties>
   <dependencies>
     <!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -47,6 +48,16 @@
           <artifactId>gson</artifactId>
           <version>2.9.0</version>
           <scope>compile</scope>
+    </dependency>
+    <dependency>
+       <groupId>org.powermock</groupId>
+       <artifactId>powermock-module-junit4</artifactId>
+       <version>${powermock.version}</version>
+    </dependency>
+    <dependency>
+       <groupId>org.powermock</groupId>
+       <artifactId>powermock-api-mockito</artifactId>
+       <version>${powermock.version}</version>
     </dependency>
   </dependencies>
   <build>

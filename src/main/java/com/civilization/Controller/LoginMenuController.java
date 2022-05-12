@@ -23,7 +23,7 @@ public class LoginMenuController extends Controller {
 
     public String register(Matcher matcher) {
         String username = matcher.group("username");
-        String nickname =  matcher.group("nickname");
+        String nickname = matcher.group("nickname");
         String password = matcher.group("password");
         if (LoginMenuRegex.getMatcher(username, LoginMenuRegex.USERNAME_FORMAT_REGEX) == null) {
             return "username format is invalid";
@@ -46,17 +46,22 @@ public class LoginMenuController extends Controller {
 
     public String login(Matcher matcher) {
         User user = new User(matcher.group("username"), matcher.group("password"), "");
-        if (!UserDatabase.isUsernameDuplicate(user)) return "Username and Password didn't match!";
-        if (!UserDatabase.isUsernameAndPasswordTrue(user)) return "Username and Password didn't match!";
+        if (!UserDatabase.isUsernameDuplicate(user)) {
+            return "Username and Password didn't match!";
+        }
+        if (!UserDatabase.isUsernameAndPasswordTrue(user)) {
+            return "Username and Password didn't match!";
+        }
         user = UserDatabase.getUserFromUsers(user);
-        if (user == null) return "BUG!";
+        if (user == null)
+            return "BUG!";
         UserDatabase.setCurrentUser(user);
-       // CurrentMenu.set(CurrentMenu.MainMenu);
+        // CurrentMenu.set(CurrentMenu.MainMenu);
         return "user logged in successfully!";
     }
 
     public String logout() {
-        if(UserDatabase.getCurrentUser()==null)
+        if (UserDatabase.getCurrentUser() == null)
             return "useri login nakarde hanooz";
         UserDatabase.setCurrentUser(null);
         return "logged out";
