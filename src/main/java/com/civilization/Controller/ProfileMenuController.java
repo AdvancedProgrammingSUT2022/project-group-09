@@ -9,9 +9,12 @@ import java.util.regex.Matcher;
 public class ProfileMenuController extends Controller {
     @Override
     public String menuNavigate(Matcher matcher) {
-        String menu = matcher.group("menaname");
-        if (Objects.equals(menu, "Main Menu"))
-            exit();
+        String menu = matcher.group("menuname");
+        if (Objects.equals(menu, "Main menu")) {
+            CurrentMenu.set(CurrentMenu.MainMenu);
+            return "entered Main Menu";
+        }
+        // exit();
         return "menu navigation is not possible";
     }
 
@@ -43,6 +46,5 @@ public class ProfileMenuController extends Controller {
         }
         return "password changed successfully";
     }
-
 
 }
