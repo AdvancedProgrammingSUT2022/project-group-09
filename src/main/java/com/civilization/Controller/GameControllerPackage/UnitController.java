@@ -20,6 +20,7 @@ public class UnitController {
         return "no unit selected";
     }
 
+
     public String sleep() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
             return "No unit selected!";
@@ -199,6 +200,13 @@ public class UnitController {
         return null;
     }
 
+    public String showWorkerInfo() {
+        String command = checkWorker();
+        if (command != null)
+            return command;
+        return ((Worker) GameDataBase.getSelected()).showInfo();
+    }
+
     public String buildRoad() {
         String command = checkWorker();
         if (command != null)
@@ -362,7 +370,7 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).removeJungle();
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVE_JUNGLE);
         return "Jungle removed successfully!";
     }
 
@@ -376,7 +384,7 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).removeRoute();
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVE_ROUTE);
         return "Road removed successfully!";
     }
 
@@ -390,7 +398,7 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).removeMarsh();
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVE_MARSH);
         return "marsh removed successfully!";
     }
 
@@ -405,7 +413,7 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).removeForest();
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVE_FOREST);
         return "forest removed successfully!";
     }
 
@@ -420,7 +428,7 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).repair();
+        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REPAIR);
         return "Repair successfully!";
     }
 
@@ -522,7 +530,9 @@ public class UnitController {
         int res = 0;
         int remainingMove = unit.getMyType().getMovement();
         ArrayList<Coordination> path = getBestPath(destination, origin, unit);
-        while (path.size() != 0) {
+        if (path == null)
+            return res;
+        while (path.size() != 1) {
             for (int i = 0; i < path.size(); i++) {
                 Terrain terrain = path.get(i).getTerrain();
                 if (currentTerrain.isHasRoad() && terrain.isHasRoad()) {

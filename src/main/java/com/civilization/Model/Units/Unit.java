@@ -94,7 +94,6 @@ public class Unit implements Combatble, Selectable {
     }
 
     public Civilization getCivilization() {
-
         for (Civilization civilization : GameDataBase.getCivilizations()) {
             if (civilization.getUnits().contains(this))
                 return civilization;
@@ -147,6 +146,7 @@ public class Unit implements Combatble, Selectable {
                 break;
             }
         }
+        setWorkDone(true);
     }
 
     private boolean isMovePossible(Terrain nextTerrain) {
@@ -270,6 +270,8 @@ public class Unit implements Combatble, Selectable {
     }
 
     public void nextTurn() {
+        if (!this.isSleep())
+            this.setWorkDone(false);
         setRemainingMove(getMyType().getMovement());
         move();
         if (this instanceof Worker) {
@@ -285,8 +287,7 @@ public class Unit implements Combatble, Selectable {
                 ((MilitaryUnit) this).fortifyHeal();
         }
 
-        if (!this.isSleep())
-            this.setWorkDone(false);
+
     }
 
 }

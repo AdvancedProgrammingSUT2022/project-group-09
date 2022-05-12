@@ -20,17 +20,17 @@ public class TechnologyMenuController {
         technologies.append("\n*available technologies*\n");
         for (Map.Entry<TechnologyType, Integer> technologyAvailable : GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesAvailable().entrySet()) {
             technologies.append("Technology: ").append(technologyAvailable.getKey().getName()).append("\t");
-            technologies.append("Cost: ").append(technologyAvailable.getValue()).append("\t");
-            technologies.append("Required techs:");
+            technologies.append("- Cost: ").append(technologyAvailable.getValue()).append("    ");
+            technologies.append("- Required techs:");
             for (TechnologyType technologyType : technologyAvailable.getKey().getRequirement()) {
                 technologies.append(" ").append(technologyType.getName());
             }
-            technologies.append("Leads to techs:");
+            technologies.append("- Leads to techs:");
             for (TechnologyType technologyType : technologyAvailable.getKey().getTechnologyUnlocks()) {
                 technologies.append(" ").append(technologyType.getName());
             }
             technologies.append("\t");
-            technologies.append("Unlocks:");
+            technologies.append("- Unlocks:");
             for (Object unlocks : technologyAvailable.getKey().getUnlocks()) {
                 technologies.append(" ").append(unlocks.toString().toLowerCase()); // TODO name
             }

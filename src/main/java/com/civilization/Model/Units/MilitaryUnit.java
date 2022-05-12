@@ -100,8 +100,9 @@ public class MilitaryUnit extends Unit {
             militaryUnit.setHp(militaryUnit.getHp() - getMyType().getRangedCombatStrengh()
                     * getTerrain().getCombatModifier());
         militaryUnit.defend(this);
-        if (militaryUnit.getHp() <= 0)
-            militaryUnit.delete();
+        if (this.getHp() > 0)
+            if (militaryUnit.getHp() <= 0)
+                militaryUnit.delete();
 
     }
 
@@ -113,8 +114,9 @@ public class MilitaryUnit extends Unit {
             city.setHp(city.getHp() - getMyType().getRangedCombatStrengh()
                     * getTerrain().getCombatModifier());
         city.defend(this);
-        if (city.getHp() <= 0)
-            city.getConqueredBy(getCivilization());
+        if (this.getHp() > 0)
+            if (city.getHp() <= 0)
+                city.getConqueredBy(this.getCivilization());
     }
 
     public void defend(Combatble target) {

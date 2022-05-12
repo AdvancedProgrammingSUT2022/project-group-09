@@ -19,7 +19,6 @@ public class GameMenuView extends View {
 
     @Override
     public void run() {
-
         while (CurrentMenu.get() == CurrentMenu.GameMenu) {
             input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.EXIT)) != null)
@@ -59,6 +58,18 @@ public class GameMenuView extends View {
             input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.INCREASE_GOLD)) != null) {
                 System.out.println(gameMenuController.getCheatConteroller().increaseGold(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SET_ARCHER)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().setArcher(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SET_TANK)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().setTank(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SET_SETTLER)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().setSettler(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SET_LANCER)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().setLancer(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SET_ARTILLERY)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().setArtillery(matcher));
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SET_CANNON)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().setCannon(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.INCREASE_HAPPINESS)) != null) {
                 System.out.println(gameMenuController.getCheatConteroller().increaseHappiness(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.INCREASE_SCIENCE)) != null) {
@@ -67,6 +78,8 @@ public class GameMenuView extends View {
                 System.out.println(gameMenuController.getCheatConteroller().increaseTurn(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.UNIT_RESET)) != null) {
                 System.out.println(gameMenuController.getCheatConteroller().resetUnit());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.OPEN_ALL_TECHNOLOGIES)) != null) {
+                System.out.println(gameMenuController.getCheatConteroller().openTechnologies());
             } else if (Objects.equals(input, "back")) {
                 return;
             } else
@@ -197,6 +210,8 @@ public class GameMenuView extends View {
             input = scanner.nextLine();
             if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SLEEP)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().sleep());
+            } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOW_INFO)) != null) {
+                System.out.println(gameMenuController.getUnitcontroller().showWorkerInfo());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.MOVE_UNIT)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().moveUnit(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.DO_NOTHING)) != null) {
