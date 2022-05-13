@@ -1,12 +1,9 @@
 package com.civilization.Model.Units;
 
-import com.civilization.Model.City;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TechnologyPackage.TechnologyType;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public enum UnitType {
