@@ -1,7 +1,6 @@
 package com.civilization.Model;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
-import com.civilization.Model.Terrains.Terrain;
 
 import java.util.ArrayList;
 

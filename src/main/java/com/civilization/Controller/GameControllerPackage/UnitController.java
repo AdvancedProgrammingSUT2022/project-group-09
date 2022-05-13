@@ -20,7 +20,6 @@ public class UnitController {
         return "no unit selected";
     }
 
-
     public String sleep() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
             return "No unit selected!";
@@ -28,7 +27,10 @@ public class UnitController {
         if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
             return "selectedo bayad har turn new mikardim";
         }
-        ((Unit) GameDataBase.getSelected()).sleep();
+        Unit unit = ((Unit) GameDataBase.getSelected());
+        unit.sleep();
+        GameDataBase.getCurrentCivilization().updateNotification("Unit " + unit.getMyType().name() + " on "
+                + unit.getTerrain().getCoordination().toString() + " is now sleeping!");
         return "Unit slept successfully!";
     }
 
@@ -42,7 +44,10 @@ public class UnitController {
         if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
             return "This is not a military unit!";
         }
-        ((MilitaryUnit) GameDataBase.getSelected()).setInAlert(true);
+        MilitaryUnit unit = ((MilitaryUnit) GameDataBase.getSelected());
+        unit.setInAlert(true);
+        GameDataBase.getCurrentCivilization().updateNotification("Military unit " + unit.getMyType().name() + " on "
+                + unit.getTerrain().getCoordination().toString() + " is now in alert!");
         return "Unit is in alert!";
     }
 
@@ -56,7 +61,10 @@ public class UnitController {
         if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
             return "This is not a military unit!";
         }
-        ((MilitaryUnit) GameDataBase.getSelected()).fortify();
+        MilitaryUnit unit = ((MilitaryUnit) GameDataBase.getSelected());
+        unit.fortify();
+        GameDataBase.getCurrentCivilization().updateNotification("Military unit " + unit.getMyType().name() + " on "
+                + unit.getTerrain().getCoordination().toString() + " is now in fortify!");
         return "Unit is fortify!";
     }
 
@@ -70,7 +78,10 @@ public class UnitController {
         if (!(GameDataBase.getSelected() instanceof MilitaryUnit)) {
             return "This is not a military unit!";
         }
-        ((MilitaryUnit) GameDataBase.getSelected()).setFortifyHeal(true);
+        MilitaryUnit unit = ((MilitaryUnit) GameDataBase.getSelected());
+        unit.setFortifyHeal(true);
+        GameDataBase.getCurrentCivilization().updateNotification("Military unit " + unit.getMyType().name() + " on "
+                + unit.getTerrain().getCoordination().toString() + " is now in fortify until full health!");
         return "Unit is fortify until heal!";
     }
 
@@ -87,7 +98,10 @@ public class UnitController {
         if (!(((MilitaryUnit) GameDataBase.getSelected()).getTerrain() instanceof City)) {
             return "This unit is not in city!";
         }
-        ((MilitaryUnit) GameDataBase.getSelected()).garrison();
+        MilitaryUnit unit = ((MilitaryUnit) GameDataBase.getSelected());
+        unit.garrison();
+        GameDataBase.getCurrentCivilization().updateNotification("Military unit " + unit.getMyType().name() + " on "
+                + unit.getTerrain().getCoordination().toString() + " is now in garrison!");
         return "Unit is in garrison!";
     }
 
@@ -103,10 +117,12 @@ public class UnitController {
         }
         if (!UnitType.getSiegeMilitaryUnit().contains(((Unit) GameDataBase.getSelected()).getMyType()))
             return "this unit can not siege";
-        ((SiegeMilitaryUnit) GameDataBase.getSelected()).setUp();
+        SiegeMilitaryUnit unit = ((SiegeMilitaryUnit) GameDataBase.getSelected());
+        unit.setUp();
+        GameDataBase.getCurrentCivilization().updateNotification("Military unit " + unit.getMyType().name() + " on "
+                + unit.getTerrain().getCoordination().toString() + " is now set up!");
         return "Unit is set up!";
     }
-
 
     public String pillage() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
@@ -124,8 +140,11 @@ public class UnitController {
         if (!((MilitaryUnit) GameDataBase.getSelected()).getTerrain().getImprovementPair().getValue()) {
             return "improvement kharab shode va dobare pillage nemishe";
         }
-        ((MilitaryUnit) GameDataBase.getSelected()).pillage();
-        return "City created successfully!";
+        MilitaryUnit unit = ((MilitaryUnit) GameDataBase.getSelected());
+        unit.pillage();
+        GameDataBase.getCurrentCivilization().updateNotification("Military unit " + unit.getMyType().name() + " on "
+                + unit.getTerrain().getCoordination().toString() + " pillaged the city");
+        return "City successfully pillaged!";
     }
 
     public String foundCity() {
@@ -146,7 +165,10 @@ public class UnitController {
                 return "There is City around this position!";
             }
         }
-        ((Settler) GameDataBase.getSelected()).foundCity();
+        Settler settler = (Settler) GameDataBase.getSelected();
+        settler.foundCity();
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("settler found a city on " + settler.getTerrain().getCoordination().toString());
         return "City created successfully!";
     }
 
@@ -168,7 +190,10 @@ public class UnitController {
         if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
             return "selectedo bayad har turn new mikardim";
         }
-        ((Unit) GameDataBase.getSelected()).wake();
+        Unit unit = (Unit) GameDataBase.getSelected();
+        unit.wake();
+        GameDataBase.getCurrentCivilization().updateNotification("Unit " + unit.getMyType().name() + " on "
+                + unit.getTerrain().getCoordination().toString() + " is now awake!");
         return "Unit waked up successfully!";
     }
 
@@ -179,8 +204,11 @@ public class UnitController {
         if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
             return "selectedo bayad har turn new mikardim";
         }
-        ((Unit) GameDataBase.getSelected()).delete();
+        Unit unit = ((Unit) GameDataBase.getSelected());
+        unit.delete();
         GameDataBase.setSelected(null);
+        GameDataBase.getCurrentCivilization().updateNotification("Unit " + unit.getMyType().name() + " on "
+                + unit.getTerrain().getCoordination().toString() + " is now deleted!");
         return "Unit deleted successfully!";
     }
 
@@ -194,7 +222,8 @@ public class UnitController {
         if (!(GameDataBase.getSelected() instanceof Worker)) {
             return "This is not a worker unit!";
         }
-        if (((Unit) GameDataBase.getSelected()).getTerrain().getCivilization() != GameDataBase.getCurrentCivilization()) {
+        if (((Unit) GameDataBase.getSelected()).getTerrain().getCivilization() != GameDataBase
+                .getCurrentCivilization()) {
             return "This terrain is not yours!";
         }
         return null;
@@ -220,7 +249,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.ROAD);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.ROAD);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("A worker made a road on " + worker.getTerrain().getCoordination().toString());
         return "Road created successfully!";
     }
 
@@ -228,7 +260,7 @@ public class UnitController {
         String command = checkWorker();
         if (command != null)
             return command;
-        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovement() == Improvement.FARM) {
+        if (((Worker) GameDataBase.getSelected()).getTerrain().getImprovement() == Improvement.MINE) {
             return "There is mine in this position!";
         }
         if (!Improvement.MINE.checkIsPossible(((Worker) GameDataBase.getSelected()).getTerrain())) {
@@ -237,7 +269,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.FARM);
+        Worker worker = (Worker) GameDataBase.getSelected();
+        worker.makeImprovement(Improvement.MINE);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("a worker made a mine on " + worker.getTerrain().getCoordination().toString());
         return "Mine created successfully!";
     }
 
@@ -254,7 +289,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.TRADINGPOST);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.TRADINGPOST);
+        GameDataBase.getCurrentCivilization().updateNotification(
+                "a worker made a trading post on " + worker.getTerrain().getCoordination().toString());
         return "Farm created successfully!";
     }
 
@@ -271,7 +309,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.FARM);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.FARM);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("a worker made a farm on " + worker.getTerrain().getCoordination().toString());
         return "Farm created successfully!";
     }
 
@@ -288,7 +329,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.LUMBERMILL);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.LUMBERMILL);
+        GameDataBase.getCurrentCivilization().updateNotification(
+                "a worker made a lubmermill on " + worker.getTerrain().getCoordination().toString());
         return "Lumber mill created successfully!";
     }
 
@@ -305,7 +349,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.PASTURE);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.PASTURE);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("a worker made a pasture on " + worker.getTerrain().getCoordination().toString());
         return "Pasture created successfully!";
     }
 
@@ -322,7 +369,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.CAMP);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.CAMP);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("a worker made a camp on " + worker.getTerrain().getCoordination().toString());
         return "Camp created successfully!";
     }
 
@@ -339,7 +389,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.PLANTATION);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.PLANTATION);
+        GameDataBase.getCurrentCivilization().updateNotification(
+                "a worker made a plantation on " + worker.getTerrain().getCoordination().toString());
         return "Plantation created successfully!";
     }
 
@@ -356,7 +409,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.QUARRY);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.QUARRY);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("a worker made a quarry on " + worker.getTerrain().getCoordination().toString());
         return "Quarry created successfully!";
     }
 
@@ -370,7 +426,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVE_JUNGLE);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.REMOVE_JUNGLE);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("a worker removed jungle on " + worker.getTerrain().getCoordination().toString());
         return "Jungle removed successfully!";
     }
 
@@ -384,7 +443,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVE_ROUTE);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.REMOVE_ROUTE);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("a worker removed route on " + worker.getTerrain().getCoordination().toString());
         return "Road removed successfully!";
     }
 
@@ -398,7 +460,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVE_MARSH);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.REMOVE_MARSH);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("a worker removed marsh on " + worker.getTerrain().getCoordination().toString());
         return "marsh removed successfully!";
     }
 
@@ -413,7 +478,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REMOVE_FOREST);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.REMOVE_FOREST);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("a worker removed forest on " + worker.getTerrain().getCoordination().toString());
         return "forest removed successfully!";
     }
 
@@ -428,7 +496,10 @@ public class UnitController {
         if (((Worker) GameDataBase.getSelected()).getMakingImprovement() != null) {
             return "kargaran mashghool karand";
         }
-        ((Worker) GameDataBase.getSelected()).makeImprovement(Improvement.REPAIR);
+        Worker worker = ((Worker) GameDataBase.getSelected());
+        worker.makeImprovement(Improvement.REPAIR);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("a worker repaired on " + worker.getTerrain().getCoordination().toString());
         return "Repair successfully!";
     }
 
@@ -465,9 +536,10 @@ public class UnitController {
         // return DjikstraPathFind(destination, origin, MP, maxMp, unitType, unit);
     }
 
-    // private String DjikstraPathFind(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType,
-    //                                 Unit unit) {
-    //     return "";
+    // private String DjikstraPathFind(Terrain destination, Terrain origin, int MP,
+    // int maxMp, UnitType unitType,
+    // Unit unit) {
+    // return "";
     // }
 
     private String backTrack(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType, Unit unit) {
@@ -491,6 +563,8 @@ public class UnitController {
         pathCoordination.remove(0);
         unit.setPath(pathCoordination);
         unit.move();
+        GameDataBase.getCurrentCivilization().updateNotification("unit " + unitType.name() + " started moving from "
+                + origin.getCoordination().toString() + " to " + destination.getCoordination().toString());
         return "unit moved successfully";
     }
 
@@ -626,7 +700,7 @@ public class UnitController {
     }
 
     private void findAllPaths(Terrain destination, Terrain origin, int MP, ArrayList<ArrayList<Terrain>> paths,
-                              ArrayList<Terrain> path, Coordination maximum, Coordination minimum) {
+            ArrayList<Terrain> path, Coordination maximum, Coordination minimum) {
         if (destination == origin) {
             paths.add(path);
             return;
@@ -643,7 +717,7 @@ public class UnitController {
     }
 
     private boolean isPathWorthChecking(ArrayList<Terrain> path, Terrain terrain, Coordination maximum,
-                                        Coordination minimum) {
+            Coordination minimum) {
         if (path.size() > 8)
             return false;
         if (terrain.getXPosition() - maximum.getX() > 3 || terrain.getYPosition() - maximum.getY() > 3)
@@ -658,8 +732,8 @@ public class UnitController {
             return false;
         if (GameDataBase.getCurrentCivilization().getTerrainState(nextTerrain.getXPosition(),
                 nextTerrain.getYPosition()) == TerrainState.FOG_OF_WAR) {
-                    return false;
-                }
+            return false;
+        }
         return true;
     }
 

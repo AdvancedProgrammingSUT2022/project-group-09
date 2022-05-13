@@ -27,6 +27,7 @@ public enum GameMenuRegex {
     SHOW_VICTORY_INFORMATION("^show victory information$"),
     SHOW_DEMOGRAPHICS_INFORMATION("^show demographics information$"),
     SHOW_NOTIFICATIONS("^show notifications$"),
+    RESET_NOTIFICATIONS("^reset notifications$"),
     SHOW_MILITARY_INFORMATION("^show military information$"),
     SHOW_ECONOMIC_INFORMATION("^show economic information$"),
     SHOW_DIPLOMATIC_INFORMATION("^show diplomatic information$"),

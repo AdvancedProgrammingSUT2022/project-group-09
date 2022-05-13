@@ -3,7 +3,6 @@ package com.civilization.View;
 import java.util.Scanner;
 
 import com.civilization.Controller.ProfileMenuController;
-import com.civilization.MenuRegex.LoginMenuRegex;
 import com.civilization.MenuRegex.ProfileMenuRegex;
 
 public class ProfileMenuView extends View {

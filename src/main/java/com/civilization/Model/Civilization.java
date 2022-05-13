@@ -17,6 +17,7 @@ public class Civilization {
     private CivilizationGold civilizationGold;
     private CivilizationScience civilizationScience;
     private CivilizationHappiness civilizationHappiness;
+    private Notification notification;
 
     private ArrayList<Resource> resources;
     private ArrayList<Unit> units;
@@ -31,6 +32,7 @@ public class Civilization {
         this.civilizationHappiness = civilizationHappiness;
         this.resources = resources;
         this.units = units;
+        this.notification = new Notification();
     }
 
     public Civilization(String name) {
@@ -45,6 +47,7 @@ public class Civilization {
         this.resources = new ArrayList<>();
         this.units = new ArrayList<>();
         civilizationGold.setCurrentGold(50);
+        this.notification = new Notification();
     }
 
     public ArrayList<City> getCities() {
@@ -119,6 +122,18 @@ public class Civilization {
         this.name = name;
     }
 
+    public String getNotification() {
+        return this.notification.getNotification();
+    }
+
+    public void updateNotification(String input) {
+        this.notification.updateNotification(input);
+    }
+
+    public void resetNotification() {
+        this.notification.resetNotifiction();
+    }
+
     public String getName() {
         return this.name;
     }
@@ -150,7 +165,6 @@ public class Civilization {
 
     public String getDemographics() {
         StringBuilder res = new StringBuilder();
-        int numberOfCitizens = 0;
         for (City city : cities) {
             res.append("city ").append(city.getName()).append("demographic:")
                     .append(city.getDemographics()).append("\n");
@@ -159,6 +173,7 @@ public class Civilization {
     }
 
     public void nextTurn() {
+        this.notification.resetNotifiction();
         updateData();
         getHappiness().nexTurn();
         getGold().addCurrentGold(getGold().getAdditionGold());

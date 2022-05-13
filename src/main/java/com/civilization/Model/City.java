@@ -9,7 +9,6 @@ import com.civilization.Model.Info.CityProduct;
 import com.civilization.Model.Info.CityScience;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
-import com.civilization.Model.Terrains.TerrainType;
 import com.civilization.Model.Units.*;
 
 import java.util.ArrayList;

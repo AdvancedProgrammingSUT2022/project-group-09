@@ -1,5 +1,7 @@
 package com.civilization.Controller.GameControllerPackage;
 
+import java.util.Objects;
+
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
 import com.civilization.Model.Units.Unit;
@@ -39,7 +41,7 @@ public class InfoController {
 
     public String showVictory() {
         return "victory nadarim hanooz";
-        //TODO...
+        // TODO...
     }
 
     public String showDemographics() {
@@ -73,6 +75,15 @@ public class InfoController {
     }
 
     public String showNotification() {
-        return "you don't have any notification!";
+        String notif = GameDataBase.getCurrentCivilization().getNotification();
+        if (Objects.equals("", notif))
+            return "you don't have any notification!";
+        else
+            return notif;
+    }
+
+    public String resetNotification() {
+        GameDataBase.getCurrentCivilization().resetNotification();
+        return "notification has been reset successfully";
     }
 }
