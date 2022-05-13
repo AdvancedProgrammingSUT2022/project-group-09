@@ -135,4 +135,32 @@ public class UnitControllerTest{
         successfullSetUp();
         assertEquals("Unit is fortify!", unitController.fortify());
     }
+
+    @Test
+    public void foritfyHealNoUnit() {
+        UnitController unitController = new UnitController();
+        GameDataBase.setSelected(null);
+        Assertions.assertEquals("No unit selected!", unitController.fortifyHeal());
+    }
+
+    @Test
+    public void fortifyHealSelect() {
+        UnitController unitController = new UnitController();
+        selectSetup();
+        assertEquals("selectedo bayad har turn new mikardim", unitController.fortifyHeal());
+    }
+
+    @Test
+    public void fortifyHealNotMilitary() {
+        UnitController unitController = new UnitController();
+        notMilitarySetup();
+        assertEquals("This is not a military unit!", unitController.fortifyHeal());
+    }
+
+    @Test
+    public void fortifyHealSuccessfull() {
+        UnitController unitController = new UnitController();
+        successfullSetUp();
+        assertEquals("Unit is fortify until heal!", unitController.fortifyHeal());
+    }
 }
