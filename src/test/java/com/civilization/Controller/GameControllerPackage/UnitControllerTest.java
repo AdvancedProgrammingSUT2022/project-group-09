@@ -9,6 +9,7 @@ import com.civilization.Model.Units.Settler;
 import com.civilization.Model.Units.Unit;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -32,6 +33,12 @@ public class UnitControllerTest{
     @Mock
     Civilization civilization2;
 
+    @AfterEach
+    public void reset() {
+        GameDataBase.setSelected(null);
+        GameDataBase.setCurrentCivilization(null);
+    }
+
     @Test
     public void sleepNoUnit() {
         UnitController unitController = new UnitController();
@@ -45,8 +52,6 @@ public class UnitControllerTest{
         GameDataBase.setSelected(unit);
         GameDataBase.setCurrentCivilization(civilization2);
         assertEquals("selectedo bayad har turn new mikardim", unitController.sleep());
-        GameDataBase.setSelected(null);
-        GameDataBase.setCurrentCivilization(null);
     }
 
     @Test
@@ -56,8 +61,23 @@ public class UnitControllerTest{
         GameDataBase.setCurrentCivilization(civilization1);
         when(unit.getCivilization()).thenReturn(civilization1);
         assertEquals("Unit slept successfully!", unitController.sleep());
-        GameDataBase.setSelected(null);
-        GameDataBase.setCurrentCivilization(null);
+    }
+
+    private void selectSetup() {
+        GameDataBase.setSelected(unit);
+        GameDataBase.setCurrentCivilization(civilization2);
+    }
+
+    private void notMilitarySetup() {
+        GameDataBase.setSelected(settler);
+        GameDataBase.setCurrentCivilization(civilization1);
+        when(settler.getCivilization()).thenReturn(civilization1);
+    }
+
+    private void successfullSetUp() {
+        GameDataBase.setSelected(militaryUnit);
+        GameDataBase.setCurrentCivilization(civilization1);
+        when(militaryUnit.getCivilization()).thenReturn(civilization1);
     }
 
     @Test
@@ -70,33 +90,49 @@ public class UnitControllerTest{
     @Test
     public void alertSelect() {
         UnitController unitController = new UnitController();
-        GameDataBase.setSelected(unit);
-        GameDataBase.setCurrentCivilization(civilization2);
+        selectSetup();
         assertEquals("selectedo bayad har turn new mikardim", unitController.sleep());
-        GameDataBase.setSelected(null);
-        GameDataBase.setCurrentCivilization(null);
     }
 
     @Test
     public void alertNotMilitary() {
         UnitController unitController = new UnitController();
-        GameDataBase.setSelected(settler);
-        GameDataBase.setCurrentCivilization(civilization1);
-        when(settler.getCivilization()).thenReturn(civilization1);
+        notMilitarySetup();
         assertEquals("This is not a military unit!", unitController.alert());
-        GameDataBase.setSelected(null);
-        GameDataBase.setCurrentCivilization(null);
     }
 
     @Test
     public void alertSuccessfull() {
         UnitController unitController = new UnitController();
-        GameDataBase.setSelected(militaryUnit);
-        GameDataBase.setCurrentCivilization(civilization1);
-        when(militaryUnit.getCivilization()).thenReturn(civilization1);
+        successfullSetUp();
         assertEquals("Unit is in alert!", unitController.alert());
-        GameDataBase.setSelected(null);
-        GameDataBase.setCurrentCivilization(null);
     }
 
+    @Test
+    public void fortifyNoUnit() {
+        UnitController unitController = new UnitController();
+        GameDataBase.setSelected(null);
+        Assertions.assertEquals("No unit selected!", unitController.fortify());
+    }
+
+    @Test
+    public void fortifySelect() {
+        UnitController unitController = new UnitController();
+        selectSetup();
+        assertEquals("selectedo bayad har turn new mikardim", unitController.fortify());
+    }
+
+    @Test
+    public void fortifyNotMilitary() {
+        UnitController unitController = new UnitController();
+        notMilitarySetup();
+        assertEquals("This is not a military unit!", unitController.fortify());
+    }
+
+    @Test
+    public void fortifySuccessfull() {
+        UnitController unitController = new UnitController();
+        successfullSetUp();
+        assertEquals("Unit is fortify!", unitController.fortify());
+    }
 }
