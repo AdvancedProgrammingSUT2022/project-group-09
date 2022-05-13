@@ -95,10 +95,10 @@ public class MilitaryUnit extends Unit {
     private void attack(MilitaryUnit militaryUnit) {
         if (getMyType().getRangedCombatStrengh() == 0)
             militaryUnit.setHp(militaryUnit.getHp() - getMyType().getCombatStrengh()
-                    * getTerrain().getCombatModifier() + attackPenalty(militaryUnit));
+                    * getTerrain().getCombatModifier() * UnitType.getDefensiveBonus(this) + attackPenalty(militaryUnit));
         else
             militaryUnit.setHp(militaryUnit.getHp() - getMyType().getRangedCombatStrengh()
-                    * getTerrain().getCombatModifier() + attackPenalty(militaryUnit));
+                    * getTerrain().getCombatModifier() * UnitType.getDefensiveBonus(this) + attackPenalty(militaryUnit));
         militaryUnit.defend(this);
         if (this.getHp() > 0)
             if (militaryUnit.getHp() <= 0)
@@ -109,10 +109,10 @@ public class MilitaryUnit extends Unit {
     private void attack(City city) {
         if (getMyType().getRangedCombatStrengh() == 0)
             city.setHp(city.getHp() - getMyType().getCombatStrengh()
-                    * getTerrain().getCombatModifier() + attackPenalty(city));
+                    * getTerrain().getCombatModifier() * UnitType.getDefensiveBonus(this) + attackPenalty(city));
         else
             city.setHp(city.getHp() - getMyType().getRangedCombatStrengh()
-                    * getTerrain().getCombatModifier() + attackPenalty(city));
+                    * getTerrain().getCombatModifier() * UnitType.getDefensiveBonus(this) + attackPenalty(city));
         city.defend(this);
         if (this.getHp() > 0)
             if (city.getHp() <= 0)

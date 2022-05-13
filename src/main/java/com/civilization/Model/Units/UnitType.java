@@ -4,6 +4,7 @@ import com.civilization.Model.City;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TechnologyPackage.TechnologyType;
 
+import java.lang.annotation.Target;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -155,5 +156,27 @@ public enum UnitType {
         res.add(CANON);
         res.add(ARTILLERY);
         return res;
+    }
+
+    public static ArrayList<UnitType> getNoDefensiveBonusUnits() {
+        ArrayList<UnitType> res = new ArrayList<>();
+        res.add(CHARIOTARCHER);
+        res.add(CATAPULT);
+        res.add(HORSEMAN);
+        res.add(KNIGHT);
+        res.add(TREBUCHET);
+        res.add(CANON);
+        res.add(LANCER);
+        res.add(CAVALRY);
+        res.add(PANZER);
+        res.add(TANK);
+        res.add(ARTILLERY);
+        return res;
+    }
+
+    public static int getDefensiveBonus(Unit unit) {
+        if (getNoDefensiveBonusUnits().contains(unit.getMyType()))
+            return 0;
+        return 1;
     }
 }
