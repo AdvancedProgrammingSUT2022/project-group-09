@@ -3,7 +3,6 @@ package com.civilization.Model.Info;
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.City;
 import com.civilization.Model.Civilization;
-import com.civilization.Model.Resources.Resource;
 
 public class CivilizationHappiness {
     private int additionHappiness;
