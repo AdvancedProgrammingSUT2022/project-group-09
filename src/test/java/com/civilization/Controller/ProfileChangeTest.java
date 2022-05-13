@@ -7,10 +7,8 @@ import java.util.regex.Matcher;
 import com.civilization.MenuRegex.ProfileMenuRegex;
 import com.civilization.Model.User;
 
-import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 public class ProfileChangeTest {
@@ -48,6 +46,39 @@ public class ProfileChangeTest {
     public void changeNickname() {
         ProfileMenuController profileMenuController = new ProfileMenuController();
         Matcher matcher = ProfileMenuRegex.getMatcher("profile change -n nickname", ProfileMenuRegex.CHANGE_NICKNAME);
-        assertEquals("nickname changed successfully", profileMenuController.changeNickname(matcher));
+        assertEquals("nickname changed successfully!", profileMenuController.changeNickname(matcher));
     }
+
+    @Test
+    public void currentPasswordInvalid() {
+        ProfileMenuController profileMenuController = new ProfileMenuController();
+        String input = "profile change -p -c sometmppassword -n password";
+        Matcher matcher = ProfileMenuRegex.getMatcher(input, ProfileMenuRegex.CHANGE_PASSWORD);
+        assertEquals("current password is invalid", profileMenuController.changePassword(matcher));
+    }
+
+    @Test
+    public void samePassword() {
+        ProfileMenuController profileMenuController = new ProfileMenuController();
+        String input = "profile change -p -c password1 -n password1";
+        Matcher matcher = ProfileMenuRegex.getMatcher(input, ProfileMenuRegex.CHANGE_PASSWORD);
+        assertEquals("please enter a new password", profileMenuController.changePassword(matcher));
+    }
+
+    @Test
+    public void weakPassword() {
+        ProfileMenuController profileMenuController = new ProfileMenuController();
+        String input = "profile change -p -c password1 -n password";
+        Matcher matcher = ProfileMenuRegex.getMatcher(input, ProfileMenuRegex.CHANGE_PASSWORD);
+        assertEquals("password is weak", profileMenuController.changePassword(matcher));
+    }
+
+    @Test
+    public void passwordChangeSuccessfull() {
+        ProfileMenuController profileMenuController = new ProfileMenuController();
+        String input = "profile change -p -c password1 -n adjf948297u*&(*(AFDKAKHSDJ";
+        Matcher matcher = ProfileMenuRegex.getMatcher(input, ProfileMenuRegex.CHANGE_PASSWORD);
+        assertEquals("password changed successfully", profileMenuController.changePassword(matcher));
+    }
+
 }
