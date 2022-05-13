@@ -112,7 +112,8 @@ public class CheatController {
         CivilizationTechnologies technologies = GameDataBase.getCurrentCivilization().getTechnologies();
         technologies.getTechnologiesResearched().addAll(technologies.getTechnologiesUnavailable());
         technologies.getTechnologiesResearched().addAll(technologies.getTechnologiesAvailable().keySet());
-        technologies.getTechnologiesResearched().add(technologies.getTechnologyCurrentlyResearching());
+        if (technologies.getTechnologyCurrentlyResearching() != null)
+            technologies.getTechnologiesResearched().add(technologies.getTechnologyCurrentlyResearching());
         technologies.setTechnologiesAvailable(new HashMap<>());
         technologies.setTechnologiesUnavailable(new ArrayList<>());
         technologies.setTechnologyCurrentlyResearching(null);
