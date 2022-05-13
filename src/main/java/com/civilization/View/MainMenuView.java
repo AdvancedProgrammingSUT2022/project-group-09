@@ -1,11 +1,9 @@
 package com.civilization.View;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
 
 import com.civilization.Controller.MainMenuController;
 import com.civilization.MenuRegex.MainMenuRegex;
-import com.civilization.MenuRegex.ProfileMenuRegex;
 
 public class MainMenuView extends View {
     private final MainMenuController MainMenuController;
