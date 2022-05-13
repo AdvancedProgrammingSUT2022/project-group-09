@@ -130,6 +130,10 @@ public class Civilization {
         this.notification.updateNotification(input);
     }
 
+    public void resetNotification() {
+        this.notification.resetNotifiction();
+    }
+
     public String getName() {
         return this.name;
     }
@@ -169,6 +173,7 @@ public class Civilization {
     }
 
     public void nextTurn() {
+        this.notification.resetNotifiction();
         updateData();
         getHappiness().nexTurn();
         getGold().addCurrentGold(getGold().getAdditionGold());

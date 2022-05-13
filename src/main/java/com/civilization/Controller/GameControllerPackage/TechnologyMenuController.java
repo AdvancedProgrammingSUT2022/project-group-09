@@ -64,6 +64,7 @@ public class TechnologyMenuController {
             return "technology is not available!";
         }
         civilizationTechnologies.startWorkingOnTechnology(technology, civilizationTechnologies.getTechnologiesAvailable().get(technology));
+        GameDataBase.getCurrentCivilization().updateNotification("started working on technology " + technology.getName());
         return "technology is researching!";
     }
 }

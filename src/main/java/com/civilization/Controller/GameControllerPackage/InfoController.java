@@ -81,4 +81,9 @@ public class InfoController {
         else
             return notif;
     }
+
+    public String resetNotification() {
+        GameDataBase.getCurrentCivilization().resetNotification();
+        return "notification has been reset successfully";
+    }
 }

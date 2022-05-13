@@ -17,9 +17,10 @@ public class CombatController {
         Coordination coordinate2 = new Coordination(x, y);
         MilitaryUnit militaryUnit = ((MilitaryUnit) GameDataBase.getSelected());
         Coordination coordinate1 = militaryUnit.getTerrain().getCoordination();
-        ArrayList<Coordination> path = new UnitController().getBestPath(coordinate2.getTerrain(), coordinate1.getTerrain(),
+        ArrayList<Coordination> path = new UnitController().getBestPath(coordinate2.getTerrain(),
+                coordinate1.getTerrain(),
                 militaryUnit);
-        if(path==null)
+        if (path == null)
             return "unfortunately there is no available path for your unit to move to your desired destination";
         int turnNeed = new UnitController().turnNeedToMove(coordinate2.getTerrain(), coordinate1.getTerrain(),
                 militaryUnit);
@@ -54,23 +55,25 @@ public class CombatController {
         } else {
             return "You can't attack this position!";
         }
+        GameDataBase.getCurrentCivilization().updateNotification("Military unit " + militaryUnit.getMyType().name()
+                + " attacked from " + coordinate1.toString() + " to " + coordinate2.toString());
         return "Attacked!";
     }
-
 
     public String cityAttack(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         Coordination coordinate = new Coordination(x, y);
-//        Coordination coordinate2 = new Coordination(x, y);
-//        City city = (City) GameDataBase.getSelected();
-//        Coordination coordinate1 = city.getCoordination();
-//        ArrayList<Coordination> path = new UnitController().getBestPath(coordinate2.getTerrain(),
-//                coordinate1.getTerrain(),
-//                militaryUnit);
-//         TODO fasele city ta oon cordinate ro mikham
-//        if (path.size() > 2)
-//            return "doore va attack nemishe";
+        // Coordination coordinate2 = new Coordination(x, y);
+        // City city = (City) GameDataBase.getSelected();
+        // Coordination coordinate1 = city.getCoordination();
+        // ArrayList<Coordination> path = new
+        // UnitController().getBestPath(coordinate2.getTerrain(),
+        // coordinate1.getTerrain(),
+        // militaryUnit);
+        // TODO fasele city ta oon cordinate ro mikham
+        // if (path.size() > 2)
+        // return "doore va attack nemishe";
         if (!coordinate.isValidCoordination()) {
             return "Coordinate is not valid!";
         }

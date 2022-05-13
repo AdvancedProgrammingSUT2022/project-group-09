@@ -33,8 +33,10 @@ public class CityController {
                 if (terrain1 == coordination.getTerrain()) {
                     if (terrain1.getCivilization() == null) {
                         GameDataBase.getCurrentCivilization().getGold().addCurrentGold(-10);
-                        ///gheimat tile =  10;
+                        /// gheimat tile = 10;
                         city.addTerrain(terrain1);
+                        GameDataBase.getCurrentCivilization()
+                                .updateNotification("bought a terrain on " + terrain1.getCoordination().toString());
                         return "kharide shod";
                     } else
                         return "in terrain sahab dare";
@@ -68,6 +70,7 @@ public class CityController {
             if (city.getCitizens().get(i) == null) {
                 city.getCitizens().set(i, coordination.getTerrain());
                 city.update();
+                GameDataBase.getCurrentCivilization().updateNotification("set a citizen on " + coordination.toString());
                 return "anjam shod";
             }
         }
@@ -91,6 +94,8 @@ public class CityController {
                     return "in bikar bood az ghabl";
                 else {
                     city.getCitizens().set(i, null);
+                    GameDataBase.getCurrentCivilization()
+                            .updateNotification("citizen on " + coordination.toString() + " is now unemployed");
                     return "in citizen bikar shod";
                 }
         }
@@ -135,8 +140,10 @@ public class CityController {
         buildingString.append("*BUILDINGS*\n");
         for (BuildingType building : city.buildingsCanBeBuilt()) {
             i++;
-            buildingString.append(i).append(" ").append(building.toString().toLowerCase()).append(" turns: ").append((int) ((building.getCost() - 1) / city.getProduction().getCurrentProduct()) + 1).append(" maintenance: ").append(building.getMaintenance()).append("\n");
-            //TODO turn ok nist
+            buildingString.append(i).append(" ").append(building.toString().toLowerCase()).append(" turns: ")
+                    .append((int) ((building.getCost() - 1) / city.getProduction().getCurrentProduct()) + 1)
+                    .append(" maintenance: ").append(building.getMaintenance()).append("\n");
+            // TODO turn ok nist
         }
         return String.valueOf(buildingString);
     }
@@ -151,8 +158,12 @@ public class CityController {
         ArrayList<UnitType> unitTypes = city.unitsCanBeBuilt();
         for (UnitType unit : unitTypes) {
             i++;
-            unitString.append(i).append(" ").append(unit.toString().toLowerCase()).append(" turns: ").append((int) ((unit.getCost() - 1) / city.getProduction().getCurrentProduct()) + 1).append(" required resource: ").append(unit.getRequiredResourse())
-                    .append(" required technology: ").append(unit.getRequiredTechnology()).append(" combat strength: ").append(unit.getCombatStrengh()). append(" combat type: ").append(unit.getCombatType().toString().toLowerCase()).append("\n");
+            unitString.append(i).append(" ").append(unit.toString().toLowerCase()).append(" turns: ")
+                    .append((int) ((unit.getCost() - 1) / city.getProduction().getCurrentProduct()) + 1)
+                    .append(" required resource: ").append(unit.getRequiredResourse())
+                    .append(" required technology: ").append(unit.getRequiredTechnology()).append(" combat strength: ")
+                    .append(unit.getCombatStrengh()).append(" combat type: ")
+                    .append(unit.getCombatType().toString().toLowerCase()).append("\n");
         }
         return String.valueOf(unitString);
     }
@@ -171,6 +182,8 @@ public class CityController {
             return "in tile male shoma nist";
         }
         city.createBuilding(buildings.get(number - 1));
+        GameDataBase.getCurrentCivilization().updateNotification(
+                "built a building " + buildings.get(number - 1).name() + " in city " + city.getName());
         return "building created successfully!";
     }
 
@@ -191,6 +204,8 @@ public class CityController {
             return "You don't have enough money to buy this unit";
         }
         city.createBuildingInstantly(buildings.get(number - 1));
+        GameDataBase.getCurrentCivilization().updateNotification(
+                "built a building " + buildings.get(number - 1).name() + " in city " + city.getName());
         return "building created successfully!";
     }
 
@@ -207,10 +222,13 @@ public class CityController {
         if (!city.getCivilization().equals(GameDataBase.getCurrentCivilization())) {
             return "in tile male shoma nist";
         }
-        if (units.get(number - 1).equals(UnitType.SETTLER) && ((City) GameDataBase.getSelected()).getCitizens().size() < 2) {
+        if (units.get(number - 1).equals(UnitType.SETTLER)
+                && ((City) GameDataBase.getSelected()).getCitizens().size() < 2) {
             return "number of citizens is not enough!";
         }
         city.CreateUnit(units.get(number - 1));
+        GameDataBase.getCurrentCivilization().updateNotification(
+                "built a unit " + units.get(number - 1).name() + " in city " + city.getName());
         return "unit created successfully!";
     }
 
@@ -230,12 +248,14 @@ public class CityController {
         if (units.get(number - 1).getCost() > GameDataBase.getCurrentCivilization().getGold().getCurrentGold()) {
             return "You don't have enough money to buy this unit";
         }
-        if (units.get(number - 1).equals(UnitType.SETTLER) && ((City) GameDataBase.getSelected()).getCitizens().size() < 2) {
+        if (units.get(number - 1).equals(UnitType.SETTLER)
+                && ((City) GameDataBase.getSelected()).getCitizens().size() < 2) {
             return "number of citizens is not enough!";
         }
         city.createUnitInstantly(units.get(number - 1));
+        GameDataBase.getCurrentCivilization().updateNotification(
+                "built a unit " + units.get(number - 1).name() + " in city " + city.getName());
         return "unit created successfully!";
     }
-
 
 }
