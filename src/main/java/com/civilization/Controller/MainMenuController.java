@@ -2,18 +2,14 @@ package com.civilization.Controller;
 
 import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.MenuRegex.MainMenuRegex;
-import com.civilization.MenuRegex.ProfileMenuRegex;
 import com.civilization.Model.User;
 import com.civilization.View.CurrentMenu;
 
-import javax.swing.plaf.ColorUIResource;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Matcher;
 
 public class MainMenuController extends Controller {
-
-    private UserDatabase userDatabase;
 
     @Override
     public String menuNavigate(Matcher matcher) {

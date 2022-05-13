@@ -45,7 +45,6 @@ public class CityController {
     }
 
     public String showCityInfo() {
-        StringBuilder buildingString = new StringBuilder();
         City city = (City) GameDataBase.getSelected();
         if (city == null)
             return "city select nashode";

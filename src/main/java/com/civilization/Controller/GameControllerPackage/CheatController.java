@@ -1,10 +1,7 @@
 package com.civilization.Controller.GameControllerPackage;
 
-import com.civilization.Model.City;
-import com.civilization.Model.Civilization;
 import com.civilization.Model.Coordination;
 import com.civilization.Model.Info.CivilizationTechnologies;
-import com.civilization.Model.TechnologyPackage.TechnologyType;
 import com.civilization.Model.Units.MilitaryUnit;
 import com.civilization.Model.Units.Settler;
 import com.civilization.Model.Units.Unit;

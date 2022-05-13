@@ -2,9 +2,7 @@ package com.civilization.Controller.GameControllerPackage;
 
 import com.civilization.Controller.Controller;
 import com.civilization.Model.*;
-import com.civilization.Model.Units.MilitaryUnit;
 import com.civilization.Model.Units.Unit;
-import com.civilization.Model.Units.Worker;
 import com.civilization.View.CurrentMenu;
 
 import java.util.Objects;

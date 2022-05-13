@@ -1,11 +1,9 @@
 package com.civilization.Controller.GameControllerPackage;
 
-import com.civilization.Model.Civilization;
 import com.civilization.Model.Info.CivilizationTechnologies;
 import com.civilization.Model.TechnologyPackage.TechnologyType;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.regex.Matcher;
 
 public class TechnologyMenuController {

@@ -1,6 +1,5 @@
 package com.civilization.Controller.GameControllerPackage;
 
-import com.civilization.MenuRegex.GameMenuRegex;
 import com.civilization.Model.City;
 import com.civilization.Model.Coordination;
 import com.civilization.Model.Units.MilitaryUnit;

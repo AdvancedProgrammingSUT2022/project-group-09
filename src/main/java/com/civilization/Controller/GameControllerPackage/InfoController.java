@@ -5,8 +5,6 @@ import com.civilization.Model.Civilization;
 import com.civilization.Model.Units.Unit;
 import com.civilization.Model.Units.UnitType;
 
-import java.util.regex.Matcher;
-
 public class InfoController {
     public String showResearch() {
         return GameDataBase.getCurrentCivilization().getTechnologies().technologyTree();

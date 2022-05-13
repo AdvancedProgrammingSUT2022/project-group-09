@@ -452,7 +452,6 @@ public class UnitController {
         int MP = unit.getRemainingMove();
         int maxMp = unit.getMyType().getMovement();
         UnitType unitType = unit.getMyType();
-        // TODO handle moving to different terrainstates
         Coordination coordination = destination.getCoordination();
         TerrainState state = GameDataBase.getCurrentCivilization().getTerrainState(coordination.getX(),
                 coordination.getY());
@@ -466,11 +465,10 @@ public class UnitController {
         // return DjikstraPathFind(destination, origin, MP, maxMp, unitType, unit);
     }
 
-    private String DjikstraPathFind(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType,
-                                    Unit unit) {
-        // TODO implement djikstra if needed
-        return "";
-    }
+    // private String DjikstraPathFind(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType,
+    //                                 Unit unit) {
+    //     return "";
+    // }
 
     private String backTrack(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType, Unit unit) {
         ArrayList<ArrayList<Terrain>> paths = new ArrayList<>();
@@ -485,22 +483,18 @@ public class UnitController {
         findAllPaths(destination, origin, maxMp, paths, path, maximum, minimum);
         if (paths.isEmpty())
             return "unfortunately there is no available path for your unit to move to your desired destination";
-            // System.out.println("ok");
         ArrayList<Terrain> bestPath = findBestPath(paths, unit.getMyType().getMovement(), maxMp, unitType);
         if (bestPath == null)
             return "unfortunately there is no available path for your unit to move to your desired destination";
-        // System.out.println("found best path");
         ArrayList<Coordination> pathCoordination = new ArrayList<>();
         setPathCoordinates(pathCoordination, bestPath);
         pathCoordination.remove(0);
         unit.setPath(pathCoordination);
         unit.move();
-        // System.out.println(pathCoordination);
         return "unit moved successfully";
     }
 
     public ArrayList<Coordination> getBestPath(Terrain destination, Terrain origin, Unit unit) {
-        int MP = unit.getRemainingMove();
         int maxMp = unit.getMyType().getMovement();
         UnitType unitType = unit.getMyType();
         ArrayList<ArrayList<Terrain>> paths = new ArrayList<>();
@@ -574,8 +568,6 @@ public class UnitController {
 
     private ArrayList<Terrain> findBestPath(ArrayList<ArrayList<Terrain>> paths, int MP, int maxMp, UnitType unitType) {
         sortPathsByMP(paths);
-        // System.out.println("------------------------------");
-        // System.out.println(paths);
         for (ArrayList<Terrain> path : paths) {
             if (isPathAvailable(path, MP, maxMp, unitType)) {
                 return path;
@@ -611,7 +603,6 @@ public class UnitController {
     }
 
     private void sortPathsByMP(ArrayList<ArrayList<Terrain>> paths) {
-        // TODO finding a better way to sort except than bubble sort
         for (int i = 0; i < paths.size(); i++) {
             for (int j = i + 1; j < paths.size(); j++) {
                 if (getPathMP(paths.get(j)) < getPathMP(paths.get(i))) {
@@ -641,13 +632,9 @@ public class UnitController {
             return;
         }
         for (Terrain nextTerrain : origin.getSurroundingTerrain()) {
-            // System.out.println("hello darling");
             if (isMovePossible(MP, nextTerrain, origin) && !path.contains(nextTerrain)) {
-                // System.out.println("maximum " + maximum);
-                // System.out.println("minimum " + minimum);
                 if (!isPathWorthChecking(path, nextTerrain, maximum, minimum))
                     continue;
-                // System.out.println("wtf is happening mate");
                 ArrayList<Terrain> nextPath = (ArrayList<Terrain>) path.clone();
                 nextPath.add(nextTerrain);
                 findAllPaths(destination, nextTerrain, MP, paths, nextPath, maximum, minimum);
@@ -667,11 +654,6 @@ public class UnitController {
     }
 
     private boolean isMovePossible(int MP, Terrain nextTerrain, Terrain terrain) {
-        // if (nextTerrain.getTerrainFeatures().contains(TerrainFeature.RIVER)
-        // && terrain.getTerrainFeatures().contains(TerrainFeature.RIVER))
-        // return false;
-        // if (MP < nextTerrain.getMp())
-        //     return false;
         if (nextTerrain.getType() == TerrainType.MOUNTAIN || nextTerrain.getType() == TerrainType.OCEAN)
             return false;
         if (GameDataBase.getCurrentCivilization().getTerrainState(nextTerrain.getXPosition(),
