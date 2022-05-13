@@ -20,7 +20,6 @@ public class UnitController {
         return "no unit selected";
     }
 
-
     public String sleep() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
             return "No unit selected!";
@@ -28,7 +27,10 @@ public class UnitController {
         if (((Unit) GameDataBase.getSelected()).getCivilization() != GameDataBase.getCurrentCivilization()) {
             return "selectedo bayad har turn new mikardim";
         }
-        ((Unit) GameDataBase.getSelected()).sleep();
+        Unit unit = ((Unit) GameDataBase.getSelected());
+        unit.sleep();
+        GameDataBase.getCurrentCivilization().updateNotification("Unit " + unit.getMyType().name() + " on "
+                + unit.getTerrain().getCoordination().toString() + " is now sleeping");
         return "Unit slept successfully!";
     }
 
@@ -106,7 +108,6 @@ public class UnitController {
         ((SiegeMilitaryUnit) GameDataBase.getSelected()).setUp();
         return "Unit is set up!";
     }
-
 
     public String pillage() {
         if (!(GameDataBase.getSelected() instanceof Unit)) {
@@ -194,7 +195,8 @@ public class UnitController {
         if (!(GameDataBase.getSelected() instanceof Worker)) {
             return "This is not a worker unit!";
         }
-        if (((Unit) GameDataBase.getSelected()).getTerrain().getCivilization() != GameDataBase.getCurrentCivilization()) {
+        if (((Unit) GameDataBase.getSelected()).getTerrain().getCivilization() != GameDataBase
+                .getCurrentCivilization()) {
             return "This terrain is not yours!";
         }
         return null;
@@ -465,9 +467,10 @@ public class UnitController {
         // return DjikstraPathFind(destination, origin, MP, maxMp, unitType, unit);
     }
 
-    // private String DjikstraPathFind(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType,
-    //                                 Unit unit) {
-    //     return "";
+    // private String DjikstraPathFind(Terrain destination, Terrain origin, int MP,
+    // int maxMp, UnitType unitType,
+    // Unit unit) {
+    // return "";
     // }
 
     private String backTrack(Terrain destination, Terrain origin, int MP, int maxMp, UnitType unitType, Unit unit) {
@@ -626,7 +629,7 @@ public class UnitController {
     }
 
     private void findAllPaths(Terrain destination, Terrain origin, int MP, ArrayList<ArrayList<Terrain>> paths,
-                              ArrayList<Terrain> path, Coordination maximum, Coordination minimum) {
+            ArrayList<Terrain> path, Coordination maximum, Coordination minimum) {
         if (destination == origin) {
             paths.add(path);
             return;
@@ -643,7 +646,7 @@ public class UnitController {
     }
 
     private boolean isPathWorthChecking(ArrayList<Terrain> path, Terrain terrain, Coordination maximum,
-                                        Coordination minimum) {
+            Coordination minimum) {
         if (path.size() > 8)
             return false;
         if (terrain.getXPosition() - maximum.getX() > 3 || terrain.getYPosition() - maximum.getY() > 3)
@@ -658,8 +661,8 @@ public class UnitController {
             return false;
         if (GameDataBase.getCurrentCivilization().getTerrainState(nextTerrain.getXPosition(),
                 nextTerrain.getYPosition()) == TerrainState.FOG_OF_WAR) {
-                    return false;
-                }
+            return false;
+        }
         return true;
     }
 

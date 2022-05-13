@@ -126,6 +126,10 @@ public class Civilization {
         return this.notification.getNotification();
     }
 
+    public void updateNotification(String input) {
+        this.notification.updateNotification(input);
+    }
+
     public String getName() {
         return this.name;
     }
