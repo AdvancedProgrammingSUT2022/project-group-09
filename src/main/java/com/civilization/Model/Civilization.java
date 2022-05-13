@@ -17,6 +17,7 @@ public class Civilization {
     private CivilizationGold civilizationGold;
     private CivilizationScience civilizationScience;
     private CivilizationHappiness civilizationHappiness;
+    private Notification notification;
 
     private ArrayList<Resource> resources;
     private ArrayList<Unit> units;
@@ -31,6 +32,7 @@ public class Civilization {
         this.civilizationHappiness = civilizationHappiness;
         this.resources = resources;
         this.units = units;
+        this.notification = new Notification();
     }
 
     public Civilization(String name) {
@@ -45,6 +47,7 @@ public class Civilization {
         this.resources = new ArrayList<>();
         this.units = new ArrayList<>();
         civilizationGold.setCurrentGold(50);
+        this.notification = new Notification();
     }
 
     public ArrayList<City> getCities() {
@@ -117,6 +120,10 @@ public class Civilization {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNotification() {
+        return this.notification.getNotification();
     }
 
     public String getName() {
