@@ -95,10 +95,10 @@ public class MilitaryUnit extends Unit {
     private void attack(MilitaryUnit militaryUnit) {
         if (getMyType().getRangedCombatStrengh() == 0)
             militaryUnit.setHp(militaryUnit.getHp() - getMyType().getCombatStrengh()
-                    * getTerrain().getCombatModifier());
+                    * getTerrain().getCombatModifier() + attackPenalty(militaryUnit));
         else
             militaryUnit.setHp(militaryUnit.getHp() - getMyType().getRangedCombatStrengh()
-                    * getTerrain().getCombatModifier());
+                    * getTerrain().getCombatModifier() + attackPenalty(militaryUnit));
         militaryUnit.defend(this);
         if (this.getHp() > 0)
             if (militaryUnit.getHp() <= 0)
@@ -109,10 +109,10 @@ public class MilitaryUnit extends Unit {
     private void attack(City city) {
         if (getMyType().getRangedCombatStrengh() == 0)
             city.setHp(city.getHp() - getMyType().getCombatStrengh()
-                    * getTerrain().getCombatModifier());
+                    * getTerrain().getCombatModifier() + attackPenalty(city));
         else
             city.setHp(city.getHp() - getMyType().getRangedCombatStrengh()
-                    * getTerrain().getCombatModifier());
+                    * getTerrain().getCombatModifier() + attackPenalty(city));
         city.defend(this);
         if (this.getHp() > 0)
             if (city.getHp() <= 0)
@@ -139,5 +139,25 @@ public class MilitaryUnit extends Unit {
             getTerrain().getImprovementPair().setValue(false);
         else
             throw new RuntimeException();
+    }
+
+    private int attackPenalty(Combatble target) {
+        if (this.getMyType() == UnitType.TANK && target instanceof City)
+            return -10;
+        if (this.getMyType() == UnitType.ARTILLERY && target instanceof City)
+            return 10;
+        if (this.getMyType() == UnitType.ANTITANKGUN && ((MilitaryUnit) target).getMyType() == UnitType.TANK)
+            return 10;
+        if (this.getMyType() == UnitType.CANON && target instanceof City)
+            return 10;
+        if (this.getMyType() == UnitType.TREBUCHET && target instanceof City)
+            return 10;
+        if (this.getMyType() == UnitType.PIKEMAN && ((MilitaryUnit) target).getMyType().getCombatType() == CombatType.MOUNTED)
+            return 10;
+        if (this.getMyType() == UnitType.CATAPULT && target instanceof City)
+            return 10;
+        if (this.getMyType() == UnitType.SPEARMAN && ((MilitaryUnit) target).getMyType().getCombatType() == CombatType.MOUNTED)
+            return 10;
+        return 0;
     }
 }
