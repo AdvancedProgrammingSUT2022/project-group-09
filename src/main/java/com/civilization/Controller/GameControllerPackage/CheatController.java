@@ -25,7 +25,7 @@ public class CheatController {
         GameDataBase.getCurrentCivilization().getGold().setAddedFromCheat(
                 GameDataBase.getCurrentCivilization().getGold().getAddedFromCheat() + number
         );
-        return "added. your current gold was : " + GameDataBase.getCurrentCivilization().getGold().getCurrentGold();
+        return "cash ziad eyne hatami balam az zamane khatami\nadded. your current gold was : " + GameDataBase.getCurrentCivilization().getGold().getCurrentGold();
 
     }
 
@@ -54,60 +54,61 @@ public class CheatController {
         return "done";
 
     }
-    public String setArcher(Matcher matcher)
-    {
-        int x= Integer.parseInt(matcher.group("x"));
-        int y= Integer.parseInt(matcher.group("y"));
+
+    public String setArcher(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
         new MilitaryUnit(UnitType.ARCHER,
-                new Coordination(x,y).getTerrain(),
+                new Coordination(x, y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "archer added";
     }
-    public String setTank(Matcher matcher)
-    {
-        int x= Integer.parseInt(matcher.group("x"));
-        int y= Integer.parseInt(matcher.group("y"));
+
+    public String setTank(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
         new MilitaryUnit(UnitType.TANK,
-                new Coordination(x,y).getTerrain(),
+                new Coordination(x, y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "tank added";
     }
-    public String setArtillery(Matcher matcher)
-    {
-        int x= Integer.parseInt(matcher.group("x"));
-        int y= Integer.parseInt(matcher.group("y"));
+
+    public String setArtillery(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
         new MilitaryUnit(UnitType.ARTILLERY,
-                new Coordination(x,y).getTerrain(),
+                new Coordination(x, y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "artillery added";
     }
-    public String setCannon(Matcher matcher)
-    {
-        int x= Integer.parseInt(matcher.group("x"));
-        int y= Integer.parseInt(matcher.group("y"));
+
+    public String setCannon(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
         new MilitaryUnit(UnitType.CANON,
-                new Coordination(x,y).getTerrain(),
+                new Coordination(x, y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "cannon added";
     }
-    public String setLancer(Matcher matcher)
-    {
-        int x= Integer.parseInt(matcher.group("x"));
-        int y= Integer.parseInt(matcher.group("y"));
+
+    public String setLancer(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
         new MilitaryUnit(UnitType.LANCER,
-                new Coordination(x,y).getTerrain(),
+                new Coordination(x, y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "lancer added";
     }
-    public String setSettler(Matcher matcher)
-    {
-        int x= Integer.parseInt(matcher.group("x"));
-        int y= Integer.parseInt(matcher.group("y"));
+
+    public String setSettler(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
         new Settler(
-                new Coordination(x,y).getTerrain(),
+                new Coordination(x, y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "setller added";
     }
+
     public String openTechnologies() {
         CivilizationTechnologies technologies = GameDataBase.getCurrentCivilization().getTechnologies();
         technologies.getTechnologiesResearched().addAll(technologies.getTechnologiesUnavailable());
