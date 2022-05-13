@@ -150,7 +150,6 @@ public class Civilization {
 
     public String getDemographics() {
         StringBuilder res = new StringBuilder();
-        int numberOfCitizens = 0;
         for (City city : cities) {
             res.append("city ").append(city.getName()).append("demographic:")
                     .append(city.getDemographics()).append("\n");

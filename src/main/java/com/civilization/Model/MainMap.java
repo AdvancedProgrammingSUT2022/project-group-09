@@ -1,11 +1,9 @@
 package com.civilization.Model;
 
-import com.civilization.Controller.GameControllerPackage.GameDataBase;
 import com.civilization.Model.Resources.Resource;
 import com.civilization.Model.TerrainFeatures.TerrainFeature;
 import com.civilization.Model.Terrains.Terrain;
 import com.civilization.Model.Terrains.TerrainType;
-import com.civilization.Model.Units.Settler;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -183,7 +181,6 @@ public class MainMap extends Map {
 
     public int getYpositionTerrain(Terrain terrain) {
         int horizental = terrains[0].length;
-        int vertical = terrains.length;
         for (Terrain[] value : terrains)
             for (int j = 0; j < horizental; j++) {
                 if (value[j] == terrain)
@@ -195,7 +192,6 @@ public class MainMap extends Map {
 
     public boolean isValidTerran(Terrain terrain) {
         int horizental = terrains[0].length;
-        int vertical = terrains.length;
         for (Terrain[] value : terrains)
             for (int j = 0; j < horizental; j++) {
                 if (value[j] == terrain)
