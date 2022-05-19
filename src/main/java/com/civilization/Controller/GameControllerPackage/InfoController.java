@@ -51,7 +51,7 @@ public class InfoController {
     public String showMilitary() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Unit unit : GameDataBase.getCurrentCivilization().getUnits()) {
-            if (UnitType.getSiegeMilitaryUnit().contains(unit.getMyType()))
+            if (UnitType.getNormalMilitaryUnit().contains(unit.getMyType()))
                 stringBuilder.append(unit.showInfo());
         }
         return String.valueOf(stringBuilder);

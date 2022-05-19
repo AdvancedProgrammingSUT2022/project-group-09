@@ -302,6 +302,7 @@ public class City extends Terrain implements Combatble, Selectable {
         Terrain terrain = new Terrain(this);
         GameDataBase.getMainMap().setTerrain(getXPosition(), getYPosition(), terrain);
         for (Civilization civilization1 : GameDataBase.getCivilizations()) {
+            civilization1.getCities().remove(this);
             for (City city : civilization1.getCities()) {
                 city.getTerrains().remove(this);
             }

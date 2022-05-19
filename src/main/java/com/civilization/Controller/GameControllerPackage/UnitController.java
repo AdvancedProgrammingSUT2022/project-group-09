@@ -99,9 +99,9 @@ public class UnitController {
             return "This unit is not in city!";
         }
         MilitaryUnit unit = ((MilitaryUnit) GameDataBase.getSelected());
-        unit.garrison();
         GameDataBase.getCurrentCivilization().updateNotification("Military unit " + unit.getMyType().name() + " on "
                 + unit.getTerrain().getCoordination().toString() + " is now in garrison!");
+        unit.garrison();
         return "Unit is in garrison!";
     }
 
@@ -148,6 +148,7 @@ public class UnitController {
     }
 
     public String foundCity() {
+
         if (!(GameDataBase.getSelected() instanceof Unit)) {
             return "No unit selected!";
         }
@@ -166,9 +167,9 @@ public class UnitController {
             }
         }
         Settler settler = (Settler) GameDataBase.getSelected();
-        settler.foundCity();
         GameDataBase.getCurrentCivilization()
                 .updateNotification("settler found a city on " + settler.getTerrain().getCoordination().toString());
+        settler.foundCity();
         return "City created successfully!";
     }
 
@@ -205,10 +206,10 @@ public class UnitController {
             return "selectedo bayad har turn new mikardim";
         }
         Unit unit = ((Unit) GameDataBase.getSelected());
-        unit.delete();
-        GameDataBase.setSelected(null);
         GameDataBase.getCurrentCivilization().updateNotification("Unit " + unit.getMyType().name() + " on "
                 + unit.getTerrain().getCoordination().toString() + " is now deleted!");
+        unit.delete();
+        GameDataBase.setSelected(null);
         return "Unit deleted successfully!";
     }
 
@@ -700,7 +701,7 @@ public class UnitController {
     }
 
     private void findAllPaths(Terrain destination, Terrain origin, int MP, ArrayList<ArrayList<Terrain>> paths,
-            ArrayList<Terrain> path, Coordination maximum, Coordination minimum) {
+                              ArrayList<Terrain> path, Coordination maximum, Coordination minimum) {
         if (destination == origin) {
             paths.add(path);
             return;
@@ -717,7 +718,7 @@ public class UnitController {
     }
 
     private boolean isPathWorthChecking(ArrayList<Terrain> path, Terrain terrain, Coordination maximum,
-            Coordination minimum) {
+                                        Coordination minimum) {
         if (path.size() > 8)
             return false;
         if (terrain.getXPosition() - maximum.getX() > 3 || terrain.getYPosition() - maximum.getY() > 3)

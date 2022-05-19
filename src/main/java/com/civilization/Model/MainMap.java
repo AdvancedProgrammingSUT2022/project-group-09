@@ -224,6 +224,7 @@ public class MainMap extends Map {
         return terrains[x][y];
     }
 
+    //TODO terrain -> coordination
     public int getXpositionTerrain(Terrain terrain) {
         int horizental = terrains[0].length;
         int vertical = terrains.length;
