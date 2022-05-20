@@ -231,9 +231,7 @@ public class City extends Terrain implements Combatble, Selectable {
     @Override
     public void setCivilization(Civilization civilization) {
         for (Civilization civilization1 : GameDataBase.getCivilizations()) {
-            for (City city : civilization1.getCities()) {
-                city.getTerrains().remove(this);
-            }
+            civilization1.getCities().remove(this);
         }
         civilization.addCity(this);
     }
@@ -256,7 +254,7 @@ public class City extends Terrain implements Combatble, Selectable {
             throw new RuntimeException();
         } else if (target instanceof MilitaryUnit) {
             MilitaryUnit targetUnit = (MilitaryUnit) target;
-            targetUnit.setHp(targetUnit.getHp() - 20);
+            targetUnit.setHp(targetUnit.getHp() - 2);
             if (targetUnit.getHp() <= 0)
                 targetUnit.delete();
         } else {
@@ -289,6 +287,7 @@ public class City extends Terrain implements Combatble, Selectable {
                 "gold : " + getGold().getAdditionGold() + "\n" +
                 "science : " + getCityScience().getAdditionScience() + "\n" +
                 "food : " + getFood().getAdditionFood() + "\n" +
+                "hp : " + getHp() + "\n" +
                 "citizens : " + getCitizens().size() + "\n" +
                 "buildings: " + buildingString;
     }

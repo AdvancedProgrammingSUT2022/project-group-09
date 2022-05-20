@@ -17,20 +17,20 @@ public class CombatController {
         Coordination coordinate2 = new Coordination(x, y);
         MilitaryUnit militaryUnit = ((MilitaryUnit) GameDataBase.getSelected());
         Coordination coordinate1 = militaryUnit.getTerrain().getCoordination();
-        ArrayList<Coordination> path = new UnitController().getBestPath(coordinate2.getTerrain(),
-                coordinate1.getTerrain(),
-                militaryUnit);
-        if (path == null)
-            return "unfortunately there is no available path for your unit to move to your desired destination";
-        int turnNeed = new UnitController().turnNeedToMove(coordinate2.getTerrain(), coordinate1.getTerrain(),
-                militaryUnit);
-        if (turnNeed <= 1)
-            while (path.size() > militaryUnit.getMyType().getRange()) {
-                militaryUnit.setTerrain(path.get(0).getTerrain());
-                path.remove(0);
-            }
-        else
-            return "bish az 1 turn mikhad va mojaz nist";
+//        ArrayList<Coordination> path = new UnitController().getBestPath(coordinate2.getTerrain(),
+//                coordinate1.getTerrain(),
+//                militaryUnit);
+//        if (path == null)
+//            return "unfortunately there is no available path for your unit to move to your desired destination";
+//        int turnNeed = new UnitController().turnNeedToMove(coordinate2.getTerrain(), coordinate1.getTerrain(),
+//                militaryUnit);
+//        if (turnNeed <= 1)
+//            while (path.size() > militaryUnit.getMyType().getRange()) {
+//                militaryUnit.setTerrain(path.get(0).getTerrain());
+//                path.remove(0);
+//            }
+//        else
+//            return "bish az 1 turn mikhad va mojaz nist";
         if (!coordinate2.isValidCoordination()) {
             return "Coordinate is not valid!";
         }
