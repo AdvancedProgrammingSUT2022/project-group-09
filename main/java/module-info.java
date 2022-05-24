@@ -13,5 +13,5 @@ module civilization.civilization {
 
     opens civilization.civilization to javafx.fxml;
     exports civilization.civilization;
-    opens civilization.civilization.main.java.com.civilization.Controller to com.google.gson;
+    opens civilization.civilization.main.java.com.civilization.Model to com.google.gson;
 }
