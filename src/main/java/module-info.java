@@ -11,7 +11,7 @@ module civilization.civilization {
     requires eu.hansolo.tilesfx;
     requires com.google.gson;
 
-    opens civilization.civilization to javafx.fxml;
-    exports civilization.civilization;
-    opens civilization.civilization.main.java.com.civilization.Model to com.google.gson;
+    opens game.civilization to javafx.fxml;
+    exports game.civilization;
+    opens game.civilization.Model to com.google.gson;
 }
