@@ -18,21 +18,7 @@ public class SceneController {
         return mainSceneController;
     }
 
-    public void LoginMenu(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("Login.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void MainMenu(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("Main.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void GameMenu(Stage stage) throws IOException {
+    public void game(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("Game.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);

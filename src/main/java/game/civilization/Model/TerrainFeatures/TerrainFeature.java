@@ -1,7 +1,9 @@
 package game.civilization.Model.TerrainFeatures;
 
+import game.civilization.Main;
 import game.civilization.Model.Resources.TerrainTypeOrTerrainFeatureType;
 import game.civilization.Model.Resources.Resource;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
@@ -11,7 +13,7 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
             add(Resource.WHEAT);
             add(Resource.SUGAR);
         }
-    }),
+    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/FloodPlain.png").toExternalForm())),
     FOREST(1, 1, 0, 25, 2, new ArrayList<Resource>() {//jangal
         {
             add(Resource.DEER);
@@ -19,30 +21,31 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
             add(Resource.DYES);
             add(Resource.SILK);
         }
-    }),
-    ICE(0, 0, 0, 0, Integer.MAX_VALUE, new ArrayList<>()),
+    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Forest.png").toExternalForm())),
+    ICE(0, 0, 0, 0, Integer.MAX_VALUE, new ArrayList<>(), new Image(Main.class.getResource("GamePictures/TerrainPicture/Ice.png").toExternalForm())),
     JUNGLE(1, -1, 0, 25, 2, new ArrayList<Resource>() {//jangal anbooh
         {
             add(Resource.BANANA);
             add(Resource.GEMS);
             add(Resource.DYES);
         }
-    }),
+    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Jungle.png").toExternalForm())),
     MARSH(-1, 0, 0, -33, 2, new ArrayList<Resource>() {
         {
             add(Resource.SUGAR);
         }
-    }),
-    OASIS(3, 0, 1, -33, 1, new ArrayList<>()),
-    RIVER(0, 0, 1, 0, 0, new ArrayList<>());
+    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Marsh.png").toExternalForm())),
+    OASIS(3, 0, 1, -33, 1, new ArrayList<>(), new Image(Main.class.getResource("GamePictures/TerrainPicture/Oasis.png").toExternalForm())),
+    RIVER(0, 0, 1, 0, 0, new ArrayList<>(), null);
 
-    TerrainFeature(int food, int product, int gold, int combatModifier, int MP, ArrayList<Resource> possibleResources) {
+    TerrainFeature(int food, int product, int gold, int combatModifier, int MP, ArrayList<Resource> possibleResources, Image image) {
         this.food = food;
         this.product = product;
         this.gold = gold;
         this.MP = MP;
         this.combatModifier = combatModifier;
         this.possibleResources = possibleResources;
+        this.image = image;
     }
 
     final int food;
@@ -51,6 +54,7 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
     final int MP;
     final int combatModifier;
     final ArrayList<Resource> possibleResources;
+    final Image image;
 
     public ArrayList<Resource> getPossibleResources() {
         return possibleResources;
@@ -70,6 +74,10 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
 
     public int getMP() {
         return MP;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     public int getCombatModifier() {

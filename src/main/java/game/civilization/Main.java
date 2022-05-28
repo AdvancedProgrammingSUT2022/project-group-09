@@ -1,5 +1,6 @@
 package game.civilization;
 
+import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.Controller.LoginMenuController;
 import game.civilization.Controller.MainMenuController;
@@ -13,15 +14,18 @@ import javafx.stage.Stage;
 import java.util.Scanner;
 
 public class Main extends Application {
+
     public static void main(String[] args) {
         launch();
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-       // preStartRequired();
+        UserDatabase.loadUsers();
+        GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
         stage.setTitle("CivilizationV");
-        SceneController.getInstance().GameMenu(stage);
+        //   preStartRequired();
+        SceneController.getInstance().game(stage);
     }
 
     public void preStartRequired() {

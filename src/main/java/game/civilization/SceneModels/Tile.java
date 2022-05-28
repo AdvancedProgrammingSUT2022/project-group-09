@@ -2,6 +2,9 @@ package game.civilization.SceneModels;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Model.Terrains.Terrain;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 
@@ -18,9 +21,9 @@ public class Tile extends Polygon {
                 x + size, dy + size * Math.sqrt(3),
                 x, dy + size * Math.sqrt(3),
                 x - (size / 2.0), dy + size * v);
-        super.setFill(Paint.valueOf("#ffffff"));
-        super.setStrokeWidth(2);
+        super.setStrokeWidth(10);
         super.setStroke(Paint.valueOf("#FF2D00"));
+        super.setFill(new ImagePattern(terrain.getType().getImage()));
     }
 
     public void goUp() {
