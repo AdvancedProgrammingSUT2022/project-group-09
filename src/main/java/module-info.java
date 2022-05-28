@@ -1,4 +1,4 @@
-module civilization.civilization {
+module game.civilization {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -13,5 +13,6 @@ module civilization.civilization {
 
     opens game.civilization to javafx.fxml;
     exports game.civilization;
+    exports game.civilization.FxmlController to javafx.fxml;
     opens game.civilization.Model to com.google.gson;
 }
