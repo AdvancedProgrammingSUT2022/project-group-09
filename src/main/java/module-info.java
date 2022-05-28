@@ -12,6 +12,7 @@ module game.civilization {
     requires com.google.gson;
 
     opens game.civilization to javafx.fxml;
+    opens game.civilization.FxmlController to javafx.fxml;
     exports game.civilization;
     exports game.civilization.FxmlController to javafx.fxml;
     opens game.civilization.Model to com.google.gson;
