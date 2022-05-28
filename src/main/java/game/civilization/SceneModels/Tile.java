@@ -1,12 +1,16 @@
 package game.civilization.SceneModels;
 
+import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Model.Terrains.Terrain;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 
 public class Tile extends Polygon {
     private final int movementVariable = 30;
+    private Terrain terrain;
 
-    public Tile(double x, double y, double dy) {
+    public Tile(double x, double y, double dy, Terrain terrain) {
+        this.terrain = terrain;
         double size = 100, v = Math.sqrt(3) / 2.0;
         super.getPoints().addAll(x, dy,
                 x + size, dy,

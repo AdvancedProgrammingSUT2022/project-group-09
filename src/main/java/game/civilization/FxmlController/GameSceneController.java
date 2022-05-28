@@ -1,5 +1,7 @@
 package game.civilization.FxmlController;
 
+import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Model.Map;
 import game.civilization.SceneModels.GameSceneDataBase;
 import game.civilization.SceneModels.Tile;
 import javafx.fxml.FXML;
@@ -21,15 +23,19 @@ public class GameSceneController implements Initializable {
     }
 
     private void initializeMap() {
-        int height = 2000;
-        int width = 1500;
+        int numberOfTerrainX = Map.getColumn();
+        int numberOfTerrainY = Map.getRow();
+        double y = 0;
         double size = 100, v = Math.sqrt(3) / 2.0;
-        for (double y = 0; y < height; y += size * Math.sqrt(3)) {
-            for (double x = -25, dy = y; x < width; x += (3.0 / 2.0) * size) {
-                Tile tile = new Tile(x, y, dy);
+        for (int j = 0; j < numberOfTerrainY; j++) {
+            y += size * Math.sqrt(3);
+            double x = -25, dy = y;
+            for (int k = 0; k < numberOfTerrainX; k++) {
+                Tile tile = new Tile(x, y, dy, GameDataBase.getMainMap().getTerrain(k, j));
                 GameSceneDataBase.getInstance().getTiles().add(tile);
                 pane.getChildren().add(tile);
                 dy = dy == y ? dy + size * v : y;
+                x += (3.0 / 2.0) * size;
             }
         }
     }

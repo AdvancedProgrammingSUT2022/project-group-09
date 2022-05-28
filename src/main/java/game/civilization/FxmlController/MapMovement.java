@@ -1,5 +1,6 @@
 package game.civilization.FxmlController;
 
+import game.civilization.Model.Map;
 import game.civilization.SceneModels.GameSceneDataBase;
 import game.civilization.SceneModels.Tile;
 import javafx.animation.AnimationTimer;
@@ -35,22 +36,22 @@ public class MapMovement {
         @Override
         public void handle(long timestamp) {
 
-            if (wPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutY() < 200) {
+            if (wPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutY() < 0) {
                 for (Tile tile : GameSceneDataBase.getInstance().getTiles())
                     tile.goDown();
             }
 
-            if (sPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutY() > -1400) {
+            if (sPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutY() > -1 * Map.getRow() * 100 * Math.sqrt(3)) {
                 for (Tile tile : GameSceneDataBase.getInstance().getTiles())
                     tile.goUp();
             }
 
-            if (aPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutX() < 200) {
+            if (aPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutX() < 300) {
                 for (Tile tile : GameSceneDataBase.getInstance().getTiles())
                     tile.goRight();
             }
 
-            if (dPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutX() > -200) {
+            if (dPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutX() > -1 * Map.getColumn() * 100) {
                 for (Tile tile : GameSceneDataBase.getInstance().getTiles())
                     tile.goLeft();
             }
