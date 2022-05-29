@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 
 public class MapMovement {
     private static MapMovement instance;
+    private final int moveSpeed = 30;
 
     public static MapMovement getInstance() {
         if (instance == null)
@@ -36,24 +37,20 @@ public class MapMovement {
         @Override
         public void handle(long timestamp) {
 
-            if (wPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutY() < 0) {
-                for (Tile tile : GameSceneDataBase.getInstance().getTiles())
-                    tile.goDown();
+            if (wPressed.get() && GameSceneDataBase.getInstance().getPane().getLayoutY() < 0) {
+                GameSceneDataBase.getInstance().getPane().setLayoutY(GameSceneDataBase.getInstance().getPane().getLayoutY() + moveSpeed);
             }
 
-            if (sPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutY() > -1 * Map.getRow() * 100 * Math.sqrt(3)) {
-                for (Tile tile : GameSceneDataBase.getInstance().getTiles())
-                    tile.goUp();
+            if (sPressed.get() && GameSceneDataBase.getInstance().getPane().getLayoutY() > -1 * Map.getRow() * 100 * Math.sqrt(3)) {
+                GameSceneDataBase.getInstance().getPane().setLayoutY(GameSceneDataBase.getInstance().getPane().getLayoutY() - moveSpeed);
             }
 
-            if (aPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutX() < 300) {
-                for (Tile tile : GameSceneDataBase.getInstance().getTiles())
-                    tile.goRight();
+            if (aPressed.get() && GameSceneDataBase.getInstance().getPane().getLayoutX() < 300) {
+                GameSceneDataBase.getInstance().getPane().setLayoutX(GameSceneDataBase.getInstance().getPane().getLayoutX() + moveSpeed);
             }
 
-            if (dPressed.get() && GameSceneDataBase.getInstance().getTiles().get(0).getLayoutX() > -1 * Map.getColumn() * 100) {
-                for (Tile tile : GameSceneDataBase.getInstance().getTiles())
-                    tile.goLeft();
+            if (dPressed.get() && GameSceneDataBase.getInstance().getPane().getLayoutX() > -1 * Map.getColumn() * 100) {
+                GameSceneDataBase.getInstance().getPane().setLayoutX(GameSceneDataBase.getInstance().getPane().getLayoutX() - moveSpeed);
             }
         }
     };
