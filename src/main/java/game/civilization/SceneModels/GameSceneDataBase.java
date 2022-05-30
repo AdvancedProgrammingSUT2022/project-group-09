@@ -78,4 +78,9 @@ public class GameSceneDataBase {
     public ArrayList<Circle> getTileFeatures() {
         return tileFeatures;
     }
+
+    public void clear() {
+        tiles.clear();
+        tileFeatures.clear();
+    }
 }

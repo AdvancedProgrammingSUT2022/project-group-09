@@ -1,5 +1,7 @@
 package game.civilization.FxmlController;
 
+import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.SceneController.MapController;
 import game.civilization.SceneModels.GameSceneDataBase;
 import javafx.event.ActionEvent;
@@ -13,6 +15,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
+    @FXML
+    private Label civilizationName;
     @FXML
     private Label scienceLabel;
     @FXML
@@ -28,6 +32,7 @@ public class GameSceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
         setDataToGameSceneDataBase();
         MapController.getInstance().run();
         MapMovement.getInstance().run();
@@ -52,6 +57,11 @@ public class GameSceneController implements Initializable {
     }
 
     public void nextTurn(ActionEvent actionEvent) {
-
+        GameSceneDataBase.getInstance().clear();
+        clearPane();
+        new GameMenuController().doNextTurn();
+        civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
+        MapController.getInstance().run();
+        loadPane();
     }
 }
