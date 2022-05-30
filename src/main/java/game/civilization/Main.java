@@ -7,6 +7,7 @@ import game.civilization.Controller.MainMenuController;
 import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
+import game.civilization.Model.Units.Settler;
 import game.civilization.View.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -23,6 +24,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         UserDatabase.loadUsers();
         GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
+        ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
         stage.setTitle("CivilizationV");
         //     preStartRequired();
         SceneController.getInstance().game(stage);

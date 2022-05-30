@@ -24,6 +24,7 @@ public class MapController {
 
     public void run() {
         initializeMap();
+        loadCityIcon();
         loadTerrainFeatures();
         loadUnits();
         showInfoTileInfo();
@@ -51,6 +52,12 @@ public class MapController {
     private void loadTerrainFeatures() {
         for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
             tile.loadTerrainFeature();
+        }
+    }
+
+    private void loadCityIcon() {
+        for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
+            tile.loadCityIcon();
         }
     }
 

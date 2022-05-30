@@ -186,7 +186,7 @@ public class Terrain {
                 terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
             x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
-            y = GameDataBase.getMainMap().getYpositionTerrain(this) + 1;
+            y = GameDataBase.getMainMap().getYpositionTerrain(this) - 1;
             if (GameDataBase.getMainMap().isValidTerran(x, y))
                 terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
@@ -210,8 +210,8 @@ public class Terrain {
             if (GameDataBase.getMainMap().isValidTerran(x, y))
                 terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
-            x = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
-            y = GameDataBase.getMainMap().getYpositionTerrain(this) - 1;
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
+            y = GameDataBase.getMainMap().getYpositionTerrain(this) + 1;
             if (GameDataBase.getMainMap().isValidTerran(x, y))
                 terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 

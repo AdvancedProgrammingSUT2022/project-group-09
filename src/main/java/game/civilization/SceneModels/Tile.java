@@ -1,6 +1,8 @@
 package game.civilization.SceneModels;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Main;
+import game.civilization.Model.City;
 import game.civilization.Model.TerrainFeatures.TerrainFeature;
 import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.Units.Unit;
@@ -34,6 +36,18 @@ public class Tile extends Polygon {
         super.setFill(new ImagePattern(terrain.getType().getImage()));
     }
 
+    public void loadCityIcon() {
+        if (!(terrain instanceof City))
+            return;
+        Circle circle = new Circle();
+        circle.setCenterX((getPoints().get(4) + getPoints().get(10)) / 2);
+        circle.setCenterY(getPoints().get(5));
+        circle.setRadius(80);
+        circle.setStrokeWidth(0);
+        circle.setFill(new ImagePattern(new Image(Main.class.getResource("GamePictures/TerrainPicture/city.jpg").toExternalForm())));
+        GameSceneDataBase.getInstance().getCityIcons().add(circle);
+    }
+
     public void loadTerrainFeature() {
         TerrainFeature terrainFeature;
         if (terrain.getTerrainFeatures().size() == 2) {
@@ -64,7 +78,6 @@ public class Tile extends Polygon {
             unit = terrain.getCivilianUnit();
         if (unit == null)
             return;
-        System.out.println(terrain.getCoordination().toString());
         Circle circle = new Circle();
         circle.setCenterX((getPoints().get(4) + getPoints().get(10)) / 2);
         circle.setCenterY(getPoints().get(5));

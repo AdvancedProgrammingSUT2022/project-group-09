@@ -273,7 +273,7 @@ public class MapController {
 //        if (terrainState == TerrainState.FOG_OF_WAR)
 //            return "this terrain is in fog for you";
 
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder(coordination.toString() + "\n");
         if (terrain.getCivilization() == null)
             stringBuilder.append("this terrain belongs to: no one");
         else
