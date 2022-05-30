@@ -329,7 +329,7 @@ public class GameMenuView extends View {
             } else if (Objects.equals(input, "back"))
                 break;
             else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SHOW_DETAILS)) != null) {
-                System.out.println(mapController.showDetails(matcher));
+              //  System.out.println(mapController.showDetails(matcher));
                 needShowMap = false;
             } else
                 System.out.println("invalid command");

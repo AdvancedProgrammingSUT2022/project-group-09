@@ -36,7 +36,7 @@ public class MapMovement {
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long timestamp) {
-
+            GameSceneDataBase.getInstance().getPane().requestFocus();
             if (wPressed.get() && GameSceneDataBase.getInstance().getPane().getLayoutY() < 0) {
                 GameSceneDataBase.getInstance().getPane().setLayoutY(GameSceneDataBase.getInstance().getPane().getLayoutY() + moveSpeed);
             }

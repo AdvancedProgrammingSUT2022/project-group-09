@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-
+<?import javafx.scene.text.Font?>
 
 <Pane fx:id="backPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="background" stylesheets="@GamePictures/Game.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.GameSceneController">
-   <children>
-      <Pane fx:id="pane" layoutY="46.0" prefHeight="857.0" prefWidth="1600.0" />
-   </children>
+    <children>
+        <Pane fx:id="pane" layoutY="46.0" prefHeight="857.0" prefWidth="1600.0" />
+        <Button fx:id="nextTurnButton" layoutX="1501.0" mnemonicParsing="false" onAction="#nextTurn" prefHeight="30.0" prefWidth="99.0" text="next turn">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Button>
+        <ImageView fitHeight="31.0" fitWidth="44.0" layoutX="1470.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@GamePictures/mainIcons/Turn.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="112.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@GamePictures/mainIcons/Gold.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="226.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@GamePictures/mainIcons/Happiness.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@GamePictures/mainIcons/Science.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="scienceLabel" layoutX="41.0" layoutY="7.0" prefHeight="31.0" prefWidth="54.0" />
+        <Label fx:id="goldLabel" layoutX="160.0" layoutY="9.0" prefHeight="31.0" prefWidth="54.0" />
+        <Label fx:id="happinessLabel" layoutX="274.0" layoutY="7.0" prefHeight="31.0" prefWidth="54.0" />
+    </children>
 </Pane>

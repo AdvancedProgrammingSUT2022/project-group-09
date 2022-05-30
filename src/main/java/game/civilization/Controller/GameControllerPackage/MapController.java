@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 import game.civilization.Model.ConsoleColors;
+import game.civilization.Model.Coordination;
 import game.civilization.Model.Map;
 import game.civilization.Model.Pair;
 import game.civilization.Model.Improvements.Improvement;
@@ -60,7 +61,7 @@ public class MapController {
     }
 
     private void drawMainDetails(String[][] mapString, int istart, int jstart, int xCenter, int yCenter,
-            String backgroundColor) {
+                                 String backgroundColor) {
         for (int k = 2; k > -1; k--) {
             for (int z = jstart + k + 1; z < jstart + k + 1 + 5 + 4 - 2 * k; z++) {
                 mapString[istart + 2 - k][z] = backgroundColor + " " + ConsoleColors.RESET;
@@ -101,7 +102,7 @@ public class MapController {
                 String backgroundColor;
                 if (j % 2 == 1)
                     backgroundColor = getBackgroundColor(terrains[x + i + remainder][y + j]);// inja bug dare az size
-                // ararye mizane biroon
+                    // ararye mizane biroon
                 else
                     backgroundColor = getBackgroundColor(terrains[x + i][y + j]);
                 // before entering this function we have checked if it's out of bonds or not
@@ -242,7 +243,7 @@ public class MapController {
             if (improvement != null && improvementPair.getValue() == true) {
                 if (improvement.getRequiredTechnology() == null || GameDataBase.getCurrentCivilization()
                         .getTechnologies().getTechnologiesResearched().contains(improvement.getRequiredTechnology())) {
-                            stringBuilder.append("this terrain has " + improvement.name() + " improvement\n");
+                    stringBuilder.append("this terrain has " + improvement.name() + " improvement\n");
                 }
             }
         }
@@ -262,15 +263,15 @@ public class MapController {
         }
     }
 
-    public String showDetails(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
+    public String showDetails(Coordination coordination) {
+        int x = coordination.getX();
+        int y = coordination.getY();
         isValidTerran(x, y);
         Terrain terrain = GameDataBase.getMainMap().getTerrain(x, y);
         TerrainState terrainState = GameDataBase.getCurrentCivilization().getTerrainState(x, y);
 
-        if (terrainState == TerrainState.FOG_OF_WAR)
-            return "this terrain is in fog for you";
+//        if (terrainState == TerrainState.FOG_OF_WAR)
+//            return "this terrain is in fog for you";
 
         StringBuilder stringBuilder = new StringBuilder();
         if (terrain.getCivilization() == null)
@@ -281,9 +282,9 @@ public class MapController {
                 .append(terrain.getType()).append("\n").append("Terrain features are: ")
                 .append(terrain.getTerrainFeatures())
                 .append("\n");
-        if (terrainState == TerrainState.VISIBLE) {
-            showVisibleDetails(stringBuilder, terrain);
-        }
+//        if (terrainState == TerrainState.VISIBLE) {
+        showVisibleDetails(stringBuilder, terrain);
+        //  }
         return stringBuilder.toString();
     }
 }

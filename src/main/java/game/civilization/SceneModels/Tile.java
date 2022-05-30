@@ -14,6 +14,10 @@ import javafx.scene.shape.Polygon;
 import java.util.ArrayList;
 
 public class Tile extends Polygon {
+    public Terrain getTerrain() {
+        return terrain;
+    }
+
     private final Terrain terrain;
 
     public Tile(double x, double y, double dy, Terrain terrain) {
