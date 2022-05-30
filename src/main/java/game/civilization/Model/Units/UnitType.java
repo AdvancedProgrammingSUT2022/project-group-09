@@ -1,83 +1,67 @@
 package game.civilization.Model.Units;
 
+import game.civilization.Main;
 import game.civilization.Model.Resources.Resource;
 import game.civilization.Model.TechnologyPackage.TechnologyType;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public enum UnitType {
-    ARCHER(70, CombatType.ARCHERY, 4, 6, 2, 2, null, TechnologyType.ARCHERY) {
-    },
-    CHARIOTARCHER(60, CombatType.MOUNTED, 3, 6, 2, 4, Resource.HORSE, TechnologyType.THEWHEEL) {
-    },
-    SCOUT(25, CombatType.RECON, 4, 0, 1, 2, null, null) {
-
-    },
-    SETTLER(89, CombatType.CIVILIAN, 0, 0, 1, 2, null, null) {
-    },
-    SPEARMAN(50, CombatType.MELEE, 6, 0, 1, 2, null, null) {
-    },
-    WARRIOR(40, CombatType.MELEE, 6, 0, 1, 2, null, null) {
-
-    },
-    WORKER(70, CombatType.CIVILIAN, 0, 0, 1, 2, null, null) {
-    },
-    CATAPULT(100, CombatType.SIEGE, 4, 14, 2, 2, Resource.IRON, TechnologyType.MATHEMATICS) {
-    },
-    HORSEMAN(80, CombatType.MOUNTED, 12, 0, 1, 4, Resource.HORSE, TechnologyType.HORSEBACKRIDING) {
-
-    },
-    SWORDSMAN(80, CombatType.MELEE, 11, 0, 1, 2, Resource.IRON, TechnologyType.IRONWORKING) {
-
-    },
-    CROSSBOWMAN(120, CombatType.ARCHERY, 6, 12, 2, 2, null, TechnologyType.MACHINERY) {
-
-    },
-    KNIGHT(150, CombatType.MOUNTED, 18, 0, 1, 3, Resource.HORSE, TechnologyType.CHIVALRY) {
-
-    },
-    LONGSWORDMAN(150, CombatType.MELEE, 18, 0, 1, 3, Resource.IRON, TechnologyType.STEEL) {
-
-    },
-    PIKEMAN(100, CombatType.MELEE, 10, 0, 1, 2, null, TechnologyType.CIVILSERVICE) {
-
-    },
-    TREBUCHET(170, CombatType.SIEGE, 6, 20, 2, 2, Resource.IRON, TechnologyType.PHYSICS) {
-
-    },
-    CANON(250, CombatType.SIEGE, 10, 26, 2, 2, null, TechnologyType.CHEMISTRY) {
-
-    },
-    CAVALRY(260, CombatType.MOUNTED, 25, 0, 1, 3, Resource.HORSE, TechnologyType.MILITARYSCIENCE) {
-
-    },
-    LANCER(220, CombatType.MOUNTED, 22, 0, 1, 4, Resource.HORSE, TechnologyType.METALLURGY) {
-
-    },
-    MUSKETMAN(120, CombatType.GUNPOWDER, 16, 0, 1, 2, null, TechnologyType.GUNPOWDER) {
-
-    },
-    RIFLEMAN(200, CombatType.GUNPOWDER, 25, 0, 1, 2, null, TechnologyType.RIFLING) {
-
-    },
-    ANTITANKGUN(300, CombatType.GUNPOWDER, 32, 0, 1, 2, null, TechnologyType.REPLACEABLEPARTS) {
-
-    },
-    ARTILLERY(420, CombatType.SIEGE, 16, 32, 3, 2, null, TechnologyType.DYNAMITE) {
-
-    },
-    INFANTRY(300, CombatType.GUNPOWDER, 36, 0, 1, 2, null, TechnologyType.REPLACEABLEPARTS) {
-
-    },
-    PANZER(450, CombatType.ARMORED, 60, 0, 1, 5, null, TechnologyType.COMBUSTION) {
-
-    },
-    TANK(450, CombatType.ARMORED, 50, 0, 1, 4, null, TechnologyType.COMBUSTION) {
-    };
+    ARCHER(70, CombatType.ARCHERY, 4, 6, 2, 2, null, TechnologyType.ARCHERY,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Archer.png").toExternalForm())),
+    CHARIOTARCHER(60, CombatType.MOUNTED, 3, 6, 2, 4, Resource.HORSE, TechnologyType.THEWHEEL,
+            new Image(Main.class.getResource("GamePictures/unitPicture/ChariotArcher.png").toExternalForm())),
+    SCOUT(25, CombatType.RECON, 4, 0, 1, 2, null, null,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Scout.png").toExternalForm())),
+    SETTLER(89, CombatType.CIVILIAN, 0, 0, 1, 2, null, null
+            , new Image(Main.class.getResource("GamePictures/unitPicture/Settler.png").toExternalForm())),
+    SPEARMAN(50, CombatType.MELEE, 6, 0, 1, 2, null, null,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Spearman.png").toExternalForm())),
+    WARRIOR(40, CombatType.MELEE, 6, 0, 1, 2, null, null,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Warrior.png").toExternalForm())),
+    WORKER(70, CombatType.CIVILIAN, 0, 0, 1, 2, null, null,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Worker.png").toExternalForm())),
+    CATAPULT(100, CombatType.SIEGE, 4, 14, 2, 2, Resource.IRON, TechnologyType.MATHEMATICS,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Catapult.png").toExternalForm())),
+    HORSEMAN(80, CombatType.MOUNTED, 12, 0, 1, 4, Resource.HORSE, TechnologyType.HORSEBACKRIDING,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Horseman.png").toExternalForm())),
+    SWORDSMAN(80, CombatType.MELEE, 11, 0, 1, 2, Resource.IRON, TechnologyType.IRONWORKING,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Swordman.png").toExternalForm())),
+    CROSSBOWMAN(120, CombatType.ARCHERY, 6, 12, 2, 2, null, TechnologyType.MACHINERY,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Crossbowman.png").toExternalForm())),
+    KNIGHT(150, CombatType.MOUNTED, 18, 0, 1, 3, Resource.HORSE, TechnologyType.CHIVALRY,
+            new Image(Main.class.getResource("GamePictures/unitPicture/knight.png").toExternalForm())),
+    LONGSWORDMAN(150, CombatType.MELEE, 18, 0, 1, 3, Resource.IRON, TechnologyType.STEEL,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Longswordman.png").toExternalForm())),
+    PIKEMAN(100, CombatType.MELEE, 10, 0, 1, 2, null, TechnologyType.CIVILSERVICE
+            , new Image(Main.class.getResource("GamePictures/unitPicture/Pikeman.png").toExternalForm())),
+    TREBUCHET(170, CombatType.SIEGE, 6, 20, 2, 2, Resource.IRON, TechnologyType.PHYSICS,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Trebuchet.png").toExternalForm())),
+    CANON(250, CombatType.SIEGE, 10, 26, 2, 2, null, TechnologyType.CHEMISTRY,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Cannon.png").toExternalForm())),
+    CAVALRY(260, CombatType.MOUNTED, 25, 0, 1, 3, Resource.HORSE, TechnologyType.MILITARYSCIENCE,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Cavalry.png").toExternalForm())),
+    LANCER(220, CombatType.MOUNTED, 22, 0, 1, 4, Resource.HORSE, TechnologyType.METALLURGY,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Lancer.png").toExternalForm())),
+    MUSKETMAN(120, CombatType.GUNPOWDER, 16, 0, 1, 2, null, TechnologyType.GUNPOWDER,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Musketman.png").toExternalForm())),
+    RIFLEMAN(200, CombatType.GUNPOWDER, 25, 0, 1, 2, null, TechnologyType.RIFLING,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Rifleman.png").toExternalForm())),
+    ANTITANKGUN(300, CombatType.GUNPOWDER, 32, 0, 1, 2, null, TechnologyType.REPLACEABLEPARTS,
+            new Image(Main.class.getResource("GamePictures/unitPicture/AntiTankGun.png").toExternalForm())),
+    ARTILLERY(420, CombatType.SIEGE, 16, 32, 3, 2, null, TechnologyType.DYNAMITE,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Artillery.png").toExternalForm())),
+    INFANTRY(300, CombatType.GUNPOWDER, 36, 0, 1, 2, null, TechnologyType.REPLACEABLEPARTS,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Infantry.png").toExternalForm())),
+    PANZER(450, CombatType.ARMORED, 60, 0, 1, 5, null, TechnologyType.COMBUSTION,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Panzer.png").toExternalForm())),
+    TANK(450, CombatType.ARMORED, 50, 0, 1, 4, null, TechnologyType.COMBUSTION,
+            new Image(Main.class.getResource("GamePictures/unitPicture/Tank.png").toExternalForm()));
 
 
-    UnitType(int cost, CombatType combatType, int combatStrengh, int rangedCombatStrengh, int range, int movement, Resource requiredResourse, TechnologyType requiredTechnology) {
+    UnitType(int cost, CombatType combatType, int combatStrengh, int rangedCombatStrengh, int range, int movement, Resource requiredResourse, TechnologyType requiredTechnology, Image image) {
         this.cost = cost;
         this.combatType = combatType;
         this.combatStrength = combatStrengh;
@@ -86,6 +70,7 @@ public enum UnitType {
         this.movement = movement;
         this.requiredTechnology = requiredTechnology;
         this.requiredResourse = requiredResourse;
+        this.image = image;
     }
 
     public int getCost() {
@@ -129,6 +114,7 @@ public enum UnitType {
     private final int movement;
     private final Resource requiredResourse;
     private final TechnologyType requiredTechnology;
+    private final Image image;
 
     public static ArrayList<UnitType> getAllUnits() {
         return new ArrayList<>(List.of(UnitType.values()));
