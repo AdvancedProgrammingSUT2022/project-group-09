@@ -4,8 +4,10 @@ public class User {
     private String username;
     private String password;
     private String nickname;
-
-    private int highScore;
+    private int score;
+    private String lastWinTime;
+    private String avatarPicutrePath;
+    private String lastLoginTime;
 
     public String getUsername() {
         return username;
@@ -31,20 +33,53 @@ public class User {
         this.nickname = nickname;
     }
 
-    public int getHighScore() {
-        return highScore;
+    public int getscore() {
+        return score;
     }
 
-    public void setHighScore(int highScore) {
-        this.highScore = highScore;
+    public void setscore(int score) {
+        this.score = score;
     }
 
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public String getLastWinTime() {
+        return this.lastWinTime;
+    }
+
+    public void setLastWinTime(String lastWinTime) {
+        this.lastWinTime = lastWinTime;
+    }
+
+    public String getAvatarPicutrePath() {
+        return this.avatarPicutrePath;
+    }
+
+    public void setAvatarPicutrePath(String avatarPicutrePath) {
+        this.avatarPicutrePath = avatarPicutrePath;
+    }
+
+    public String getLastLoginTime() {
+        return this.lastLoginTime;
+    }
+
+    public void setLastLoginTime(String lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+    
 
     public User(String username, String password, String nickname) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
-        this.highScore = 0;
+        this.score = 0;
     }
 
     @Override
@@ -52,7 +87,7 @@ public class User {
         return "username : " + username + "\n" +
                 "password : " + password + "\n" +
                 "nickname : " + nickname + "\n" +
-                "highscore : " + highScore;
+                "score : " + score;
     }
 
 }
