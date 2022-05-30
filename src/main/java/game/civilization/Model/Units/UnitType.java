@@ -161,4 +161,8 @@ public enum UnitType {
             return 0;
         return 1;
     }
+
+    public Image getImage() {
+        return image;
+    }
 }

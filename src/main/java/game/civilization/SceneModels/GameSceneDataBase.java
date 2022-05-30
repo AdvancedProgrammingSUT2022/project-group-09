@@ -32,6 +32,7 @@ public class GameSceneDataBase {
 
     private final ArrayList<Tile> tiles = new ArrayList<>();
     private final ArrayList<Circle> tileFeatures = new ArrayList<>();
+    private final ArrayList<Circle> units = new ArrayList<>();
     private Pane pane;
     private Pane backPane = null;
     private Label scienceLabel;
@@ -82,5 +83,9 @@ public class GameSceneDataBase {
     public void clear() {
         tiles.clear();
         tileFeatures.clear();
+    }
+
+    public ArrayList<Circle> getUnits() {
+        return units;
     }
 }

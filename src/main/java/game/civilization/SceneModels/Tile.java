@@ -3,6 +3,7 @@ package game.civilization.SceneModels;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Model.TerrainFeatures.TerrainFeature;
 import game.civilization.Model.Terrains.Terrain;
+import game.civilization.Model.Units.Unit;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -12,6 +13,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Tile extends Polygon {
     public Terrain getTerrain() {
@@ -52,6 +54,25 @@ public class Tile extends Polygon {
         circle.setStrokeWidth(2);
         circle.setFill(new ImagePattern(terrainFeature.getImage()));
         GameSceneDataBase.getInstance().getTileFeatures().add(circle);
+    }
+
+    public void loadUnit() {
+        Unit unit = null;
+        if (terrain.getMilitaryUnit() != null)
+            unit = terrain.getMilitaryUnit();
+        if (terrain.getCivilianUnit() != null)
+            unit = terrain.getCivilianUnit();
+        if (unit == null)
+            return;
+        System.out.println(terrain.getCoordination().toString());
+        Circle circle = new Circle();
+        circle.setCenterX((getPoints().get(4) + getPoints().get(10)) / 2);
+        circle.setCenterY(getPoints().get(5));
+        circle.setRadius(40);
+        circle.setStroke(Paint.valueOf("#FF0000"));
+        circle.setStrokeWidth(2);
+        circle.setFill(new ImagePattern(unit.getMyType().getImage()));
+        GameSceneDataBase.getInstance().getUnits().add(circle);
     }
 
 }

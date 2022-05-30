@@ -25,8 +25,10 @@ public class MapController {
     public void run() {
         initializeMap();
         loadTerrainFeatures();
+        loadUnits();
         showInfoTileInfo();
         loadCivilizationInfo();
+
     }
 
     private void initializeMap() {
@@ -49,6 +51,12 @@ public class MapController {
     private void loadTerrainFeatures() {
         for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
             tile.loadTerrainFeature();
+        }
+    }
+
+    private void loadUnits() {
+        for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
+            tile.loadUnit();
         }
     }
 
