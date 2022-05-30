@@ -24,7 +24,7 @@ public class Main extends Application {
         UserDatabase.loadUsers();
         GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
         stage.setTitle("CivilizationV");
-        //   preStartRequired();
+        //     preStartRequired();
         SceneController.getInstance().game(stage);
     }
 
