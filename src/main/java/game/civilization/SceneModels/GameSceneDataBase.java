@@ -84,6 +84,8 @@ public class GameSceneDataBase {
     public void clear() {
         tiles.clear();
         tileFeatures.clear();
+        units.clear();
+        cityIcons.clear();
     }
 
     public ArrayList<Circle> getUnits() {
