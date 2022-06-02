@@ -229,7 +229,7 @@ public class City extends Terrain implements Combatble, Selectable {
     }
 
     @Override
-    public void setCivilization(Civilization civilization) {
+    public void setCivilizationToCapitalCity(Civilization civilization) {
         for (Civilization civilization1 : GameDataBase.getCivilizations()) {
             civilization1.getCities().remove(this);
         }
@@ -294,7 +294,7 @@ public class City extends Terrain implements Combatble, Selectable {
 
     public void getConqueredBy(Civilization civilization) {
         setUnHappiness(true);
-        setCivilization(civilization);
+        setCivilizationToCapitalCity(civilization);
     }
 
     public void deleteCity() {

@@ -29,7 +29,6 @@ public class MapController {
         loadUnits();
         showInfoTileInfo();
         loadCivilizationInfo();
-
     }
 
     private void initializeMap() {

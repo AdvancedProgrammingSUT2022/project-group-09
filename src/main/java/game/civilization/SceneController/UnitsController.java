@@ -2,6 +2,7 @@ package game.civilization.SceneController;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.UnitController;
+import game.civilization.FxmlController.GameSceneController;
 import game.civilization.Model.Units.Unit;
 import game.civilization.SceneModels.GameSceneDataBase;
 import game.civilization.SceneModels.Tile;
@@ -43,6 +44,7 @@ public class UnitsController {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println(new UnitController().foundCity());
+                GameSceneDataBase.getInstance().getGameSceneController().refresh();
             }
         });
         pane.getChildren().add(foundCityButon);

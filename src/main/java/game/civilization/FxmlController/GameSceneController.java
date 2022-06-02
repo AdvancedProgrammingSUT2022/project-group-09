@@ -53,6 +53,7 @@ public class GameSceneController implements Initializable {
     }
 
     private void setDataToGameSceneDataBase() {
+        GameSceneDataBase.getInstance().setGameSceneController(this);
         GameSceneDataBase.getInstance().setBackPane(backPane);
         GameSceneDataBase.getInstance().setPane(pane);
         GameSceneDataBase.getInstance().setGoldLabel(goldLabel);
@@ -66,6 +67,15 @@ public class GameSceneController implements Initializable {
         new GameMenuController().doNextTurn();
         civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
         MapController.getInstance().run();
+        UnitsController.getInstance().run();
+        loadPane();
+    }
+
+    public void refresh() {
+        GameSceneDataBase.getInstance().clear();
+        clearPane();
+        MapController.getInstance().run();
+        UnitsController.getInstance().run();
         loadPane();
     }
 }

@@ -147,18 +147,16 @@ public class Terrain {
         return null;
     }
 
-    public void setCivilization(Civilization civilization) {
+    public void setCivilizationToCapitalCity(Civilization civilization) {
         for (Civilization civilization1 : GameDataBase.getCivilizations()) {
             for (City city : civilization1.getCities()) {
                 city.getTerrains().remove(this);
             }
         }
-        for (Civilization civilization1 : GameDataBase.getCivilizations()) {
-            for (City city : civilization1.getCities()) {
-                if (city.isCapital()) {
-                    city.addTerrain(this);
-                    return;
-                }
+        for (City city : civilization.getCities()) {
+            if (city.isCapital()) {
+                city.addTerrain(this);
+                return;
             }
         }
         System.err.println("ERROR! setCivilization-Terrain(civilization ma paytakht nadare!)");
@@ -169,24 +167,24 @@ public class Terrain {
     public ArrayList<Terrain> getSurroundingTerrain() {
         ArrayList<Terrain> terrains = new ArrayList<>();
         int x, y;
-        if (GameDataBase.getMainMap().getYpositionTerrain(this) % 2 == 0) {
+        if (GameDataBase.getMainMap().getXpositionTerrain(this) % 2 == 0) {
             x = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
             y = GameDataBase.getMainMap().getYpositionTerrain(this);
             if (GameDataBase.getMainMap().isValidTerran(x, y))
                 terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
+            y = GameDataBase.getMainMap().getYpositionTerrain(this) - 1;
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
+
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
+            y = GameDataBase.getMainMap().getYpositionTerrain(this) - 1;
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
+
             x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
             y = GameDataBase.getMainMap().getYpositionTerrain(this);
-            if (GameDataBase.getMainMap().isValidTerran(x, y))
-                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
-
-            x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
-            y = GameDataBase.getMainMap().getYpositionTerrain(this) - 1;
-            if (GameDataBase.getMainMap().isValidTerran(x, y))
-                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
-
-            x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
-            y = GameDataBase.getMainMap().getYpositionTerrain(this) - 1;
             if (GameDataBase.getMainMap().isValidTerran(x, y))
                 terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
@@ -205,17 +203,17 @@ public class Terrain {
             if (GameDataBase.getMainMap().isValidTerran(x, y))
                 terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
+            x = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
+            y = GameDataBase.getMainMap().getYpositionTerrain(this) + 1;
+            if (GameDataBase.getMainMap().isValidTerran(x, y))
+                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
+
             x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
             y = GameDataBase.getMainMap().getYpositionTerrain(this);
             if (GameDataBase.getMainMap().isValidTerran(x, y))
                 terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
 
             x = GameDataBase.getMainMap().getXpositionTerrain(this) - 1;
-            y = GameDataBase.getMainMap().getYpositionTerrain(this) + 1;
-            if (GameDataBase.getMainMap().isValidTerran(x, y))
-                terrains.add(GameDataBase.getMainMap().getTerrain(x, y));
-
-            x = GameDataBase.getMainMap().getXpositionTerrain(this) + 1;
             y = GameDataBase.getMainMap().getYpositionTerrain(this) + 1;
             if (GameDataBase.getMainMap().isValidTerran(x, y))
                 terrains.add(GameDataBase.getMainMap().getTerrain(x, y));

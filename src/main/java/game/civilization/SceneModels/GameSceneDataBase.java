@@ -1,5 +1,6 @@
 package game.civilization.SceneModels;
 
+import game.civilization.FxmlController.GameSceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -30,6 +31,7 @@ public class GameSceneDataBase {
 
     }
 
+    private GameSceneController gameSceneController;
     private final ArrayList<Tile> tiles = new ArrayList<>();
     private final ArrayList<Circle> tileFeatures = new ArrayList<>();
     private final ArrayList<Circle> units = new ArrayList<>();
@@ -94,5 +96,13 @@ public class GameSceneDataBase {
 
     public ArrayList<Circle> getCityIcons() {
         return cityIcons;
+    }
+
+    public GameSceneController getGameSceneController() {
+        return gameSceneController;
+    }
+
+    public void setGameSceneController(GameSceneController gameSceneController) {
+        this.gameSceneController = gameSceneController;
     }
 }

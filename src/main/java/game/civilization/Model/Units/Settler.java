@@ -24,10 +24,10 @@ public class Settler extends Unit {
     private void foundCapitalCity() {
         City city = new City(getTerrain());
         city.setCapital(true);
-        city.setCivilization(getCivilization());
+        city.setCivilizationToCapitalCity(getCivilization());
         GameDataBase.getMainMap().setTerrain(getTerrain().getXPosition(), getTerrain().getYPosition(), city);
         for (Terrain terrain : city.getSurroundingTerrain()) {
-            terrain.setCivilization(getCivilization());
+            terrain.setCivilizationToCapitalCity(getCivilization());
         }
         if (getTerrain().getType() == TerrainType.HILLS)
             city.setHp(city.getHp() + 20);
@@ -37,10 +37,10 @@ public class Settler extends Unit {
     private void foundNormalCity() {
         City city = new City();
         city.setCapital(false);
-        city.setCivilization(getCivilization());
+        city.setCivilizationToCapitalCity(getCivilization());
         GameDataBase.getMainMap().setTerrain(getTerrain().getXPosition(), getTerrain().getYPosition(), city);
         for (Terrain terrain : city.getSurroundingTerrain()) {
-            terrain.setCivilization(getCivilization());
+            terrain.setCivilizationToCapitalCity(getCivilization());
         }
         if (getTerrain().getType() == TerrainType.HILLS)
             city.setHp(city.getHp() + 20);
