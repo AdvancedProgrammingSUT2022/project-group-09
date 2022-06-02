@@ -3,6 +3,7 @@ package game.civilization.FxmlController;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.SceneController.MapController;
+import game.civilization.SceneController.UnitsController;
 import game.civilization.SceneModels.GameSceneDataBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +36,7 @@ public class GameSceneController implements Initializable {
         civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
         setDataToGameSceneDataBase();
         MapController.getInstance().run();
+        UnitsController.getInstance().run();
         MapMovement.getInstance().run();
         loadPane();
     }

@@ -23,6 +23,7 @@ public class Tile extends Polygon {
     }
 
     private final Terrain terrain;
+    private Circle unitCircle;
 
     public Tile(double x, double y, double dy, Terrain terrain) {
         this.terrain = terrain;
@@ -85,7 +86,15 @@ public class Tile extends Polygon {
         circle.setStroke(Paint.valueOf("#FF0000"));
         circle.setStrokeWidth(2);
         circle.setFill(new ImagePattern(unit.getMyType().getImage()));
+        this.unitCircle = circle;
         GameSceneDataBase.getInstance().getUnits().add(circle);
     }
 
+    public Circle getUnitCircle() {
+        return unitCircle;
+    }
+
+    public void setUnitCircle(Circle unitCircle) {
+        this.unitCircle = unitCircle;
+    }
 }
