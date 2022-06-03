@@ -15,10 +15,12 @@ public class Settler extends Unit {
         for (City city : getCivilization().getCities()) {
             if (city.isCapital()) {
                 foundNormalCity();
+                GameDataBase.getCurrentCivilization().getMap().updateExploration();
                 return;
             }
         }
         foundCapitalCity();
+        GameDataBase.getCurrentCivilization().getMap().updateExploration();
     }
 
     private void foundCapitalCity() {

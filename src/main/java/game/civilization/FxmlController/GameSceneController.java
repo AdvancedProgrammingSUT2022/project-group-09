@@ -66,6 +66,7 @@ public class GameSceneController implements Initializable {
         GameSceneDataBase.getInstance().clear();
         clearPane();
         new GameMenuController().doNextTurn();
+        GameDataBase.getCurrentCivilization().getMap().updateExploration();
         civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
         MapController.getInstance().run();
         UnitsController.getInstance().run();
@@ -75,6 +76,7 @@ public class GameSceneController implements Initializable {
     public void refresh() {
         GameSceneDataBase.getInstance().clear();
         clearPane();
+        GameDataBase.getCurrentCivilization().getMap().updateExploration();
         MapController.getInstance().run();
         UnitsController.getInstance().run();
         loadPane();

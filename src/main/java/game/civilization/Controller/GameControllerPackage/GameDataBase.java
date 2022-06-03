@@ -44,7 +44,7 @@ public class GameDataBase {
             Terrain terrain = GameDataBase.getMainMap().getTerrain(coordination.getX(), coordination.getY());
             new Settler(terrain, civilization);
         }
-
+        GameDataBase.getCurrentCivilization().getMap().updateExploration();
     }
 
     public static ArrayList<Civilization> getCivilizations() {

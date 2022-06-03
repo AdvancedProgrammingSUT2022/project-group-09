@@ -2,6 +2,7 @@ package game.civilization.SceneController;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Model.Map;
+import game.civilization.Model.Terrains.TerrainState;
 import game.civilization.Model.Units.Unit;
 import game.civilization.SceneModels.GameSceneDataBase;
 import game.civilization.SceneModels.Tile;
@@ -53,19 +54,25 @@ public class MapController {
 
     private void loadTerrainFeatures() {
         for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
-            tile.loadTerrainFeature();
+            if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[tile.getTerrain().getXPosition()][tile.getTerrain().getYPosition()]
+                    != TerrainState.FOG_OF_WAR)
+                tile.loadTerrainFeature();
         }
     }
 
     private void loadCityIcon() {
         for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
-            tile.loadCityIcon();
+            if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[tile.getTerrain().getXPosition()][tile.getTerrain().getYPosition()]
+                    != TerrainState.FOG_OF_WAR)
+                tile.loadCityIcon();
         }
     }
 
     private void loadUnits() {
         for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
-            tile.loadUnit();
+            if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[tile.getTerrain().getXPosition()][tile.getTerrain().getYPosition()]
+                    == TerrainState.VISIBLE)
+                tile.loadUnit();
         }
     }
 
@@ -106,14 +113,17 @@ public class MapController {
 
     private void showInfoTileInfo() {
         for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
-            tile.setOnMouseEntered(mouseEvent -> {
-                setTerrainInfoPane(makeTerrainPanelPane(tile));
-                GameSceneDataBase.getInstance().getBackPane().getChildren().add(getTerrainInfoPane());
-            });
-            tile.setOnMouseExited(mouseEvent -> {
-                GameSceneDataBase.getInstance().getBackPane().getChildren().remove(getTerrainInfoPane());
-                setTerrainInfoPane(null);
-            });
+            if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[tile.getTerrain().getXPosition()][tile.getTerrain().getYPosition()]
+                    == TerrainState.VISIBLE) {
+                tile.setOnMouseEntered(mouseEvent -> {
+                    setTerrainInfoPane(makeTerrainPanelPane(tile));
+                    GameSceneDataBase.getInstance().getBackPane().getChildren().add(getTerrainInfoPane());
+                });
+                tile.setOnMouseExited(mouseEvent -> {
+                    GameSceneDataBase.getInstance().getBackPane().getChildren().remove(getTerrainInfoPane());
+                    setTerrainInfoPane(null);
+                });
+            }
         }
 
     }
