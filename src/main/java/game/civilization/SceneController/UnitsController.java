@@ -32,7 +32,6 @@ public class UnitsController {
         SettlerController.getInstance().settlerClicked();
     }
 
-
     public Pane getUnitPanel() {
         return unitPane;
     }
