@@ -2,6 +2,7 @@ module game.civilization {
     requires transitive javafx.controls;
     requires transitive javafx.fxml;
     requires transitive javafx.web;
+    requires transitive javafx.graphics;
 
     requires transitive org.controlsfx.controls;
     requires transitive com.dlsc.formsfx;
@@ -15,4 +16,6 @@ module game.civilization {
     exports game.civilization;
     exports game.civilization.FxmlController to javafx.fxml;
     opens game.civilization.Model to com.google.gson;
+    opens game.civilization.FxmlController to javafx.fxml;
+//    opens javafx.scene.image.Image to com.google.gson;
 }

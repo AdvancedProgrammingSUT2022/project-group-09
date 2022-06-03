@@ -21,10 +21,7 @@ public class LoginMenuController extends Controller {
         return "menu navigation is not possible!";
     }
 
-    public String register(Matcher matcher) {
-        String username = matcher.group("username");
-        String nickname = matcher.group("nickname");
-        String password = matcher.group("password");
+    public String register(String username, String nickname, String password) {
         if (LoginMenuRegex.getMatcher(username, LoginMenuRegex.USERNAME_FORMAT_REGEX) == null) {
             return "username format is invalid";
         }
@@ -44,8 +41,8 @@ public class LoginMenuController extends Controller {
         return "user created successfully!";
     }
 
-    public String login(Matcher matcher) {
-        User user = new User(matcher.group("username"), matcher.group("password"), "");
+    public String login(String username, String password) {
+        User user = new User(username, password, "");
         if (!UserDatabase.isUsernameDuplicate(user)) {
             return "Username and Password didn't match!";
         }
@@ -56,7 +53,7 @@ public class LoginMenuController extends Controller {
         if (user == null)
             return "BUG!";
         UserDatabase.setCurrentUser(user);
-        // CurrentMenu.set(CurrentMenu.MainMenu);
+        CurrentMenu.set(CurrentMenu.MainMenu);
         return "user logged in successfully!";
     }
 

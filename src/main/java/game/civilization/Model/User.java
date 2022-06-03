@@ -1,9 +1,16 @@
 package game.civilization.Model;
 
+import game.civilization.Main;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class User {
     private String username;
     private String password;
     private String nickname;
+    private String profileUrl;
+    private boolean inputStream = false;
+//    private Image profile;
 
     private int highScore;
 
@@ -45,6 +52,7 @@ public class User {
         this.password = password;
         this.nickname = nickname;
         this.highScore = 0;
+        profileUrl = Main.class.getResource("avatar/5.png").toExternalForm();
     }
 
     @Override
@@ -55,4 +63,19 @@ public class User {
                 "highscore : " + highScore;
     }
 
+    public String getProfileUrl() {
+        return profileUrl;
+    }
+
+    public void setProfileUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
+    }
+
+    public boolean isInputStream() {
+        return inputStream;
+    }
+
+    public void setInputStream(boolean inputStream) {
+        this.inputStream = inputStream;
+    }
 }
