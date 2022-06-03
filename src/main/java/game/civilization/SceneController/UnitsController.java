@@ -61,6 +61,8 @@ public class UnitsController {
             Unit finalUnit = unit1;
             unit.setOnMouseClicked(mouseEvent -> {
                 if (!unitClicked) {
+                    if (!(finalUnit.getCivilization() == GameDataBase.getCurrentCivilization()))
+                        return;
                     GameDataBase.setSelected(finalUnit);
                     unitClicked = true;
                     setSettlerPanel(makeSettlerPane());
