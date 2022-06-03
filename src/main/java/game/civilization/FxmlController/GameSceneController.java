@@ -5,6 +5,7 @@ import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.SceneController.MapController;
 import game.civilization.SceneController.UnitsController;
 import game.civilization.SceneModels.GameSceneDataBase;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
