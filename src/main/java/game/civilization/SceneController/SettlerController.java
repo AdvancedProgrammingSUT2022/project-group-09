@@ -26,8 +26,8 @@ public class SettlerController {
 
     private Pane makeSettlerPane() {
         Pane pane = new Pane();
-        pane.prefWidth(6000);
-        pane.prefHeight(6000);
+        pane.setMinSize(200,200);
+        pane.setMaxSize(200,200);
         pane.setLayoutX(0);
         pane.setLayoutY(50);
         pane.setStyle("-fx-background-color: #00ff59");

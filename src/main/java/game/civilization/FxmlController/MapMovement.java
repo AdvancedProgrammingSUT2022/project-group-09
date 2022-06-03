@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 
 public class MapMovement {
     private static MapMovement instance;
-    private final int moveSpeed = 30;
+    private final int moveSpeed = 50;
 
     public static MapMovement getInstance() {
         if (instance == null)

@@ -7,12 +7,17 @@ import game.civilization.Model.TerrainFeatures.TerrainFeature;
 import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.Terrains.TerrainState;
 import game.civilization.Model.Units.Unit;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.MotionBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 
@@ -38,7 +43,10 @@ public class Tile extends Polygon {
                 x - (size / 2.0), dy + size * v);
         if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[terrain.getXPosition()][terrain.getYPosition()] == TerrainState.FOG_OF_WAR)
             super.setFill(Color.GRAY);
-        else
+        else if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[terrain.getXPosition()][terrain.getYPosition()] == TerrainState.KNOWN) {
+            super.setFill(new ImagePattern(terrain.getType().getImage()));
+            super.setEffect(new BoxBlur(5,5,7));
+        } else
             super.setFill(new ImagePattern(terrain.getType().getImage()));
     }
 

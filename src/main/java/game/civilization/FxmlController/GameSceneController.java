@@ -81,4 +81,8 @@ public class GameSceneController implements Initializable {
         UnitsController.getInstance().run();
         loadPane();
     }
+
+    public void CheatActivate(ActionEvent actionEvent) {
+        clearPane();
+    }
 }
