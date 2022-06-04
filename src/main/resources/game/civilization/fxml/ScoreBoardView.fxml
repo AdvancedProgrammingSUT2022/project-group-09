@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="game.civilization.FxmlController.ScoreBoardViewController.java"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/ScoreBoardCSS.css"
+    xmlns="http://javafx.com/javafx/18"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.ScoreBoardViewController">
+    <children>
+        <TableView styleClass="mainTable" fx:id="scoreboardTable" layoutX="203.0" layoutY="43.0" prefHeight="634.0" prefWidth="900.0" >
+            <columns>
+                <TableColumn styleClass="rank" fx:id="rankColumn" prefWidth="150.0" text="Rank" />
+                <TableColumn fx:id="avatarColumn" prefWidth="150.0" text="Avatar" />
+                <TableColumn fx:id="usernameColumn" prefWidth="150.0" text="Username" />
+                <TableColumn fx:id="scoreColumn" prefWidth="150.0" text="Score" />
+                <TableColumn fx:id="lastWinColumn" prefWidth="150.0" text="Last Win" />
+                <TableColumn fx:id="lastLoginColumn" prefWidth="150.0" text="Last Login" />
+            </columns>
+        </TableView>
+    </children>
 </AnchorPane>

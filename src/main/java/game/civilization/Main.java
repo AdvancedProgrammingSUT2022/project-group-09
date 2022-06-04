@@ -6,6 +6,7 @@ import game.civilization.Controller.MainMenuController;
 import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
+import game.civilization.Model.User;
 import game.civilization.View.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -19,9 +20,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-       // preStartRequired();
+    //    preStartRequired();
+        UserDatabase.loadUsers();
+        UserDatabase.setCurrentUser(UserDatabase.getUsers().get(0));
         stage.setTitle("CivilizationV");
-        SceneController.getInstance().GameMenu(stage);
+        SceneController.getInstance().scoreBoard(stage);
     }
 
     public void preStartRequired() {

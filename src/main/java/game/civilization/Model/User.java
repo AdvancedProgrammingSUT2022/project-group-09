@@ -6,8 +6,17 @@ public class User {
     private String nickname;
     private int score;
     private String lastWinTime;
-    private String avatarPicutrePath;
+    private String avatarPicturePath = "src/main/resources/game/civilization/images/avatar/default.jpg";
     private String lastLoginTime;
+    private int rank;
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public int getRank() {
+        return this.rank;
+    }
 
     public String getUsername() {
         return username;
@@ -33,15 +42,6 @@ public class User {
         this.nickname = nickname;
     }
 
-    public int getscore() {
-        return score;
-    }
-
-    public void setscore(int score) {
-        this.score = score;
-    }
-
-
     public int getScore() {
         return this.score;
     }
@@ -58,12 +58,12 @@ public class User {
         this.lastWinTime = lastWinTime;
     }
 
-    public String getAvatarPicutrePath() {
-        return this.avatarPicutrePath;
+    public String getAvatarPicturePath() {
+        return this.avatarPicturePath;
     }
 
-    public void setAvatarPicutrePath(String avatarPicutrePath) {
-        this.avatarPicutrePath = avatarPicutrePath;
+    public void setAvatarPicturePath(String avatarPicutrePath) {
+        this.avatarPicturePath = avatarPicutrePath;
     }
 
     public String getLastLoginTime() {
@@ -87,7 +87,9 @@ public class User {
         return "username : " + username + "\n" +
                 "password : " + password + "\n" +
                 "nickname : " + nickname + "\n" +
-                "score : " + score;
+                "score : " + score + "\n" +
+                "lastWinTime: " + lastWinTime + "\n" +
+                "lastLoginTime: " + lastLoginTime + "\n";
     }
 
 }
