@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class SceneController {
+    private Stage stage = null;
 
     private static SceneController mainSceneController = null;
     public static SceneController getInstance() {
@@ -19,49 +20,53 @@ public class SceneController {
         return mainSceneController;
     }
 
-    public void LoginMenu(Stage stage) throws IOException {
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void LoginMenu() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/LoginMenuView.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void MainMenu(Stage stage) throws IOException {
+    public void MainMenu() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/MainMenuView.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void game(Stage stage) throws IOException {
+    public void game() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/Game.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void gameMenu(Stage stage) throws IOException {
+    public void gameMenu() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/GameMenuView.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void scoreBoard(Stage stage) throws IOException {
+    public void scoreBoard() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/ScoreBoardView.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void profileMenu(Stage stage) throws IOException {
+    public void profileMenu() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/ProfileMenuView.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void chatMenu(Stage stage) throws IOException {
+    public void chatMenu() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/ChatMenuView.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);

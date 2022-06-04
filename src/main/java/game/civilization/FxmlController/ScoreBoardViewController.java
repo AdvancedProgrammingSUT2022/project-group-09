@@ -46,13 +46,12 @@ public class ScoreBoardViewController {
 
         avatarColumn.setCellFactory(col -> {
             TableCell<User, String> cell = new TableCell<>();
-            // cell.itemProperty().addListener((observableValue, o, newValue) -> {
-                // if (newValue != null) {
-                    ImageView image = new ImageView(new Image("file:src/main/resources/game/civilization/images/avatar/default.jpg", 50, 50, false, false));
+            cell.itemProperty().addListener((observableValue, o, newValue) -> {
+                if (newValue != null) {
+                    ImageView image = new ImageView(new Image(newValue, 50, 50, false, false));
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(image));
-                    // System.out.println("file:" + newValue);
-                // }
-            // });
+                }
+            });
             return cell;
         });
         ObservableList<User> usersObservableList = FXCollections.observableArrayList(users);
@@ -70,7 +69,7 @@ public class ScoreBoardViewController {
 
     private void setAllCellValueFactory() {
         rankColumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
-        avatarColumn.setCellValueFactory(new PropertyValueFactory<>("avatarPicturePath"));
+        avatarColumn.setCellValueFactory(new PropertyValueFactory<>("profileUrl"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
         lastWinColumn.setCellValueFactory(new PropertyValueFactory<>("lastWinTime"));

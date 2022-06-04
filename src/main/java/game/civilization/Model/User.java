@@ -1,14 +1,16 @@
 package game.civilization.Model;
 
+import game.civilization.Main;
 public class User {
     private String username;
     private String password;
     private String nickname;
     private int score;
     private String lastWinTime;
-    private String avatarPicturePath = "src/main/resources/game/civilization/images/avatar/default.jpg";
     private String lastLoginTime;
     private int rank;
+    private String profileUrl;
+    private boolean inputStream = false;
 
     public void setRank(int rank) {
         this.rank = rank;
@@ -58,14 +60,6 @@ public class User {
         this.lastWinTime = lastWinTime;
     }
 
-    public String getAvatarPicturePath() {
-        return this.avatarPicturePath;
-    }
-
-    public void setAvatarPicturePath(String avatarPicutrePath) {
-        this.avatarPicturePath = avatarPicutrePath;
-    }
-
     public String getLastLoginTime() {
         return this.lastLoginTime;
     }
@@ -80,6 +74,7 @@ public class User {
         this.password = password;
         this.nickname = nickname;
         this.score = 0;
+        profileUrl = Main.class.getResource("avatar/5.png").toExternalForm();
     }
 
     @Override
@@ -92,4 +87,19 @@ public class User {
                 "lastLoginTime: " + lastLoginTime + "\n";
     }
 
+    public String getProfileUrl() {
+        return profileUrl;
+    }
+
+    public void setProfileUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
+    }
+
+    public boolean isInputStream() {
+        return inputStream;
+    }
+
+    public void setInputStream(boolean inputStream) {
+        this.inputStream = inputStream;
+    }
 }

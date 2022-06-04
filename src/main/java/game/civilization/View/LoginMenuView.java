@@ -18,11 +18,11 @@ public class LoginMenuView extends View {
     public void run() {
         while (CurrentMenu.get() == CurrentMenu.LoginMenu) {
             input = scanner.nextLine();
-            if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.CREATE)) != null)
-                System.out.println(LoginMenuController.register(matcher));
-            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.LOGIN)) != null)
-                System.out.println(LoginMenuController.login(matcher));
-            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.LOGOUT)) != null)
+//            if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.CREATE)) != null)
+//                System.out.println(LoginMenuController.register(matcher));
+//            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.LOGIN)) != null)
+//                System.out.println(LoginMenuController.login(matcher));
+            if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.LOGOUT)) != null)
                 System.out.println(LoginMenuController.logout());
             else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.EXIT)) != null)
                 System.out.println(LoginMenuController.exit());

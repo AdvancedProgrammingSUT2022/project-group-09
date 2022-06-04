@@ -1,8 +1,13 @@
 package game.civilization.Controller;
 
-import game.civilization.View.CurrentMenu;
 import game.civilization.MenuRegex.LoginMenuRegex;
+import game.civilization.View.CurrentMenu;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Objects;
 import java.util.regex.Matcher;
 
@@ -23,8 +28,7 @@ public class ProfileMenuController extends Controller {
         return "entered Main Menu";
     }
 
-    public String changeNickname(Matcher matcher) {
-        String newNickname = matcher.group("nickname");
+    public String changeNickname(String newNickname) {
         if (UserDatabase.isNicknameDuplicate(newNickname))
             return "user with nickname " + newNickname + " already exists";
         if (LoginMenuRegex.getMatcher(newNickname, LoginMenuRegex.NICKNAME_FORMAT_REGEX) == null) {
@@ -34,9 +38,7 @@ public class ProfileMenuController extends Controller {
         return "nickname changed successfully!";
     }
 
-    public String changePassword(Matcher matcher) {
-        String oldPassword = matcher.group("currentpassword");
-        String newPassword = matcher.group("newpassword");
+    public String changePassword(String newPassword, String oldPassword) {
         if (!Objects.equals(UserDatabase.getCurrentUser().getPassword(), oldPassword))
             return "current password is invalid";
         if (Objects.equals(oldPassword, newPassword))
@@ -44,7 +46,21 @@ public class ProfileMenuController extends Controller {
         if (LoginMenuRegex.getMatcher(newPassword, LoginMenuRegex.PASSWORD_FORMAT_REGEX) == null) {
             return "password is weak";
         }
-        return "password changed successfully";
+        UserDatabase.getCurrentUser().setPassword(newPassword);
+        return "password changed successfully!";
+    }
+
+    public String changeProfile(ImageView profile, String url) {
+        InputStream inputStream;
+        try {
+            inputStream = new FileInputStream(url);
+        } catch (FileNotFoundException e) {
+            return "url is not valid";
+        }
+        UserDatabase.getCurrentUser().setInputStream(true);
+        UserDatabase.getCurrentUser().setProfileUrl(url);
+        profile.setImage(new Image(inputStream));
+        return "ok";
     }
 
 }
