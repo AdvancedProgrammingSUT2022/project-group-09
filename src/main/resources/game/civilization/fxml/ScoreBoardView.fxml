@@ -3,13 +3,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Button?>
 
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/ScoreBoardCSS.css"
     xmlns="http://javafx.com/javafx/18"
     xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.ScoreBoardViewController">
     <children>
-        <TableView styleClass="mainTable" fx:id="scoreboardTable" layoutX="40.0" layoutY="43.0" prefHeight="634.0" prefWidth="1200.0" >
+        <TableView styleClass="mainTable" fx:id="scoreboardTable" layoutX="40.0" layoutY="43.0" prefHeight="600.0" prefWidth="1200.0" >
             <columns>
                 <TableColumn styleClass="rank" fx:id="rankColumn" prefWidth="150.0" text="Rank" />
                 <TableColumn fx:id="avatarColumn" prefWidth="150.0" text="Avatar" />
@@ -19,5 +20,6 @@
                 <TableColumn fx:id="lastLoginColumn" prefWidth="300.0" text="Last Login" />
             </columns>
         </TableView>
+        <Button layoutX="42.0" layoutY="660.0" mnemonicParsing="false" onAction="#back" text="BACK" />
     </children>
 </AnchorPane>

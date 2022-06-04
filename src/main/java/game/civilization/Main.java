@@ -32,7 +32,7 @@ public class Main extends Application {
         UserDatabase.setCurrentUser(UserDatabase.getUsers().get(0));
         stage.setTitle("CivilizationV");
         // SceneController.getInstance().scoreBoard(stage);
-        SceneController.getInstance().profileMenu();
+        SceneController.getInstance().scoreBoard();
         // preStartRequired(stage);
         // stage.setTitle("CivilizationV");
         // stage.sizeToScene();

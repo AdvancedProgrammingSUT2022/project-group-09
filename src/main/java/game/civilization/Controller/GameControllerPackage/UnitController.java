@@ -1,6 +1,7 @@
 package game.civilization.Controller.GameControllerPackage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 
 import game.civilization.Model.City;
@@ -595,6 +596,29 @@ public class UnitController {
         return pathCoordination;
     }
 
+    public ArrayList<Coordination> findOneTurnCoordinations(Unit unit) {
+        HashSet<Coordination> coordinations = new HashSet<>();
+        if (unit.getRemainingMove() <= 0) {
+            return new ArrayList<Coordination>(coordinations);
+        }
+        Terrain origin = unit.getTerrain();
+        for (Terrain terrain1 : origin.getSurroundingTerrain()) {
+            ArrayList<Terrain> tmp = new ArrayList<>();
+            if (isDestinationEmpty(unit.getMyType(), terrain1) && isMovePossible(unit.getRemainingMove(), terrain1, origin)) {
+                coordinations.add(terrain1.getCoordination());
+                tmp.add(terrain1);
+                for (Terrain terrain2 : origin.getSurroundingTerrain()) {
+                    if (isDestinationEmpty(unit.getMyType(), terrain2) && isMovePossible(unit.getRemainingMove() - terrain1.getMp(), terrain2, terrain1)) {
+                        if (turnNeedToMove(terrain2, origin, unit) < 2) {
+                            coordinations.add(terrain2.getCoordination());
+                        }
+                    }
+                }
+            }
+        }
+        return new ArrayList<Coordination>(coordinations);
+    }
+
     public int turnNeedToMove(Terrain destination, Terrain origin, Unit unit) {
         Terrain currentTerrain = unit.getTerrain();
         int res = 0;
@@ -655,7 +679,7 @@ public class UnitController {
     private boolean isPathAvailable(ArrayList<Terrain> path, int MP, int MaxMp, UnitType unitType) {
         if (path.isEmpty())
             return false;
-        MP -= path.get(0).getMp();
+        // MP -= path.get(0).getMp();
         for (int i = 1; i < path.size(); i++) {
             Terrain terrain = path.get(i);
             if (terrain.isHasRoad() && path.get(i - 1).isHasRoad()) {

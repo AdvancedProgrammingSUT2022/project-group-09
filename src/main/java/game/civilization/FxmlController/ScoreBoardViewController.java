@@ -1,5 +1,6 @@
 package game.civilization.FxmlController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -65,6 +66,10 @@ public class ScoreBoardViewController {
                     row.pseudoClassStateChanged(highlighted, newOrder != null && newOrder.getUsername().equals(UserDatabase.getCurrentUser().getUsername())));
             return row;
         });
+    }
+
+    public void back() throws IOException {
+        SceneController.getInstance().MainMenu();
     }
 
     private void setAllCellValueFactory() {
