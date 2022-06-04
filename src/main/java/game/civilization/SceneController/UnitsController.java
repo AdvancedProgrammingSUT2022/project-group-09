@@ -30,6 +30,7 @@ public class UnitsController {
 
     public void run() {
         SettlerController.getInstance().settlerClicked();
+        MilitaryUnitController.getInstance().MilitaryUnitClicked();
     }
 
     public Pane getUnitPanel() {

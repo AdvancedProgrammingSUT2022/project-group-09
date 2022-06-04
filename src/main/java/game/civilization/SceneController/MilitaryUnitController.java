@@ -12,37 +12,39 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
-public class SettlerController {
-    private static SettlerController SettlerController = null;
+public class MilitaryUnitController {
+    private static MilitaryUnitController MilitaryUnitController = null;
 
-    public static SettlerController getInstance() {
-        if (SettlerController == null)
-            SettlerController = new SettlerController();
-        return SettlerController;
+    public static MilitaryUnitController getInstance() {
+        if (MilitaryUnitController == null)
+            MilitaryUnitController = new MilitaryUnitController();
+        return MilitaryUnitController;
     }
 
-    private SettlerController() {
+    private MilitaryUnitController() {
 
     }
 
-    private Pane makeSettlerPane() {
+    private Pane makeMilitaryUnitPanel() {
         Pane pane = new Pane();
-        pane.setMinSize(200, 200);
-        pane.setMaxSize(200, 200);
+        pane.setMinSize(200, 400);
+        pane.setMaxSize(200, 400);
         pane.setLayoutX(0);
         pane.setLayoutY(50);
         pane.setStyle("-fx-background-color: #00ff59");
-        Button foundCityButon = new Button();
-        foundCityButon.setText("foundCity");
-        foundCityButon.setOnAction(new EventHandler<ActionEvent>() {
+        Button pillageButton = new Button();
+        pillageButton.setText("Pilage");
+        pillageButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println(new UnitController().foundCity());
+                System.out.println(new UnitController().pillage());
                 GameSceneDataBase.getInstance().getGameSceneController().refresh();
                 GameSceneDataBase.getInstance().getBackPane().getChildren().remove(UnitsController.getInstance().getUnitPanel());
                 UnitsController.getInstance().setUnitPanel(null);
             }
         });
+
+
         Button moveButon = new Button();
         moveButon.setLayoutY(20);
         moveButon.setText("move");
@@ -105,7 +107,77 @@ public class SettlerController {
                 UnitsController.getInstance().setUnitPanel(null);
             }
         });
-        pane.getChildren().add(foundCityButon);
+
+        Button attackButton = new Button();
+        attackButton.setLayoutY(120);
+        attackButton.setText("attack");
+        attackButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //TODO
+            }
+        });
+
+
+        Button setupButton = new Button();
+        setupButton.setLayoutY(140);
+        setupButton.setText("setup");
+        setupButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //TODO
+            }
+        });
+
+        Button garrisonButton = new Button();
+        garrisonButton.setLayoutY(160);
+        garrisonButton.setText("garrison");
+        garrisonButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //TODO
+            }
+        });
+
+        Button fortifyButton = new Button();
+        fortifyButton.setLayoutY(180);
+        fortifyButton.setText("fortify");
+        fortifyButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //TODO
+            }
+        });
+
+
+        Button fortifyUntilHealButton = new Button();
+        fortifyUntilHealButton.setLayoutY(200);
+        fortifyUntilHealButton.setText("fortifyUntilHeal");
+        fortifyUntilHealButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //TODO
+            }
+        });
+
+        Button alertButton = new Button();
+        alertButton.setLayoutY(220);
+        alertButton.setText("alert");
+        alertButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //TODO
+            }
+        });
+
+
+        pane.getChildren().add(alertButton);
+        pane.getChildren().add(fortifyButton);
+        pane.getChildren().add(fortifyUntilHealButton);
+        pane.getChildren().add(setupButton);
+        pane.getChildren().add(garrisonButton);
+        pane.getChildren().add(pillageButton);
+        pane.getChildren().add(attackButton);
         pane.getChildren().add(deleteButton);
         pane.getChildren().add(doNothingButton);
         pane.getChildren().add(sleepButton);
@@ -114,17 +186,15 @@ public class SettlerController {
         return pane;
     }
 
-    public void settlerClicked() {
+    public void MilitaryUnitClicked() {
         for (Circle unit : GameSceneDataBase.getInstance().getUnits()) {
             Unit unit1 = null;
             for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
                 if (tile.getUnitCircle() == unit)
-                    unit1 = tile.getTerrain().getCivilianUnit();
+                    unit1 = tile.getTerrain().getMilitaryUnit();
             }
             Unit finalUnit = unit1;
             if (finalUnit == null)
-                continue;
-            if (finalUnit.getMyType() != UnitType.SETTLER)
                 continue;
             unit.setOnMouseClicked(mouseEvent -> {
                 if (!UnitsController.getInstance().isUnitClicked()) {
@@ -132,7 +202,7 @@ public class SettlerController {
                         return;
                     GameDataBase.setSelected(finalUnit);
                     UnitsController.getInstance().setUnitClicked(true);
-                    UnitsController.getInstance().setUnitPanel(makeSettlerPane());
+                    UnitsController.getInstance().setUnitPanel(makeMilitaryUnitPanel());
                     GameSceneDataBase.getInstance().getBackPane().getChildren().add(UnitsController.getInstance().getUnitPanel());
                 } else {
                     UnitsController.getInstance().setUnitClicked(false);
