@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import game.civilization.Main;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.Model.User;
 import javafx.beans.binding.Bindings;

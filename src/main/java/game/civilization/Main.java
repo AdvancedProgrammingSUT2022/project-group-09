@@ -1,13 +1,11 @@
 package game.civilization;
 
-import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.Controller.LoginMenuController;
 import game.civilization.Controller.MainMenuController;
 import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
-import game.civilization.Model.User;
 import game.civilization.View.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -15,8 +13,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Main extends Application {
@@ -32,7 +28,7 @@ public class Main extends Application {
         UserDatabase.setCurrentUser(UserDatabase.getUsers().get(0));
         stage.setTitle("CivilizationV");
         // SceneController.getInstance().scoreBoard(stage);
-        SceneController.getInstance().scoreBoard();
+        SceneController.getInstance().MainMenu();
         // preStartRequired(stage);
         // stage.setTitle("CivilizationV");
         // stage.sizeToScene();
@@ -49,12 +45,7 @@ public class Main extends Application {
 
             @Override
             public void handle(WindowEvent event) {
-                if (UserDatabase.getCurrentUser() != null) {
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-                    LocalDateTime now = LocalDateTime.now();
-                    UserDatabase.getCurrentUser().setLastLoginTime(dtf.format(now));
-                }
-                UserDatabase.saveUsers();
+                UserDatabase.updateData();
             }
             
         });
