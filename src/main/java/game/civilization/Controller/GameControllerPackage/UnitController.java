@@ -1,6 +1,7 @@
 package game.civilization.Controller.GameControllerPackage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 
 import game.civilization.Model.City;
@@ -15,9 +16,9 @@ import game.civilization.Model.Units.*;
 
 public class UnitController {
 
-    public String moveUnit(Matcher matcher) {
+    public String moveUnit(Coordination coordination) {
         if (GameDataBase.getSelected() instanceof Unit)
-            return move(matcher, (Unit) GameDataBase.getSelected());
+            return move(coordination, (Unit) GameDataBase.getSelected());
         return "no unit selected";
     }
 
@@ -505,17 +506,14 @@ public class UnitController {
         return "Repair successfully!";
     }
 
-    public String move(Matcher matcher, Unit unit) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
-        Coordination coordination = new Coordination(x, y);
+    public String move(Coordination coordination, Unit unit) {
         if (!coordination.isValidCoordination())
             return "position out of bounds";
         if (unit == null)
             return "no unit selected";
         if (unit.getCivilization() != GameDataBase.getCurrentCivilization())
             return "this unit doesn't belong to you good sir";
-        Terrain destination = GameDataBase.getMainMap().getTerrain(x, y);
+        Terrain destination = GameDataBase.getMainMap().getTerrain(coordination.getX(), coordination.getY());
         return moveUnit(destination, unit);
     }
 
@@ -737,6 +735,29 @@ public class UnitController {
             return false;
         }
         return true;
+    }
+
+    public ArrayList<Coordination> findOneTurnCoordination(Unit unit) {
+        HashSet<Coordination> coordination = new HashSet<>();
+        if (unit.getRemainingMove() <= 0) {
+            return new ArrayList<Coordination>(coordination);
+        }
+        Terrain origin = unit.getTerrain();
+        for (Terrain terrain1 : origin.getSurroundingTerrain()) {
+            ArrayList<Terrain> tmp = new ArrayList<>();
+            if (isDestinationEmpty(unit.getMyType(), terrain1) && isMovePossible(unit.getRemainingMove(), terrain1, origin)) {
+                coordination.add(terrain1.getCoordination());
+                tmp.add(terrain1);
+                for (Terrain terrain2 : origin.getSurroundingTerrain()) {
+                    if (isDestinationEmpty(unit.getMyType(), terrain2) && isMovePossible(unit.getRemainingMove() - terrain1.getMp(), terrain2, terrain1)) {
+                        if (turnNeedToMove(terrain2, origin, unit) < 2) {
+                            coordination.add(terrain2.getCoordination());
+                        }
+                    }
+                }
+            }
+        }
+        return new ArrayList<Coordination>(coordination);
     }
 
 }

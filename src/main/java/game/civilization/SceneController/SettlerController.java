@@ -49,8 +49,7 @@ public class SettlerController {
         moveButon.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //TODO
-                System.out.println("gooz");
+                MovementController.getInstance().run();
             }
         });
 

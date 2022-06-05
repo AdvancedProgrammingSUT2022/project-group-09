@@ -10,6 +10,9 @@ import game.civilization.Model.Resources.Resource;
 import game.civilization.Model.TerrainFeatures.TerrainFeature;
 import game.civilization.Model.Units.MilitaryUnit;
 import game.civilization.Model.Units.Unit;
+import game.civilization.SceneModels.GameSceneDataBase;
+import game.civilization.SceneModels.Tile;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
@@ -282,5 +285,13 @@ public class Terrain {
             mao += terrainFeature.getCombatModifier();
         }
         return (mao + 100) / (double) 100;
+    }
+
+    public Tile getTile() {
+        for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
+            if (tile.getTerrain() == this)
+                return tile;
+        }
+        return null;
     }
 }
