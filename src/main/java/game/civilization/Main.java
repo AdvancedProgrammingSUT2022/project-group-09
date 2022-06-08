@@ -33,7 +33,7 @@ public class Main extends Application {
         stage.setTitle("CivilizationV");
         SceneController.getInstance().game();
 
-
+//
 //        handleCloseRequest(stage);
 //        SceneController.getInstance().setStage(stage);
 //        UserDatabase.loadUsers();

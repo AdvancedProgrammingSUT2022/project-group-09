@@ -1,6 +1,7 @@
 package game.civilization.Model;
 
 import game.civilization.Main;
+
 public class User {
     private String username;
     private String password;
@@ -67,14 +68,14 @@ public class User {
     public void setLastLoginTime(String lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
-    
+
 
     public User(String username, String password, String nickname) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
         this.score = 0;
-        profileUrl = Main.class.getResource("avatar/5.png").toExternalForm();
+        profileUrl = Main.class.getResource("images/avatar/5.png").toExternalForm();
     }
 
     @Override
