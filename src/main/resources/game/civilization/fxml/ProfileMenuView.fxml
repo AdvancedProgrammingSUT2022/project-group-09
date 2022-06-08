@@ -10,11 +10,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="669.0" prefWidth="1144.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.ProfileMenuViewController">
+<AnchorPane prefHeight="669.0" prefWidth="1144.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.ProfileMenuViewController">
    <children>
       <ImageView fitHeight="682.0" fitWidth="1195.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../background/1788058.jpg" />
+            <Image url="@../images/background/1788058.jpg" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0a0a45" height="420.0" layoutX="22.0" layoutY="41.0" stroke="TRANSPARENT" strokeType="INSIDE" width="341.0" />
@@ -35,19 +35,19 @@
          </font></TextField>
       <ImageView fx:id="pic4" fitHeight="38.0" fitWidth="44.0" layoutX="62.0" layoutY="155.0" onMouseClicked="#setPic4" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../avatar/4.png" />
+            <Image url="@../images/avatar/4.png" />
          </image></ImageView>
       <ImageView fx:id="pic3" fitHeight="40.0" fitWidth="46.0" layoutX="140.0" layoutY="154.0" onMouseClicked="#setPic3" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../avatar/3.png" />
+            <Image url="@../images/avatar/3.png" />
          </image></ImageView>
       <ImageView fx:id="pic2" fitHeight="42.0" fitWidth="48.0" layoutX="216.0" layoutY="154.0" onMouseClicked="#setPic2" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../avatar/2.png" />
+            <Image url="@../images/avatar/2.png" />
          </image></ImageView>
       <ImageView fx:id="pic1" fitHeight="56.0" fitWidth="56.0" layoutX="290.0" layoutY="146.0" onMouseClicked="#setPic1" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../avatar/1.png" />
+            <Image url="@../images/avatar/1.png" />
          </image></ImageView>
       <Label alignment="CENTER" layoutX="789.0" layoutY="65.0" prefHeight="88.0" prefWidth="272.0" text="Change password" textFill="WHITE">
          <font>

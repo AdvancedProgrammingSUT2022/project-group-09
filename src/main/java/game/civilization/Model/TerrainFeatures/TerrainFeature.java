@@ -13,7 +13,7 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
             add(Resource.WHEAT);
             add(Resource.SUGAR);
         }
-    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/FloodPlain.png").toExternalForm())),
+    }, new Image(Main.class.getResource("images/GamePictures/TerrainPicture/FloodPlain.png").toExternalForm())),
     FOREST(1, 1, 0, 25, 2, new ArrayList<Resource>() {//jangal
         {
             add(Resource.DEER);
@@ -21,21 +21,21 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
             add(Resource.DYES);
             add(Resource.SILK);
         }
-    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Forest.png").toExternalForm())),
-    ICE(0, 0, 0, 0, Integer.MAX_VALUE, new ArrayList<>(), new Image(Main.class.getResource("GamePictures/TerrainPicture/Ice.png").toExternalForm())),
+    }, new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Forest.png").toExternalForm())),
+    ICE(0, 0, 0, 0, Integer.MAX_VALUE, new ArrayList<>(), new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Ice.png").toExternalForm())),
     JUNGLE(1, -1, 0, 25, 2, new ArrayList<Resource>() {//jangal anbooh
         {
             add(Resource.BANANA);
             add(Resource.GEMS);
             add(Resource.DYES);
         }
-    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Jungle.png").toExternalForm())),
+    }, new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Jungle.png").toExternalForm())),
     MARSH(-1, 0, 0, -33, 2, new ArrayList<Resource>() {
         {
             add(Resource.SUGAR);
         }
-    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Marsh.png").toExternalForm())),
-    OASIS(3, 0, 1, -33, 1, new ArrayList<>(), new Image(Main.class.getResource("GamePictures/TerrainPicture/Oasis.png").toExternalForm())),
+    }, new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Marsh.png").toExternalForm())),
+    OASIS(3, 0, 1, -33, 1, new ArrayList<>(), new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Oasis.png").toExternalForm())),
     RIVER(0, 0, 1, 0, 0, new ArrayList<>(), null);
 
     TerrainFeature(int food, int product, int gold, int combatModifier, int MP, ArrayList<Resource> possibleResources, Image image) {

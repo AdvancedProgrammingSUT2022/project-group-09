@@ -27,7 +27,7 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
             add(Resource.INCENSE);
             add(Resource.SHEEP);
         }
-    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Desert.png").toExternalForm())),
+    }, new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Desert.png").toExternalForm())),
     GRASSLLAND(2, 0, 0, -33, 1, new ArrayList<TerrainFeature>() {
         {
             add(TerrainFeature.RIVER);
@@ -46,7 +46,7 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
             add(Resource.COTTON);
             add(Resource.SHEEP);
         }
-    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Grassland.png").toExternalForm())),
+    }, new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Grassland.png").toExternalForm())),
     HILLS(0, 2, 0, 25, 2, new ArrayList<TerrainFeature>() {
         {
             add(TerrainFeature.RIVER);
@@ -64,8 +64,8 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
             add(Resource.MARBLE);
             add(Resource.SHEEP);
         }
-    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Hill.png").toExternalForm())),
-    MOUNTAIN(0, 0, 0, 25, Integer.MAX_VALUE, new ArrayList<TerrainFeature>(), new ArrayList<Resource>(), new Image(Main.class.getResource("GamePictures/TerrainPicture/Mountain.png").toExternalForm())),
+    }, new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Hill.png").toExternalForm())),
+    MOUNTAIN(0, 0, 0, 25, Integer.MAX_VALUE, new ArrayList<TerrainFeature>(), new ArrayList<Resource>(), new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Mountain.png").toExternalForm())),
     OCEAN(1, 0, 1, 0, Integer.MAX_VALUE, new ArrayList<TerrainFeature>() {
         {
             add(TerrainFeature.ICE);
@@ -74,7 +74,7 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
         {
 
         }
-    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Ocean.png").toExternalForm())),
+    }, new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Ocean.png").toExternalForm())),
     PLAIN(1, 1, 0, -33, 1, new ArrayList<TerrainFeature>() {
         {
             add(TerrainFeature.RIVER);
@@ -95,12 +95,12 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
             add(Resource.INCENSE);
             add(Resource.SHEEP);
         }
-    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Plains.png").toExternalForm())),
+    }, new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Plains.png").toExternalForm())),
     SNOW(0, 0, 0, -33, 1, new ArrayList<TerrainFeature>(), new ArrayList<Resource>() {
         {
             add(Resource.IRON);
         }
-    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Snow.png").toExternalForm())),
+    }, new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Snow.png").toExternalForm())),
     TUNDRA(1, 0, 0, -33, 1, new ArrayList<TerrainFeature>() {
         {
             add(TerrainFeature.FOREST);
@@ -115,7 +115,7 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
             add(Resource.MARBLE);
             add(Resource.FURS);
         }
-    }, new Image(Main.class.getResource("GamePictures/TerrainPicture/Tundra.png").toExternalForm()));
+    }, new Image(Main.class.getResource("images/GamePictures/TerrainPicture/Tundra.png").toExternalForm()));
 
     TerrainType(int food, int product, int gold, int combatModifier, int MP, ArrayList<TerrainFeature> possibleFeatures, ArrayList<Resource> possibleResources, Image image) {
         this.food = food;

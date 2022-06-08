@@ -1,11 +1,13 @@
 package game.civilization;
 
+import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.Controller.LoginMenuController;
 import game.civilization.Controller.MainMenuController;
 import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
+import game.civilization.Model.Units.Settler;
 import game.civilization.View.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -22,13 +24,23 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        handleCloseRequest(stage);
+        //ghabl az start userdatabase.json ro por konid ba 2 user masalan
+        //[{"username":"payam","password":"pass","nickname":"payam","score":0,"lastLoginTime":"2022/06/09 01:04:18","rank":0,"inputStream":false},{"username":"aylin","password":"pass","nickname":"payam","score":0,"rank":0,"inputStream":false}]
         SceneController.getInstance().setStage(stage);
         UserDatabase.loadUsers();
-        UserDatabase.setCurrentUser(UserDatabase.getUsers().get(0));
+        GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
+        ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
         stage.setTitle("CivilizationV");
-        // SceneController.getInstance().scoreBoard(stage);
-        SceneController.getInstance().MainMenu();
+        SceneController.getInstance().game();
+
+
+//        handleCloseRequest(stage);
+//        SceneController.getInstance().setStage(stage);
+//        UserDatabase.loadUsers();
+//        UserDatabase.setCurrentUser(UserDatabase.getUsers().get(0));
+//        stage.setTitle("CivilizationV");
+//        // SceneController.getInstance().scoreBoard(stage);
+//        SceneController.getInstance().MainMenu();
         // preStartRequired(stage);
         // stage.setTitle("CivilizationV");
         // stage.sizeToScene();
@@ -47,7 +59,7 @@ public class Main extends Application {
             public void handle(WindowEvent event) {
                 UserDatabase.updateData();
             }
-            
+
         });
     }
 

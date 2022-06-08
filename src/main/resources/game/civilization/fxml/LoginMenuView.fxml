@@ -11,11 +11,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="1142.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.LoginMenuViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="1142.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.LoginMenuViewController">
     <children>
         <ImageView fitHeight="644.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../background/1788056.jpg" />
+                <Image url="@../images/background/1788056.jpg" />
             </image>
         </ImageView>
         <Polygon fill="#0a0a45" layoutX="188.0" layoutY="121.0" points="-174.388916015625, 435.0, 301.611083984375, 163.0, -128.388916015625, -110.0" stroke="TRANSPARENT" strokeType="INSIDE" />
@@ -71,7 +71,7 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e5dcdc4f" height="103.0" layoutX="323.0" layoutY="13.0" stroke="TRANSPARENT" strokeType="INSIDE" width="505.0" />
         <ImageView fitHeight="111.0" fitWidth="498.0" layoutX="326.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../background/CivilizationLogo.png" />
+                <Image url="@../images/background/CivilizationLogo.png" />
             </image>
         </ImageView>
       <Label fx:id="loginLabel" layoutX="54.0" layoutY="453.0" prefHeight="55.0" prefWidth="249.0" />

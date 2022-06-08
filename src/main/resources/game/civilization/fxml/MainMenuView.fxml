@@ -19,7 +19,7 @@
         <Button onAction="#switchToChatMenu" layoutX="806.0" layoutY="560.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="330.0" text="CHAT MENU" />
         <ImageView fitHeight="111.0" fitWidth="501.0" layoutX="85.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../background/CivilizationLogo.png" />
+                <Image url="@../images/background/CivilizationLogo.png" />
             </image>
         </ImageView>
     </children>
