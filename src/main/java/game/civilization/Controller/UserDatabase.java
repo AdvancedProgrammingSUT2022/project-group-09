@@ -9,6 +9,8 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +38,15 @@ public class UserDatabase {
             System.err.println("ERROR! in loading UserDatabase[JSON]");
             throw new RuntimeException(e);
         }
+    }
+
+    public static void updateData() {
+        if (currentUser != null) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            currentUser.setLastLoginTime(dtf.format(now));
+        }
+        saveUsers();
     }
 
     static public void saveUsers() {

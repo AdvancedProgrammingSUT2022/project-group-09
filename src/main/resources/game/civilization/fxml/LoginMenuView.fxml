@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="1142.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.LoginMenuViewController">
+    <children>
+        <ImageView fitHeight="644.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../background/1788056.jpg" />
+            </image>
+        </ImageView>
+        <Polygon fill="#0a0a45" layoutX="188.0" layoutY="121.0" points="-174.388916015625, 435.0, 301.611083984375, 163.0, -128.388916015625, -110.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Polygon fill="#0a0a45d1" layoutX="376.0" layoutY="454.0" points="-363.2370910644531, 102.40814208984375, 50.0, 40.0, 112.611083984375, -170.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Label alignment="CENTER" layoutX="54.0" layoutY="80.0" prefHeight="57.0" prefWidth="149.0" text="LOGIN" textFill="WHITE">
+            <font>
+                <Font name="Baloo Bhaina Regular" size="38.0" />
+            </font>
+        </Label>
+        <TextField fx:id="loginUsername" layoutX="77.0" layoutY="216.0" promptText="Enter your username">
+            <font>
+                <Font name="Baloo Bhaina Regular" size="13.0" />
+            </font>
+        </TextField>
+        <PasswordField fx:id="loginPassword" layoutX="77.0" layoutY="271.0" prefHeight="35.0" prefWidth="150.0" promptText="Enter your password">
+            <font>
+                <Font name="Baloo Bhaijaan Regular" size="13.0" />
+            </font>
+        </PasswordField>
+        <Button fx:id="loginButton" layoutX="77.0" layoutY="355.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="160.0" text="LOGIN">
+            <font>
+                <Font name="Baloo Bhaina Regular" size="13.0" />
+            </font>
+        </Button>
+        <Polygon fill="#0a0a45" layoutX="837.0" layoutY="216.0" points="299.781982421875, 418.8609619140625, 299.781982421875, -105.39031982421875, -161.647216796875, 138.38357543945312" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Polygon fill="#0a0a45bd" layoutX="1034.0" layoutY="267.0" points="-358.96221923828125, 88.29586791992188, -150.6416015625, -209.5889892578125, 110.888916015625, -155.6813201904297" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Label alignment="CENTER" layoutX="856.0" layoutY="66.0" prefHeight="57.0" prefWidth="149.0" text="SIGN UP" textFill="WHITE">
+            <font>
+                <Font name="Baloo Bhaina Regular" size="38.0" />
+            </font>
+        </Label>
+        <Button fx:id="signUpButton" layoutX="974.0" layoutY="480.0" mnemonicParsing="false" onAction="#signUp" prefHeight="26.0" prefWidth="125.0" text="SIGNUP" />
+        <TextField fx:id="signUpUsername" layoutX="884.0" layoutY="253.0" promptText="Enter your username">
+            <font>
+                <Font name="Baloo Bhaina Regular" size="13.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="signUpNickname" layoutX="885.0" layoutY="306.0" promptText="Enter your nickname">
+            <font>
+                <Font name="Baloo Bhaina Regular" size="13.0" />
+            </font>
+        </TextField>
+        <PasswordField fx:id="signUpPassword" layoutX="885.0" layoutY="356.0" prefHeight="35.0" prefWidth="150.0" promptText="Enter your password">
+            <font>
+                <Font name="Baloo Bhaijaan Regular" size="13.0" />
+            </font>
+        </PasswordField>
+        <PasswordField fx:id="signUpConfirm" layoutX="887.0" layoutY="399.0" prefHeight="35.0" prefWidth="150.0" promptText="Confirm password">
+            <font>
+                <Font name="Baloo Bhaijaan Regular" size="13.0" />
+            </font>
+        </PasswordField>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e5dcdc4f" height="103.0" layoutX="323.0" layoutY="13.0" stroke="TRANSPARENT" strokeType="INSIDE" width="505.0" />
+        <ImageView fitHeight="111.0" fitWidth="498.0" layoutX="326.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../background/CivilizationLogo.png" />
+            </image>
+        </ImageView>
+      <Label fx:id="loginLabel" layoutX="54.0" layoutY="453.0" prefHeight="55.0" prefWidth="249.0" />
+      <Label fx:id="signUpLabel" layoutX="850.0" layoutY="168.0" prefHeight="55.0" prefWidth="249.0" />
+    </children>
+</AnchorPane>

@@ -1,19 +1,20 @@
 module game.civilization {
-    requires javafx.controls;
-    requires javafx.fxml;
-    requires javafx.web;
+    requires transitive javafx.controls;
+    requires transitive javafx.fxml;
+    requires transitive javafx.web;
+    requires transitive javafx.graphics;
 
-    requires org.controlsfx.controls;
-    requires com.dlsc.formsfx;
-    requires validatorfx;
-    requires org.kordamp.ikonli.javafx;
-    requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
-    requires com.google.gson;
+    requires transitive org.controlsfx.controls;
+    requires transitive com.dlsc.formsfx;
+    requires transitive validatorfx;
+    requires transitive org.kordamp.ikonli.javafx;
+    requires transitive org.kordamp.bootstrapfx.core;
+    requires transitive eu.hansolo.tilesfx;
+    requires transitive com.google.gson;
 
     opens game.civilization to javafx.fxml;
     opens game.civilization.FxmlController to javafx.fxml;
     exports game.civilization;
     exports game.civilization.FxmlController to javafx.fxml;
-    opens game.civilization.Model to com.google.gson;
+    opens game.civilization.Model to com.google.gson, javafx.base;
 }

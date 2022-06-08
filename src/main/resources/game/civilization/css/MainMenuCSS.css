@@ -1,0 +1,17 @@
+.root {
+  -fx-background-image: url("../images/background/1788166.png");
+  -fx-background-size: contain;
+  -fx-background-color: transparent;
+}
+
+Button {
+  -fx-background-color: linear-gradient(#ffd65b, #e68400),
+    linear-gradient(#ffef84, #f2ba44), linear-gradient(#ffea6a, #ff9921),
+    linear-gradient(#ffe657 0%, #ff9921 50%, #ff9921 100%);
+
+  -fx-text-fill: #654b00;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-font-family: "Baloo Bhaina";
+  -fx-background-radius: 30;
+}

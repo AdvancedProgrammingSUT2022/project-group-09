@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/GameMenuCSS.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.GameMenuViewController">
+  <children>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0a0a45" height="580.0" layoutX="452.0" layoutY="53.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="778.0" />
+    <Polygon fill="#0a0a45a9" layoutX="843.0" layoutY="12.0" points="-74.800048828125, 41.0, 70.800048828125, 41.0, -2.800048828125, 12.80000114440918" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+    <Polygon fill="#0a0a45a9" layoutX="818.0" layoutY="593.0" points="-366.0, 40.0, 412.0, 40.0, 16.39996337890625, 87.5999755859375" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+    <Button layoutX="42.0" layoutY="660.0" mnemonicParsing="false" onAction="#back" text="BACK" />
+    <ChoiceBox fx:id="autoSaveChoiceBox" layoutX="1050.0" layoutY="576.0" prefWidth="150.0">
+      <tooltip>
+        <Tooltip styleClass="tooltip" text="here is a tooltip." />
+      </tooltip>
+    </ChoiceBox>
+    <Label layoutX="1053.0" layoutY="548.0" styleClass="customLabel" text="AutoSave" />
+    <Label layoutX="514.0" layoutY="548.0" styleClass="customLabel" text="Music" />
+    <Button layoutX="510.0" layoutY="144.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="325.0" text="Play Game" />
+    <TextField layoutX="510.0" layoutY="100.0" />
+    <Button layoutX="690.0" layoutY="96.0" mnemonicParsing="false" text="Send Invitation" />
+    <Label layoutX="914.0" layoutY="104.0" styleClass="heightWidthLabel" text="Height:" />
+    <Label layoutX="918.0" layoutY="157.0" styleClass="heightWidthLabel" text="Width:" />
+    <Button layoutX="1029.0" layoutY="464.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="118.0" text="Load Game" />
+    <Circle layoutX="50.0" layoutY="61.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" styleClass="inbox" />
+    <Circle fx:id="inbox" layoutX="50.0" layoutY="61.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"/>
+  </children>
+</AnchorPane>

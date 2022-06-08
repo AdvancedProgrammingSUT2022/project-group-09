@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="670.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.ChatMenuViewController">
+   <children>
+      <ImageView fitHeight="730.0" fitWidth="1158.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../background/1788164.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0a0a45" height="524.0" layoutX="8.0" layoutY="48.0" stroke="#ffffff00" strokeType="INSIDE" width="1121.0" />
+      <ScrollPane layoutX="31.0" layoutY="129.0" prefHeight="398.0" prefWidth="312.0">
+         <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="369.0">
+               <children>
+                  <ImageView fitHeight="515.0" fitWidth="652.0" layoutY="-2.0" pickOnBounds="true" smooth="false">
+                     <image>
+                        <Image url="@../background/3992021.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="411.0" layoutY="127.0" prefHeight="398.0" prefWidth="312.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="405.0">
+               <children>
+                  <ImageView fitHeight="542.0" fitWidth="625.0" layoutX="-4.0" layoutY="-1.0" pickOnBounds="true" smooth="false">
+                     <image>
+                        <Image url="@../background/3992021.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="795.0" layoutY="129.0" prefHeight="398.0" prefWidth="312.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="388.0">
+               <children>
+                  <ImageView fitHeight="518.0" fitWidth="713.0" layoutY="-1.0" pickOnBounds="true" smooth="false">
+                     <image>
+                        <Image url="@../background/3992021.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <Label alignment="CENTER" layoutX="103.0" layoutY="48.0" prefHeight="50.0" prefWidth="160.0" text="ROOMS" textFill="WHITE">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="26.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="470.0" layoutY="47.0" prefHeight="60.0" prefWidth="202.0" text="PUBLIC CHATS" textFill="WHITE">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="26.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="849.0" layoutY="48.0" prefHeight="60.0" prefWidth="202.0" text="PRIVATE CHATS" textFill="WHITE">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="26.0" />
+         </font>
+      </Label>
+      <Polygon fill="#0a0a45be" layoutX="153.0" layoutY="71.0" points="-55.63380432128906, -22.557525634765625, 116.73983764648438, -22.557525634765625, 30.553024291992188, -62.10206985473633" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Polygon fill="#0a0a45be" layoutX="544.0" layoutY="72.0" points="-55.63380432128906, -22.557525634765625, 116.73983764648438, -22.557525634765625, 30.553024291992188, -62.10206985473633" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Polygon fill="#0a0a45be" layoutX="915.0" layoutY="71.0" points="-55.63380432128906, -22.557525634765625, 116.73983764648438, -22.557525634765625, 30.553024291992188, -62.10206985473633" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Line endX="370.996826171875" endY="572.0" startX="370.9968566894531" startY="47.99998092651367" stroke="WHITE" />
+      <Line endX="370.996826171875" endY="588.5210571289062" layoutX="388.0" layoutY="-15.0" startX="370.996826171875" startY="64.56047058105469" stroke="WHITE" />
+   </children>
+</AnchorPane>
