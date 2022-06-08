@@ -45,7 +45,7 @@ public class Tile extends Polygon {
             super.setFill(Color.GRAY);
         else if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[terrain.getXPosition()][terrain.getYPosition()] == TerrainState.KNOWN) {
             super.setFill(new ImagePattern(terrain.getType().getImage()));
-            super.setEffect(new BoxBlur(5,5,7));
+            super.setEffect(new BoxBlur(5, 5, 7));
         } else
             super.setFill(new ImagePattern(terrain.getType().getImage()));
     }
