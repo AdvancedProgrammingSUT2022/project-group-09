@@ -114,7 +114,9 @@ public class MilitaryUnitController {
         attackButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //TODO
+                AttackController.getInstance().run();
+                GameSceneDataBase.getInstance().getBackPane().getChildren().remove(UnitsController.getInstance().getUnitPanel());
+                UnitsController.getInstance().setUnitPanel(null);
             }
         });
 
@@ -125,7 +127,10 @@ public class MilitaryUnitController {
         setupButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //TODO
+                System.out.println(new UnitController().setUp());
+                GameSceneDataBase.getInstance().getGameSceneController().refresh();
+                GameSceneDataBase.getInstance().getBackPane().getChildren().remove(UnitsController.getInstance().getUnitPanel());
+                UnitsController.getInstance().setUnitPanel(null);
             }
         });
 
@@ -135,7 +140,10 @@ public class MilitaryUnitController {
         garrisonButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //TODO
+                System.out.println(new UnitController().garrison());
+                GameSceneDataBase.getInstance().getGameSceneController().refresh();
+                GameSceneDataBase.getInstance().getBackPane().getChildren().remove(UnitsController.getInstance().getUnitPanel());
+                UnitsController.getInstance().setUnitPanel(null);
             }
         });
 
@@ -145,7 +153,10 @@ public class MilitaryUnitController {
         fortifyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //TODO
+                System.out.println(new UnitController().fortify());
+                GameSceneDataBase.getInstance().getGameSceneController().refresh();
+                GameSceneDataBase.getInstance().getBackPane().getChildren().remove(UnitsController.getInstance().getUnitPanel());
+                UnitsController.getInstance().setUnitPanel(null);
             }
         });
 
@@ -156,7 +167,10 @@ public class MilitaryUnitController {
         fortifyUntilHealButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //TODO
+                System.out.println(new UnitController().fortifyHeal());
+                GameSceneDataBase.getInstance().getGameSceneController().refresh();
+                GameSceneDataBase.getInstance().getBackPane().getChildren().remove(UnitsController.getInstance().getUnitPanel());
+                UnitsController.getInstance().setUnitPanel(null);
             }
         });
 
@@ -166,7 +180,10 @@ public class MilitaryUnitController {
         alertButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //TODO
+                System.out.println(new UnitController().alert());
+                GameSceneDataBase.getInstance().getGameSceneController().refresh();
+                GameSceneDataBase.getInstance().getBackPane().getChildren().remove(UnitsController.getInstance().getUnitPanel());
+                UnitsController.getInstance().setUnitPanel(null);
             }
         });
 
@@ -187,10 +204,10 @@ public class MilitaryUnitController {
     }
 
     public void MilitaryUnitClicked() {
-        for (Circle unit : GameSceneDataBase.getInstance().getUnits()) {
+        for (Circle unit : GameSceneDataBase.getInstance().getMilitaryUnits()) {
             Unit unit1 = null;
             for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
-                if (tile.getUnitCircle() == unit)
+                if (tile.getMilitaryUnitCircle() == unit)
                     unit1 = tile.getTerrain().getMilitaryUnit();
             }
             Unit finalUnit = unit1;

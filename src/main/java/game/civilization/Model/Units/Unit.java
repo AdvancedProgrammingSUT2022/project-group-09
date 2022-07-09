@@ -69,11 +69,9 @@ public class Unit implements Combatble, Selectable {
 
     public void setTerrain(Terrain terrain) {
         if (this instanceof MilitaryUnit) {
-            System.out.println("kir");
             for (Terrain[] terrains : GameDataBase.getMainMap().getTerrains()) {
                 for (Terrain terrain1 : terrains) {
                     if (terrain1.getMilitaryUnit() == (MilitaryUnit) this) {
-                        System.out.println("az inja pak shod" + terrain1.getCoordination().toString());
                         terrain1.setMilitaryUnit(null);
                     }
                 }
@@ -269,7 +267,8 @@ public class Unit implements Combatble, Selectable {
     }
 
     public String showInfo() {
-        return myType + " at " + getTerrain().getCoordination().toString() + " Worke done : " + workDone + " sleep : " + isSleep +
+        return myType + " at " + getTerrain().getCoordination().toString() + " for : " + getCivilization().getName()+
+                " Worke done : " + workDone + " sleep : " + isSleep +
                 " remaining Mp : " + remainingMove + " hp : " + hp +
                 " size of masiri ke bayad bere : " + path.size();
     }

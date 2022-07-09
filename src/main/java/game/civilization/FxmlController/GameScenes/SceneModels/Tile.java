@@ -6,6 +6,7 @@ import game.civilization.Model.City;
 import game.civilization.Model.TerrainFeatures.TerrainFeature;
 import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.Terrains.TerrainState;
+import game.civilization.Model.Units.MilitaryUnit;
 import game.civilization.Model.Units.Unit;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
@@ -24,6 +25,7 @@ public class Tile extends Polygon {
 
     private final Terrain terrain;
     private Circle unitCircle;
+    private Circle militaryUnitCircle;
 
     public Tile(double x, double y, double dy, Terrain terrain) {
         this.terrain = terrain;
@@ -79,25 +81,38 @@ public class Tile extends Polygon {
 
     public void loadUnit() {
         Unit unit = null;
-        if (terrain.getMilitaryUnit() != null)
+        if (terrain.getMilitaryUnit() != null) {
             unit = terrain.getMilitaryUnit();
-        if (terrain.getCivilianUnit() != null)
+            Circle circle = new Circle();
+            circle.setCenterX((getPoints().get(4) + getPoints().get(10)) / 2 - 35);
+            circle.setCenterY(getPoints().get(5));
+            circle.setStroke(Paint.valueOf("#FF0000"));
+            circle.setStrokeWidth(2);
+            circle.setFill(new ImagePattern(unit.getMyType().getImage()));
+            circle.setRadius(35);
+            this.militaryUnitCircle = circle;
+            GameSceneDataBase.getInstance().getMilitaryUnits().add(circle);
+        }
+        if (terrain.getCivilianUnit() != null) {
             unit = terrain.getCivilianUnit();
-        if (unit == null)
-            return;
-        Circle circle = new Circle();
-        circle.setCenterX((getPoints().get(4) + getPoints().get(10)) / 2);
-        circle.setCenterY(getPoints().get(5));
-        circle.setRadius(40);
-        circle.setStroke(Paint.valueOf("#FF0000"));
-        circle.setStrokeWidth(2);
-        circle.setFill(new ImagePattern(unit.getMyType().getImage()));
-        this.unitCircle = circle;
-        GameSceneDataBase.getInstance().getUnits().add(circle);
+            Circle circle = new Circle();
+            circle.setCenterX((getPoints().get(4) + getPoints().get(10)) / 2 + 35);
+            circle.setCenterY(getPoints().get(5));
+            circle.setStroke(Paint.valueOf("#FF0000"));
+            circle.setStrokeWidth(2);
+            circle.setFill(new ImagePattern(unit.getMyType().getImage()));
+            circle.setRadius(35);
+            this.unitCircle = circle;
+            GameSceneDataBase.getInstance().getUnits().add(circle);
+        }
     }
 
     public Circle getUnitCircle() {
         return unitCircle;
+    }
+
+    public Circle getMilitaryUnitCircle() {
+        return militaryUnitCircle;
     }
 
     public void setUnitCircle(Circle unitCircle) {

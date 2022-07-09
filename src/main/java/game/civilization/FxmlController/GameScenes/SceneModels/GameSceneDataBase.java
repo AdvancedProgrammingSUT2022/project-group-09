@@ -33,6 +33,7 @@ public class GameSceneDataBase {
     private final ArrayList<Tile> tiles = new ArrayList<>();
     private final ArrayList<Circle> tileFeatures = new ArrayList<>();
     private final ArrayList<Circle> units = new ArrayList<>();
+    private final ArrayList<Circle> militaryUnits = new ArrayList<>();
     private final ArrayList<Circle> cityIcons = new ArrayList<>();
     private Pane pane;
     private Pane backPane = null;
@@ -85,11 +86,16 @@ public class GameSceneDataBase {
         tiles.clear();
         tileFeatures.clear();
         units.clear();
+        militaryUnits.clear();
         cityIcons.clear();
     }
 
     public ArrayList<Circle> getUnits() {
         return units;
+    }
+
+    public ArrayList<Circle> getMilitaryUnits() {
+        return militaryUnits;
     }
 
     public ArrayList<Circle> getCityIcons() {

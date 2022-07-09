@@ -53,6 +53,7 @@ public class GameSceneController implements Initializable {
         pane.getChildren().addAll(GameSceneDataBase.getInstance().getCityIcons());
         pane.getChildren().addAll(GameSceneDataBase.getInstance().getTileFeatures());
         pane.getChildren().addAll(GameSceneDataBase.getInstance().getUnits());
+        pane.getChildren().addAll(GameSceneDataBase.getInstance().getMilitaryUnits());
     }
 
     private void setDataToGameSceneDataBase() {

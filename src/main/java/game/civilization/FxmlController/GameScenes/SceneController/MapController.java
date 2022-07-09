@@ -130,14 +130,10 @@ public class MapController {
 
     private void showUnitInfo() {
         for (Circle circle : GameSceneDataBase.getInstance().getUnits()) {
-
-
             Unit unit = null;
             for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
                 if (tile.getUnitCircle() == circle) {
-                    if (tile.getTerrain().getCivilianUnit() == null)
-                        unit = tile.getTerrain().getMilitaryUnit();
-                    else
+                    if (tile.getTerrain().getCivilianUnit() != null)
                         unit = tile.getTerrain().getCivilianUnit();
                 }
             }
@@ -151,8 +147,25 @@ public class MapController {
                 GameSceneDataBase.getInstance().getBackPane().getChildren().remove(getTerrainInfoPane());
                 setTerrainInfoPane(null);
             });
+        }
+        for (Circle circle : GameSceneDataBase.getInstance().getMilitaryUnits()) {
+            Unit unit = null;
+            for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
+                if (tile.getMilitaryUnitCircle() == circle) {
+                    if (tile.getTerrain().getMilitaryUnit() != null)
+                        unit = tile.getTerrain().getMilitaryUnit();
+                }
+            }
 
-
+            Unit finalUnit = unit;
+            circle.setOnMouseEntered(mouseEvent -> {
+                setTerrainInfoPane(makeUnitInfoPane(finalUnit));
+                GameSceneDataBase.getInstance().getBackPane().getChildren().add(getTerrainInfoPane());
+            });
+            circle.setOnMouseExited(mouseEvent -> {
+                GameSceneDataBase.getInstance().getBackPane().getChildren().remove(getTerrainInfoPane());
+                setTerrainInfoPane(null);
+            });
         }
 
     }
