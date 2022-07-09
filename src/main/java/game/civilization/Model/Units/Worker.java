@@ -99,6 +99,11 @@ public class Worker extends Unit {
         makingImprovement = null;
     }
 
+    @Override
+    public String showInfo() {
+        return super.showInfo() + " Working details: " + getWorkingDetail();
+    }
+
     public String getWorkingDetail() {
         if (makingImprovement == null)
             return "chzi nemisaze";

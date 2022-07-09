@@ -168,6 +168,24 @@ public enum Improvement {
     }
 
     public boolean checkIsPossible(Terrain terrain) {
+        if (this == ROAD && !terrain.isHasRoad())
+            return true;
+        if (this == REMOVE_MARSH && terrain.getTerrainFeatures().contains(TerrainFeature.MARSH))
+            return true;
+        if (this == REMOVE_JUNGLE && terrain.getTerrainFeatures().contains(TerrainFeature.JUNGLE) &&
+                GameDataBase.getCurrentCivilization().getTechnologies().
+                        getTechnologiesResearched().contains(TechnologyType.MATHEMATICS))
+            return true;
+        if (this == REMOVE_FOREST && terrain.getTerrainFeatures().contains(TerrainFeature.FOREST) &&
+                GameDataBase.getCurrentCivilization().getTechnologies().
+                        getTechnologiesResearched().contains(TechnologyType.BRONZEWORKING))
+            return true;
+        if (this == REPAIR && !terrain.getImprovementPair().getValue())
+            return true;
+        if (this == REMOVE_ROUTE && terrain.isHasRoad())
+            return true;
+
+
         if (!(GameDataBase.getCurrentCivilization().getTechnologies().
                 getTechnologiesResearched().contains(requiredTechnology) || requiredTechnology == null))
             return false;
