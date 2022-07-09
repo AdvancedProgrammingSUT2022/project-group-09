@@ -1,14 +1,11 @@
-package game.civilization.SceneModels;
+package game.civilization.FxmlController.GameScenes.SceneModels;
 
-import game.civilization.FxmlController.GameSceneController;
-import javafx.fxml.FXML;
+import game.civilization.FxmlController.GameScenes.GameSceneController;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class GameSceneDataBase {
     private static GameSceneDataBase gameSceneDataBase = null;

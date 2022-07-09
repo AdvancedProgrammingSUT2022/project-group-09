@@ -10,9 +10,8 @@ import game.civilization.Model.Resources.Resource;
 import game.civilization.Model.TerrainFeatures.TerrainFeature;
 import game.civilization.Model.Units.MilitaryUnit;
 import game.civilization.Model.Units.Unit;
-import game.civilization.SceneModels.GameSceneDataBase;
-import game.civilization.SceneModels.Tile;
-import javafx.scene.layout.Pane;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
+import game.civilization.FxmlController.GameScenes.SceneModels.Tile;
 
 import java.util.ArrayList;
 

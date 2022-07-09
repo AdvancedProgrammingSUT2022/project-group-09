@@ -17,4 +17,6 @@ module game.civilization {
     exports game.civilization;
     exports game.civilization.FxmlController to javafx.fxml;
     opens game.civilization.Model to com.google.gson, javafx.base;
+    exports game.civilization.FxmlController.GameScenes to javafx.fxml;
+    opens game.civilization.FxmlController.GameScenes to javafx.fxml;
 }

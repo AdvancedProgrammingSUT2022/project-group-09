@@ -1,4 +1,4 @@
-package game.civilization.SceneModels;
+package game.civilization.FxmlController.GameScenes.SceneModels;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Main;
@@ -7,22 +7,15 @@ import game.civilization.Model.TerrainFeatures.TerrainFeature;
 import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.Terrains.TerrainState;
 import game.civilization.Model.Units.Unit;
-import javafx.scene.effect.Bloom;
 import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.MotionBlur;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Tile extends Polygon {
     public Terrain getTerrain() {

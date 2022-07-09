@@ -1,8 +1,7 @@
 package game.civilization.FxmlController;
 
 import game.civilization.Model.Map;
-import game.civilization.SceneModels.GameSceneDataBase;
-import game.civilization.SceneModels.Tile;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;

@@ -1,4 +1,4 @@
-package game.civilization.SceneController;
+package game.civilization.FxmlController.GameScenes.SceneController;
 
 public class WorkerController {
     private static WorkerController WorkerController = null;

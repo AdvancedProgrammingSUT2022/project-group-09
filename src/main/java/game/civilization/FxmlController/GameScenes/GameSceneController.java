@@ -1,19 +1,18 @@
-package game.civilization.FxmlController;
+package game.civilization.FxmlController.GameScenes;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
-import game.civilization.SceneController.MapController;
-import game.civilization.SceneController.UnitsController;
-import game.civilization.SceneModels.GameSceneDataBase;
-import javafx.animation.AnimationTimer;
+import game.civilization.FxmlController.MapMovement;
+import game.civilization.FxmlController.SceneController;
+import game.civilization.FxmlController.GameScenes.SceneController.MapController;
+import game.civilization.FxmlController.GameScenes.SceneController.UnitsController;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;

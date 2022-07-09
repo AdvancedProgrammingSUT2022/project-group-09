@@ -1,11 +1,11 @@
-package game.civilization.SceneController;
+package game.civilization.FxmlController.GameScenes.SceneController;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Model.Map;
 import game.civilization.Model.Terrains.TerrainState;
 import game.civilization.Model.Units.Unit;
-import game.civilization.SceneModels.GameSceneDataBase;
-import game.civilization.SceneModels.Tile;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
+import game.civilization.FxmlController.GameScenes.SceneModels.Tile;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;

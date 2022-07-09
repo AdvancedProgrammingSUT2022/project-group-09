@@ -1,11 +1,11 @@
-package game.civilization.SceneController;
+package game.civilization.FxmlController.GameScenes.SceneController;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.UnitController;
 import game.civilization.Model.Units.Unit;
 import game.civilization.Model.Units.UnitType;
-import game.civilization.SceneModels.GameSceneDataBase;
-import game.civilization.SceneModels.Tile;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
+import game.civilization.FxmlController.GameScenes.SceneModels.Tile;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

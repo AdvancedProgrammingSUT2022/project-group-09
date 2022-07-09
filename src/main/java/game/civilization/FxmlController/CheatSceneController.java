@@ -1,11 +1,8 @@
 package game.civilization.FxmlController;
 
-import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.MenuRegex.GameMenuRegex;
-import game.civilization.SceneModels.GameSceneDataBase;
-import javafx.animation.AnimationTimer;
-import javafx.css.Match;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +11,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 

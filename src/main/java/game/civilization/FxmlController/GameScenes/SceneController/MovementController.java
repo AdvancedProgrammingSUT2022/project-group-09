@@ -1,19 +1,13 @@
-package game.civilization.SceneController;
+package game.civilization.FxmlController.GameScenes.SceneController;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
-import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.Controller.GameControllerPackage.UnitController;
-import game.civilization.FxmlController.GameSceneController;
 import game.civilization.Model.Coordination;
 import game.civilization.Model.Units.Unit;
-import game.civilization.SceneModels.GameSceneDataBase;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import javafx.event.EventHandler;
-import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
