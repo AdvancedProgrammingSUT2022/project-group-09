@@ -50,6 +50,8 @@ public class SettlerController {
             @Override
             public void handle(ActionEvent event) {
                 MovementController.getInstance().run();
+                GameSceneDataBase.getInstance().getBackPane().getChildren().remove(UnitsController.getInstance().getUnitPanel());
+                UnitsController.getInstance().setUnitPanel(null);
             }
         });
 

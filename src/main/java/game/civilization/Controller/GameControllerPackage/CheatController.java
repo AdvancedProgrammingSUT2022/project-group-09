@@ -106,7 +106,7 @@ public class CheatController {
         new Settler(
                 new Coordination(x, y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
-        return "setller added";
+        return "settler added";
     }
 
     public String openTechnologies() {

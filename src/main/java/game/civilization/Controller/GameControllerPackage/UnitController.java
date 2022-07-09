@@ -780,6 +780,7 @@ public class UnitController {
                 }
             }
         }
+        coordination.add(unit.getTerrain().getCoordination());
         return new ArrayList<Coordination>(coordination);
     }
 

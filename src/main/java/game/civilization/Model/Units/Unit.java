@@ -68,22 +68,28 @@ public class Unit implements Combatble, Selectable {
     }
 
     public void setTerrain(Terrain terrain) {
-        for (Terrain[] terrains : GameDataBase.getMainMap().getTerrains()) {
-            for (Terrain terrain1 : terrains) {
-                if (terrain1.getCivilianUnit() == this)
-                    terrain1.setCivilianUnit(null);
-                if (terrain.getMilitaryUnit() == this)
-                    terrain1.setMilitaryUnit(null);
-            }
-        }
-
         if (this instanceof MilitaryUnit) {
+            System.out.println("kir");
+            for (Terrain[] terrains : GameDataBase.getMainMap().getTerrains()) {
+                for (Terrain terrain1 : terrains) {
+                    if (terrain1.getMilitaryUnit() == (MilitaryUnit) this) {
+                        System.out.println("az inja pak shod" + terrain1.getCoordination().toString());
+                        terrain1.setMilitaryUnit(null);
+                    }
+                }
+            }
             if (terrain.getMilitaryUnit() != null) {
                 System.err.println("ERROR! 2 ta military nemitoonan yeja bashan");
                 throw new RuntimeException();
             } else
                 terrain.setMilitaryUnit((MilitaryUnit) this);
         } else {
+            for (Terrain[] terrains : GameDataBase.getMainMap().getTerrains()) {
+                for (Terrain terrain1 : terrains) {
+                    if (terrain1.getCivilianUnit() == (Unit) this)
+                        terrain1.setCivilianUnit(null);
+                }
+            }
             if (terrain.getCivilianUnit() != null) {
                 System.err.println("ERROR! 2 ta civilian unit nemitoonan yeja bashan");
                 throw new RuntimeException();
@@ -137,7 +143,6 @@ public class Unit implements Combatble, Selectable {
                 this.remainingMove -= terrain.getMp();
             }
             this.setTerrain(terrain);
-            // System.out.println("unit move setTerrain()" + terrain.getCoordination());    
             this.path.remove(i);
             i = 0;
             if (this.remainingMove < 0) {

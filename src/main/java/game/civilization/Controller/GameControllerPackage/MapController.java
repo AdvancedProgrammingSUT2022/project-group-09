@@ -270,8 +270,8 @@ public class MapController {
         Terrain terrain = GameDataBase.getMainMap().getTerrain(x, y);
         TerrainState terrainState = GameDataBase.getCurrentCivilization().getTerrainState(x, y);
 
-//        if (terrainState == TerrainState.FOG_OF_WAR)
-//            return "this terrain is in fog for you";
+        if (terrainState == TerrainState.FOG_OF_WAR)
+            return "this terrain is in fog for you";
 
         StringBuilder stringBuilder = new StringBuilder(coordination.toString() + "\n");
         if (terrain.getCivilization() == null)
@@ -282,9 +282,9 @@ public class MapController {
                 .append(terrain.getType()).append("\n").append("Terrain features are: ")
                 .append(terrain.getTerrainFeatures())
                 .append("\n");
-//        if (terrainState == TerrainState.VISIBLE) {
-        showVisibleDetails(stringBuilder, terrain);
-        //  }
+        if (terrainState == TerrainState.VISIBLE) {
+            showVisibleDetails(stringBuilder, terrain);
+        }
         return stringBuilder.toString();
     }
 }

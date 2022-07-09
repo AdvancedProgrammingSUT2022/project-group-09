@@ -1,5 +1,6 @@
 package game.civilization.Model.Units;
 
+import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Model.City;
 import game.civilization.Model.Civilization;
 import game.civilization.Model.Terrains.Terrain;

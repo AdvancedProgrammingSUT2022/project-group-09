@@ -114,7 +114,7 @@ public class MapController {
     private void showInfoTileInfo() {
         for (Tile tile : GameSceneDataBase.getInstance().getTiles()) {
             if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[tile.getTerrain().getXPosition()][tile.getTerrain().getYPosition()]
-                    == TerrainState.VISIBLE) {
+                    != TerrainState.FOG_OF_WAR) {
                 tile.setOnMouseEntered(mouseEvent -> {
                     setTerrainInfoPane(makeTerrainPanelPane(tile));
                     GameSceneDataBase.getInstance().getBackPane().getChildren().add(getTerrainInfoPane());
