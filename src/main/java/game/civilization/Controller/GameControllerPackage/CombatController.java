@@ -6,13 +6,14 @@ import game.civilization.Model.Units.MilitaryUnit;
 import game.civilization.Model.Units.SiegeMilitaryUnit;
 import game.civilization.Model.Units.Unit;
 
+import java.util.Collections;
 import java.util.regex.Matcher;
 
 public class CombatController {
 
-    public String militaryAttack(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
+    public String militaryAttack(Coordination coordination) {
+        int x = coordination.getX();
+        int y = coordination.getY();
         Coordination coordinate2 = new Coordination(x, y);
         MilitaryUnit militaryUnit = ((MilitaryUnit) GameDataBase.getSelected());
         Coordination coordinate1 = militaryUnit.getTerrain().getCoordination();

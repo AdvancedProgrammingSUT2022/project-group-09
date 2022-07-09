@@ -1,5 +1,6 @@
 package game.civilization.FxmlController.GameScenes.SceneController;
 
+import game.civilization.Controller.GameControllerPackage.CombatController;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.UnitController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
@@ -13,8 +14,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
-import static javafx.scene.paint.Color.GREEN;
-import static javafx.scene.paint.Color.RED;
+import static javafx.scene.paint.Color.*;
 
 public class AttackController {
     private static AttackController attackController = null;
@@ -46,6 +46,7 @@ public class AttackController {
                         coordinations.add(terrain.getCoordination());
             }
         }
+        coordinations.add(((Unit) GameDataBase.getSelected()).getTerrain().getCoordination());
     }
 
     public void run() {
@@ -56,7 +57,7 @@ public class AttackController {
 
     private void showAccessibleTile() {
         for (Coordination coordination : coordinations) {
-            coordination.getTerrain().getTile().setEffect(new InnerShadow(100, 1, 1, GREEN));
+            coordination.getTerrain().getTile().setEffect(new InnerShadow(100, 1, 1, DARKBLUE));
         }
     }
 
@@ -65,7 +66,7 @@ public class AttackController {
             coordination.getTerrain().getTile().setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    System.out.println(new UnitController().moveUnit(coordination));
+                    System.out.println(new CombatController().militaryAttack(coordination));
                     finish();
                 }
             });
