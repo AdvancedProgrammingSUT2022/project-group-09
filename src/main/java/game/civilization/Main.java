@@ -42,11 +42,11 @@ public class Main extends Application {
         SceneController.getInstance().setStage(stage);
         UserDatabase.loadUsers();
         GameDataBaseSaving.loadGame();
-    //    GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
-    //    ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
+     //   GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
+     //   ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
         stage.setTitle("CivilizationV");
         SceneController.getInstance().game();
-      //  GameDataBaseSaving.saveGame();
+        GameDataBaseSaving.saveGame();
 
 
 //

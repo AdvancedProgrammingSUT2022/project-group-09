@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class UserDatabase {
-    static private final ArrayList<User> users = new ArrayList<>();
+    static private ArrayList<User> users = new ArrayList<>();
     static private User currentUser;
 
     static public void loadUsers() {
@@ -135,6 +135,7 @@ public class UserDatabase {
         return false;
     }
 
+
     static public User getCurrentUser() {
         return currentUser;
     }
@@ -150,5 +151,9 @@ public class UserDatabase {
     static public void addUser(User user) {
         users.add(user);
     }
-    
+
+    public static void setUsers(ArrayList<User> users) {
+        UserDatabase.users = users;
+    }
+
 }
