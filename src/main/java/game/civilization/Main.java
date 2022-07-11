@@ -37,6 +37,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        //CLIENT VA SERVER RO RUN KONID
+
         //ghabl az start userdatabase.json ro por konid ba 2 user masalan
         //[{"username" :"payam","password":"pass","nickname":"payam","score":0,"lastLoginTime":"2022/06/09 01:04:18","rank":0,"inputStream":false},{"username":"aylin","password":"pass","nickname":"payam","score":0,"rank":0,"inputStream":false}]
         SceneController.getInstance().setStage(stage);

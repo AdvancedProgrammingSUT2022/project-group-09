@@ -24,7 +24,7 @@ public class GameDataBaseSaving {
     private GameDataBaseSaving() {
     }
 
-    private static GameDataBaseSaving getInstance() {
+    public static GameDataBaseSaving getInstance() {
         GameDataBaseSaving data = new GameDataBaseSaving();
         data.turn = GameDataBase.getTurn();
         data.mainMap = GameDataBase.getMainMap();

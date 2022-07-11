@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server extends Application {
     public static String getXml() {
@@ -16,24 +17,28 @@ public class Server extends Application {
         Server.xml = xml;
     }
 
+    private static ArrayList<ServerSocketHandler> clientSockets = new ArrayList<>();
     private static String xml;
     private ServerSocket serverSocket;
-    private DataInputStream dataInputStream;
-    private DataOutputStream dataOutputStream;
 
     public static void main(String[] args) throws IOException {
         launch();
     }
 
+    public static ArrayList<ServerSocketHandler> getClientSockets() {
+        return clientSockets;
+    }
+
+
     private void connect() throws IOException {
         serverSocket = new ServerSocket(8000);
         while (true) {
             Socket socket = serverSocket.accept();
-            dataInputStream = new DataInputStream(socket.getInputStream());
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            System.out.println(socket + "is connected");
-            ServerSocketHandler socketHandler = new ServerSocketHandler(socket);
-            socketHandler.start();
+            System.out.println(socket + " first is connected");
+            Socket socket2 = serverSocket.accept();
+            System.out.println(socket + " second is connected");
+            ServerSocketHandler socketHandler = new ServerSocketHandler(socket, socket2);
+            Server.getClientSockets().add(socketHandler);
         }
     }
 
