@@ -26,6 +26,14 @@ public class ServerSocketHandler {
         this.socket2 = socket2;
         dataInputStream2 = new DataInputStream(socket2.getInputStream());
         dataOutputStream2 = new DataOutputStream(socket2.getOutputStream());
+        sendGame();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                listenForClient();
+            }
+        });
+        thread.start();
     }
 
     public void listenForClient() {
@@ -38,6 +46,7 @@ public class ServerSocketHandler {
                 }
                 System.out.println("GameDatabase get from " + socket);
                 Server.setXml(message.getXml());
+                sendGameToAll();
                 System.out.println("Xml Server updated");
             }
         } catch (Exception ignored) {
@@ -47,6 +56,8 @@ public class ServerSocketHandler {
 
     private void sendGameToAll() throws IOException {
         for (ServerSocketHandler socketHandler : Server.getClientSockets()) {
+            if (socketHandler == this)
+                continue;
             System.out.println("game is sending for " + socketHandler);
             socketHandler.sendGame();
         }
@@ -56,6 +67,7 @@ public class ServerSocketHandler {
         Message message = new Message();
         message.setXml(Server.getXml());
         sendMessage(message);
+        System.out.println("game data base send");
     }
 //    private Message handleReq(Message request) {
 //        Message message = new Message();

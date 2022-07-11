@@ -1,5 +1,10 @@
 package game.civilization.Controller.NetworkController.Server;
 
+import com.thoughtworks.xstream.XStream;
+import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
+import game.civilization.Controller.UserDatabase;
+import game.civilization.Model.Units.Settler;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -44,6 +49,11 @@ public class Server extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        UserDatabase.loadUsers();
+        GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
+        ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
+        XStream xStream = new XStream();
+        Server.xml = xStream.toXML(GameDataBaseSaving.getInstance());
         connect();
     }
 }

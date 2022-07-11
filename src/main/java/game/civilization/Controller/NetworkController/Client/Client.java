@@ -19,10 +19,14 @@ import java.nio.file.Paths;
 public class Client extends Application {
     private Socket socket;
     private Socket socket2;
-
+    private static ClientSocketController clientSocketController;
 
     public static void main(String[] args) throws IOException {
         launch();
+    }
+
+    public static ClientSocketController getClientSocketController() {
+        return clientSocketController;
     }
 
     private void connect() throws IOException {
@@ -33,14 +37,11 @@ public class Client extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         connect();
-        String xml = new String(Files.readAllBytes(Paths.get("data/gameInformation.xml")));
-        System.out.println(xml);
-
+        Client.clientSocketController = new ClientSocketController(socket, socket2);
         SceneController.getInstance().setStage(stage);
-        UserDatabase.loadUsers();
-        //   GameDataBaseSaving.loadGame();
-        GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
-        ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
+        while (!clientSocketController.isGameLoadedFOrFirstTime()) {
+            System.out.println("game not loaded yet");
+        }
         stage.setTitle("CivilizationV");
         SceneController.getInstance().game();
     }

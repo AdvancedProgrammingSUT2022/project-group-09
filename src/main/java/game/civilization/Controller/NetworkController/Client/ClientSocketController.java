@@ -21,6 +21,7 @@ public class ClientSocketController {
     private final DataInputStream dataInputStream2;
     private final DataOutputStream dataOutputStream2;
     private boolean isListenCalledBefore = false;
+    private boolean isGameLoadedFOrFirstTime=false;
 
     public ClientSocketController(Socket socket, Socket socket2) throws IOException {
         this.socket = socket;
@@ -29,9 +30,10 @@ public class ClientSocketController {
         this.socket2 = socket2;
         dataInputStream2 = new DataInputStream(socket2.getInputStream());
         dataOutputStream2 = new DataOutputStream(socket2.getOutputStream());
+        listenForGame();
     }
 
-    public void listenForGame() throws IOException {
+    private void listenForGame() throws IOException {
         if (isListenCalledBefore)
             return;
         isListenCalledBefore = true;
@@ -51,6 +53,7 @@ public class ClientSocketController {
                         if (xml.length() != 0) {
                             GameDataBaseSaving game = (GameDataBaseSaving) xStream.fromXML(xml);
                             game.setToGameDataBase();
+                            isGameLoadedFOrFirstTime=true;
                             System.out.println("game loaded from Server");
                         }
                     }
@@ -73,6 +76,10 @@ public class ClientSocketController {
         byte[] data = messageJson.getBytes(StandardCharsets.UTF_8);
         dataOutputStream.writeInt(data.length);
         dataOutputStream.write(data);
+    }
+
+    public boolean isGameLoadedFOrFirstTime() {
+        return isGameLoadedFOrFirstTime;
     }
 
 //    private Message getMessage() throws IOException {

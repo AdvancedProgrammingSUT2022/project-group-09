@@ -2,6 +2,7 @@ package game.civilization.FxmlController.GameScenes;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
+import game.civilization.Controller.NetworkController.Client.Client;
 import game.civilization.FxmlController.MapMovement;
 import game.civilization.FxmlController.SceneController;
 import game.civilization.FxmlController.GameScenes.SceneController.MapController;
@@ -65,7 +66,7 @@ public class GameSceneController implements Initializable {
         GameSceneDataBase.getInstance().setScienceLabel(scienceLabel);
     }
 
-    public void nextTurn(ActionEvent actionEvent) {
+    public void nextTurn(ActionEvent actionEvent) throws IOException {
         GameSceneDataBase.getInstance().clear();
         clearPane();
         new GameMenuController().doNextTurn();
@@ -74,6 +75,7 @@ public class GameSceneController implements Initializable {
         MapController.getInstance().run();
         UnitsController.getInstance().run();
         loadPane();
+        Client.getClientSocketController().setGame();
     }
 
     public void refresh() {

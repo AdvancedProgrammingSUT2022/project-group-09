@@ -30,7 +30,7 @@ module game.civilization {
     opens game.civilization.Model.Units to com.google.gson, xstream;
     opens game.civilization.Model.Resources to com.google.gson, xstream;
     opens game.civilization.Model.Buildings to com.google.gson, xstream;
-
+    opens game.civilization.Model.NetworkModels to com.google.gson;
 
     exports game.civilization.Controller.NetworkController to javafx.graphics;
     opens game.civilization to javafx.fxml;
