@@ -8,7 +8,7 @@ import game.civilization.Model.Terrains.TerrainType;
 import game.civilization.Model.Units.Settler;
 import game.civilization.Model.*;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class GameDataBase {
@@ -39,7 +39,7 @@ public class GameDataBase {
         for (Civilization civilization : GameDataBase.getCivilizations()) {
             Coordination coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
             while (coordination.getTerrain().getType() == TerrainType.MOUNTAIN ||
-                    coordination.getTerrain().getCivilization()!=null)
+                    coordination.getTerrain().getCivilization() != null)
                 coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
             Terrain terrain = GameDataBase.getMainMap().getTerrain(coordination.getX(), coordination.getY());
             new Settler(terrain, civilization);
@@ -122,4 +122,5 @@ public class GameDataBase {
         turn++;
         setCurrentCivilization(getCivilizations().get(turn % getCivilizations().size()));
     }
+
 }

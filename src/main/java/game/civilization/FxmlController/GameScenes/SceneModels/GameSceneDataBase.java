@@ -1,5 +1,6 @@
 package game.civilization.FxmlController.GameScenes.SceneModels;
 
+import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.FxmlController.GameScenes.GameSceneController;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -26,7 +27,6 @@ public class GameSceneDataBase {
     }
 
     private GameSceneDataBase() {
-
     }
 
     private GameSceneController gameSceneController;

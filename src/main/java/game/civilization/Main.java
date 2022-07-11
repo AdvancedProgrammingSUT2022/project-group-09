@@ -1,12 +1,17 @@
 package game.civilization;
 
+import com.google.gson.Gson;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.Controller.LoginMenuController;
 import game.civilization.Controller.MainMenuController;
 import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.FxmlController.GameScenes.GameSceneController;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.FxmlController.SceneController;
+import game.civilization.Model.City;
 import game.civilization.Model.Units.Settler;
 import game.civilization.View.*;
 import javafx.application.Application;
@@ -14,8 +19,16 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -28,10 +41,13 @@ public class Main extends Application {
         //[{"username" :"payam","password":"pass","nickname":"payam","score":0,"lastLoginTime":"2022/06/09 01:04:18","rank":0,"inputStream":false},{"username":"aylin","password":"pass","nickname":"payam","score":0,"rank":0,"inputStream":false}]
         SceneController.getInstance().setStage(stage);
         UserDatabase.loadUsers();
-        GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
-        ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
+        GameDataBaseSaving.loadGame();
+    //    GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
+    //    ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
         stage.setTitle("CivilizationV");
         SceneController.getInstance().game();
+      //  GameDataBaseSaving.saveGame();
+
 
 //
 //        handleCloseRequest(stage);
