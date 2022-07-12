@@ -58,7 +58,7 @@ public class ServerSocketHandler {
         for (ServerSocketHandler socketHandler : Server.getClientSockets()) {
             if (socketHandler == this)
                 continue;
-            System.out.println("game is sending for " + socketHandler);
+            System.out.println("game is sending for " + socketHandler.socket2);
             socketHandler.sendGame();
         }
     }

@@ -3,23 +3,28 @@ package game.civilization.FxmlController.GameScenes;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.Controller.NetworkController.Client.Client;
+import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.MapMovement;
 import game.civilization.FxmlController.SceneController;
 import game.civilization.FxmlController.GameScenes.SceneController.MapController;
 import game.civilization.FxmlController.GameScenes.SceneController.UnitsController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
+import game.civilization.Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
+    @FXML
+    private Label turnLabel;
     @FXML
     private Label civilizationName;
     @FXML
@@ -47,6 +52,7 @@ public class GameSceneController implements Initializable {
 
     private void clearPane() {
         pane.getChildren().clear();
+        turnLabel.setText("");
     }
 
     private void loadPane() {
@@ -70,18 +76,19 @@ public class GameSceneController implements Initializable {
         GameSceneDataBase.getInstance().clear();
         clearPane();
         new GameMenuController().doNextTurn();
-        GameDataBase.getCurrentCivilization().getMap().updateExploration();
-        civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
-        MapController.getInstance().run();
-        UnitsController.getInstance().run();
-        loadPane();
+        refresh();
         Client.getClientSocketController().setGame();
     }
 
     public void refresh() {
+        civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
         GameSceneDataBase.getInstance().clear();
         clearPane();
         GameDataBase.getCurrentCivilization().getMap().updateExploration();
+        if (!UserDatabase.getCurrentUser().getUsername().equals(civilizationName.getText())) {
+            turnLabel.setText("Its not your Turn !");
+            return;
+        }
         MapController.getInstance().run();
         UnitsController.getInstance().run();
         loadPane();

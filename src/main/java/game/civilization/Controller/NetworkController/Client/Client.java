@@ -5,6 +5,7 @@ import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
 import game.civilization.Model.Units.Settler;
+import game.civilization.Model.User;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -36,6 +37,7 @@ public class Client extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        UserDatabase.setCurrentUser(new User("payam", "ll", "kk"));
         connect();
         Client.clientSocketController = new ClientSocketController(socket, socket2);
         SceneController.getInstance().setStage(stage);

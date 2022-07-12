@@ -3,7 +3,9 @@ package game.civilization.Controller.NetworkController.Client;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.Model.NetworkModels.Message;
+import javafx.application.Platform;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -21,7 +23,7 @@ public class ClientSocketController {
     private final DataInputStream dataInputStream2;
     private final DataOutputStream dataOutputStream2;
     private boolean isListenCalledBefore = false;
-    private boolean isGameLoadedFOrFirstTime=false;
+    private boolean isGameLoadedFOrFirstTime = false;
 
     public ClientSocketController(Socket socket, Socket socket2) throws IOException {
         this.socket = socket;
@@ -47,13 +49,21 @@ public class ClientSocketController {
                         dataInputStream2.readFully(data);
                         String messageJson = new String(data, StandardCharsets.UTF_8);
                         Message message = Message.fromJson(messageJson);
-                        String xml =message.getXml();
+                        String xml = message.getXml();
                         XStream xStream = new XStream();
                         xStream.addPermission(AnyTypePermission.ANY);
                         if (xml.length() != 0) {
                             GameDataBaseSaving game = (GameDataBaseSaving) xStream.fromXML(xml);
                             game.setToGameDataBase();
-                            isGameLoadedFOrFirstTime=true;
+                            if (GameSceneDataBase.getInstance().getGameSceneController() != null) {
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        GameSceneDataBase.getInstance().getGameSceneController().refresh();
+                                    }
+                                });
+                            }
+                            isGameLoadedFOrFirstTime = true;
                             System.out.println("game loaded from Server");
                         }
                     }
@@ -67,10 +77,11 @@ public class ClientSocketController {
 
     public void setGame() throws IOException {
         XStream xStream = new XStream();
-        String xml=xStream.toXML(GameDataBaseSaving.getInstance());
+        String xml = xStream.toXML(GameDataBaseSaving.getInstance());
 
-        Message message=new Message();
+        Message message = new Message();
         message.setAction("set GameDatabase");
+        message.setXml(xml);
 
         String messageJson = message.toJson();
         byte[] data = messageJson.getBytes(StandardCharsets.UTF_8);
