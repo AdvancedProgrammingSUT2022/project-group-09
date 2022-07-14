@@ -9,6 +9,7 @@ import game.civilization.FxmlController.SceneController;
 import game.civilization.FxmlController.GameScenes.SceneController.MapController;
 import game.civilization.FxmlController.GameScenes.SceneController.UnitsController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
+import game.civilization.Model.Resources.Resource;
 import game.civilization.Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
+    @FXML
+    private Button tradeButton;
     @FXML
     private Label turnLabel;
     @FXML
@@ -84,6 +87,7 @@ public class GameSceneController implements Initializable {
         civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
         GameSceneDataBase.getInstance().clear();
         clearPane();
+        UnitsController.getInstance().setUnitClicked(false);
         GameDataBase.getCurrentCivilization().getMap().updateExploration();
         if (!UserDatabase.getCurrentUser().getUsername().equals(civilizationName.getText())) {
             turnLabel.setText("Its not your Turn !");
@@ -97,6 +101,14 @@ public class GameSceneController implements Initializable {
     public void CheatActivate(ActionEvent actionEvent) {
         try {
             SceneController.getInstance().cheat();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openTrade(ActionEvent actionEvent) {
+        try {
+            SceneController.getInstance().trade();
         } catch (IOException e) {
             e.printStackTrace();
         }

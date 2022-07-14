@@ -1,7 +1,7 @@
 package game.civilization.Controller.NetworkController.Server;
 
-import game.civilization.Controller.NetworkController.Server.Server;
 import game.civilization.Model.NetworkModels.Message;
+import game.civilization.Model.TradingObject;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -18,6 +18,7 @@ public class ServerSocketHandler {
     private final Socket socket2;
     private final DataInputStream dataInputStream2;
     private final DataOutputStream dataOutputStream2;
+    private String name;
 
     public ServerSocketHandler(Socket socket, Socket socket2) throws IOException {
         this.socket = socket;
@@ -40,14 +41,12 @@ public class ServerSocketHandler {
         try {
             while (true) {
                 Message message = getMessage();
+                System.out.println("message " + message.getAction() + " action " + " received");
                 if (message.getAction().equals("exit")) {
                     System.out.println("socket " + socket + "disconnected");
                     return;
                 }
-                System.out.println("GameDatabase get from " + socket);
-                Server.setXml(message.getXml());
-                sendGameToAll();
-                System.out.println("Xml Server updated");
+                handleReq(message);
             }
         } catch (Exception ignored) {
 
@@ -65,18 +64,41 @@ public class ServerSocketHandler {
 
     private void sendGame() throws IOException {
         Message message = new Message();
-        message.setXml(Server.getXml());
+        message.setAction("GameDatabase");
+        message.setMessage(Server.getXml());
         sendMessage(message);
         System.out.println("game data base send");
     }
-//    private Message handleReq(Message request) {
-//        Message message = new Message();
-//        switch (request.getAction()) {
-//            case "get GameDatabase" -> message.setXml(Server.getXml());
-//            case "set GameDatabase" -> Server.setXml(message.getXml());
-//        }
-//        return message;
-//    }
+
+    private void handleReq(Message message) throws IOException {
+        if (message.getAction().equals("set GameDatabase")) {
+            System.out.println("GameDatabase get from " + socket);
+            Server.setXml(message.getMessage());
+            sendGameToAll();
+            System.out.println("Xml Server updated");
+        }
+        if (message.getAction().equals("introduction")) {
+            System.out.println("introduction done client name is :" + message.getMessage());
+            name = message.getMessage();
+        }
+        if (message.getAction().equals("send trade")) {
+            TradingObject tradingObject = TradingObject.fromJson(message.getMessage());
+            sendTrade(tradingObject);
+        }
+    }
+
+    private void sendTrade(TradingObject tradingObject) throws IOException {
+        Message message = new Message();
+        message.setMessage(tradingObject.toJson());
+        message.setAction("receive trade");
+        for (ServerSocketHandler clientSocket : Server.getClientSockets()) {
+            if (clientSocket.getName().equals(tradingObject.getTarget())) {
+                clientSocket.sendMessage(message);
+                return;
+            }
+        }
+        System.out.println("user with name "+tradingObject.getTarget()+" not registered yet");
+    }
 
     private Message getMessage() throws IOException {
         int length = dataInputStream.readInt();
@@ -91,5 +113,9 @@ public class ServerSocketHandler {
         byte[] data = temp.getBytes(StandardCharsets.UTF_8);
         dataOutputStream2.writeInt(data.length);
         dataOutputStream2.write(data);
+    }
+
+    public String getName() {
+        return name;
     }
 }

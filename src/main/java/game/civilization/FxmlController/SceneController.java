@@ -83,5 +83,14 @@ public class SceneController {
         cheatStage.show();
     }
 
+    public void trade() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/trade.fxml")));
+        Scene scene = new Scene(root);
+        Stage cheatStage = new Stage();
+        cheatStage.setTitle("Trade !");
+        cheatStage.setScene(scene);
+        cheatStage.show();
+    }
+
 
 }

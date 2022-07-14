@@ -2,9 +2,14 @@ package game.civilization.Controller.NetworkController.Client;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.AnyTypePermission;
+import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
+import game.civilization.Controller.NetworkController.Server.Server;
+import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
+import game.civilization.Model.Civilization;
 import game.civilization.Model.NetworkModels.Message;
+import game.civilization.Model.TradingObject;
 import javafx.application.Platform;
 
 import java.io.DataInputStream;
@@ -12,8 +17,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
 
 public class ClientSocketController {
     private final Socket socket;
@@ -32,40 +36,26 @@ public class ClientSocketController {
         this.socket2 = socket2;
         dataInputStream2 = new DataInputStream(socket2.getInputStream());
         dataOutputStream2 = new DataOutputStream(socket2.getOutputStream());
-        listenForGame();
+        Message message = new Message();
+        message.setAction("introduction");
+        message.setMessage(UserDatabase.getCurrentUser().getUsername());
+        sendMessage(message);
+        listen();
     }
 
-    private void listenForGame() throws IOException {
+    private void listen() throws IOException {
         if (isListenCalledBefore)
             return;
+        //ino zadam ke yebar faghat az in tabe estefade beshe
         isListenCalledBefore = true;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     while (true) {
-                        int length = dataInputStream2.readInt();
-                        byte[] data = new byte[length];
-                        dataInputStream2.readFully(data);
-                        String messageJson = new String(data, StandardCharsets.UTF_8);
-                        Message message = Message.fromJson(messageJson);
-                        String xml = message.getXml();
-                        XStream xStream = new XStream();
-                        xStream.addPermission(AnyTypePermission.ANY);
-                        if (xml.length() != 0) {
-                            GameDataBaseSaving game = (GameDataBaseSaving) xStream.fromXML(xml);
-                            game.setToGameDataBase();
-                            if (GameSceneDataBase.getInstance().getGameSceneController() != null) {
-                                Platform.runLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        GameSceneDataBase.getInstance().getGameSceneController().refresh();
-                                    }
-                                });
-                            }
-                            isGameLoadedFOrFirstTime = true;
-                            System.out.println("game loaded from Server");
-                        }
+                        Message message = getMessage();
+                        System.out.println(message.getAction() + " received");
+                        handleReq(message);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -75,36 +65,85 @@ public class ClientSocketController {
         thread.start();
     }
 
+    private void handleReq(Message message) throws IOException, InterruptedException {
+        if (message.getAction().equals("GameDatabase"))
+            readGame(message);
+        if (message.getAction().equals("receive trade")) {
+            TradingObject tradingObject = TradingObject.fromJson(message.getMessage());
+            loadTradingObject(tradingObject);
+        }
+    }
+
+    private void loadTradingObject(TradingObject tradingObject) {
+        Civilization civilization = findCiv();
+        assert civilization != null;
+        civilization.getGold().setCurrentGold(civilization.getGold().getCurrentGold() + tradingObject.getGold());
+        civilization.getCities().get(0).getTerrains().get(0).getResources().addAll(tradingObject.getResources());
+        civilization.getTradingObjects().add(tradingObject);
+    }
+
+    private Civilization findCiv() {
+        for (Civilization civilization1 : GameDataBase.getCivilizations()) {
+            if (civilization1.getName().equals(UserDatabase.getCurrentUser().getUsername()))
+                return civilization1;
+        }
+        return null;
+    }
+
+    private void readGame(Message message) throws InterruptedException {
+        String xml = message.getMessage();
+        XStream xStream = new XStream();
+        xStream.addPermission(AnyTypePermission.ANY);
+        if (xml.length() != 0) {
+            GameDataBaseSaving game = (GameDataBaseSaving) xStream.fromXML(xml);
+            game.setToGameDataBase();
+            isGameLoadedFOrFirstTime = true;
+            while (GameSceneDataBase.getInstance().getGameSceneController() == null) {
+                System.out.println("waiting!");
+                TimeUnit.MILLISECONDS.sleep(400);
+            }
+            if (GameSceneDataBase.getInstance().getGameSceneController() != null) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        GameSceneDataBase.getInstance().getGameSceneController().refresh();
+                    }
+                });
+            }
+            System.out.println("game loaded from Server");
+        }
+    }
+
     public void setGame() throws IOException {
         XStream xStream = new XStream();
         String xml = xStream.toXML(GameDataBaseSaving.getInstance());
 
         Message message = new Message();
         message.setAction("set GameDatabase");
-        message.setXml(xml);
+        message.setMessage(xml);
 
+        sendMessage(message);
+    }
+
+    public void sendMessage(Message message) throws IOException {
         String messageJson = message.toJson();
         byte[] data = messageJson.getBytes(StandardCharsets.UTF_8);
         dataOutputStream.writeInt(data.length);
         dataOutputStream.write(data);
+        System.out.println("message  action " + message.getAction() + " send");
     }
 
     public boolean isGameLoadedFOrFirstTime() {
         return isGameLoadedFOrFirstTime;
     }
 
-//    private Message getMessage() throws IOException {
-//        int length = dataInputStream.readInt();
-//        byte[] data = new byte[length];
-//        dataInputStream.readFully(data);
-//        String messageJson = new String(data, StandardCharsets.UTF_8);
-//        return Message.fromJson(messageJson);
-//    }
+    private Message getMessage() throws IOException {
+        int length = dataInputStream2.readInt();
+        byte[] data = new byte[length];
+        dataInputStream2.readFully(data);
+        String messageJson = new String(data, StandardCharsets.UTF_8);
+        return Message.fromJson(messageJson);
+    }
 
-//    private void sendMessage(Message message) throws IOException {
-//        String temp = message.toJson();
-//        byte[] data = temp.getBytes(StandardCharsets.UTF_8);
-//        dataOutputStream.writeInt(data.length);
-//        dataOutputStream.write(data);
-//    }
+
 }

@@ -24,6 +24,7 @@ public class Civilization {
 
     private ArrayList<Resource> resources;
     private ArrayList<Unit> units;
+    private final ArrayList<TradingObject> tradingObjects=new ArrayList<>();
 
     public Civilization(Map map, ArrayList<Resource> resources, ArrayList<City> cities, ArrayList<War> wars, CivilizationTechnologies civilizationTechnologies, CivilizationGold civilizationGold, CivilizationScience civilizationScience, CivilizationHappiness civilizationHappiness, ArrayList<Unit> units) {
         this.map = map;
@@ -242,4 +243,7 @@ public class Civilization {
     }
 
 
+    public ArrayList<TradingObject> getTradingObjects() {
+        return tradingObjects;
+    }
 }

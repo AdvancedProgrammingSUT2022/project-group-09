@@ -45,5 +45,6 @@
         <Label fx:id="goldLabel" layoutX="160.0" layoutY="9.0" prefHeight="31.0" prefWidth="54.0" />
         <Label fx:id="happinessLabel" layoutX="274.0" layoutY="7.0" prefHeight="31.0" prefWidth="54.0" />
       <Label fx:id="civilizationName" alignment="CENTER" layoutX="1348.0" layoutY="6.0" prefHeight="21.0" prefWidth="105.0" stylesheets="@../css/Game.css" />
+      <Button fx:id="tradeButton" layoutX="1191.0" layoutY="10.0" mnemonicParsing="false" onAction="#openTrade" text="Trade" />
     </children>
 </Pane>

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 
 public class Message {
     private String action;
-    private String xml;
+    private String message;
 
     public String getAction() {
         return action;
@@ -14,12 +14,12 @@ public class Message {
         this.action = action;
     }
 
-    public String getXml() {
-        return xml;
+    public String getMessage() {
+        return message;
     }
 
-    public void setXml(String xml) {
-        this.xml = xml;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String toJson() {

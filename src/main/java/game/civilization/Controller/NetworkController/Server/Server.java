@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.XStream;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.Model.Resources.Resource;
 import game.civilization.Model.Units.Settler;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -36,7 +37,7 @@ public class Server extends Application {
 
 
     private void connect() throws IOException {
-        serverSocket = new ServerSocket(8000);
+        serverSocket = new ServerSocket(700);
         while (true) {
             Socket socket = serverSocket.accept();
             System.out.println(socket + " first is connected");
