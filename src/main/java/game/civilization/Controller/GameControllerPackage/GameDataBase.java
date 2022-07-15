@@ -1,21 +1,18 @@
 package game.civilization.Controller.GameControllerPackage;
 
 
-import game.civilization.FxmlController.SceneController;
-import game.civilization.Main;
 import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.Terrains.TerrainType;
 import game.civilization.Model.Units.Settler;
 import game.civilization.Model.*;
 
-import java.io.*;
 import java.util.*;
+import java.util.Map;
 
 public class GameDataBase {
     static private int turn;
     static private MainMap mainMap;
     static private ArrayList<User> players; //ina bazi mikonan avalesh inja sabt mishe
-    static private User currentUser;
     static private Civilization currentCivilization;
     static private HashMap<User, Civilization> civilizations;
 
@@ -31,7 +28,6 @@ public class GameDataBase {
         for (User player : players) {
             civilizations.put(player, new Civilization(player.getUsername()));
         }
-        currentUser = players.get(0);
         currentCivilization = civilizations.get(players.get(0));
         turn = 0;
         mainMap = new MainMap();
@@ -83,14 +79,6 @@ public class GameDataBase {
         GameDataBase.players = players;
     }
 
-    public static User getCurrentUser() {
-        return currentUser;
-    }
-
-    public static void setCurrentUser(User currentUser) {
-        GameDataBase.currentUser = currentUser;
-    }
-
     public static Civilization getCurrentCivilization() {
         return currentCivilization;
     }
@@ -119,8 +107,31 @@ public class GameDataBase {
     }
 
     public static void nextTurn() {
+        removeLosers();
         turn++;
         setCurrentCivilization(getCivilizations().get(turn % getCivilizations().size()));
+    }
+
+    private static void removeLosers() {
+        ArrayList<User> userArrayList = new ArrayList<>();
+        ArrayList<Civilization> civilizationArrayList = new ArrayList<>();
+        for (Civilization civilization : getCivilizations()) {
+            if (civilization.getCities().size() <= 0 && civilization.getUnits().size() <= 0) {
+                System.out.println("civilization " + civilization.getName() + " will die");
+                for (Map.Entry<User, Civilization> entry : civilizations.entrySet()) {
+                    User key = entry.getKey();
+                    Civilization value = entry.getValue();
+                    if (key.getUsername().equals(civilization.getName())) {
+                        userArrayList.add(key);
+                        civilizationArrayList.add(value);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < userArrayList.size(); i++) {
+            civilizations.remove(userArrayList.get(i), civilizationArrayList.get(i));
+            players.remove(userArrayList.get(i));
+        }
     }
 
     public static Civilization findCiv(String name) {

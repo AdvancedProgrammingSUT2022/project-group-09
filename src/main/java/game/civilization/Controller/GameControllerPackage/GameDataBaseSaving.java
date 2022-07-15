@@ -39,7 +39,6 @@ public class GameDataBaseSaving {
         GameDataBase.setSelected(selected);
         GameDataBase.setMainMap(mainMap);
         GameDataBase.setPlayers(players);
-        GameDataBase.setCurrentUser(UserDatabase.getCurrentUser());
         GameDataBase.setCurrentCivilization(currentCivilization);
         HashMap<User, Civilization> civilizationHashMap = new HashMap<>();
         for (int i = 0; i < civilizations.size(); i++) {

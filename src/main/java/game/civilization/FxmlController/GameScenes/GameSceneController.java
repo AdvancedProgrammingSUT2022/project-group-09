@@ -9,8 +9,7 @@ import game.civilization.FxmlController.SceneController;
 import game.civilization.FxmlController.GameScenes.SceneController.MapController;
 import game.civilization.FxmlController.GameScenes.SceneController.UnitsController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
-import game.civilization.Model.Resources.Resource;
-import game.civilization.Model.User;
+import game.civilization.Model.Civilization;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -60,7 +58,11 @@ public class GameSceneController implements Initializable {
 
     private void setNotification() {
         notification.setEditable(false);
-        notification.setText(Objects.requireNonNull(GameDataBase.findCiv(UserDatabase.getCurrentUser().getUsername())).getNotification());
+        try {
+            notification.setText((Objects.requireNonNull(GameDataBase.findCiv(UserDatabase.getCurrentUser().getUsername()))).getNotification());
+        } catch (Exception ignored) {
+            notification.setText("you lose Bye Bye");
+        }
     }
 
     private void clearPane() {
@@ -86,7 +88,7 @@ public class GameSceneController implements Initializable {
     }
 
     public void nextTurn(ActionEvent actionEvent) throws IOException {
-        if (!isMyTurn())
+        if (isNotMyTurn())
             return;
         GameSceneDataBase.getInstance().clear();
         clearPane();
@@ -102,8 +104,10 @@ public class GameSceneController implements Initializable {
         UnitsController.getInstance().setUnitClicked(false);
         GameDataBase.getCurrentCivilization().getMap().updateExploration();
         setNotification();
-        if (!isMyTurn()) {
+        if (isNotMyTurn()) {
             turnLabel.setText("Its not your Turn !");
+            if (amILose())
+                turnLabel.setText("you lose");
             return;
         }
         MapController.getInstance().run();
@@ -112,7 +116,7 @@ public class GameSceneController implements Initializable {
     }
 
     public void CheatActivate(ActionEvent actionEvent) {
-        if (!isMyTurn())
+        if (isNotMyTurn())
             return;
         try {
             SceneController.getInstance().cheat();
@@ -122,7 +126,7 @@ public class GameSceneController implements Initializable {
     }
 
     public void openTrade(ActionEvent actionEvent) {
-        if (!isMyTurn())
+        if (isNotMyTurn())
             return;
         try {
             SceneController.getInstance().trade();
@@ -131,7 +135,15 @@ public class GameSceneController implements Initializable {
         }
     }
 
-    private boolean isMyTurn() {
-        return GameDataBase.getCurrentCivilization().getName().equals(UserDatabase.getCurrentUser().getUsername());
+    private boolean isNotMyTurn() {
+        return !GameDataBase.getCurrentCivilization().getName().equals(UserDatabase.getCurrentUser().getUsername());
+    }
+
+    private boolean amILose() {
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            if (civilization.getName().equals(UserDatabase.getCurrentUser().getUsername()))
+                return false;
+        }
+        return true;
     }
 }
