@@ -16,14 +16,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
+    @FXML
+    private TextArea notification;
     @FXML
     private Button tradeButton;
     @FXML
@@ -46,11 +50,17 @@ public class GameSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
+        setNotification();
         setDataToGameSceneDataBase();
         MapController.getInstance().run();
         UnitsController.getInstance().run();
         MapMovement.getInstance().run();
         loadPane();
+    }
+
+    private void setNotification() {
+        notification.setEditable(false);
+        notification.setText(Objects.requireNonNull(GameDataBase.findCiv(UserDatabase.getCurrentUser().getUsername())).getNotification());
     }
 
     private void clearPane() {
@@ -89,6 +99,7 @@ public class GameSceneController implements Initializable {
         clearPane();
         UnitsController.getInstance().setUnitClicked(false);
         GameDataBase.getCurrentCivilization().getMap().updateExploration();
+        setNotification();
         if (!UserDatabase.getCurrentUser().getUsername().equals(civilizationName.getText())) {
             turnLabel.setText("Its not your Turn !");
             return;
