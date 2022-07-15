@@ -86,6 +86,8 @@ public class GameSceneController implements Initializable {
     }
 
     public void nextTurn(ActionEvent actionEvent) throws IOException {
+        if (!isMyTurn())
+            return;
         GameSceneDataBase.getInstance().clear();
         clearPane();
         new GameMenuController().doNextTurn();
@@ -100,7 +102,7 @@ public class GameSceneController implements Initializable {
         UnitsController.getInstance().setUnitClicked(false);
         GameDataBase.getCurrentCivilization().getMap().updateExploration();
         setNotification();
-        if (!UserDatabase.getCurrentUser().getUsername().equals(civilizationName.getText())) {
+        if (!isMyTurn()) {
             turnLabel.setText("Its not your Turn !");
             return;
         }
@@ -110,6 +112,8 @@ public class GameSceneController implements Initializable {
     }
 
     public void CheatActivate(ActionEvent actionEvent) {
+        if (!isMyTurn())
+            return;
         try {
             SceneController.getInstance().cheat();
         } catch (IOException e) {
@@ -118,10 +122,16 @@ public class GameSceneController implements Initializable {
     }
 
     public void openTrade(ActionEvent actionEvent) {
+        if (!isMyTurn())
+            return;
         try {
             SceneController.getInstance().trade();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean isMyTurn() {
+        return GameDataBase.getCurrentCivilization().getName().equals(UserDatabase.getCurrentUser().getUsername());
     }
 }
