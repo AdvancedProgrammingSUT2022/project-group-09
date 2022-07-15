@@ -123,4 +123,12 @@ public class GameDataBase {
         setCurrentCivilization(getCivilizations().get(turn % getCivilizations().size()));
     }
 
+    public static Civilization findCiv(String name) {
+        for (Civilization civilization : getCivilizations()) {
+            if (civilization.getName().equals(name))
+                return civilization;
+        }
+        return null;
+    }
+
 }

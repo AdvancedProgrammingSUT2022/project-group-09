@@ -14,6 +14,7 @@ import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Resources.Resource;
 import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.TradingObject;
+import game.civilization.Model.War;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -35,6 +36,12 @@ import java.util.regex.Matcher;
 public class TradeController implements Initializable {
 
     @FXML
+    private TextArea wars;
+    @FXML
+    private Button declareWar;
+    @FXML
+    private Button peace;
+    @FXML
     private TextArea result;
     @FXML
     private Pane pane;
@@ -51,6 +58,7 @@ public class TradeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        wars.setEditable(false);
         result.setEditable(false);
         firstMessage = targetCivilization.getText();
         findCiv();
@@ -65,6 +73,11 @@ public class TradeController implements Initializable {
         for (TradingObject tradingObject : civilization.getTradingObjects()) {
             result.setText(result.getText() + tradingObject.showInfo());
         }
+        wars.setText("wars :");
+        for (War war : GameDataBase.getCurrentCivilization().getWars()) {
+            wars.setText(wars.getText() + war.getNameOfCivilization());
+        }
+
     }
 
     private void findCiv() {
@@ -179,5 +192,31 @@ public class TradeController implements Initializable {
             x += 30;
             pane.getChildren().add(button);
         }
+    }
+
+    public void peace(ActionEvent actionEvent) {
+        if (targetCivilization.getText().equals(firstMessage)) {
+            targetCivilization.setText("select civilization first");
+            firstMessage = targetCivilization.getText();
+            return;
+        }
+        GameDataBase.getCurrentCivilization().getWars().removeIf(war -> war.getNameOfCivilization().equals(targetCivilization.getText()));
+        Objects.requireNonNull(GameDataBase.findCiv(targetCivilization.getText())).getWars().removeIf(war -> war.getNameOfCivilization().equals(GameDataBase.getCurrentCivilization().getName()));
+        targetCivilization.setText("peace done");
+        firstMessage = targetCivilization.getText();
+        setResult();
+    }
+
+    public void declareWar(ActionEvent actionEvent) {
+        if (targetCivilization.getText().equals(firstMessage)) {
+            targetCivilization.setText("select civilization first");
+            firstMessage = targetCivilization.getText();
+            return;
+        }
+        GameDataBase.getCurrentCivilization().getWars().add(new War(targetCivilization.getText()));
+        Objects.requireNonNull(GameDataBase.findCiv(targetCivilization.getText())).getWars().add(new War(GameDataBase.getCurrentCivilization().getName()));
+        targetCivilization.setText("war declared");
+        firstMessage = targetCivilization.getText();
+        setResult();
     }
 }

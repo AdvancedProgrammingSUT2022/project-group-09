@@ -40,7 +40,22 @@
             <Font size="24.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="result" layoutX="382.0" layoutY="203.0" prefHeight="633.0" prefWidth="519.0">
+      <TextArea fx:id="result" layoutX="382.0" layoutY="203.0" prefHeight="297.0" prefWidth="519.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+      <Button fx:id="declareWar" layoutX="382.0" layoutY="160.0" mnemonicParsing="false" onAction="#declareWar" prefHeight="39.0" prefWidth="149.0" text="Declare war">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="peace" layoutX="752.0" layoutY="160.0" mnemonicParsing="false" onAction="#peace" prefHeight="39.0" prefWidth="149.0" text="Peace">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="wars" layoutX="382.0" layoutY="503.0" prefHeight="341.0" prefWidth="519.0">
          <font>
             <Font size="24.0" />
          </font>

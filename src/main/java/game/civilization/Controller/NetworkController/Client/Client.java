@@ -39,7 +39,7 @@ public class Client extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        UserDatabase.setCurrentUser(new User("aylin", "ll", "kk"));
+        UserDatabase.setCurrentUser(new User("payam", "ll", "kk"));
         connect();
         Client.clientSocketController = new ClientSocketController(socket, socket2);
         while (!clientSocketController.isGameLoadedFOrFirstTime()) {
@@ -47,7 +47,7 @@ public class Client extends Application {
               TimeUnit.MILLISECONDS.sleep(400);
         }
         SceneController.getInstance().setStage(stage);
-        stage.setTitle("CivilizationV");
+        stage.setTitle("CivilizationV "+UserDatabase.getCurrentUser().getUsername());
         SceneController.getInstance().game();
     }
 }
