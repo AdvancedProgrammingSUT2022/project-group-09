@@ -68,19 +68,19 @@ public class ClientSocketController {
     private void handleReq(Message message) throws IOException, InterruptedException {
         if (message.getAction().equals("GameDatabase"))
             readGame(message);
-        if (message.getAction().equals("receive trade")) {
-            TradingObject tradingObject = TradingObject.fromJson(message.getMessage());
-            loadTradingObject(tradingObject);
-        }
+//        if (message.getAction().equals("receive trade")) {
+//            TradingObject tradingObject = TradingObject.fromJson(message.getMessage());
+//            loadTradingObject(tradingObject);
+//        }
     }
 
-    private void loadTradingObject(TradingObject tradingObject) {
-        Civilization civilization = findCiv();
-        assert civilization != null;
-        civilization.getGold().setCurrentGold(civilization.getGold().getCurrentGold() + tradingObject.getGold());
-        civilization.getCities().get(0).getTerrains().get(0).getResources().addAll(tradingObject.getResources());
-        civilization.getTradingObjects().add(tradingObject);
-    }
+//    private void loadTradingObject(TradingObject tradingObject) {
+//        Civilization civilization = findCiv();
+//        assert civilization != null;
+//        civilization.getGold().setCurrentGold(civilization.getGold().getCurrentGold() + tradingObject.getGold());
+//        civilization.getCities().get(0).getTerrains().get(0).getResources().addAll(tradingObject.getResources());
+//        civilization.getTradingObjects().add(tradingObject);
+//    }
 
     private Civilization findCiv() {
         for (Civilization civilization1 : GameDataBase.getCivilizations()) {

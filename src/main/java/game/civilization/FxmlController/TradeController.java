@@ -63,7 +63,7 @@ public class TradeController implements Initializable {
     private void setResult() {
         result.setText("");
         for (TradingObject tradingObject : civilization.getTradingObjects()) {
-            result.setText(result.getText()+tradingObject.showInfo());
+            result.setText(result.getText() + tradingObject.showInfo());
         }
     }
 
@@ -141,13 +141,25 @@ public class TradeController implements Initializable {
         tradingObject.setTarget(targetCivilization.getText());
         tradingObject.setResources(resources);
         tradingObject.setFrom(civilization.getName());
-        Message message = new Message();
-        message.setAction("send trade");
-        message.setMessage(tradingObject.toJson());
-        Client.getClientSocketController().sendMessage(message);
+        civilization.getTradingObjects().add(tradingObject);
+        Civilization target = null;
+        for (Civilization civilization1 : GameDataBase.getCivilizations()) {
+            if (civilization1.getName().equals(tradingObject.getTarget()))
+                target = civilization1;
+        }
+        if (target == null)
+            System.out.println("Bug dar TradeController -> initializeMyItem");
+        assert target != null;
+        target.getTradingObjects().add(tradingObject);
+        target.getGold().setCurrentGold(target.getGold().getCurrentGold() + tradingObject.getGold());
+        target.getCities().get(0).getTerrains().get(0).getResources().addAll(tradingObject.getResources());
+        target.getTradingObjects().add(tradingObject);
+//        Message message = new Message();
+//        message.setAction("send trade");
+//        message.setMessage(tradingObject.toJson());
+//        Client.getClientSocketController().sendMessage(message);
         targetCivilization.setText("done !");
         firstMessage = targetCivilization.getText();
-        civilization.getTradingObjects().add(tradingObject);
         setResult();
     }
 
