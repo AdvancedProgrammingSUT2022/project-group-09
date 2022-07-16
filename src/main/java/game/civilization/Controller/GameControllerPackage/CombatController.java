@@ -6,6 +6,7 @@ import game.civilization.Model.Units.MilitaryUnit;
 import game.civilization.Model.Units.SiegeMilitaryUnit;
 import game.civilization.Model.Units.Unit;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Matcher;
 
@@ -17,6 +18,7 @@ public class CombatController {
         Coordination coordinate2 = new Coordination(x, y);
         MilitaryUnit militaryUnit = ((MilitaryUnit) GameDataBase.getSelected());
         Coordination coordinate1 = militaryUnit.getTerrain().getCoordination();
+        //start
 //        ArrayList<Coordination> path = new UnitController().getBestPath(coordinate2.getTerrain(),
 //                coordinate1.getTerrain(),
 //                militaryUnit);
@@ -31,6 +33,7 @@ public class CombatController {
 //            }
 //        else
 //            return "bish az 1 turn mikhad va mojaz nist";
+        //end
         if (!coordinate2.isValidCoordination()) {
             return "Coordinate is not valid!";
         }
@@ -44,8 +47,10 @@ public class CombatController {
             return "This is not a military unit!";
         }
         if (GameDataBase.getSelected() instanceof SiegeMilitaryUnit &&
-                !((SiegeMilitaryUnit) GameDataBase.getSelected()).isInSiege())
+                !((SiegeMilitaryUnit) GameDataBase.getSelected()).isInSiege()) {
+            GameDataBase.getCurrentCivilization().updateNotification("first you have to setup");
             return "first you have to setup";
+        }
         if (coordinate2.getTerrain() instanceof City) {
             ((MilitaryUnit) GameDataBase.getSelected()).attack((City) coordinate2.getTerrain());
         } else if (coordinate2.getTerrain().getMilitaryUnit() != null) {

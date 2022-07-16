@@ -285,7 +285,7 @@ public class GameMenuView extends View {
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SETUP)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().setUp());
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.ATTACK)) != null) {
-                //  System.out.println(gameMenuController.getCombatController().militaryAttack(matcher));
+             //     System.out.println(gameMenuController.getCombatController().militaryAttack(matcher));
             } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.PILLAGE)) != null) {
                 System.out.println(gameMenuController.getUnitcontroller().pillage());
             } else if (Objects.equals(input, "back")) {

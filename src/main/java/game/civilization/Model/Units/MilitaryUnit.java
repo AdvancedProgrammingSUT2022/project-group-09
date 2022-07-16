@@ -4,6 +4,7 @@ import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Model.City;
 import game.civilization.Model.Civilization;
 import game.civilization.Model.Terrains.Terrain;
+import game.civilization.Model.War;
 
 public class MilitaryUnit extends Unit {
     private boolean isInAlert;
@@ -83,8 +84,24 @@ public class MilitaryUnit extends Unit {
         }
     }
 
+    private void declareWar(Unit unit) {
+        for (War war : getCivilization().getWars()) {
+            if (war.getNameOfCivilization().equals(unit.getCivilization().getName()))
+                return;
+        }
+        getCivilization().getWars().add(new War(unit.getCivilization()));
+    }
+
+    private void declareWar(City city) {
+        for (War war : getCivilization().getWars()) {
+            if (war.getNameOfCivilization().equals(city.getCivilization().getName()))
+                return;
+        }
+        getCivilization().getWars().add(new War(city.getCivilization()));
+    }
 
     private void attack(Unit civilianUnit) {
+        declareWar(civilianUnit);
         if (civilianUnit instanceof MilitaryUnit) {
             System.err.println("civilian unit jaye military dade shode");
             throw new RuntimeException();
@@ -94,6 +111,7 @@ public class MilitaryUnit extends Unit {
 
 
     private void attack(MilitaryUnit militaryUnit) {
+        declareWar(militaryUnit);
         if (getMyType().getRangedCombatStrengh() == 0)
             militaryUnit.setHp(militaryUnit.getHp() - getMyType().getCombatStrengh()
                     * getTerrain().getCombatModifier() * UnitType.getDefensiveBonus(this) + attackPenalty(militaryUnit));
@@ -108,6 +126,7 @@ public class MilitaryUnit extends Unit {
     }
 
     private void attack(City city) {
+        declareWar(city);
         if (getMyType().getRangedCombatStrengh() == 0)
             city.setHp(city.getHp() - getMyType().getCombatStrengh()
                     * getTerrain().getCombatModifier() * UnitType.getDefensiveBonus(this) + attackPenalty(city));
