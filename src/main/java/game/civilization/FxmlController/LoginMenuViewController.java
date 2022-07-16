@@ -11,6 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class LoginMenuViewController {
     public TextField loginUsername;
     public PasswordField loginPassword;
@@ -25,7 +27,7 @@ public class LoginMenuViewController {
 
     private final LoginMenuController loginMenuController = new LoginMenuController();
 
-    public void login(ActionEvent event) {
+    public void login(ActionEvent event) throws IOException {
         String username = loginUsername.getText();
         String password = loginPassword.getText();
         String output = loginMenuController.login(username, password);
@@ -33,6 +35,7 @@ public class LoginMenuViewController {
             loginLabel.setText(output);
         }
         else{
+            SceneController.getInstance().MainMenu();
             loginLabel.setText("");
         }
 //        loginLabel.setText(output);
@@ -49,7 +52,7 @@ public class LoginMenuViewController {
             signUpLabel.setText(output);
         }
         else{
-            signUpLabel.setText("");
+            signUpLabel.setText("user created successfully!");
         }
         signUpLabel.setFont(Font.font("Baloo Bhaijaan Regular"));
         signUpLabel.setTextFill(Color.RED);

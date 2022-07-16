@@ -81,7 +81,7 @@ public class ScoreBoardViewController {
     }
 
     private void sortUsers(ArrayList<User> users) {
-        Comparator<User> c = (user1, user2) -> ((Integer) user2.getScore()).compareTo((Integer) user1.getScore());
+        Comparator<User> c = (user1, user2) -> Integer.compare(user2.getScore(), user1.getScore());
         c = c.thenComparing((user1, user2) -> user1.getLastWinTime().compareTo(user2.getLastWinTime()));
         c = c.thenComparing((user1, user2) -> user1.getLastLoginTime().compareTo(user2.getLastLoginTime()));
         users.sort(c);

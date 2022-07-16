@@ -42,23 +42,22 @@ public class Main extends Application {
         //ghabl az start userdatabase.json ro por konid ba 2 user masalan
         //[{"username" :"payam","password":"pass","nickname":"payam","score":0,"lastLoginTime":"2022/06/09 01:04:18","rank":0,"inputStream":false},{"username":"aylin","password":"pass","nickname":"payam","score":0,"rank":0,"inputStream":false}]
         SceneController.getInstance().setStage(stage);
-        UserDatabase.loadUsers();
      //   GameDataBaseSaving.loadGame();
-        GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
-        ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
-        stage.setTitle("CivilizationV");
-        SceneController.getInstance().game();
+   //     GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
+    //    ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
+    //    stage.setTitle("CivilizationV");
+    //    SceneController.getInstance().game();
     //    GameDataBaseSaving.saveGame();
 
 
 //
-//        handleCloseRequest(stage);
-//        SceneController.getInstance().setStage(stage);
-//        UserDatabase.loadUsers();
+        UserDatabase.loadUsers();
+        handleCloseRequest(stage);
 //        UserDatabase.setCurrentUser(UserDatabase.getUsers().get(0));
-//        stage.setTitle("CivilizationV");
-//        // SceneController.getInstance().scoreBoard(stage);
-//        SceneController.getInstance().MainMenu();
+        stage.setTitle("CivilizationV");
+        // SceneController.getInstance().scoreBoard(stage);
+        SceneController.getInstance().LoginMenu();
+
         // preStartRequired(stage);
         // stage.setTitle("CivilizationV");
         // stage.sizeToScene();

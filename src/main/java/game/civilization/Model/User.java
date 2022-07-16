@@ -2,13 +2,16 @@ package game.civilization.Model;
 
 import game.civilization.Main;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class User {
     private String username;
     private String password;
     private String nickname;
     private int score;
-    private String lastWinTime;
-    private String lastLoginTime;
+    private String lastWinTime; //DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
+    private String lastLoginTime; //DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
     private int rank;
     private String profileUrl;
     private boolean inputStream = false;

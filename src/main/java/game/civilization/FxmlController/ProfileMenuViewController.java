@@ -100,9 +100,9 @@ public class ProfileMenuViewController implements Initializable {
                 avatarLabel.setText("");
         }
         else if (picNumber != 0){
-            UserDatabase.getCurrentUser().setProfileUrl(Objects.requireNonNull(Main.class.getResource("avatar/" + picNumber + ".png")).toExternalForm());
+            UserDatabase.getCurrentUser().setProfileUrl(Objects.requireNonNull(Main.class.getResource("images/avatar/" + picNumber + ".png")).toExternalForm());
             UserDatabase.getCurrentUser().setInputStream(false);
-            Image image = new Image(Objects.requireNonNull(Main.class.getResource("avatar/" + picNumber + ".png")).toExternalForm());
+            Image image = new Image(Objects.requireNonNull(Main.class.getResource("images/avatar/" + picNumber + ".png")).toExternalForm());
             picProfile.setImage(image);
             if (picNumber == 1){
                 picProfile.setScaleX(56/42f);
@@ -116,7 +116,7 @@ public class ProfileMenuViewController implements Initializable {
     }
 
     public void back(ActionEvent event) throws IOException{
-        SceneController.getInstance().scoreBoard();
+        SceneController.getInstance().MainMenu();
     }
 
     public void changeNicknameOrPassword(ActionEvent event) {
