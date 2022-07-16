@@ -114,6 +114,10 @@ public class GameSceneController implements Initializable {
                 turnLabel.setText("your Score is :" + GameSceneDataBase.getInstance().getScore() + "you lose");
             return;
         }
+        if (amIWin()) {
+            turnLabel.setText("your Score is :" + GameSceneDataBase.getInstance().getScore() + "you Win");
+            return;
+        }
         MapController.getInstance().run();
         UnitsController.getInstance().run();
         loadPane();
@@ -149,5 +153,12 @@ public class GameSceneController implements Initializable {
                 return false;
         }
         return true;
+    }
+
+    private boolean amIWin() {
+        if (GameDataBase.getCivilizations().size() == 1)
+            if (GameDataBase.getCivilizations().get(0).getName().equals(UserDatabase.getCurrentUser().getUsername()))
+                return true;
+        return false;
     }
 }
