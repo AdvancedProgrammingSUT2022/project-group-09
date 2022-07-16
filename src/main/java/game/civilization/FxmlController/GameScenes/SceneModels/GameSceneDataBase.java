@@ -40,6 +40,8 @@ public class GameSceneDataBase {
     private Label scienceLabel;
     private Label goldLabel;
     private Label happinessLabel;
+    private Integer score;
+    private Label year;
 
 
     public Label getScienceLabel() {
@@ -108,5 +110,21 @@ public class GameSceneDataBase {
 
     public void setGameSceneController(GameSceneController gameSceneController) {
         this.gameSceneController = gameSceneController;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public Label getYear() {
+        return year;
+    }
+
+    public void setYear(Label year) {
+        this.year = year;
     }
 }

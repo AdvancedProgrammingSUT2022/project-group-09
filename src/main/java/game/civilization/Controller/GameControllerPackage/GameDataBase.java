@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.Map;
 
 public class GameDataBase {
+    static private final int turnToYear = 50;
     static private int turn;
     static private MainMap mainMap;
     static private ArrayList<User> players; //ina bazi mikonan avalesh inja sabt mishe
@@ -107,9 +108,34 @@ public class GameDataBase {
     }
 
     public static void nextTurn() {
+        handleYear2050();
         removeLosers();
         turn++;
         setCurrentCivilization(getCivilizations().get(turn % getCivilizations().size()));
+    }
+
+    private static void handleYear2050() {
+        if (turn * turnToYear >= 2050) {
+            ArrayList<User> userArrayList = new ArrayList<>();
+            ArrayList<Civilization> civilizationArrayList = new ArrayList<>();
+            Civilization winner = null;
+            int winnerScore = 0;
+            for (Civilization civilization : getCivilizations()) {
+                if (winnerScore < civilization.getScore()) {
+                    winner = civilization;
+                    winnerScore = civilization.getScore();
+                }
+            }
+            for (Map.Entry<User, Civilization> entry : civilizations.entrySet()) {
+                User key = entry.getKey();
+                Civilization value = entry.getValue();
+                if (value != winner) {
+                    userArrayList.add(key);
+                    civilizationArrayList.add(value);
+                }
+            }
+            removeUser(userArrayList, civilizationArrayList);
+        }
     }
 
     private static void removeLosers() {
@@ -128,7 +154,12 @@ public class GameDataBase {
                 }
             }
         }
+        removeUser(userArrayList, civilizationArrayList);
+    }
+
+    private static void removeUser(ArrayList<User> userArrayList, ArrayList<Civilization> civilizationArrayList) {
         for (int i = 0; i < userArrayList.size(); i++) {
+            userArrayList.get(i).setScore(civilizationArrayList.get(i).getScore());
             civilizations.remove(userArrayList.get(i), civilizationArrayList.get(i));
             players.remove(userArrayList.get(i));
         }
@@ -140,6 +171,10 @@ public class GameDataBase {
                 return civilization;
         }
         return null;
+    }
+
+    public static int getYear() {
+        return turn * turnToYear;
     }
 
 }

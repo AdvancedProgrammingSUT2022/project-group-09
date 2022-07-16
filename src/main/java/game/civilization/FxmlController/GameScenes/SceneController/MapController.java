@@ -78,6 +78,8 @@ public class MapController {
 
     private void loadCivilizationInfo() {
         GameDataBase.getCurrentCivilization().updateData();
+        GameSceneDataBase.getInstance().setScore(GameDataBase.getCurrentCivilization().getScore());
+        GameSceneDataBase.getInstance().getYear().setText("year : "+GameDataBase.getYear());
         GameSceneDataBase.getInstance().getGoldLabel().setText(String.valueOf(GameDataBase.getCurrentCivilization().getGold().getCurrentGold()));
         GameSceneDataBase.getInstance().getScienceLabel().setText(String.valueOf(GameDataBase.getCurrentCivilization().getScience().getAdditionScience()));
         GameSceneDataBase.getInstance().getHappinessLabel().setText(String.valueOf(GameDataBase.getCurrentCivilization().getHappiness().getAdditionHappiness()));

@@ -39,7 +39,7 @@ public class Client extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        UserDatabase.setCurrentUser(new User("aylin", "ll", "kk"));
+        UserDatabase.setCurrentUser(new User("payam", "ll", "kk"));
         connect();
         Client.clientSocketController = new ClientSocketController(socket, socket2);
         while (!clientSocketController.isGameLoadedFOrFirstTime()) {

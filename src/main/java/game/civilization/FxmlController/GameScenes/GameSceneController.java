@@ -25,6 +25,8 @@ import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
     @FXML
+    private Label year;
+    @FXML
     private TextArea notification;
     @FXML
     private Button tradeButton;
@@ -80,6 +82,7 @@ public class GameSceneController implements Initializable {
 
     private void setDataToGameSceneDataBase() {
         GameSceneDataBase.getInstance().setGameSceneController(this);
+        GameSceneDataBase.getInstance().setYear(year);
         GameSceneDataBase.getInstance().setBackPane(backPane);
         GameSceneDataBase.getInstance().setPane(pane);
         GameSceneDataBase.getInstance().setGoldLabel(goldLabel);
@@ -99,6 +102,7 @@ public class GameSceneController implements Initializable {
 
     public void refresh() {
         civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
+        GameSceneDataBase.getInstance().getYear().setText("year : " + GameDataBase.getYear());
         GameSceneDataBase.getInstance().clear();
         clearPane();
         UnitsController.getInstance().setUnitClicked(false);
@@ -107,7 +111,7 @@ public class GameSceneController implements Initializable {
         if (isNotMyTurn()) {
             turnLabel.setText("Its not your Turn !");
             if (amILose())
-                turnLabel.setText("you lose");
+                turnLabel.setText("your Score is :" + GameSceneDataBase.getInstance().getScore() + "you lose");
             return;
         }
         MapController.getInstance().run();

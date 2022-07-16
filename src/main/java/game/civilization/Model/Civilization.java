@@ -24,7 +24,7 @@ public class Civilization {
 
     private ArrayList<Resource> resources;
     private ArrayList<Unit> units;
-    private final ArrayList<TradingObject> tradingObjects=new ArrayList<>();
+    private final ArrayList<TradingObject> tradingObjects = new ArrayList<>();
 
     public Civilization(Map map, ArrayList<Resource> resources, ArrayList<City> cities, ArrayList<War> wars, CivilizationTechnologies civilizationTechnologies, CivilizationGold civilizationGold, CivilizationScience civilizationScience, CivilizationHappiness civilizationHappiness, ArrayList<Unit> units) {
         this.map = map;
@@ -240,6 +240,18 @@ public class Civilization {
                 }
             }
         }
+    }
+
+    public int getScore() {
+        int res = 0;
+        res += cities.size() * 50;
+        for (City city : cities) {
+            res += city.getTerrains().size() * 10;
+        }
+        res += units.size() * 20;
+        res += civilizationTechnologies.getTechnologiesResearched().size() * 40;
+        res += civilizationGold.getCurrentGold();
+        return res;
     }
 
 
