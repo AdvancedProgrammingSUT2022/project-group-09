@@ -47,6 +47,8 @@ public class CheatSceneController implements Initializable {
             text.setText(text.getText() + gameMenuController.getCheatConteroller().increaseGold(matcher) + "\n");
         } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SET_ARCHER)) != null) {
             text.setText(text.getText() + gameMenuController.getCheatConteroller().setArcher(matcher) + "\n");
+        } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SET_WORKER)) != null) {
+            text.setText(text.getText() + gameMenuController.getCheatConteroller().setWorker(matcher) + "\n");
         } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SET_TANK)) != null) {
             text.setText(text.getText() + gameMenuController.getCheatConteroller().setTank(matcher) + "\n");
         } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.SET_SETTLER)) != null) {

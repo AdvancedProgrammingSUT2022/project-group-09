@@ -2,10 +2,7 @@ package game.civilization.Controller.GameControllerPackage;
 
 import game.civilization.Model.Coordination;
 import game.civilization.Model.Info.CivilizationTechnologies;
-import game.civilization.Model.Units.MilitaryUnit;
-import game.civilization.Model.Units.Settler;
-import game.civilization.Model.Units.Unit;
-import game.civilization.Model.Units.UnitType;
+import game.civilization.Model.Units.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,6 +59,14 @@ public class CheatController {
                 new Coordination(x, y).getTerrain(),
                 GameDataBase.getCurrentCivilization());
         return "archer added";
+    }
+
+    public String setWorker(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        new Worker(new Coordination(x, y).getTerrain(),
+                GameDataBase.getCurrentCivilization());
+        return "worker added";
     }
 
     public String setTank(Matcher matcher) {
