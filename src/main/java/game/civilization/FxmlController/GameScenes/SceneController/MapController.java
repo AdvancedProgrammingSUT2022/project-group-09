@@ -37,6 +37,7 @@ public class MapController {
               -fx-font-size: 14px;
               -fx-font-family: "Baloo Bhaina";
               -fx-background-radius: 30;""".indent(2);
+
     public void run() {
         initializeMap();
         loadCityIcon();
@@ -91,7 +92,7 @@ public class MapController {
     private void loadCivilizationInfo() {
         GameDataBase.getCurrentCivilization().updateData();
         GameSceneDataBase.getInstance().setScore(GameDataBase.getCurrentCivilization().getScore());
-        GameSceneDataBase.getInstance().getYear().setText("year : "+GameDataBase.getYear());
+        GameSceneDataBase.getInstance().getYear().setText("year : " + GameDataBase.getYear());
         GameSceneDataBase.getInstance().getGoldLabel().setText(String.valueOf(GameDataBase.getCurrentCivilization().getGold().getCurrentGold()));
         GameSceneDataBase.getInstance().getScienceLabel().setText(String.valueOf(GameDataBase.getCurrentCivilization().getScience().getAdditionScience()));
         GameSceneDataBase.getInstance().getHappinessLabel().setText(String.valueOf(GameDataBase.getCurrentCivilization().getHappiness().getAdditionHappiness()));
@@ -126,8 +127,10 @@ public class MapController {
             if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[tile.getTerrain().getXPosition()][tile.getTerrain().getYPosition()]
                     != TerrainState.FOG_OF_WAR) {
                 tile.setOnMouseEntered(mouseEvent -> {
-                    setTerrainInfoPane(makeTerrainPanelPane(tile));
-                    GameSceneDataBase.getInstance().getBackPane().getChildren().add(getTerrainInfoPane());
+                    if (!UnitsController.getInstance().isUnitClicked()) {
+                        setTerrainInfoPane(makeTerrainPanelPane(tile));
+                        GameSceneDataBase.getInstance().getBackPane().getChildren().add(getTerrainInfoPane());
+                    }
                 });
                 tile.setOnMouseExited(mouseEvent -> {
                     GameSceneDataBase.getInstance().getBackPane().getChildren().remove(getTerrainInfoPane());
@@ -150,8 +153,10 @@ public class MapController {
 
             Unit finalUnit = unit;
             circle.setOnMouseEntered(mouseEvent -> {
-                setTerrainInfoPane(makeUnitInfoPane(finalUnit));
-                GameSceneDataBase.getInstance().getBackPane().getChildren().add(getTerrainInfoPane());
+                if (!UnitsController.getInstance().isUnitClicked()) {
+                    setTerrainInfoPane(makeUnitInfoPane(finalUnit));
+                    GameSceneDataBase.getInstance().getBackPane().getChildren().add(getTerrainInfoPane());
+                }
             });
             circle.setOnMouseExited(mouseEvent -> {
                 GameSceneDataBase.getInstance().getBackPane().getChildren().remove(getTerrainInfoPane());
@@ -169,8 +174,10 @@ public class MapController {
 
             Unit finalUnit = unit;
             circle.setOnMouseEntered(mouseEvent -> {
-                setTerrainInfoPane(makeUnitInfoPane(finalUnit));
-                GameSceneDataBase.getInstance().getBackPane().getChildren().add(getTerrainInfoPane());
+                if (!UnitsController.getInstance().isUnitClicked()) {
+                    setTerrainInfoPane(makeUnitInfoPane(finalUnit));
+                    GameSceneDataBase.getInstance().getBackPane().getChildren().add(getTerrainInfoPane());
+                }
             });
             circle.setOnMouseExited(mouseEvent -> {
                 GameSceneDataBase.getInstance().getBackPane().getChildren().remove(getTerrainInfoPane());

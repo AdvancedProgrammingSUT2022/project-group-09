@@ -14,6 +14,8 @@ import game.civilization.Model.Units.Worker;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
@@ -32,16 +34,41 @@ public class WorkerController {
 
     }
 
+    private static final String res = """
+            -fx-background-color:
+                      linear-gradient(#ffd65b, #e68400),
+                      linear-gradient(#ffef84, #f2ba44),
+                      linear-gradient(#ffea6a, #ff9921),
+                      linear-gradient(#ffe657 0%, #ff9921 50%, #ff9921 100%);
+
+              -fx-text-fill: #654b00;
+              -fx-font-weight: bold;
+              -fx-font-size: 14px;
+              -fx-font-family: "Baloo Bhaina";
+              -fx-background-radius: 30;""".indent(2);
+
+    private static final String res2 = """
+            -fx-background-color:
+                      linear-gradient(#ab0e30, #f62222),
+                      linear-gradient(#ffef84, #f2ba44),
+                      linear-gradient(#ffea6a, #00d3ff),
+                      linear-gradient(#ffe657 0%, #574839 50%, #75c52d 100%);
+
+              -fx-text-fill: #654b00;
+              -fx-font-weight: bold;
+              -fx-font-size: 14px;
+              -fx-font-family: "Baloo Bhaina";
+              -fx-background-radius: 30;""".indent(2);
+
     private Pane makeWorkerPanel() {
         Pane pane = new Pane();
-        pane.setMinSize(200, 200);
-        pane.setMaxSize(200, 200);
         pane.setLayoutX(0);
         pane.setLayoutY(50);
-        pane.setStyle("-fx-background-color: #00ff59");
+        pane.setStyle(res2);
         Button moveButon = new Button();
-        moveButon.setLayoutY(20);
+        moveButon.setLayoutY(0);
         moveButon.setText("move");
+        moveButon.setStyle(res);
         moveButon.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -52,7 +79,8 @@ public class WorkerController {
         });
 
         Button deleteButton = new Button();
-        deleteButton.setLayoutY(40);
+        deleteButton.setLayoutY(30);
+        deleteButton.setStyle(res);
         deleteButton.setText("delete");
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -67,6 +95,7 @@ public class WorkerController {
         Button wakeButton = new Button();
         wakeButton.setLayoutY(60);
         wakeButton.setText("wake");
+        wakeButton.setStyle(res);
         wakeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -78,7 +107,8 @@ public class WorkerController {
         });
 
         Button doNothingButton = new Button();
-        doNothingButton.setLayoutY(80);
+        doNothingButton.setLayoutY(90);
+        doNothingButton.setStyle(res);
         doNothingButton.setText("doNothing");
         doNothingButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -91,8 +121,9 @@ public class WorkerController {
         });
 
         Button sleepButton = new Button();
-        sleepButton.setLayoutY(100);
+        sleepButton.setLayoutY(120);
         sleepButton.setText("sleep");
+        sleepButton.setStyle(res);
         sleepButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -104,11 +135,12 @@ public class WorkerController {
         });
 /////
         ArrayList<Button> workButtons = new ArrayList<>();
-        int y = 100;
+        int y = 120;
         for (Improvement improvement : Improvement.getAllImprovements()) {
             if (improvement.checkIsPossible((((Worker) GameDataBase.getSelected()).getTerrain()))) {
-                y += 20;
+                y += 30;
                 Button button = new Button();
+                button.setStyle(res);
                 button.setLayoutY(y);
                 button.setText(improvement.name());
                 button.setOnAction(new EventHandler<ActionEvent>() {
@@ -147,7 +179,15 @@ public class WorkerController {
                 workButtons.add(button);
             }
         }
-/////
+        Label label = new Label();
+        label.setLayoutY(y + 30);
+        label.setText(((Worker) GameDataBase.getSelected()).showInfo());
+
+        ImageView logo = new ImageView((UnitType.WORKER.getImage()));
+        logo.setLayoutX(100);
+
+        pane.getChildren().add(logo);
+        pane.getChildren().add(label);
         pane.getChildren().addAll(workButtons);
         pane.getChildren().add(deleteButton);
         pane.getChildren().add(doNothingButton);
