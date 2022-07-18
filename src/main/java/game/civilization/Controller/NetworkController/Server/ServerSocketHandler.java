@@ -32,7 +32,7 @@ public class ServerSocketHandler {
         this.socket2 = socket2;
         dataInputStream2 = new DataInputStream(socket2.getInputStream());
         dataOutputStream2 = new DataOutputStream(socket2.getOutputStream());
-        //  sendGame();
+        sendGame();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

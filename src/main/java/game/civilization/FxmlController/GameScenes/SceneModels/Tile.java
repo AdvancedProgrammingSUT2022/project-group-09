@@ -9,6 +9,7 @@ import game.civilization.Model.Terrains.TerrainState;
 import game.civilization.Model.Units.MilitaryUnit;
 import game.civilization.Model.Units.Unit;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -17,6 +18,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Tile extends Polygon {
     public Terrain getTerrain() {
@@ -36,13 +40,39 @@ public class Tile extends Polygon {
                 x + size, dy + size * Math.sqrt(3),
                 x, dy + size * Math.sqrt(3),
                 x - (size / 2.0), dy + size * v);
-        if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[terrain.getXPosition()][terrain.getYPosition()] == TerrainState.FOG_OF_WAR)
+        if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[terrain.getXPosition()][terrain.getYPosition()] == TerrainState.FOG_OF_WAR) {
             super.setFill(Color.GRAY);
-        else if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[terrain.getXPosition()][terrain.getYPosition()] == TerrainState.KNOWN) {
+            return;
+        } else if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[terrain.getXPosition()][terrain.getYPosition()] == TerrainState.KNOWN) {
             super.setFill(new ImagePattern(terrain.getType().getImage()));
             super.setEffect(new BoxBlur(5, 5, 7));
         } else
             super.setFill(new ImagePattern(terrain.getType().getImage()));
+        if (terrain.isRuin()) {
+            super.setEffect(new InnerShadow(99999, Color.HOTPINK));
+//            List<Color> colors = new ArrayList<Color>();
+//            for (int r = 0; r < 100; r++) colors.add(new Color(r / (float) 100, 1, 0, 1));
+//            for (int g = 100; g > 0; g--) colors.add(new Color(1, g / (float) 100, 0, 1));
+//            for (int b = 0; b < 100; b++) colors.add(new Color(1, 0, b / (float) 100, 1));
+//            for (int r = 100; r > 0; r--) colors.add(new Color(r / (float) 100, 0, 1, 1));
+//            for (int g = 0; g < 100; g++) colors.add(new Color(0, g / (float) 100, 1, 1));
+//            for (int b = 100; b > 0; b--) colors.add(new Color(0, 1, b / (float) 100, 1));
+//            colors.add(new Color(0, 1, 0, 1));
+//            System.out.println(colors.size());
+//            final int[] i = {0};
+//            Timer timer = new Timer();
+//            timer.scheduleAtFixedRate(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    if (i[0] >= colors.size())
+//                        i[0] = 0;
+//                    System.out.println(i[0]);
+//                    Color color = colors.get(i[0]);
+//                    Tile.super.setEffect(new InnerShadow(99999, color));
+//                    i[0] = i[0] + 1;
+//                }
+//            }, 0, 5);
+        }
     }
 
     public void loadCityIcon() {

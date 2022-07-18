@@ -50,7 +50,8 @@ public class GameDataBase {
             Random random = new Random();
             Coordination coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
             while (coordination.getTerrain().getType() == TerrainType.MOUNTAIN ||
-                    coordination.getTerrain().getCivilization() != null)
+                    coordination.getTerrain().getCivilization() != null
+                    || coordination.getTerrain() instanceof City)
                 coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
             coordination.getTerrain().setRuin(true);
         }

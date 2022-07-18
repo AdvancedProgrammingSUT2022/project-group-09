@@ -51,10 +51,11 @@ public class Server extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         UserDatabase.loadUsers();
-        // GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
-        //  ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
-        //   XStream xStream = new XStream();
-        //   Server.xml = xStream.toXML(GameDataBaseSaving.getInstance());
+        GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
+        ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
+        GameDataBase.getCurrentCivilization().getMap().setAllVisible();
+        XStream xStream = new XStream();
+        Server.xml = xStream.toXML(GameDataBaseSaving.getInstance());
         connect();
     }
 }

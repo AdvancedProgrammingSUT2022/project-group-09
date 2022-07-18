@@ -38,8 +38,8 @@ public class ClientSocketController {
         dataOutputStream2 = new DataOutputStream(socket2.getOutputStream());
         Message message = new Message();
         message.setAction("introduction");
-    //    message.setMessage(UserDatabase.getCurrentUser().getUsername());
-        message.setMessage("no one");
+        message.setMessage(UserDatabase.getCurrentUser().getUsername());
+        message.setMessage(UserDatabase.getCurrentUser().getUsername());
         sendMessage(message);
         listen();
     }
