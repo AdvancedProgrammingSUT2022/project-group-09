@@ -222,15 +222,15 @@ public class MapController {
         if (terrain.getCivilianUnit() == null) {
             stringBuilder.append("there is no civilization unit in this terrain\n");
         } else {
-            stringBuilder.append("civilzation unit: " + terrain.getCivilianUnit().getMyType() + " belonging to: "
-                    + terrain.getCivilianUnit().getCivilization().getName() + "\n");
+            stringBuilder.append("civilzation unit: ").append(terrain.getCivilianUnit().getMyType()).append(" belonging to: ").append(terrain.getCivilianUnit().getCivilization().getName()).append("\n");
         }
         if (terrain.getMilitaryUnit() == null) {
             stringBuilder.append("there is no military unit in this terrain\n");
         } else {
-            stringBuilder.append("military unit: " + terrain.getMilitaryUnit().getMyType() + " belonging to: " +
-                    terrain.getMilitaryUnit().getCivilization().getName() + "\n");
+            stringBuilder.append("military unit: ").append(terrain.getMilitaryUnit().getMyType()).append(" belonging to: ").append(terrain.getMilitaryUnit().getCivilization().getName()).append("\n");
         }
+        if (terrain.isHasRoad())
+            stringBuilder.append("this terrain has road\n");
         showResources(stringBuilder, terrain);
         showImprovements(stringBuilder, terrain);
         showRivers(stringBuilder, terrain);
