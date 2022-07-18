@@ -4,6 +4,7 @@ import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.Controller.NetworkController.Client.Client;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.FxmlController.GameScenes.SceneController.*;
 import game.civilization.FxmlController.MapMovement;
 import game.civilization.FxmlController.SceneController;
 import game.civilization.FxmlController.GameScenes.SceneController.MapController;
@@ -55,6 +56,9 @@ public class GameSceneController implements Initializable {
         MapController.getInstance().run();
         UnitsController.getInstance().run();
         MapMovement.getInstance().run();
+        TechnologyController.getInstance().run();
+        UnitPanel.getInstance().run();
+        CityPanel.getInstance().run();
         loadPane();
     }
 
@@ -120,6 +124,9 @@ public class GameSceneController implements Initializable {
         }
         MapController.getInstance().run();
         UnitsController.getInstance().run();
+        TechnologyController.getInstance().run();
+        UnitPanel.getInstance().run();
+        CityPanel.getInstance().run();
         loadPane();
     }
 

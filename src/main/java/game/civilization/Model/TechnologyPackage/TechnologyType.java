@@ -30,11 +30,11 @@ public enum TechnologyType {
         {
             add(TechnologyType.MINING);
         }
-    }), CALENDER("calender", 70, new ArrayList<TechnologyType>() {
+    }), CALENDER("calendar", 70, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.POTTERY);
         }
-    }), MASONRY("masonary", 55, new ArrayList<TechnologyType>() {
+    }), MASONRY("masonry", 55, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.MINING);
         }
@@ -54,7 +54,7 @@ public enum TechnologyType {
         {
             add(TechnologyType.MASONRY);
         }
-    }), HORSEBACKRIDING("horse back riding", 100, new ArrayList<TechnologyType>() {
+    }), HORSEBACKRIDING("horseback riding", 100, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.THEWHEEL);
         }
@@ -194,7 +194,7 @@ public enum TechnologyType {
         {
             add(TechnologyType.ELECTRICITY);
         }
-    }), RAILROAD("rail road", 1900, new ArrayList<TechnologyType>() {
+    }), RAILROAD("railroad", 1900, new ArrayList<TechnologyType>() {
         {
             add(TechnologyType.STEAMPOWER);
         }
@@ -278,5 +278,23 @@ public enum TechnologyType {
                 unlocks.add(allTechnology);
         }
         return unlocks;
+    }
+
+    public String showInfo(){
+        StringBuilder technologies = new StringBuilder();
+        technologies.append("- Required techs:");
+        for (TechnologyType technologyType : getRequirement()) {
+            technologies.append(" ").append(technologyType.getName());
+        }
+        technologies.append("- Leads to techs:");
+        for (TechnologyType technologyType : getTechnologyUnlocks()) {
+            technologies.append(" ").append(technologyType.getName());
+        }
+        technologies.append("\t");
+        technologies.append("- Unlocks:");
+        for (Object unlocks : getUnlocks()) {
+            technologies.append(" ").append(unlocks.toString().toLowerCase()); // TODO name
+        }
+        return technologies.toString();
     }
 }
