@@ -2,10 +2,9 @@ package game.civilization.FxmlController.GameScenes;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
+import game.civilization.FxmlController.GameScenes.SceneController.*;
 import game.civilization.FxmlController.MapMovement;
 import game.civilization.FxmlController.SceneController;
-import game.civilization.FxmlController.GameScenes.SceneController.MapController;
-import game.civilization.FxmlController.GameScenes.SceneController.UnitsController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,6 +40,9 @@ public class GameSceneController implements Initializable {
         MapController.getInstance().run();
         UnitsController.getInstance().run();
         MapMovement.getInstance().run();
+        TechnologyController.getInstance().run();
+        UnitPanel.getInstance().run();
+        CityPanel.getInstance().run();
         loadPane();
     }
 
@@ -73,6 +75,9 @@ public class GameSceneController implements Initializable {
         civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
         MapController.getInstance().run();
         UnitsController.getInstance().run();
+        TechnologyController.getInstance().run();
+        UnitPanel.getInstance().run();
+        CityPanel.getInstance().run();
         loadPane();
     }
 
@@ -82,6 +87,9 @@ public class GameSceneController implements Initializable {
         GameDataBase.getCurrentCivilization().getMap().updateExploration();
         MapController.getInstance().run();
         UnitsController.getInstance().run();
+        TechnologyController.getInstance().run();
+        UnitPanel.getInstance().run();
+        CityPanel.getInstance().run();
         loadPane();
     }
 
