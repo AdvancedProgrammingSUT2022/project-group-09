@@ -1,6 +1,7 @@
 package game.civilization.Controller.NetworkController.Server;
 
 import game.civilization.Controller.LoginMenuController;
+import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Request;
@@ -90,6 +91,55 @@ public class ServerSocketHandler {
         }
         if (message.getAction().equals("login")) {
             login(message);
+        }
+        if (message.getAction().equals("changeNickname")) {
+            changeNickname(message);
+        }
+        if (message.getAction().equals("changePassword")) {
+            changePassword(message);
+        }
+        if (message.getAction().equals("changePicture")) {
+            changePicture(message);
+        }
+    }
+
+    private void changePicture(Message message) {
+        User user = UserDatabase.findUserByUsername(name);
+        assert user != null;
+        new ProfileMenuController().changeProfileServer(user, message.getMessage());
+    }
+
+    private void changePassword(Message message) throws IOException {
+        User user = UserDatabase.findUserByUsername(name);
+        assert user != null;
+        String res = new ProfileMenuController().changePasswordServer(user, (String) Request.fromJson(message.getMessage()).getData().get("newPassword"), (String) Request.fromJson(message.getMessage()).getData().get("oldPassword"));
+        if (res.equals("password changed successfully!")) {
+            Message message1 = new Message();
+            message1.setMessage(user.toJson());
+            message1.setAction("change done");
+            sendMessageOnFirstData(message);
+        } else {
+            Message message1 = new Message();
+            message1.setMessage(res);
+            message1.setAction("change failed");
+            sendMessageOnFirstData(message);
+        }
+    }
+
+    private void changeNickname(Message message) throws IOException {
+        User user = UserDatabase.findUserByUsername(name);
+        assert user != null;
+        String res = new ProfileMenuController().changeNicknameServer(user, (String) Request.fromJson(message.getMessage()).getData().get("nickName"));
+        if (res.equals("nickname changed successfully!")) {
+            Message message1 = new Message();
+            message1.setMessage(user.toJson());
+            message1.setAction("change done");
+            sendMessageOnFirstData(message);
+        } else {
+            Message message1 = new Message();
+            message1.setMessage(res);
+            message1.setAction("changeNickname failed");
+            sendMessageOnFirstData(message);
         }
     }
 

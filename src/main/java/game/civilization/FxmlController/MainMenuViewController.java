@@ -2,11 +2,13 @@ package game.civilization.FxmlController;
 
 import java.io.IOException;
 
+import game.civilization.Controller.LoginMenuController;
 import game.civilization.Controller.UserDatabase;
 
 public class MainMenuViewController {
     public void logout() throws IOException{
         UserDatabase.updateData();
+        new LoginMenuController().logoutClient();
         SceneController.getInstance().LoginMenu();
     }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -77,5 +78,6 @@
       <Polygon fill="#0a0a45be" layoutX="915.0" layoutY="71.0" points="-55.63380432128906, -22.557525634765625, 116.73983764648438, -22.557525634765625, 30.553024291992188, -62.10206985473633" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Line endX="370.996826171875" endY="572.0" startX="370.9968566894531" startY="47.99998092651367" stroke="WHITE" />
       <Line endX="370.996826171875" endY="588.5210571289062" layoutX="388.0" layoutY="-15.0" startX="370.996826171875" startY="64.56047058105469" stroke="WHITE" />
+      <Button layoutX="31.0" layoutY="683.0" mnemonicParsing="false" onAction="#back" text="back" />
    </children>
 </AnchorPane>

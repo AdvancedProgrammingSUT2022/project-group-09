@@ -88,10 +88,10 @@ public class ProfileMenuViewController implements Initializable {
         picNumber = 4;
     }
 
-    public void changeAvatar(ActionEvent event) {
+    public void changeAvatar(ActionEvent event) throws IOException {
         if (!url.getText().equals("")){
             String output;
-            if (!(output = profileMenuController.changeProfile(picProfile, url.getText())).equals("ok")){
+            if (!(output = profileMenuController.changeProfileCLinet(picProfile, url.getText())).equals("ok")){
                 avatarLabel.setText(output);
                 avatarLabel.setFont(Font.font("Baloo Bhaijaan Regular"));
                 avatarLabel.setTextFill(Color.RED);
@@ -119,19 +119,19 @@ public class ProfileMenuViewController implements Initializable {
         SceneController.getInstance().MainMenu();
     }
 
-    public void changeNicknameOrPassword(ActionEvent event) {
+    public void changeNicknameOrPassword(ActionEvent event) throws IOException {
         System.out.println(UserDatabase.getCurrentUser().getPassword());
         String output;
         nicknamePasswordLabel.setFont(Font.font("Baloo Bhaijaan Regular"));
         nicknamePasswordLabel.setTextFill(Color.RED);
         if (!profileNickname.getText().equals("")) {
-            if (!(output = profileMenuController.changeNickname(profileNickname.getText())).equals("nickname changed successfully!")) {
+            if (!(output = profileMenuController.changeNicknameCLinet(profileNickname.getText())).equals("nickname changed successfully!")) {
                 nicknamePasswordLabel.setText(output);
                 return;
             }
         }
         if (!profileNewPassword.getText().equals("") && !profileOldPassword.getText().equals("")) {
-            if (!(output = profileMenuController.changePassword(profileNewPassword.getText(), profileOldPassword.getText())).equals("password changed successfully!")) {
+            if (!(output = profileMenuController.changePasswordCLinet(profileNewPassword.getText(), profileOldPassword.getText())).equals("password changed successfully!")) {
                 nicknamePasswordLabel.setText(output);
                 return;
             }
