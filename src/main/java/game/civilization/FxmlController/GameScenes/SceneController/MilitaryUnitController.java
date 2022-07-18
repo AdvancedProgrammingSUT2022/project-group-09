@@ -5,9 +5,13 @@ import game.civilization.Controller.GameControllerPackage.UnitController;
 import game.civilization.Model.Units.Unit;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.FxmlController.GameScenes.SceneModels.Tile;
+import game.civilization.Model.Units.UnitType;
+import game.civilization.Model.Units.Worker;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
@@ -24,14 +28,40 @@ public class MilitaryUnitController {
 
     }
 
+    private static final String res = """
+            -fx-background-color:
+                      linear-gradient(#ffd65b, #e68400),
+                      linear-gradient(#ffef84, #f2ba44),
+                      linear-gradient(#ffea6a, #ff9921),
+                      linear-gradient(#ffe657 0%, #ff9921 50%, #ff9921 100%);
+
+              -fx-text-fill: #654b00;
+              -fx-font-weight: bold;
+              -fx-font-size: 14px;
+              -fx-font-family: "Baloo Bhaina";
+              -fx-background-radius: 30;""".indent(2);
+
+    private static final String res2 = """
+            -fx-background-color:
+                      linear-gradient(#ab0e30, #f62222),
+                      linear-gradient(#ffef84, #f2ba44),
+                      linear-gradient(#ffea6a, #00d3ff),
+                      linear-gradient(#ffe657 0%, #574839 50%, #75c52d 100%);
+
+              -fx-text-fill: #654b00;
+              -fx-font-weight: bold;
+              -fx-font-size: 14px;
+              -fx-font-family: "Baloo Bhaina";
+              -fx-background-radius: 30;""".indent(2);
+
+
     private Pane makeMilitaryUnitPanel() {
         Pane pane = new Pane();
-        pane.setMinSize(200, 400);
-        pane.setMaxSize(200, 400);
         pane.setLayoutX(0);
         pane.setLayoutY(50);
-        pane.setStyle("-fx-background-color: #00ff59");
+        pane.setStyle(res2);
         Button pillageButton = new Button();
+        pillageButton.setStyle(res);
         pillageButton.setText("Pilage");
         pillageButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -45,7 +75,8 @@ public class MilitaryUnitController {
 
 
         Button moveButon = new Button();
-        moveButon.setLayoutY(20);
+        moveButon.setLayoutY(30);
+        moveButon.setStyle(res);
         moveButon.setText("move");
         moveButon.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -57,7 +88,8 @@ public class MilitaryUnitController {
         });
 
         Button deleteButton = new Button();
-        deleteButton.setLayoutY(40);
+        deleteButton.setLayoutY(60);
+        deleteButton.setStyle(res);
         deleteButton.setText("delete");
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -70,7 +102,8 @@ public class MilitaryUnitController {
         });
 
         Button wakeButton = new Button();
-        wakeButton.setLayoutY(60);
+        wakeButton.setLayoutY(90);
+        wakeButton.setStyle(res);
         wakeButton.setText("wake");
         wakeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -83,7 +116,8 @@ public class MilitaryUnitController {
         });
 
         Button doNothingButton = new Button();
-        doNothingButton.setLayoutY(80);
+        doNothingButton.setLayoutY(120);
+        doNothingButton.setStyle(res);
         doNothingButton.setText("doNothing");
         doNothingButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -96,7 +130,8 @@ public class MilitaryUnitController {
         });
 
         Button sleepButton = new Button();
-        sleepButton.setLayoutY(100);
+        sleepButton.setLayoutY(150);
+        sleepButton.setStyle(res);
         sleepButton.setText("sleep");
         sleepButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -109,7 +144,8 @@ public class MilitaryUnitController {
         });
 
         Button attackButton = new Button();
-        attackButton.setLayoutY(120);
+        attackButton.setLayoutY(180);
+        attackButton.setStyle(res);
         attackButton.setText("attack");
         attackButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -122,8 +158,9 @@ public class MilitaryUnitController {
 
 
         Button setupButton = new Button();
-        setupButton.setLayoutY(140);
+        setupButton.setLayoutY(210);
         setupButton.setText("setup");
+        setupButton.setStyle(res);
         setupButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -135,8 +172,9 @@ public class MilitaryUnitController {
         });
 
         Button garrisonButton = new Button();
-        garrisonButton.setLayoutY(160);
+        garrisonButton.setLayoutY(240);
         garrisonButton.setText("garrison");
+        garrisonButton.setStyle(res);
         garrisonButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -148,8 +186,9 @@ public class MilitaryUnitController {
         });
 
         Button fortifyButton = new Button();
-        fortifyButton.setLayoutY(180);
+        fortifyButton.setLayoutY(270);
         fortifyButton.setText("fortify");
+        fortifyButton.setStyle(res);
         fortifyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -162,7 +201,8 @@ public class MilitaryUnitController {
 
 
         Button fortifyUntilHealButton = new Button();
-        fortifyUntilHealButton.setLayoutY(200);
+        fortifyUntilHealButton.setLayoutY(300);
+        fortifyUntilHealButton.setStyle(res);
         fortifyUntilHealButton.setText("fortifyUntilHeal");
         fortifyUntilHealButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -175,8 +215,9 @@ public class MilitaryUnitController {
         });
 
         Button alertButton = new Button();
-        alertButton.setLayoutY(220);
+        alertButton.setLayoutY(330);
         alertButton.setText("alert");
+        alertButton.setStyle(res);
         alertButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -188,6 +229,15 @@ public class MilitaryUnitController {
         });
 
 
+        Label label = new Label();
+        label.setLayoutY(360);
+        label.setText(((Unit) GameDataBase.getSelected()).showInfo());
+
+        ImageView logo = new ImageView((((Unit) GameDataBase.getSelected()).getMyType().getImage()));
+        logo.setLayoutX(100);
+
+        pane.getChildren().add(logo);
+        pane.getChildren().add(label);
         pane.getChildren().add(alertButton);
         pane.getChildren().add(fortifyButton);
         pane.getChildren().add(fortifyUntilHealButton);
