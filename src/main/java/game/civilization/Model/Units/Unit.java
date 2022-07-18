@@ -291,7 +291,7 @@ public class Unit implements Combatble, Selectable {
     public String showInfo() {
         return myType + " at " + getTerrain().getCoordination().toString() + " for : " + getCivilization().getName() +
                 " Worke done : " + workDone + " sleep : " + isSleep +
-                " remaining Mp : " + remainingMove + " hp : " + hp +
+                "\n remaining Mp : " + remainingMove + " hp : " + hp +
                 " size of masiri ke bayad bere : " + path.size();
     }
 

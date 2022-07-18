@@ -9,7 +9,11 @@ import game.civilization.FxmlController.GameScenes.SceneModels.Tile;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 public class SettlerController {
@@ -25,14 +29,39 @@ public class SettlerController {
 
     }
 
+    private static final String res = """
+            -fx-background-color:
+                      linear-gradient(#ffd65b, #e68400),
+                      linear-gradient(#ffef84, #f2ba44),
+                      linear-gradient(#ffea6a, #ff9921),
+                      linear-gradient(#ffe657 0%, #ff9921 50%, #ff9921 100%);
+
+              -fx-text-fill: #654b00;
+              -fx-font-weight: bold;
+              -fx-font-size: 14px;
+              -fx-font-family: "Baloo Bhaina";
+              -fx-background-radius: 30;""".indent(2);
+
+    private static final String res2 = """
+            -fx-background-color:
+                      linear-gradient(#ab0e30, #f62222),
+                      linear-gradient(#ffef84, #f2ba44),
+                      linear-gradient(#ffea6a, #00d3ff),
+                      linear-gradient(#ffe657 0%, #574839 50%, #75c52d 100%);
+
+              -fx-text-fill: #654b00;
+              -fx-font-weight: bold;
+              -fx-font-size: 14px;
+              -fx-font-family: "Baloo Bhaina";
+              -fx-background-radius: 30;""".indent(2);
+
     private Pane makeSettlerPane() {
         Pane pane = new Pane();
-        pane.setMinSize(200, 200);
-        pane.setMaxSize(200, 200);
         pane.setLayoutX(0);
         pane.setLayoutY(50);
-        pane.setStyle("-fx-background-color: #00ff59");
+        pane.setStyle(res2);
         Button foundCityButon = new Button();
+        foundCityButon.setStyle(res);
         foundCityButon.setText("foundCity");
         foundCityButon.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -44,7 +73,8 @@ public class SettlerController {
             }
         });
         Button moveButon = new Button();
-        moveButon.setLayoutY(20);
+        moveButon.setStyle(res);
+        moveButon.setLayoutY(30);
         moveButon.setText("move");
         moveButon.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -56,7 +86,8 @@ public class SettlerController {
         });
 
         Button deleteButton = new Button();
-        deleteButton.setLayoutY(40);
+        deleteButton.setStyle(res);
+        deleteButton.setLayoutY(60);
         deleteButton.setText("delete");
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -69,7 +100,8 @@ public class SettlerController {
         });
 
         Button wakeButton = new Button();
-        wakeButton.setLayoutY(60);
+        wakeButton.setStyle(res);
+        wakeButton.setLayoutY(90);
         wakeButton.setText("wake");
         wakeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -82,7 +114,8 @@ public class SettlerController {
         });
 
         Button doNothingButton = new Button();
-        doNothingButton.setLayoutY(80);
+        doNothingButton.setStyle(res);
+        doNothingButton.setLayoutY(120);
         doNothingButton.setText("doNothing");
         doNothingButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -95,7 +128,8 @@ public class SettlerController {
         });
 
         Button sleepButton = new Button();
-        sleepButton.setLayoutY(100);
+        sleepButton.setStyle(res);
+        sleepButton.setLayoutY(150);
         sleepButton.setText("sleep");
         sleepButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -112,6 +146,13 @@ public class SettlerController {
         pane.getChildren().add(sleepButton);
         pane.getChildren().add(wakeButton);
         pane.getChildren().add(moveButon);
+        ImageView logo = new ImageView((UnitType.SETTLER.getImage()));
+        logo.setLayoutX(100);
+        pane.getChildren().add(logo);
+        Label label = new Label();
+        label.setText(((Unit) (GameDataBase.getSelected())).showInfo());
+        label.setLayoutY(180);
+        pane.getChildren().add(label);
         return pane;
     }
 
