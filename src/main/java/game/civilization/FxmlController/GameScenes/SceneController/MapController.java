@@ -25,6 +25,18 @@ public class MapController {
 
     }
 
+    private static final String res2 = """
+            -fx-background-color:
+                      linear-gradient(#ead1d6, #ff0808),
+                      linear-gradient(#e1d36c, #eed19e),
+                      linear-gradient(#ffea6a, #00d3ff),
+                      linear-gradient(#ffe657 0%, #e7d4c3 50%, #75c52d 100%);
+
+              -fx-text-fill: #d7d0be;
+              -fx-font-weight: bold;
+              -fx-font-size: 14px;
+              -fx-font-family: "Baloo Bhaina";
+              -fx-background-radius: 30;""".indent(2);
     public void run() {
         initializeMap();
         loadCityIcon();
@@ -87,11 +99,9 @@ public class MapController {
 
     private Pane makeTerrainPanelPane(Tile tile) {
         Pane pane = new Pane();
-        pane.prefWidth(6000);
-        pane.prefHeight(6000);
         pane.setLayoutX(0);
         pane.setLayoutY(50);
-        pane.setStyle("-fx-background-color: #e0b600");
+        pane.setStyle(res2);
         Label label = new Label(new game.civilization.Controller.GameControllerPackage.MapController().showDetails(tile.getTerrain().getCoordination()));
         label.setMinWidth(50);
         label.setMinHeight(50);
@@ -101,11 +111,9 @@ public class MapController {
 
     private Pane makeUnitInfoPane(Unit unit) {
         Pane pane = new Pane();
-        pane.prefWidth(6000);
-        pane.prefHeight(6000);
         pane.setLayoutX(0);
         pane.setLayoutY(50);
-        pane.setStyle("-fx-background-color: #e0b600");
+        pane.setStyle(res2);
         Label label = new Label(unit.showInfo());
         label.setMinWidth(50);
         label.setMinHeight(50);
