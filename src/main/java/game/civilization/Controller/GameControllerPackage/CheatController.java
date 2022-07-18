@@ -126,4 +126,10 @@ public class CheatController {
         technologies.setRemainCost(0);
         return "all technologies were opened!";
     }
+
+    public String openTerrains() {
+        GameDataBase.getCurrentCivilization().getMap().setAllVisible();
+        GameDataBase.getCurrentCivilization().getMap().updateExploration();
+        return "done";
+    }
 }

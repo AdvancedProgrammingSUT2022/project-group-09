@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class Terrain {
     private final Pair<Improvement, Boolean> improvement; // boolean salem boodan roo mide ke age kharabe bayad repair beshe
     private boolean hasRoad;
+    private boolean isRuin;
     private TerrainType type;
     private ArrayList<TerrainFeature> terrainFeatures;
     private ArrayList<Resource> resources;
@@ -27,6 +28,7 @@ public class Terrain {
     public Terrain() {
         this.improvement = new Pair<>(null, true);
         this.hasRoad = false;
+        this.isRuin=false;
         this.type = null;
         this.terrainFeatures = new ArrayList<>();
         this.resources = new ArrayList<>();
@@ -37,6 +39,7 @@ public class Terrain {
     public Terrain(Terrain terrain) {
         this.improvement = terrain.getImprovementPair();
         this.hasRoad = terrain.isHasRoad();
+        this.isRuin=terrain.isRuin;
         this.type = terrain.getType();
         this.terrainFeatures = terrain.getTerrainFeatures();
         this.resources = terrain.getResources();
@@ -48,6 +51,7 @@ public class Terrain {
         this.type = type;
         this.improvement = new Pair<>(null, true);
         this.hasRoad = false;
+        this.isRuin=false;
         this.terrainFeatures = new ArrayList<>();
         this.resources = new ArrayList<>();
         this.civilianUnit = null;
@@ -292,5 +296,13 @@ public class Terrain {
                 return tile;
         }
         return null;
+    }
+
+    public boolean isRuin() {
+        return isRuin;
+    }
+
+    public void setRuin(boolean ruin) {
+        isRuin = ruin;
     }
 }

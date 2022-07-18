@@ -1,6 +1,8 @@
 package game.civilization.Model.Units;
 
+import game.civilization.Controller.GameControllerPackage.CheatController;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Model.City;
 import game.civilization.Model.Civilization;
 import game.civilization.Model.Coordination;
 import game.civilization.Model.Selectable;
@@ -79,8 +81,18 @@ public class Unit implements Combatble, Selectable {
             if (terrain.getMilitaryUnit() != null) {
                 System.err.println("ERROR! 2 ta military nemitoonan yeja bashan");
                 throw new RuntimeException();
-            } else
+            } else {
                 terrain.setMilitaryUnit((MilitaryUnit) this);
+                if (terrain.isRuin()) {
+                    getCivilization().getGold().setCurrentGold(getCivilization().getGold().getCurrentGold() + 500);
+                    new CheatController().openTechnologies();
+                    new CheatController().openTerrains();
+                    for (City city : getCivilization().getCities()) {
+                        city.getCitizens().add(null);
+                    }
+                    terrain.setRuin(false);
+                }
+            }
         } else {
             for (Terrain[] terrains : GameDataBase.getMainMap().getTerrains()) {
                 for (Terrain terrain1 : terrains) {
@@ -91,8 +103,18 @@ public class Unit implements Combatble, Selectable {
             if (terrain.getCivilianUnit() != null) {
                 System.err.println("ERROR! 2 ta civilian unit nemitoonan yeja bashan");
                 throw new RuntimeException();
-            } else
+            } else {
                 terrain.setCivilianUnit(this);
+                if (terrain.isRuin()) {
+                    getCivilization().getGold().setCurrentGold(getCivilization().getGold().getCurrentGold() + 500);
+                    new CheatController().openTechnologies();
+                    new CheatController().openTerrains();
+                    for (City city : getCivilization().getCities()) {
+                        city.getCitizens().add(null);
+                    }
+                    terrain.setRuin(false);
+                }
+            }
         }
 
     }
@@ -267,7 +289,7 @@ public class Unit implements Combatble, Selectable {
     }
 
     public String showInfo() {
-        return myType + " at " + getTerrain().getCoordination().toString() + " for : " + getCivilization().getName()+
+        return myType + " at " + getTerrain().getCoordination().toString() + " for : " + getCivilization().getName() +
                 " Worke done : " + workDone + " sleep : " + isSleep +
                 " remaining Mp : " + remainingMove + " hp : " + hp +
                 " size of masiri ke bayad bere : " + path.size();

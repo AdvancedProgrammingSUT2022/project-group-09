@@ -83,6 +83,14 @@ public class Map {
         }
     }
 
+    public void setAllVisible() {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                terrainStates[i][j] = TerrainState.VISIBLE;
+            }
+        }
+    }
+
     public boolean isValidTerran(int x, int y) {
         return x < row && x >= 0 && y < column && y >= 0;
     }

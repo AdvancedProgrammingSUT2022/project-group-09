@@ -41,7 +41,19 @@ public class GameDataBase {
             Terrain terrain = GameDataBase.getMainMap().getTerrain(coordination.getX(), coordination.getY());
             new Settler(terrain, civilization);
         }
+        setRuins();
         GameDataBase.getCurrentCivilization().getMap().updateExploration();
+    }
+
+    private static void setRuins() {
+        for (int i = 0; i < 30; i++) {
+            Random random = new Random();
+            Coordination coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
+            while (coordination.getTerrain().getType() == TerrainType.MOUNTAIN ||
+                    coordination.getTerrain().getCivilization() != null)
+                coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
+            coordination.getTerrain().setRuin(true);
+        }
     }
 
     public static ArrayList<Civilization> getCivilizations() {

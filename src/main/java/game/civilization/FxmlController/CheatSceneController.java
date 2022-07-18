@@ -69,6 +69,8 @@ public class CheatSceneController implements Initializable {
             text.setText(text.getText() + gameMenuController.getCheatConteroller().resetUnit());
         } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.OPEN_ALL_TECHNOLOGIES)) != null) {
             text.setText(text.getText() + gameMenuController.getCheatConteroller().openTechnologies() + "\n");
+        } else if ((matcher = GameMenuRegex.getMatcher(input, GameMenuRegex.OPEN_TERRAINS)) != null) {
+            text.setText(text.getText() + gameMenuController.getCheatConteroller().openTerrains() + "\n");
         } else {
             text.setText(text.getText() + "invalid command" + "\n");
         }

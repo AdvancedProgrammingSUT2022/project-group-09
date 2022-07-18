@@ -108,8 +108,8 @@ public enum GameMenuRegex {
     SET_LANCER("set lancer to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
     SET_SETTLER("set settler to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
     SET_WORKER("set worker to -x (?<x>-?\\d+) -y (?<y>-?\\d+)"),
-    OPEN_ALL_TECHNOLOGIES("open all technologies")
-    ;
+    OPEN_ALL_TECHNOLOGIES("open all technologies"),
+    OPEN_TERRAINS("open all terrains");
 
 
     private final String regex;
