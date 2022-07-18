@@ -81,24 +81,8 @@ public class ServerSocketHandler {
             System.out.println("introduction done client name is :" + message.getMessage());
             name = message.getMessage();
         }
-//        if (message.getAction().equals("send trade")) {
-//            TradingObject tradingObject = TradingObject.fromJson(message.getMessage());
-//            sendTrade(tradingObject);
-//        }
     }
 
-//    private void sendTrade(TradingObject tradingObject) throws IOException {
-//        Message message = new Message();
-//        message.setMessage(tradingObject.toJson());
-//        message.setAction("receive trade");
-//        for (ServerSocketHandler clientSocket : Server.getClientSockets()) {
-//            if (clientSocket.getName().equals(tradingObject.getTarget())) {
-//                clientSocket.sendMessage(message);
-//                return;
-//            }
-//        }
-//        System.out.println("user with name "+tradingObject.getTarget()+" not registered yet");
-//    }
 
     private Message getMessage() throws IOException {
         int length = dataInputStream.readInt();

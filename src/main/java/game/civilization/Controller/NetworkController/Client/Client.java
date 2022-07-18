@@ -20,8 +20,8 @@ import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 public class Client extends Application {
-    private Socket socket;
-    private Socket socket2;
+    private Socket socket; //send
+    private Socket socket2;//receive
     private static ClientSocketController clientSocketController;
 
     public static void main(String[] args) throws IOException {

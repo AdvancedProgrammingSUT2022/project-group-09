@@ -1,9 +1,13 @@
 package game.civilization.Controller;
 
+import game.civilization.Controller.NetworkController.Client.Client;
 import game.civilization.MenuRegex.LoginMenuRegex;
+import game.civilization.Model.NetworkModels.Message;
+import game.civilization.Model.Request;
 import game.civilization.Model.User;
 import game.civilization.View.CurrentMenu;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.regex.Matcher;
 
