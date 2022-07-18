@@ -32,7 +32,7 @@ public class ServerSocketHandler {
         this.socket2 = socket2;
         dataInputStream2 = new DataInputStream(socket2.getInputStream());
         dataOutputStream2 = new DataOutputStream(socket2.getOutputStream());
-        sendGame();
+        //  sendGame();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -117,12 +117,12 @@ public class ServerSocketHandler {
             Message message1 = new Message();
             message1.setMessage(user.toJson());
             message1.setAction("change done");
-            sendMessageOnFirstData(message);
+            sendMessageOnFirstData(message1);
         } else {
             Message message1 = new Message();
             message1.setMessage(res);
             message1.setAction("change failed");
-            sendMessageOnFirstData(message);
+            sendMessageOnFirstData(message1);
         }
     }
 
@@ -134,12 +134,12 @@ public class ServerSocketHandler {
             Message message1 = new Message();
             message1.setMessage(user.toJson());
             message1.setAction("change done");
-            sendMessageOnFirstData(message);
+            sendMessageOnFirstData(message1);
         } else {
             Message message1 = new Message();
             message1.setMessage(res);
             message1.setAction("changeNickname failed");
-            sendMessageOnFirstData(message);
+            sendMessageOnFirstData(message1);
         }
     }
 
@@ -181,7 +181,7 @@ public class ServerSocketHandler {
         Message message1 = new Message();
         message1.setMessage(res);
         message1.setAction("register");
-        sendMessageOnFirstData(message);
+        sendMessageOnFirstData(message1);
     }
 
     private void login(Message message) throws IOException {
@@ -195,13 +195,14 @@ public class ServerSocketHandler {
             Message message1 = new Message();
             message1.setMessage(res);
             message1.setAction("login failed");
-            sendMessageOnFirstData(message);
+            sendMessageOnFirstData(message1);
         } else {
+            name = user.getUsername();
             String res = user.toJson();
             Message message1 = new Message();
             message1.setMessage(res);
             message1.setAction("login done");
-            sendMessageOnFirstData(message);
+            sendMessageOnFirstData(message1);
         }
 
     }

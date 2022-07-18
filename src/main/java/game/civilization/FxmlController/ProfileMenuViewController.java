@@ -100,8 +100,9 @@ public class ProfileMenuViewController implements Initializable {
                 avatarLabel.setText("");
         }
         else if (picNumber != 0){
-            UserDatabase.getCurrentUser().setProfileUrl(Objects.requireNonNull(Main.class.getResource("images/avatar/" + picNumber + ".png")).toExternalForm());
+            profileMenuController.changeProfileCLinet(picProfile, Objects.requireNonNull(Main.class.getResource("images/avatar/" + picNumber + ".png")).toExternalForm());
             UserDatabase.getCurrentUser().setInputStream(false);
+            UserDatabase.getCurrentUser().setProfileUrl(Objects.requireNonNull(Main.class.getResource("images/avatar/" + picNumber + ".png")).toExternalForm());
             Image image = new Image(Objects.requireNonNull(Main.class.getResource("images/avatar/" + picNumber + ".png")).toExternalForm());
             picProfile.setImage(image);
             if (picNumber == 1){

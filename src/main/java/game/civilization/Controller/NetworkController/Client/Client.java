@@ -39,15 +39,15 @@ public class Client extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        UserDatabase.setCurrentUser(new User("payam", "ll", "kk"));
+        //  UserDatabase.setCurrentUser(new User("payam", "ll", "kk"));
         connect();
         Client.clientSocketController = new ClientSocketController(socket, socket2);
-        while (!clientSocketController.isGameLoadedFOrFirstTime()) {
-            System.out.println("game not loaded yet");
-              TimeUnit.MILLISECONDS.sleep(400);
-        }
+//        while (!clientSocketController.isGameLoadedFOrFirstTime()) {
+//            System.out.println("game not loaded yet");
+//              TimeUnit.MILLISECONDS.sleep(400);
+//        }
         SceneController.getInstance().setStage(stage);
-        stage.setTitle("CivilizationV "+UserDatabase.getCurrentUser().getUsername());
-        SceneController.getInstance().game();
+        stage.setTitle("CivilizationV ");//+UserDatabase.getCurrentUser().getUsername());
+        SceneController.getInstance().LoginMenu();
     }
 }

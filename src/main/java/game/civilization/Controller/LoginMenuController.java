@@ -32,6 +32,7 @@ public class LoginMenuController extends Controller {
         request.addData("nickname", nickname);
         request.addData("password", password);
         Message message = Client.getClientSocketController().sendMessageAndGetMessage(request);
+        System.out.println(message.getMessage());
         return message.getMessage();
     }
 
@@ -85,11 +86,10 @@ public class LoginMenuController extends Controller {
         return "user logged in successfully!";
     }
 
-    public String logoutClient() {
+    public void logoutClient() {
         if (UserDatabase.getCurrentUser() == null)
-            return "useri login nakarde hanooz";
+            return;
         UserDatabase.setCurrentUser(null);
-        return "logged out";
     }
 
     public String exitClient() {
