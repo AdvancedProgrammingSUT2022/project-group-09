@@ -22,16 +22,16 @@ public class LoginMenuView extends View {
 //                System.out.println(LoginMenuController.register(matcher));
 //            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.LOGIN)) != null)
 //                System.out.println(LoginMenuController.login(matcher));
-            if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.LOGOUT)) != null)
-                System.out.println(LoginMenuController.logout());
-            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.EXIT)) != null)
-                System.out.println(LoginMenuController.exit());
-            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.ENTER)) != null)
-                System.out.println(LoginMenuController.menuNavigate(matcher));
-            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.SHOW_MENU)) != null)
-                System.out.println(CurrentMenu.get());
-            else
-                System.out.println("invalid command");
+//            if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.LOGOUT)) != null)
+//                System.out.println(LoginMenuController.logout());
+//            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.EXIT)) != null)
+//                System.out.println(LoginMenuController.exit());
+//            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.ENTER)) != null)
+//                System.out.println(LoginMenuController.menuNavigate(matcher));
+//            else if ((matcher = LoginMenuRegex.getMatcher(input, LoginMenuRegex.SHOW_MENU)) != null)
+//                System.out.println(CurrentMenu.get());
+//            else
+//                System.out.println("invalid command");
         }
     }
 }

@@ -25,7 +25,33 @@ public class LoginMenuController extends Controller {
         return "menu navigation is not possible!";
     }
 
-    public String register(String username, String nickname, String password) {
+    public String registerClient(String username, String nickname, String password) throws IOException {
+        Request request = new Request();
+        request.setAction("register");
+        request.addData("username", username);
+        request.addData("nickname", nickname);
+        request.addData("password", password);
+        Message message = Client.getClientSocketController().sendMessageAndGetMessage(request);
+        return message.getMessage();
+    }
+
+    public String loginClient(String username, String password) throws IOException {
+        Request request = new Request();
+        request.setAction("login");
+        request.addData("username", username);
+        request.addData("password", password);
+        Message message = Client.getClientSocketController().sendMessageAndGetMessage(request);
+        if (message.getAction().equals("login done")) {
+            UserDatabase.setCurrentUser(User.fromJson(message.getMessage()));
+            CurrentMenu.set(CurrentMenu.MainMenu);
+            System.out.println("login : " + UserDatabase.getCurrentUser().getUsername());
+            return "user logged in successfully!";
+        }
+        return message.getMessage();
+    }
+
+
+    public String registerServer(String username, String nickname, String password) {
         if (LoginMenuRegex.getMatcher(username, LoginMenuRegex.USERNAME_FORMAT_REGEX) == null) {
             return "username format is invalid";
         }
@@ -45,7 +71,7 @@ public class LoginMenuController extends Controller {
         return "user created successfully!";
     }
 
-    public String login(String username, String password) {
+    public String loginServer(String username, String password) {
         User user = new User(username, password, "");
         if (!UserDatabase.isUsernameDuplicate(user)) {
             return "Username and Password didn't match!";
@@ -56,19 +82,17 @@ public class LoginMenuController extends Controller {
         user = UserDatabase.getUserFromUsers(user);
         if (user == null)
             return "BUG!";
-        UserDatabase.setCurrentUser(user);
-        CurrentMenu.set(CurrentMenu.MainMenu);
         return "user logged in successfully!";
     }
 
-    public String logout() {
+    public String logoutClient() {
         if (UserDatabase.getCurrentUser() == null)
             return "useri login nakarde hanooz";
         UserDatabase.setCurrentUser(null);
         return "logged out";
     }
 
-    public String exit() {
+    public String exitClient() {
         CurrentMenu.set(CurrentMenu.EndGame);
         return "Game Ended!";
     }

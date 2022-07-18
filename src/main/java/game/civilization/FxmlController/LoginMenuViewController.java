@@ -30,7 +30,7 @@ public class LoginMenuViewController {
     public void login(ActionEvent event) throws IOException {
         String username = loginUsername.getText();
         String password = loginPassword.getText();
-        String output = loginMenuController.login(username, password);
+        String output = loginMenuController.loginClient(username, password);
         if (output.equals("Username and Password didn't match!") || output.equals("bug")){
             loginLabel.setText(output);
         }
@@ -43,11 +43,11 @@ public class LoginMenuViewController {
         loginLabel.setTextFill(Color.RED);
     }
 
-    public void signUp(ActionEvent event) {
+    public void signUp(ActionEvent event) throws IOException {
         String username = signUpUsername.getText();
         String password = signUpPassword.getText();
         String nickname = signUpNickname.getText();
-        String output = loginMenuController.register(username, nickname, password);
+        String output = loginMenuController.registerClient(username, nickname, password);
         if (!output.equals("user created successfully!")){
             signUpLabel.setText(output);
         }

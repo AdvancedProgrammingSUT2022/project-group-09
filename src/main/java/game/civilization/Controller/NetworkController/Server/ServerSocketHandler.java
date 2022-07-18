@@ -1,7 +1,11 @@
 package game.civilization.Controller.NetworkController.Server;
 
+import game.civilization.Controller.LoginMenuController;
+import game.civilization.Controller.UserDatabase;
 import game.civilization.Model.NetworkModels.Message;
+import game.civilization.Model.Request;
 import game.civilization.Model.TradingObject;
+import game.civilization.Model.User;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -81,6 +85,12 @@ public class ServerSocketHandler {
             System.out.println("introduction done client name is :" + message.getMessage());
             name = message.getMessage();
         }
+        if (message.getAction().equals("register")) {
+            register(message);
+        }
+        if (message.getAction().equals("login")) {
+            login(message);
+        }
     }
 
 
@@ -97,9 +107,52 @@ public class ServerSocketHandler {
         byte[] data = temp.getBytes(StandardCharsets.UTF_8);
         dataOutputStream2.writeInt(data.length);
         dataOutputStream2.write(data);
+        dataOutputStream2.flush();
+    }
+
+    private void sendMessageOnFirstData(Message message) throws IOException {
+        String temp = message.toJson();
+        byte[] data = temp.getBytes(StandardCharsets.UTF_8);
+        dataOutputStream.writeInt(data.length);
+        dataOutputStream.write(data);
+        dataOutputStream.flush();
     }
 
     public String getName() {
         return name;
+    }
+
+    private void register(Message message) throws IOException {
+        Request request = Request.fromJson(message.getMessage());
+        String username = (String) request.getData().get("username");
+        String nickname = (String) request.getData().get("nickname");
+        String password = (String) request.getData().get("password");
+        String res = new LoginMenuController().registerServer(username, nickname, password);
+        Message message1 = new Message();
+        message1.setMessage(res);
+        message1.setAction("register");
+        sendMessageOnFirstData(message);
+    }
+
+    private void login(Message message) throws IOException {
+        Request request = Request.fromJson(message.getMessage());
+        String username = (String) request.getData().get("username");
+        String password = (String) request.getData().get("password");
+        User user = new User(username, password, "");
+        user = UserDatabase.getUserFromUsers(user);
+        if (user == null) {
+            String res = new LoginMenuController().loginServer(username, password);
+            Message message1 = new Message();
+            message1.setMessage(res);
+            message1.setAction("login failed");
+            sendMessageOnFirstData(message);
+        } else {
+            String res = user.toJson();
+            Message message1 = new Message();
+            message1.setMessage(res);
+            message1.setAction("login done");
+            sendMessageOnFirstData(message);
+        }
+
     }
 }

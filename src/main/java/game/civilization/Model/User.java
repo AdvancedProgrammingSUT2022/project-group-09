@@ -1,5 +1,6 @@
 package game.civilization.Model;
 
+import com.google.gson.Gson;
 import game.civilization.Main;
 
 import java.time.LocalDateTime;
@@ -89,6 +90,16 @@ public class User {
                 "score : " + score + "\n" +
                 "lastWinTime: " + lastWinTime + "\n" +
                 "lastLoginTime: " + lastLoginTime + "\n";
+    }
+
+    public String toJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    public static User fromJson(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, User.class);
     }
 
     public String getProfileUrl() {

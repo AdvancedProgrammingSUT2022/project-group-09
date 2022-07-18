@@ -143,6 +143,7 @@ public class ClientSocketController {
         byte[] data = new byte[length];
         dataInputStream.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
+        System.out.println(Message.fromJson(messageJson).getAction() + "received");
         return Message.fromJson(messageJson);
     }
 
