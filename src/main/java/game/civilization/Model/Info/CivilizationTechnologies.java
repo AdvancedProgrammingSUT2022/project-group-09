@@ -131,4 +131,12 @@ public class CivilizationTechnologies {
     public void setRemainCost(int remainCost) {
         this.remainCost = remainCost;
     }
+
+    public Integer getTurn(TechnologyType technologyType){
+        if (technologiesAvailable.containsKey(technologyType))
+            return (int) (technologiesAvailable.get(technologyType)/GameDataBase.getCurrentCivilization().getScience().getAdditionScienceCopy()) + ((technologiesAvailable.get(technologyType)/GameDataBase.getCurrentCivilization().getScience().getAdditionScienceCopy()) % 1 == 0 ? 0 : 1);
+        if (technologiesUnavailable.contains(technologyType))
+            return (int) (technologyType.getCost()/GameDataBase.getCurrentCivilization().getScience().getAdditionScienceCopy()) + ((technologyType.getCost()/GameDataBase.getCurrentCivilization().getScience().getAdditionScienceCopy()) % 1 == 0 ? 0 : 1);
+        return (int) (remainCost/GameDataBase.getCurrentCivilization().getScience().getAdditionScienceCopy()) + ((remainCost/GameDataBase.getCurrentCivilization().getScience().getAdditionScienceCopy()) % 1 == 0 ? 0 : 1);
+    }
 }

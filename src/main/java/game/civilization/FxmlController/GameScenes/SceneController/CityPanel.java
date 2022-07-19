@@ -70,7 +70,7 @@ public class CityPanel {
         rectangle.setX(0);
         rectangle.setY(0);
         rectangle.setWidth(220);
-        rectangle.setHeight(150);
+        rectangle.setHeight(60);
         pane.getChildren().add(rectangle);
         double y = 10, x = 35;
         pane.minWidth(6000);
