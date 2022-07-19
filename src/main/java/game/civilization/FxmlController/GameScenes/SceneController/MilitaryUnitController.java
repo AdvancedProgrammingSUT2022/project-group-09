@@ -55,7 +55,7 @@ public class MilitaryUnitController {
               -fx-background-radius: 30;""".indent(2);
 
 
-    private Pane makeMilitaryUnitPanel() {
+    public Pane makeMilitaryUnitPanel() {
         Pane pane = new Pane();
         pane.setLayoutX(0);
         pane.setLayoutY(50);

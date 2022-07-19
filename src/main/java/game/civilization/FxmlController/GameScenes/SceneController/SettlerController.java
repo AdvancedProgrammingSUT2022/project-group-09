@@ -55,7 +55,7 @@ public class SettlerController {
               -fx-font-family: "Baloo Bhaina";
               -fx-background-radius: 30;""".indent(2);
 
-    private Pane makeSettlerPane() {
+    public Pane makeSettlerPane() {
         Pane pane = new Pane();
         pane.setLayoutX(0);
         pane.setLayoutY(50);

@@ -164,8 +164,7 @@ public class GameSceneController implements Initializable {
 
     private boolean amIWin() {
         if (GameDataBase.getCivilizations().size() == 1)
-            if (GameDataBase.getCivilizations().get(0).getName().equals(UserDatabase.getCurrentUser().getUsername()))
-                return true;
+            return GameDataBase.getCivilizations().get(0).getName().equals(UserDatabase.getCurrentUser().getUsername());
         return false;
     }
 }
