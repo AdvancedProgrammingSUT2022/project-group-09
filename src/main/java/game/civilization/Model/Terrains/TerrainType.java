@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
     DESERT(0, 0, 0, -33, 1, new ArrayList<TerrainFeature>() {
@@ -167,5 +168,9 @@ public enum TerrainType implements TerrainTypeOrTerrainFeatureType {
 
     public ArrayList<Resource> getPossibleResources() {
         return possibleResources;
+    }
+
+    public static ArrayList<TerrainType> getAll() {
+        return new ArrayList<>(List.of(TerrainType.values()));
     }
 }

@@ -1,6 +1,7 @@
 package game.civilization.FxmlController.GameScenes.SceneModels;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
+import game.civilization.FxmlController.BuildMapController;
 import game.civilization.FxmlController.GameScenes.GameSceneController;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -42,6 +43,7 @@ public class GameSceneDataBase {
     private Label happinessLabel;
     private Integer score;
     private Label year;
+    private BuildMapController buildMapController;
 
 
     public Label getScienceLabel() {
@@ -126,5 +128,13 @@ public class GameSceneDataBase {
 
     public void setYear(Label year) {
         this.year = year;
+    }
+
+    public BuildMapController getBuildMapController() {
+        return buildMapController;
+    }
+
+    public void setBuildMapController(BuildMapController buildMapController) {
+        this.buildMapController = buildMapController;
     }
 }

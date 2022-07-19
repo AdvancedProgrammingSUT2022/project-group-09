@@ -15,6 +15,7 @@ public class SceneController {
     private Stage stage = null;
 
     private static SceneController mainSceneController = null;
+
     public static SceneController getInstance() {
         if (mainSceneController == null)
             mainSceneController = new SceneController();
@@ -41,6 +42,13 @@ public class SceneController {
 
     public void game() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/Game.fxml")));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void buildMap() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/buildMap.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -93,4 +101,12 @@ public class SceneController {
     }
 
 
+    public void build() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/build.fxml")));
+        Scene scene = new Scene(root);
+        Stage cheatStage = new Stage();
+        cheatStage.setTitle("build !");
+        cheatStage.setScene(scene);
+        cheatStage.show();
+    }
 }

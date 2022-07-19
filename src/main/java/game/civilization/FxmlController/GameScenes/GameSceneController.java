@@ -150,7 +150,7 @@ public class GameSceneController implements Initializable {
         }
     }
 
-    private boolean isNotMyTurn() {
+    public boolean isNotMyTurn() {
         return !GameDataBase.getCurrentCivilization().getName().equals(UserDatabase.getCurrentUser().getUsername());
     }
 

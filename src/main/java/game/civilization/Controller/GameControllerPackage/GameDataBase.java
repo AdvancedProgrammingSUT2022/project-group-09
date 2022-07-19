@@ -25,6 +25,19 @@ public class GameDataBase {
         setGameDataBase();
     }
 
+    public static void buildCustomisableMap() {
+        mainMap = new MainMap();
+        for (Terrain[] terrains : mainMap.getTerrains()) {
+            for (Terrain terrain : terrains) {
+                terrain.setType(TerrainType.OCEAN);
+                terrain.getTerrainFeatures().clear();
+                terrain.getResources().clear();
+                terrain.setHasRoad(false);
+                terrain.setRuin(false);
+            }
+        }
+    }
+
     private static void setGameDataBase() {
         for (User player : players) {
             civilizations.put(player, new Civilization(player.getUsername()));

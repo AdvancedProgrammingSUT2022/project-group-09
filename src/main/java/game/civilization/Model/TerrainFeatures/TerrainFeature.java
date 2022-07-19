@@ -3,9 +3,11 @@ package game.civilization.Model.TerrainFeatures;
 import game.civilization.Main;
 import game.civilization.Model.Resources.TerrainTypeOrTerrainFeatureType;
 import game.civilization.Model.Resources.Resource;
+import game.civilization.Model.Units.UnitType;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
     FLOODPLAINS(2, 0, 0, -33, 1, new ArrayList<Resource>() {
@@ -82,5 +84,10 @@ public enum TerrainFeature implements TerrainTypeOrTerrainFeatureType {
 
     public int getCombatModifier() {
         return combatModifier;
+    }
+
+
+    public static ArrayList<TerrainFeature> getAll() {
+        return new ArrayList<>(List.of(TerrainFeature.values()));
     }
 }

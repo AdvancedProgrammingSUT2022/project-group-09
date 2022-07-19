@@ -48,6 +48,12 @@ public class MapController {
         loadCivilizationInfo();
     }
 
+    public void runForBuild() {
+        initializeMap();
+        loadTerrainFeatures();
+        showInfoTileInfo();
+    }
+
     private void initializeMap() {
         int numberOfTerrainX = Map.getColumn();
         int numberOfTerrainY = Map.getRow();
