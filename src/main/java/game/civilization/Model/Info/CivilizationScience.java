@@ -5,6 +5,7 @@ import game.civilization.Model.Civilization;
 
 public class CivilizationScience {
     private double additionScience;
+    private double additionScienceCopy;
     private double addedFromCheat;
 
     public double getAddedFromCheat() {
@@ -17,6 +18,7 @@ public class CivilizationScience {
 
     public void add(double number) {
         additionScience += number;
+        additionScienceCopy = additionScience;
     }
 
     public double getAdditionScience() {
@@ -25,6 +27,8 @@ public class CivilizationScience {
 
     public void setAdditionScience(double additionScience) {
         this.additionScience = additionScience;
+        if (additionScience != 0)
+            additionScienceCopy = additionScience;
     }
 
     public Civilization getCivilization() {
@@ -33,5 +37,13 @@ public class CivilizationScience {
                 return civilization;
         }
         return null;
+    }
+
+    public double getAdditionScienceCopy() {
+        return additionScienceCopy;
+    }
+
+    public void setAdditionScienceCopy(double additionScienceCopy) {
+        this.additionScienceCopy = additionScienceCopy;
     }
 }

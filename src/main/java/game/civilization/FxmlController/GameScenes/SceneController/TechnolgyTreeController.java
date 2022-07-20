@@ -56,7 +56,7 @@ public class TechnolgyTreeController {
         coordinates.put(TechnologyType.ARCHERY, new Coordination(429, 450));
         coordinates.put(TechnologyType.MINING, new Coordination(429, 586));
 //        coordinates.put(TechnologyType.S, new Coordination(800, 42));
-        coordinates.put(TechnologyType.CALENDER, new Coordination(795, 114));
+        coordinates.put(TechnologyType.CALENDER, new Coordination(795, 113));
         coordinates.put(TechnologyType.WRITING, new Coordination(795, 180));
         coordinates.put(TechnologyType.TRAPPING, new Coordination(795, 247));
         coordinates.put(TechnologyType.THEWHEEL, new Coordination(795, 385));
@@ -70,19 +70,19 @@ public class TechnolgyTreeController {
         coordinates.put(TechnologyType.IRONWORKING, new Coordination(1160, 656));
 
         coordinates.put(TechnologyType.THEOLOGY, new Coordination(1530, 112));
-        coordinates.put(TechnologyType.CIVILSERVICE, new Coordination(1530, 249));
+        coordinates.put(TechnologyType.CIVILSERVICE, new Coordination(1530, 251));
         coordinates.put(TechnologyType.CURRENCY, new Coordination(1530, 462));
         coordinates.put(TechnologyType.ENGINEERING, new Coordination(1530, 530));
         coordinates.put(TechnologyType.METALCASTING, new Coordination(1530, 670));
 //        coordinates.put(TechnologyType.COMP, new Coordination(1900, 44));
-        coordinates.put(TechnologyType.EDUCATION, new Coordination(1903, 185));
+        coordinates.put(TechnologyType.EDUCATION, new Coordination(1903, 184));
         coordinates.put(TechnologyType.CHIVALRY, new Coordination(1903, 320));
         coordinates.put(TechnologyType.MACHINERY, new Coordination(1903, 530));
         coordinates.put(TechnologyType.PHYSICS, new Coordination(1903, 600));
         coordinates.put(TechnologyType.STEEL, new Coordination(1903, 666));
 //        coordinates.put(TechnologyType.AST, new Coordination(2280, 114));
-        coordinates.put(TechnologyType.ACOUSTICS, new Coordination(2278, 246));
-        coordinates.put(TechnologyType.BANKING, new Coordination(2278, 320));
+        coordinates.put(TechnologyType.ACOUSTICS, new Coordination(2278, 248));
+        coordinates.put(TechnologyType.BANKING, new Coordination(2278, 319));
         coordinates.put(TechnologyType.PRINTINGPRESS, new Coordination(2278, 519));
         coordinates.put(TechnologyType.GUNPOWDER, new Coordination(2278, 660));
 //        coordinates.put(TechnologyType.NA, new Coordination(2645, 114));
@@ -229,7 +229,6 @@ public class TechnolgyTreeController {
                         GameDataBase.getCurrentCivilization().getTechnologies().startWorkingOnTechnology(technologyType, GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesAvailable().get(technologyType));
                         //TODO    nabayad az science kam beshe ?
                         run();
-                        System.out.println(1);
                     }
                 }
             });
@@ -255,6 +254,12 @@ public class TechnolgyTreeController {
             pane.getChildren().add(rectangle);
             pane.getChildren().add(image);
             pane.getChildren().add(label);
+            Label label5 = new Label(GameDataBase.getCurrentCivilization().getTechnologies().getTurn(technologyType).toString() + " turns");
+            label5.setFont(new Font("Baloo Bhaina Regular", 12));
+            label5.setLayoutX(rectangle.getX() + 6 + rectangle.getHeight() - 10 + 150);
+            label5.setLayoutY(rectangle.getY());
+            System.out.println(GameDataBase.getCurrentCivilization().getScience().getAdditionScience());
+            pane.getChildren().add(label5);
             int x = 0;
             for (TechnologyType type : technologyType.getRequirement()) {
                 ImageView imageView = new ImageView(new Image(Main.class.getResource("images/technology/" + type.getName() + ".png").toExternalForm()));
