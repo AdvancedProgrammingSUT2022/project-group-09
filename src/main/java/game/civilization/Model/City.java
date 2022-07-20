@@ -281,15 +281,16 @@ public class City extends Terrain implements Combatble, Selectable {
         for (BuildingType building : getBuildings().getBuildings()) {
             buildingString.append(building).append(" ");
         }
-        return "city name: " + name + " number of citizens: " + citizens.size() + " x position: " + getXPosition()
+        return "city name: " + name + "\n" + "number of citizens: " + citizens.size() + "\n"
+                + "x position: " + getXPosition()
                 + " y position: " + getYPosition() + "\n" +
                 "production : " + getProduction().getCurrentProduct() + "\n" +
                 "gold : " + getGold().getAdditionGold() + "\n" +
                 "science : " + getCityScience().getAdditionScience() + "\n" +
                 "food : " + getFood().getAdditionFood() + "\n" +
                 "hp : " + getHp() + "\n" +
-                "citizens : " + getCitizens().size() + "\n" +
-                "buildings: " + buildingString;
+                "citizens : " + getCitizens().size();
+                // + "\n" + "buildings: " + buildingString;
     }
 
     public void getConqueredBy(Civilization civilization) {
@@ -464,10 +465,10 @@ public class City extends Terrain implements Combatble, Selectable {
         StringBuilder res = new StringBuilder();
         for (Terrain citizen : citizens) {
             if (citizen == null)
-                res.append("citizen").append(counter).append(" bikare");
+                res.append("citizen").append(counter).append(" is not doing a thing!\n");
             else
                 res.append("citizen").append(counter).append(" ").append(citizen.getCoordination().toString())
-                        .append("ke midahad : ").append(citizen.showGoldProductFood());
+                        .append("working on : ").append(citizen.showGoldProductFood()).append("\n");
             counter++;
         }
         return res.toString();

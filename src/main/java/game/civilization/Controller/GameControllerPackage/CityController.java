@@ -32,6 +32,8 @@ public class CityController {
             for (Terrain terrain1 : terrain.getSurroundingTerrain()) {
                 if (terrain1 == coordination.getTerrain()) {
                     if (terrain1.getCivilization() == null) {
+                        if (GameDataBase.getCurrentCivilization().getGold().getCurrentGold() < 10)
+                            return "you don't have enough money to buy this terrain!";
                         GameDataBase.getCurrentCivilization().getGold().addCurrentGold(-10);
                         /// gheimat tile = 10;
                         city.addTerrain(terrain1);
@@ -181,6 +183,9 @@ public class CityController {
         if (!city.getCivilization().equals(GameDataBase.getCurrentCivilization())) {
             return "in tile male shoma nist";
         }
+        if (city.getMakingBuilding() != null || city.getMakingUnit() != null) {
+            return "you cannot build two things at the same time!";
+        }
         city.createBuilding(buildings.get(number - 1));
         GameDataBase.getCurrentCivilization().updateNotification(
                 "built a building " + buildings.get(number - 1).name() + " in city " + city.getName());
@@ -202,6 +207,9 @@ public class CityController {
         }
         if (buildings.get(number - 1).getCost() > GameDataBase.getCurrentCivilization().getGold().getCurrentGold()) {
             return "You don't have enough money to buy this unit";
+        }
+        if (city.getMakingBuilding() != null || city.getMakingUnit() != null) {
+            return "you cannot build two things at the same time!";
         }
         city.createBuildingInstantly(buildings.get(number - 1));
         GameDataBase.getCurrentCivilization().updateNotification(
@@ -225,6 +233,9 @@ public class CityController {
         if (units.get(number - 1).equals(UnitType.SETTLER)
                 && ((City) GameDataBase.getSelected()).getCitizens().size() < 2) {
             return "number of citizens is not enough!";
+        }
+        if (city.getMakingBuilding() != null || city.getMakingUnit() != null) {
+            return "you cannot build two things at the same time!";
         }
         city.CreateUnit(units.get(number - 1));
         GameDataBase.getCurrentCivilization().updateNotification(
@@ -251,6 +262,9 @@ public class CityController {
         if (units.get(number - 1).equals(UnitType.SETTLER)
                 && ((City) GameDataBase.getSelected()).getCitizens().size() < 2) {
             return "number of citizens is not enough!";
+        }
+        if (city.getMakingBuilding() != null || city.getMakingUnit() != null) {
+            return "you cannot build two things at the same time!";
         }
         city.createUnitInstantly(units.get(number - 1));
         GameDataBase.getCurrentCivilization().updateNotification(

@@ -84,6 +84,7 @@ public class Tile extends Polygon {
         circle.setRadius(80);
         circle.setStrokeWidth(0);
         circle.setFill(new ImagePattern(new Image(Main.class.getResource("images/GamePictures/TerrainPicture/city.jpg").toExternalForm())));
+        circle.setDisable(true);
         GameSceneDataBase.getInstance().getCityIcons().add(circle);
     }
 

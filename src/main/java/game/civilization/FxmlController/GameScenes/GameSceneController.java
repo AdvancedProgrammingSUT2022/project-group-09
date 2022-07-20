@@ -4,10 +4,13 @@ import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.Controller.NetworkController.Client.Client;
 import game.civilization.Controller.UserDatabase;
-import game.civilization.FxmlController.GameScenes.SceneController.*;
 import game.civilization.FxmlController.MapMovement;
 import game.civilization.FxmlController.SceneController;
+import game.civilization.FxmlController.GameScenes.SceneController.CityMenuController;
+import game.civilization.FxmlController.GameScenes.SceneController.CityPanel;
 import game.civilization.FxmlController.GameScenes.SceneController.MapController;
+import game.civilization.FxmlController.GameScenes.SceneController.TechnologyController;
+import game.civilization.FxmlController.GameScenes.SceneController.UnitPanel;
 import game.civilization.FxmlController.GameScenes.SceneController.UnitsController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.Model.Civilization;
@@ -16,8 +19,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,6 +52,12 @@ public class GameSceneController implements Initializable {
     private Pane backPane;
     @FXML
     private Pane pane;
+    @FXML
+    private Pane cityDetailsPane;
+    @FXML
+    private Pane cityButtonsPane;
+    @FXML
+    private ScrollPane scrollPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,6 +67,7 @@ public class GameSceneController implements Initializable {
         MapController.getInstance().run();
         UnitsController.getInstance().run();
         MapMovement.getInstance().run();
+        CityMenuController.getInstance().run();
         TechnologyController.getInstance().run();
         UnitPanel.getInstance().run();
         CityPanel.getInstance().run();
@@ -92,6 +104,9 @@ public class GameSceneController implements Initializable {
         GameSceneDataBase.getInstance().setGoldLabel(goldLabel);
         GameSceneDataBase.getInstance().setHappinessLabel(happinessLabel);
         GameSceneDataBase.getInstance().setScienceLabel(scienceLabel);
+        GameSceneDataBase.getInstance().setCityButtonsPane(cityButtonsPane);
+        GameSceneDataBase.getInstance().setCityDetailsPane(cityDetailsPane);
+        GameSceneDataBase.getInstance().setScrollPane(scrollPane);
     }
 
     public void nextTurn(ActionEvent actionEvent) throws IOException {
@@ -127,6 +142,7 @@ public class GameSceneController implements Initializable {
         TechnologyController.getInstance().run();
         UnitPanel.getInstance().run();
         CityPanel.getInstance().run();
+        CityMenuController.getInstance().run();
         loadPane();
     }
 

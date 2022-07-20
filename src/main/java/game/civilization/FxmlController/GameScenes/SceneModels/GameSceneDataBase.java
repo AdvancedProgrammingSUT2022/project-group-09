@@ -5,6 +5,7 @@ import game.civilization.FxmlController.BuildMapController;
 import game.civilization.FxmlController.GameScenes.GameSceneController;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
@@ -20,6 +21,29 @@ public class GameSceneDataBase {
         this.backPane = backPane;
     }
 
+    public Pane getCityDetailsPane() {
+        return this.cityDetailsPane;
+    }
+
+    public void setCityDetailsPane(Pane cityDetailsPane) {
+        this.cityDetailsPane = cityDetailsPane;
+    }
+
+    public Pane getCityButtonsPane() {
+        return this.cityButtonsPane;
+    }
+
+    public void setCityButtonsPane(Pane cityButtonsPane) {
+        this.cityButtonsPane = cityButtonsPane;
+    }
+
+    public void setScrollPane(ScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+    }
+
+    public ScrollPane getScrollPane() {
+        return this.scrollPane;
+    }
 
     public static GameSceneDataBase getInstance() {
         if (gameSceneDataBase == null)
@@ -38,6 +62,9 @@ public class GameSceneDataBase {
     private final ArrayList<Circle> cityIcons = new ArrayList<>();
     private Pane pane;
     private Pane backPane = null;
+    private Pane cityButtonsPane;
+    private Pane cityDetailsPane;
+    private ScrollPane scrollPane;
     private Label scienceLabel;
     private Label goldLabel;
     private Label happinessLabel;
