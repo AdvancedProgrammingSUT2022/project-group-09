@@ -1,6 +1,7 @@
 package game.civilization.Model.Info;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Model.City;
 import game.civilization.Model.Civilization;
 
 public class CivilizationScience {
@@ -39,6 +40,13 @@ public class CivilizationScience {
         return null;
     }
 
+    public void update() {
+        setAdditionScience(50);
+        add(getAddedFromCheat());
+        for (City city : getCivilization().getCities()) {
+            add(city.getCityScience().getAdditionScience());
+        }
+    }
     public double getAdditionScienceCopy() {
         return additionScienceCopy;
     }

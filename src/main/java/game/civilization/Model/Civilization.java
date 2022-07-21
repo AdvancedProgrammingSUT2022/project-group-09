@@ -190,39 +190,13 @@ public class Civilization {
     }
 
     public void updateData() {
+        for (City city : getCities()) {
+            city.update();
+        }
         updateResource();
-        updateGold();
-        updateScience();
-        updateHappiness();
-    }
-
-    private void updateHappiness() {
-        getHappiness().setAdditionHappiness(10);//starting
-        getHappiness().add(getHappiness().getAddedFromCheat());
-
-        ArrayList<Resource> luxuryResource = new ArrayList<>(Resource.getLuxuryResources());
-        for (Resource resource : getResources()) {
-            if (luxuryResource.contains(resource)) {
-                getHappiness().add(4); //luxury ha
-                luxuryResource.remove(resource);
-            }
-        }
-    }
-
-    private void updateGold() {
-        getGold().setAdditionGold(0);
-        getGold().addAdditionGold(getGold().getAddedFromCheat());
-        for (City city : cities) {
-            getGold().addAdditionGold(city.getGold().getAdditionGold());
-        }
-    }
-
-    private void updateScience() {
-        getScience().setAdditionScience(50);
-        getScience().add(getScience().getAddedFromCheat());
-        for (City city : cities) {
-            getScience().add(city.getCityScience().getAdditionScience());
-        }
+        getGold().update();
+        getScience().update();
+        getHappiness().update();
     }
 
     private void updateResource() {

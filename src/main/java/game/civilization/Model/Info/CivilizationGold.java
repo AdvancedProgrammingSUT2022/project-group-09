@@ -1,6 +1,7 @@
 package game.civilization.Model.Info;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Model.City;
 import game.civilization.Model.Civilization;
 
 public class CivilizationGold {
@@ -8,6 +9,14 @@ public class CivilizationGold {
     private double currentGold;
 
     private double addedFromCheat;
+
+    public void update() {
+        setAdditionGold(0);
+        addAdditionGold(getAddedFromCheat());
+        for (City city : getCivilization().getCities()) {
+            addAdditionGold(city.getGold().getAdditionGold());
+        }
+    }
 
     public double getAddedFromCheat() {
         return addedFromCheat;

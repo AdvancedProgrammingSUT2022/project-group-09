@@ -69,11 +69,9 @@ public class GameSceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
         handleDemographic();
         handleMilitary();
         handleEconomy();
-        setNotification();
         setDataToGameSceneDataBase();
         MapController.getInstance().run();
         UnitsController.getInstance().run();
@@ -201,13 +199,14 @@ public class GameSceneController implements Initializable {
     public void refresh() {
         civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
         GameSceneDataBase.getInstance().getYear().setText("year : " + GameDataBase.getYear());
-        setResearchIcon();
         GameSceneDataBase.getInstance().clear();
         clearPane();
-        GameDataBase.getCurrentCivilization().getMap().updateExploration();
         setNotification();
         if (!turnHandler())
             return;
+        setResearchIcon();
+        GameDataBase.getCurrentCivilization().getMap().updateExploration();
+        GameDataBase.getCurrentCivilization().updateData();
         MapController.getInstance().run();
         UnitsController.getInstance().run();
         TechnologyController.getInstance().run();

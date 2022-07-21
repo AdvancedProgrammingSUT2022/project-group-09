@@ -3,10 +3,14 @@ package game.civilization.Model.Info;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Model.City;
 import game.civilization.Model.Civilization;
+import game.civilization.Model.Resources.Resource;
+
+import java.util.ArrayList;
 
 public class CivilizationHappiness {
     private int additionHappiness;
     private double addedFromCheat;
+    private int removedHappiness;
 
     public double getAddedFromCheat() {
         return addedFromCheat;
@@ -17,10 +21,23 @@ public class CivilizationHappiness {
     }
 
     public void nexTurn() {
-        additionHappiness -= 2 * getCivilization().getCities().size();//unhappines baraye shahr ha
+        removedHappiness += 2 * getCivilization().getCities().size();//unhappines baraye shahr ha
         for (City city : getCivilization().getCities()) {
-            additionHappiness -= city.getCitizens().size() / 3;//har 3 citizen ye hapines kam mikone
+            removedHappiness += city.getCitizens().size() / 3;//har 3 citizen ye hapines kam mikone
         }
+    }
+
+    public void update() {
+        additionHappiness = 10;
+        additionHappiness += addedFromCheat;
+        ArrayList<Resource> luxuryResource = new ArrayList<>(Resource.getLuxuryResources());
+        for (Resource resource : getCivilization().getResources()) {
+            if (luxuryResource.contains(resource)) {
+                add(4); //luxury ha
+                luxuryResource.remove(resource);
+            }
+        }
+        additionHappiness -= removedHappiness;
     }
 
     private Civilization getCivilization() {
