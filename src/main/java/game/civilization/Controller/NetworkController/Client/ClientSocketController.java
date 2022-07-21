@@ -39,7 +39,6 @@ public class ClientSocketController {
         Message message = new Message();
         message.setAction("introduction");
         message.setMessage(UserDatabase.getCurrentUser().getUsername());
-        message.setMessage(UserDatabase.getCurrentUser().getUsername());
         sendMessage(message);
         listen();
     }

@@ -180,6 +180,7 @@ public class Civilization {
         this.notification.resetNotifiction();
         updateData();
         getHappiness().nexTurn();
+        getTechnologies().nextTurn();
         getGold().addCurrentGold(getGold().getAdditionGold());
         if (getGold().getAdditionGold() < 0)  //age manfi shod az scien`ce kam one
         {
@@ -193,11 +194,6 @@ public class Civilization {
         updateGold();
         updateScience();
         updateHappiness();
-        updateResearch();
-    }
-
-    private void updateResearch() {
-        civilizationTechnologies.checkTechnologyCurrentlyResearching();
     }
 
     private void updateHappiness() {

@@ -95,7 +95,10 @@ public class CityPanel {
             label1.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    //TODO
+                    CityMenuController.getInstance().resetScrollPane();
+                    GameDataBase.setSelected(city);
+                    CityMenuController.getInstance().updateInfo(city);
+                    CityMenuController.getInstance().setPanesDisable(false);
                 }
             });
             label1.setFont(new Font("Baloo Bhaina Regular", 13));

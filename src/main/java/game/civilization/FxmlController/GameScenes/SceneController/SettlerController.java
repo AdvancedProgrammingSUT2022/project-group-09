@@ -29,7 +29,7 @@ public class SettlerController {
 
     }
 
-    private static final String res = """
+    public static final String res = """
             -fx-background-color:
                       linear-gradient(#ffd65b, #e68400),
                       linear-gradient(#ffef84, #f2ba44),
@@ -42,7 +42,7 @@ public class SettlerController {
               -fx-font-family: "Baloo Bhaina";
               -fx-background-radius: 30;""".indent(2);
 
-    private static final String res2 = """
+    public static final String res2 = """
             -fx-background-color:
                       linear-gradient(#ab0e30, #f62222),
                       linear-gradient(#ffef84, #f2ba44),

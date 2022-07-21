@@ -53,7 +53,6 @@ public class Server extends Application {
         UserDatabase.loadUsers();
         GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
         ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
-        GameDataBase.getCurrentCivilization().getMap().setAllVisible();
         XStream xStream = new XStream();
         Server.xml = xStream.toXML(GameDataBaseSaving.getInstance());
         connect();

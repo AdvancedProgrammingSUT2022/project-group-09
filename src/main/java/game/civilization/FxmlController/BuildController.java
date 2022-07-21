@@ -50,7 +50,7 @@ public class BuildController implements Initializable {
             Button button = new Button();
             button.setText(terrainFeature.toString());
             button.setLayoutY(y);
-            button.setLayoutX(80);
+            button.setLayoutX(130);
             button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -67,7 +67,7 @@ public class BuildController implements Initializable {
             Button button = new Button();
             button.setText(resource.toString());
             button.setLayoutY(y);
-            button.setLayoutX(150);
+            button.setLayoutX(290);
             button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {

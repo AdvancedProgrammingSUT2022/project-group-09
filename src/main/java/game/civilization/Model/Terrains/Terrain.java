@@ -272,9 +272,9 @@ public class Terrain {
             product += getImprovement().getProduction();
             gold += getImprovement().getGold();
         }
-        return "food : " + food +
-                "gold : " + gold +
-                "product : " + product;
+        return " food : " + food +
+                " gold : " + gold +
+                " product : " + product;
     }
 
     public Pair<Improvement, Boolean> getImprovementPair() {

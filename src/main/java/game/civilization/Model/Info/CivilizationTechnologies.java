@@ -48,10 +48,10 @@ public class CivilizationTechnologies {
         technologiesAvailable.remove(newTechnology);//checkBeshe
         technologyCurrentlyResearching = newTechnology;
         remainCost = cost;
-        checkTechnologyCurrentlyResearching();
+        //checkTechnologyCurrentlyResearching();
     }
 
-    public void checkTechnologyCurrentlyResearching() {
+    public void nextTurn() {
         if (technologyCurrentlyResearching != null) {
             remainCost -= GameDataBase.getCurrentCivilization().getScience().getAdditionScience();
             if (remainCost <= 0) {

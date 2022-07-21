@@ -3,7 +3,9 @@ package game.civilization.FxmlController.GameScenes.SceneModels;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.FxmlController.BuildMapController;
 import game.civilization.FxmlController.GameScenes.GameSceneController;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.shape.Circle;
@@ -71,6 +73,8 @@ public class GameSceneDataBase {
     private Integer score;
     private Label year;
     private BuildMapController buildMapController;
+    private Label currentTechTurn;
+    private ImageView currentTech;
 
 
     public Label getScienceLabel() {
@@ -163,5 +167,21 @@ public class GameSceneDataBase {
 
     public void setBuildMapController(BuildMapController buildMapController) {
         this.buildMapController = buildMapController;
+    }
+
+    public Label getCurrentTechTurn() {
+        return currentTechTurn;
+    }
+
+    public void setCurrentTechTurn(Label currentTechTurn) {
+        this.currentTechTurn = currentTechTurn;
+    }
+
+    public ImageView getCurrentTech() {
+        return currentTech;
+    }
+
+    public void setCurrentTech(ImageView currentTech) {
+        this.currentTech = currentTech;
     }
 }

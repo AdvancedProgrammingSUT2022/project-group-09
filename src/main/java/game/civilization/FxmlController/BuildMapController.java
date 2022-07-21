@@ -70,6 +70,7 @@ public class BuildMapController implements Initializable {
     }
 
     public void finish(ActionEvent actionEvent) {
+
     }
 
     public Tile getTile() {

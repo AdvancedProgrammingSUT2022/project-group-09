@@ -509,7 +509,7 @@ public class CityMenuController {
         }
     }
 
-    private void updateInfo(City city) {
+    public void updateInfo(City city) {
         ScrollPane infosScrollPane = (ScrollPane) cityDetailsPane.getChildren().get(1);
         VBox infoVBox = (VBox) infosScrollPane.getContent();
         infoVBox.getChildren().clear();
@@ -562,8 +562,10 @@ public class CityMenuController {
                 (((VBox) citizenLabel.getParent()).getWidth() - 100) / 2));
 
         Label demographicsLabel = new Label(city.getDemographics() + "\n");
-        demographicsLabel.setStyle("-fx-text-fill: black; -fx-font-family: \"Times New Roman\"; -fx-font-size: 24;");
-        demographicsLabel.setPadding(new Insets(0, 0, 0, 10));
+        demographicsLabel.setStyle("-fx-text-fill: black; -fx-font-family: \"Times New Roman\"; -fx-font-size: 20;");
+        //demographicsLabel.setPadding(new Insets(0, 0, 0, 20));
+        demographicsLabel.setMinWidth(50);
+        demographicsLabel.setMinHeight(50);
         infoVBox.getChildren().add(demographicsLabel);
 
         Label constructionLabel = new Label("Under Construction");
@@ -610,7 +612,7 @@ public class CityMenuController {
         this.cityButtonsPane.setDisable(isDisable);
     }
 
-    private void resetScrollPane() {
+    public void resetScrollPane() {
         this.scrollPane.setVisible(false);
         this.scrollPane.setDisable(true);
         ((Pane) this.scrollPane.getParent()).setVisible(false);

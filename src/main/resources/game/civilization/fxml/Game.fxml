@@ -40,8 +40,8 @@
                 <Font size="15.0" />
             </font>
         </Button>
-        <Button layoutX="1249.0" layoutY="10.0" mnemonicParsing="false" onAction="#CheatActivate" text="Cheat" />
-        <ImageView fitHeight="31.0" fitWidth="44.0" layoutX="1470.0" pickOnBounds="true" preserveRatio="true">
+        <Button layoutX="1220.0" layoutY="10.0" mnemonicParsing="false" onAction="#CheatActivate" text="Cheat" />
+        <ImageView fx:id="demographic" fitHeight="31.0" fitWidth="44.0" layoutX="1470.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/GamePictures/mainIcons/Turn.png" />
             </image>
@@ -61,11 +61,12 @@
                 <Image url="@../images/GamePictures/mainIcons/Science.png" />
             </image>
         </ImageView>
+      <ImageView fx:id="currentTech" fitHeight="102.0" fitWidth="105.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
         <Label fx:id="scienceLabel" layoutX="41.0" layoutY="7.0" prefHeight="31.0" prefWidth="54.0" />
         <Label fx:id="goldLabel" layoutX="160.0" layoutY="9.0" prefHeight="31.0" prefWidth="54.0" />
         <Label fx:id="happinessLabel" layoutX="274.0" layoutY="7.0" prefHeight="31.0" prefWidth="54.0" />
-        <Label fx:id="civilizationName" alignment="CENTER" layoutX="1348.0" layoutY="6.0" prefHeight="21.0" prefWidth="105.0" stylesheets="@../css/Game.css" />
-        <Label fx:id="year" layoutX="1498.0" layoutY="30.0" prefHeight="21.0" prefWidth="105.0" stylesheets="@../css/Game.css" text="year :" />
+        <Label fx:id="civilizationName" alignment="CENTER" layoutX="1267.0" layoutY="14.0" prefHeight="21.0" prefWidth="105.0" stylesheets="@../css/Game.css" />
+        <Label fx:id="year" layoutX="1527.0" layoutY="30.0" prefHeight="21.0" prefWidth="76.0" stylesheets="@../css/Game.css" text="year :" />
         <Pane fx:id="cityButtonsPane" layoutX="567.0" layoutY="697.0" prefHeight="158.0" prefWidth="991.0">
             <children>
                 <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#7abfff80" height="158.0" layoutX="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="991.0" />
@@ -81,7 +82,7 @@
             </ScrollPane>
             </children>
         </Pane>
-        <Button fx:id="tradeButton" layoutX="1191.0" layoutY="10.0" mnemonicParsing="false" onAction="#openTrade" text="Trade" />
+        <Button fx:id="tradeButton" layoutX="1174.0" layoutY="10.0" mnemonicParsing="false" onAction="#openTrade" text="Trade" />
       <Pane layoutX="1157.0" layoutY="80.0" prefHeight="777.0" prefWidth="400.0">
          <children>
             <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#7ac1ff80" height="700.0" stroke="#7ac1ff00" strokeType="INSIDE" width="387.0" />
@@ -92,5 +93,16 @@
             </ScrollPane>
          </children>
       </Pane>
+      <Label fx:id="currentTechTurn" alignment="BOTTOM_CENTER" layoutX="112.0" layoutY="37.0" prefHeight="48.0" prefWidth="54.0" />
+      <ImageView fx:id="military" fitHeight="31.0" fitWidth="46.0" layoutX="1427.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/GamePictures/unitPicture/AntiTankGun.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="setting" fitHeight="31.0" fitWidth="46.0" layoutX="1384.0" onMouseClicked="#setting" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/GamePictures/setting.jpg" />
+         </image>
+      </ImageView>
     </children>
 </Pane>

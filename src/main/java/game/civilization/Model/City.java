@@ -465,10 +465,10 @@ public class City extends Terrain implements Combatble, Selectable {
         StringBuilder res = new StringBuilder();
         for (Terrain citizen : citizens) {
             if (citizen == null)
-                res.append("citizen").append(counter).append(" is not doing a thing!\n");
+                res.append("citizen ").append(counter).append(" is not doing a thing!\n");
             else
-                res.append("citizen").append(counter).append(" ").append(citizen.getCoordination().toString())
-                        .append("working on : ").append(citizen.showGoldProductFood()).append("\n");
+                res.append("citizen ").append(counter).append(" ").append(citizen.getCoordination().toString())
+                        .append("\nworking on : ").append(citizen.showGoldProductFood()).append("\n");
             counter++;
         }
         return res.toString();

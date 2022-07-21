@@ -59,7 +59,7 @@ public class GameDataBase {
     }
 
     private static void setRuins() {
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 15; i++) {
             Random random = new Random();
             Coordination coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
             while (coordination.getTerrain().getType() == TerrainType.MOUNTAIN ||

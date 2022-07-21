@@ -2,34 +2,42 @@ package game.civilization.FxmlController.GameScenes;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
+import game.civilization.Controller.GameControllerPackage.InfoController;
 import game.civilization.Controller.NetworkController.Client.Client;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.FxmlController.GameScenes.SceneController.*;
 import game.civilization.FxmlController.MapMovement;
 import game.civilization.FxmlController.SceneController;
-import game.civilization.FxmlController.GameScenes.SceneController.CityMenuController;
-import game.civilization.FxmlController.GameScenes.SceneController.CityPanel;
-import game.civilization.FxmlController.GameScenes.SceneController.MapController;
-import game.civilization.FxmlController.GameScenes.SceneController.TechnologyController;
-import game.civilization.FxmlController.GameScenes.SceneController.UnitPanel;
-import game.civilization.FxmlController.GameScenes.SceneController.UnitsController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
+import game.civilization.Main;
 import game.civilization.Model.Civilization;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class GameSceneController implements Initializable {
+    @FXML
+    private ImageView military;
+    @FXML
+    private ImageView demographic;
+    @FXML
+    private Label currentTechTurn;
+    @FXML
+    private ImageView currentTech;
     @FXML
     private Label year;
     @FXML
@@ -62,6 +70,9 @@ public class GameSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
+        handleDemographic();
+        handleMilitary();
+        handleEconomy();
         setNotification();
         setDataToGameSceneDataBase();
         MapController.getInstance().run();
@@ -72,6 +83,72 @@ public class GameSceneController implements Initializable {
         UnitPanel.getInstance().run();
         CityPanel.getInstance().run();
         loadPane();
+    }
+
+    private void handleDemographic() {
+        demographic.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                notification.setText(GameDataBase.getCurrentCivilization().getDemographics());
+            }
+        });
+        demographic.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                TimerTask timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        setNotification();
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(timerTask, 3000);
+            }
+        });
+    }
+
+    private void handleMilitary() {
+        military.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                notification.setText(new InfoController().showMilitary());
+            }
+        });
+        military.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                TimerTask timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        setNotification();
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(timerTask, 3000);
+            }
+        });
+    }
+
+    private void handleEconomy() {
+        goldLabel.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                notification.setText(new InfoController().showEconomy());
+            }
+        });
+        goldLabel.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                TimerTask timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        setNotification();
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(timerTask, 3000);
+            }
+        });
     }
 
     private void setNotification() {
@@ -107,6 +184,8 @@ public class GameSceneController implements Initializable {
         GameSceneDataBase.getInstance().setCityButtonsPane(cityButtonsPane);
         GameSceneDataBase.getInstance().setCityDetailsPane(cityDetailsPane);
         GameSceneDataBase.getInstance().setScrollPane(scrollPane);
+        GameSceneDataBase.getInstance().setCurrentTechTurn(currentTechTurn);
+        GameSceneDataBase.getInstance().setCurrentTech(currentTech);
     }
 
     public void nextTurn(ActionEvent actionEvent) throws IOException {
@@ -122,21 +201,13 @@ public class GameSceneController implements Initializable {
     public void refresh() {
         civilizationName.setText(GameDataBase.getCurrentCivilization().getName());
         GameSceneDataBase.getInstance().getYear().setText("year : " + GameDataBase.getYear());
+        setResearchIcon();
         GameSceneDataBase.getInstance().clear();
         clearPane();
-        UnitsController.getInstance().setUnitClicked(false);
         GameDataBase.getCurrentCivilization().getMap().updateExploration();
         setNotification();
-        if (isNotMyTurn()) {
-            turnLabel.setText("Its not your Turn !");
-            if (amILose())
-                turnLabel.setText("your Score is :" + GameSceneDataBase.getInstance().getScore() + "you lose");
+        if (!turnHandler())
             return;
-        }
-        if (amIWin()) {
-            turnLabel.setText("your Score is :" + GameSceneDataBase.getInstance().getScore() + "you Win");
-            return;
-        }
         MapController.getInstance().run();
         UnitsController.getInstance().run();
         TechnologyController.getInstance().run();
@@ -144,6 +215,43 @@ public class GameSceneController implements Initializable {
         CityPanel.getInstance().run();
         CityMenuController.getInstance().run();
         loadPane();
+    }
+
+    private boolean turnHandler() {
+        if (isNotMyTurn()) {
+            turnLabel.setText("Its not your Turn !");
+            if (amILose()) {
+                turnLabel.setText("your Score is :" + GameSceneDataBase.getInstance().getScore() + "you lose");
+                nextTurnButton.setText("exit");
+                nextTurnButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        try {
+                            SceneController.getInstance().MainMenu();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+        if (amIWin()) {
+            turnLabel.setText("your Score is :" + GameSceneDataBase.getInstance().getScore() + "you Win");
+            nextTurnButton.setText("exit");
+            nextTurnButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    try {
+                        SceneController.getInstance().MainMenu();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return false;
+        }
+        return true;
     }
 
     public void CheatActivate(ActionEvent actionEvent) {
@@ -182,5 +290,22 @@ public class GameSceneController implements Initializable {
         if (GameDataBase.getCivilizations().size() == 1)
             return GameDataBase.getCivilizations().get(0).getName().equals(UserDatabase.getCurrentUser().getUsername());
         return false;
+    }
+
+    public void setResearchIcon() {
+        try {
+            GameSceneDataBase.getInstance().getCurrentTechTurn().setText("turn : " + String.valueOf(GameDataBase.getCurrentCivilization().getTechnologies().
+                    getTurn(GameDataBase.getCurrentCivilization().getTechnologies().getTechnologyCurrentlyResearching())));
+            GameSceneDataBase.getInstance().getCurrentTech().setImage(new Image(Main.class.getResource("images/technology/" + GameDataBase.getCurrentCivilization().getTechnologies().getTechnologyCurrentlyResearching().getName() + ".png").toExternalForm()));
+        } catch (Exception ignore) {
+            GameSceneDataBase.getInstance().getCurrentTechTurn().setText("");
+        }
+    }
+
+    public void setting(MouseEvent actionEvent) {
+        if (backPane.getChildren().contains(SettingController.getInstance().getPane()))
+            backPane.getChildren().remove(SettingController.getInstance().getPane());
+        else
+            backPane.getChildren().add(SettingController.getInstance().getPane());
     }
 }

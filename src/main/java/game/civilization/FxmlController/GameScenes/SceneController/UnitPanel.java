@@ -1,6 +1,7 @@
 package game.civilization.FxmlController.GameScenes.SceneController;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Controller.GameControllerPackage.InfoController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.Main;
 import game.civilization.Model.TechnologyPackage.TechnologyType;

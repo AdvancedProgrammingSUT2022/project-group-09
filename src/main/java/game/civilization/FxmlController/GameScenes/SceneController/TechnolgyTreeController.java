@@ -9,18 +9,13 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class TechnolgyTreeController {
@@ -41,15 +36,17 @@ public class TechnolgyTreeController {
 
     public void run() {
         clear();
+        GameSceneDataBase.getInstance().getGameSceneController().refresh();
         initializeCoordinates();
         initializeTree();
+        GameSceneDataBase.getInstance().getGameSceneController().setResearchIcon();
     }
 
     private void clear() {
         GameSceneDataBase.getInstance().getBackPane().getChildren().remove(backPane);
     }
 
-    private void initializeCoordinates(){
+    private void initializeCoordinates() {
         coordinates.put(TechnologyType.AGRICULTURE, new Coordination(64, 384));
         coordinates.put(TechnologyType.POTTERY, new Coordination(429, 111));
         coordinates.put(TechnologyType.ANIMALHUSBANDARY, new Coordination(429, 315));
@@ -138,9 +135,9 @@ public class TechnolgyTreeController {
         backPane.setPrefHeight(10000);
         backPane.setPrefWidth(10000);
         scrollPane.setPrefWidth(1700);
-        scrollPane.setPrefHeight(730);
+        scrollPane.setPrefHeight(750);
         pane.setPrefHeight(730);
-        pane.setPrefWidth(6600);
+        pane.setPrefWidth(4473);
         Button backButton = new Button("BACK");
         backButton.setLayoutX(10);
         backButton.setLayoutY(10);
@@ -216,7 +213,7 @@ public class TechnolgyTreeController {
             try {
                 rectangle.setX(coordinates.get(technologyType).getX());
                 rectangle.setY(coordinates.get(technologyType).getY());
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(technologyType.toString());
             }
             rectangle.setWidth(272);
@@ -226,8 +223,11 @@ public class TechnolgyTreeController {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     if (GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesAvailable().containsKey(technologyType)) {
-                        GameDataBase.getCurrentCivilization().getTechnologies().startWorkingOnTechnology(technologyType, GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesAvailable().get(technologyType));
-                        //TODO    nabayad az science kam beshe ?
+                        GameDataBase.getCurrentCivilization().getTechnologies().
+                                startWorkingOnTechnology(
+                                        technologyType,
+                                        GameDataBase.getCurrentCivilization().getTechnologies().getTechnologiesAvailable().get(technologyType));
+                        GameDataBase.getCurrentCivilization().updateNotification("started working on technology " + technologyType.getName());
                         run();
                     }
                 }
@@ -258,7 +258,7 @@ public class TechnolgyTreeController {
             label5.setFont(new Font("Baloo Bhaina Regular", 12));
             label5.setLayoutX(rectangle.getX() + 6 + rectangle.getHeight() - 10 + 150);
             label5.setLayoutY(rectangle.getY());
-            System.out.println(GameDataBase.getCurrentCivilization().getScience().getAdditionScience());
+            // System.out.println(GameDataBase.getCurrentCivilization().getScience().getAdditionScience());
             pane.getChildren().add(label5);
             int x = 0;
             for (TechnologyType type : technologyType.getRequirement()) {

@@ -77,8 +77,8 @@ public class TechnologyController {
         Pane pane = new Pane();
         pane.prefWidth(6000);
         pane.prefHeight(6000);
-        pane.setLayoutX(200);
-        pane.setLayoutY(200);
+        pane.setLayoutX(527);
+        pane.setLayoutY(70);
         pane.setStyle("-fx-background-color: #ffda4a");
         Label label = new Label(technology.showInfo());
         label.setMinWidth(50);
