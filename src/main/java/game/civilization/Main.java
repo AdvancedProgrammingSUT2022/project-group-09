@@ -12,6 +12,9 @@ import game.civilization.FxmlController.GameScenes.GameSceneController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.FxmlController.SceneController;
 import game.civilization.Model.City;
+import game.civilization.Model.Improvements.Improvement;
+import game.civilization.Model.Terrains.Terrain;
+import game.civilization.Model.Terrains.TerrainType;
 import game.civilization.Model.Units.Settler;
 import game.civilization.View.*;
 import javafx.application.Application;
@@ -37,17 +40,20 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Terrain terrain = new Terrain();
+        terrain.setType(TerrainType.DESERT);
+        System.out.println(Improvement.FARM.checkIsPossible(terrain));
         //CLIENT VA SERVER RO RUN KONID
 
         //ghabl az start userdatabase.json ro por konid ba 2 user masalan
         //[{"username" :"payam","password":"pass","nickname":"payam","score":0,"lastLoginTime":"2022/06/09 01:04:18","rank":0,"inputStream":false},{"username":"aylin","password":"pass","nickname":"payam","score":0,"rank":0,"inputStream":false}]
         SceneController.getInstance().setStage(stage);
-     //   GameDataBaseSaving.loadGame();
-   //     GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
-    //    ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
-    //    stage.setTitle("CivilizationV");
-    //    SceneController.getInstance().game();
-    //    GameDataBaseSaving.saveGame();
+        //   GameDataBaseSaving.loadGame();
+        //     GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
+        //    ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
+        //    stage.setTitle("CivilizationV");
+        //    SceneController.getInstance().game();
+        //    GameDataBaseSaving.saveGame();
 
 
 //

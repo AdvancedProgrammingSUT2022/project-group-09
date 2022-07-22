@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public enum Improvement {
-    //TODO .. bazaiash vaght sakhte shodan jangal ya chizaye digaro az bein mibare
     CAMP(6, 0, 0, 0, new ArrayList<Resource>() {
         {
             add(Resource.IVORY);
@@ -189,11 +188,11 @@ public enum Improvement {
         if (!(GameDataBase.getCurrentCivilization().getTechnologies().
                 getTechnologiesResearched().contains(requiredTechnology) || requiredTechnology == null))
             return false;
-        if (canBeBuiltON.contains(terrain.getType())) {
+        if (getCanBeBuiltON().contains(terrain.getType())) {
             return true;
         }
         for (TerrainFeature feature : terrain.getTerrainFeatures()) {
-            if (canBeBuiltON.contains(feature)) {
+            if (getCanBeBuiltON().contains(feature)) {
                 return true;
             }
         }

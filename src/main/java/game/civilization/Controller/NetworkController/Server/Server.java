@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.XStream;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.Model.Improvements.Improvement;
 import game.civilization.Model.Resources.Resource;
 import game.civilization.Model.Units.Settler;
 import javafx.application.Application;
@@ -53,6 +54,8 @@ public class Server extends Application {
         UserDatabase.loadUsers();
         GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
         ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
+        GameDataBase.getMainMap().getTerrain(0,0).setImprovement(Improvement.FARM);
+        GameDataBaseSaving.saveGame();
         XStream xStream = new XStream();
         Server.xml = xStream.toXML(GameDataBaseSaving.getInstance());
         connect();

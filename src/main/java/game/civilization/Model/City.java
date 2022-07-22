@@ -290,7 +290,7 @@ public class City extends Terrain implements Combatble, Selectable {
                 "food : " + getFood().getAdditionFood() + "\n" +
                 "hp : " + getHp() + "\n" +
                 "citizens : " + getCitizens().size();
-                // + "\n" + "buildings: " + buildingString;
+        // + "\n" + "buildings: " + buildingString;
     }
 
     public void getConqueredBy(Civilization civilization) {
@@ -439,7 +439,8 @@ public class City extends Terrain implements Combatble, Selectable {
         for (BuildingType building : BuildingType.getAllBuildings()) {
             if (getCivilization().getTechnologies().getTechnologiesResearched().contains(building.getRequirement())
                     || building.getRequirement() == null) {
-                possibleBuildings.add(building);
+                if (!buildings.getBuildings().contains(building))
+                    possibleBuildings.add(building);
             }
         }
         return possibleBuildings;

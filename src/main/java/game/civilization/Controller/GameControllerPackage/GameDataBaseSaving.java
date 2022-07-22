@@ -11,6 +11,8 @@ import java.util.HashMap;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.AnyTypePermission;
+import game.civilization.Model.Improvements.Improvement;
+import game.civilization.Model.Terrains.Terrain;
 
 public class GameDataBaseSaving {
     private int turn;
@@ -19,6 +21,8 @@ public class GameDataBaseSaving {
     private Civilization currentCivilization;
     private ArrayList<Civilization> civilizations;
     private Selectable selected;
+    private Improvement[][] improvements = new Improvement[Map.getRow()][Map.getColumn()];
+    private Boolean[][] improvementsBoolean = new Boolean[Map.getRow()][Map.getColumn()];
 
 
     private GameDataBaseSaving() {
@@ -31,6 +35,12 @@ public class GameDataBaseSaving {
         data.players = GameDataBase.getPlayers();
         data.currentCivilization = GameDataBase.getCurrentCivilization();
         data.civilizations = GameDataBase.getCivilizations();
+        for (int i = 0; i < Map.getColumn(); i++)
+            for (int j = 0; j < Map.getRow(); j++) {
+                data.improvements[i][j] = GameDataBase.getMainMap().getTerrain(i, j).getImprovement();
+                data.improvementsBoolean[i][j] = GameDataBase.getMainMap().getTerrain(i, j).getImprovementPair().getValue();
+            }
+
         return data;
     }
 
@@ -45,6 +55,12 @@ public class GameDataBaseSaving {
             civilizationHashMap.put(players.get(i), civilizations.get(i));
         }
         GameDataBase.setCivilizations(civilizationHashMap);
+
+        for (int i = 0; i < Map.getColumn(); i++)
+            for (int j = 0; j < Map.getRow(); j++) {
+                GameDataBase.getMainMap().getTerrain(i, j).setImprovement(improvements[i][j]);
+                GameDataBase.getMainMap().getTerrain(i, j).getImprovementPair().setValue(improvementsBoolean[i][j]);
+            }
     }
 
 

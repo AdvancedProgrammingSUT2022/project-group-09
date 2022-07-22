@@ -4,6 +4,7 @@ import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
+import game.civilization.Model.Improvements.Improvement;
 import game.civilization.Model.Resources.Resource;
 import game.civilization.Model.Units.Settler;
 import game.civilization.Model.User;
@@ -39,7 +40,8 @@ public class Client extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        UserDatabase.setCurrentUser(new User("a", "ll", "kk"));
+        debugImprovement();
+        UserDatabase.setCurrentUser(new User("aylin", "ll", "kk"));
 //        GameDataBase.buildCustomisableMap();
 //        SceneController.getInstance().setStage(stage);
 //        SceneController.getInstance().buildMap();
@@ -49,8 +51,16 @@ public class Client extends Application {
             System.out.println("game not loaded yet");
             TimeUnit.MILLISECONDS.sleep(400);
         }
+        System.out.println(GameDataBase.getMainMap().getTerrain(0,0).getImprovementPair().getKey());
         SceneController.getInstance().setStage(stage);
         stage.setTitle("CivilizationV ");//+UserDatabase.getCurrentUser().getUsername());
         SceneController.getInstance().game();
+    }
+
+    private void debugImprovement() {
+        for (Improvement improvement : Improvement.getAllImprovements()) {
+            improvement.getCanBeBuiltON();
+            improvement.getRequiredTechnology();
+        }
     }
 }

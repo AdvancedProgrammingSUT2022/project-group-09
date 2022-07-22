@@ -183,6 +183,8 @@ public class UnitController {
             return "selectedo bayad har turn new mikardim";
         }
         ((Unit) GameDataBase.getSelected()).DoNothing();
+        GameDataBase.getCurrentCivilization()
+                .updateNotification("do nothing done");
         return "done!";
     }
 
@@ -514,7 +516,10 @@ public class UnitController {
         if (unit.getCivilization() != GameDataBase.getCurrentCivilization())
             return "this unit doesn't belong to you good sir";
         Terrain destination = GameDataBase.getMainMap().getTerrain(coordination.getX(), coordination.getY());
-        return moveUnit(destination, unit);
+        String res = moveUnit(destination, unit);
+        GameDataBase.getCurrentCivilization()
+                .updateNotification(res);
+        return res;
     }
 
     private String moveUnit(Terrain destination, Unit unit) {

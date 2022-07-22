@@ -64,6 +64,7 @@ public class Terrain {
 
     public void setImprovement(Improvement improvement) {
         this.improvement.setKey(improvement);
+        this.improvement.setValue(true);
     }
 
     public boolean isHasRoad() {

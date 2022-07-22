@@ -45,6 +45,7 @@ public class CityController {
                 }
             }
         }
+        GameDataBase.getCurrentCivilization().updateNotification("in terrain dar mahdoode kharid shoma nist va ddoore");
         return "in terrain dar mahdoode kharid shoma nist va ddoore";
     }
 
@@ -145,7 +146,6 @@ public class CityController {
             buildingString.append(i).append(" ").append(building.toString().toLowerCase()).append(" turns: ")
                     .append((int) ((building.getCost() - 1) / city.getProduction().getCurrentProduct()) + 1)
                     .append(" maintenance: ").append(building.getMaintenance()).append("\n");
-            // TODO turn ok nist
         }
         return String.valueOf(buildingString);
     }

@@ -3,6 +3,7 @@ package game.civilization.FxmlController.GameScenes.SceneController;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.Controller.GameControllerPackage.UnitController;
+import game.civilization.FxmlController.GameScenes.GameSceneController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.FxmlController.GameScenes.SceneModels.Tile;
 import game.civilization.MenuRegex.GameMenuRegex;
@@ -137,6 +138,8 @@ public class WorkerController {
         ArrayList<Button> workButtons = new ArrayList<>();
         int y = 120;
         for (Improvement improvement : Improvement.getAllImprovements()) {
+            improvement.getRequiredTechnology();
+            improvement.getCanBeBuiltON();
             if (improvement.checkIsPossible((((Worker) GameDataBase.getSelected()).getTerrain()))) {
                 y += 30;
                 Button button = new Button();
@@ -174,6 +177,7 @@ public class WorkerController {
                             System.out.println(new UnitController().removeMarsh());
                         else if (improvement == Improvement.REPAIR)
                             System.out.println(new UnitController().repair());
+                        GameSceneDataBase.getInstance().getGameSceneController().refresh();
                     }
                 });
                 workButtons.add(button);

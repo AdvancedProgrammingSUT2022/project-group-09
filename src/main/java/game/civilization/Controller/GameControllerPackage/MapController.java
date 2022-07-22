@@ -240,11 +240,9 @@ public class MapController {
         Pair<Improvement, Boolean> improvementPair = terrain.getImprovementPair();
         if (improvementPair != null) {
             Improvement improvement = improvementPair.getKey();
-            if (improvement != null && improvementPair.getValue() == true) {
-                if (improvement.getRequiredTechnology() == null || GameDataBase.getCurrentCivilization()
-                        .getTechnologies().getTechnologiesResearched().contains(improvement.getRequiredTechnology())) {
-                    stringBuilder.append("this terrain has " + improvement.name() + " improvement\n");
-                }
+            if (improvement != null && improvementPair.getValue()) {
+                stringBuilder.append("this terrain has " + improvement.name() + " improvement\n");
+
             }
         }
     }
