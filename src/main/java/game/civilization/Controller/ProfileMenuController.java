@@ -4,6 +4,7 @@ import game.civilization.Controller.NetworkController.Client.Client;
 import game.civilization.MenuRegex.LoginMenuRegex;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Request;
+import game.civilization.Model.Response;
 import game.civilization.Model.User;
 import game.civilization.View.CurrentMenu;
 import javafx.scene.image.Image;
@@ -37,7 +38,7 @@ public class ProfileMenuController extends Controller {
         Request request = new Request();
         request.setAction("changeNickname");
         request.addData("nickname", newNickname);
-        Message message = Client.getClientServerSocketController().sendMessageAndGetMessage(request);
+        Response message = Client.getClientServerSocketController().sendRequestAndGetResponse(request);
         if (message.getAction().equals("change done")) {
             UserDatabase.setCurrentUser(User.fromJson(message.getMessage()));
             System.out.println("change nickname : " + UserDatabase.getCurrentUser().getNickname());
@@ -51,7 +52,7 @@ public class ProfileMenuController extends Controller {
         request.setAction("changePassword");
         request.addData("newPassword", newPassword);
         request.addData("oldPassword", oldPassword);
-        Message message = Client.getClientServerSocketController().sendMessageAndGetMessage(request);
+        Response message = Client.getClientServerSocketController().sendRequestAndGetResponse(request);
         if (message.getAction().equals("change done")) {
             UserDatabase.setCurrentUser(User.fromJson(message.getMessage()));
             System.out.println("change password : " + UserDatabase.getCurrentUser().getPassword());
@@ -61,10 +62,10 @@ public class ProfileMenuController extends Controller {
     }
 
     public String changeProfileCLinet(ImageView profile, String url) throws IOException {
-        Message request = new Message();
+        Request request = new Request();
         request.setAction("changePicture");
-        request.setMessage(url);
-        Client.getClientServerSocketController().sendMessage(request);
+        request.addData("url",url);
+        Client.getClientServerSocketController().justSendRequest(request);
         InputStream inputStream;
         try {
             inputStream = new FileInputStream(url);

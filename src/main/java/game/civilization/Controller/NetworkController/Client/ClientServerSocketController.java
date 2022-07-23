@@ -10,6 +10,7 @@ import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase
 import game.civilization.Model.Civilization;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Request;
+import game.civilization.Model.Response;
 import javafx.application.Platform;
 
 import java.io.DataInputStream;
@@ -35,10 +36,6 @@ public class ClientServerSocketController {
         this.socket2 = socket2;
         dataInputStream2 = new DataInputStream(socket2.getInputStream());
         dataOutputStream2 = new DataOutputStream(socket2.getOutputStream());
-        Message message = new Message();
-        message.setAction("introduction");
-        message.setMessage("");
-        sendMessage(message);
         listen();
     }
 
@@ -68,26 +65,23 @@ public class ClientServerSocketController {
 
     }
 
-    public void sendMessage(Message message) throws IOException {
-        String messageJson = message.toJson();
+    public void justSendRequest(Request request) throws IOException {
+        String messageJson = request.toJson();
         byte[] data = messageJson.getBytes(StandardCharsets.UTF_8);
         dataOutputStream.writeInt(data.length);
         dataOutputStream.write(data);
         dataOutputStream.flush();
-        System.out.println("message  action " + message.getAction() + " send");
+        System.out.println("message  action " + request.getAction() + " send");
     }
 
-    public Message sendMessageAndGetMessage(Request request) throws IOException {
-        Message message = new Message();
-        message.setMessage(request.toJson());
-        message.setAction(request.getAction());
-        sendMessage(message);
+    public Response sendRequestAndGetResponse(Request request) throws IOException {
+        justSendRequest(request);
         int length = dataInputStream.readInt();
         byte[] data = new byte[length];
         dataInputStream.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
-        System.out.println(Message.fromJson(messageJson).getAction() + " received");
-        return Message.fromJson(messageJson);
+        System.out.println(Response.fromJson(messageJson)+ " received");
+        return Response.fromJson(messageJson);
     }
     private Message getMessage() throws IOException {
         int length = dataInputStream2.readInt();

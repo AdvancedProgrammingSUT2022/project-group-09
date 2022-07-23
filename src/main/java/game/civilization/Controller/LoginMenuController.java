@@ -4,6 +4,7 @@ import game.civilization.Controller.NetworkController.Client.Client;
 import game.civilization.MenuRegex.LoginMenuRegex;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Request;
+import game.civilization.Model.Response;
 import game.civilization.Model.User;
 import game.civilization.View.CurrentMenu;
 
@@ -31,7 +32,7 @@ public class LoginMenuController extends Controller {
         request.addData("username", username);
         request.addData("nickname", nickname);
         request.addData("password", password);
-        Message message = Client.getClientServerSocketController().sendMessageAndGetMessage(request);
+        Response message = Client.getClientServerSocketController().sendRequestAndGetResponse(request);
         System.out.println(message.getMessage());
         return message.getMessage();
     }
@@ -41,7 +42,7 @@ public class LoginMenuController extends Controller {
         request.setAction("login");
         request.addData("username", username);
         request.addData("password", password);
-        Message message = Client.getClientServerSocketController().sendMessageAndGetMessage(request);
+        Response message = Client.getClientServerSocketController().sendRequestAndGetResponse(request);
         if (message.getAction().equals("login done")) {
             UserDatabase.setCurrentUser(User.fromJson(message.getMessage()));
             CurrentMenu.set(CurrentMenu.MainMenu);

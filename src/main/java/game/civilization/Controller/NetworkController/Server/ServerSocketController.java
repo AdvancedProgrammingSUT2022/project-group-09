@@ -7,6 +7,7 @@ import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Request;
+import game.civilization.Model.Response;
 import game.civilization.Model.User;
 
 import java.io.DataInputStream;
@@ -43,42 +44,38 @@ public class ServerSocketController {
     public void listenForClient() {
         try {
             while (true) {
-                Message message = getMessage();
-                System.out.println("message " + message.getAction() + " action " + " received");
-                if (message.getAction().equals("exit")) {
+                Request request = getMessage();
+                System.out.println("message " + request.getAction() + " action " + " received");
+                if (request.getAction().equals("exit")) {
                     System.out.println("socket " + socket + "disconnected");
                     return;
                 }
-                handleReq(message);
+                handleReq(request);
             }
         } catch (Exception ignored) {
 
         }
     }
 
-    private void handleReq(Message message) throws IOException {
-        switch (message.getAction()) {
-            case "introduction" -> {
-                System.out.println("introduction done client name is :" + message.getMessage());
-                name = "";
-            }
-            case "register" -> register(message);
-            case "login" -> login(message);
-            case "changeNickname" -> changeNickname(message);
-            case "changePassword" -> changePassword(message);
-            case "changePicture" -> changePicture(message);
+    private void handleReq(Request request) throws IOException {
+        switch (request.getAction()) {
+            case "register" -> register(request);
+            case "login" -> login(request);
+            case "changeNickname" -> changeNickname(request);
+            case "changePassword" -> changePassword(request);
+            case "changePicture" -> changePicture(request);
         }
     }
 
-    private Message getMessage() throws IOException {
+    private Request getMessage() throws IOException {
         int length = dataInputStream.readInt();
         byte[] data = new byte[length];
         dataInputStream.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
-        return Message.fromJson(messageJson);
+        return Request.fromJson(messageJson);
     }
 
-    private void sendMessage(Message message) throws IOException {
+    private void sendMessageDirectly(Message message) throws IOException {
         String temp = message.toJson();
         byte[] data = temp.getBytes(StandardCharsets.UTF_8);
         dataOutputStream2.writeInt(data.length);
@@ -86,7 +83,7 @@ public class ServerSocketController {
         dataOutputStream2.flush();
     }
 
-    private void sendMessageOnFirstSocket(Message message) throws IOException {
+    private void sendResponse(Response message) throws IOException {
         String temp = message.toJson();
         byte[] data = temp.getBytes(StandardCharsets.UTF_8);
         dataOutputStream.writeInt(data.length);
@@ -94,81 +91,79 @@ public class ServerSocketController {
         dataOutputStream.flush();
     }
 
-    private void register(Message message) throws IOException {
-        Request request = Request.fromJson(message.getMessage());
+    private void register(Request request) throws IOException {
         String username = (String) request.getData().get("username");
         String nickname = (String) request.getData().get("nickname");
         String password = (String) request.getData().get("password");
         String res = new LoginMenuController().registerServer(username, nickname, password);
-        Message message1 = new Message();
-        message1.setMessage(res);
-        message1.setAction("register");
-        sendMessageOnFirstSocket(message1);
+        Response response = new Response();
+        response.setMessage(res);
+        response.setAction("register");
+        sendResponse(response);
     }
 
-    private void login(Message message) throws IOException {
-        Request request = Request.fromJson(message.getMessage());
-        String username = (String) request.getData().get("username");
-        String password = (String) request.getData().get("password");
+    private void login(Request message) throws IOException {
+        String username = (String) message.getData().get("username");
+        String password = (String) message.getData().get("password");
         User user = new User(username, password, "");
         user = UserDatabase.getUserFromUsers(user);
         if (user == null) {
             String res = new LoginMenuController().loginServer(username, password);
-            Message message1 = new Message();
-            message1.setMessage(res);
-            message1.setAction("login failed");
-            sendMessageOnFirstSocket(message1);
+            Response response = new Response();
+            response.setMessage(res);
+            response.setAction("login failed");
+            sendResponse(response);
         } else {
             name = user.getUsername();
             String res = user.toJson();
-            Message message1 = new Message();
-            message1.setMessage(res);
-            message1.setAction("login done");
-            sendMessageOnFirstSocket(message1);
+            Response response = new Response();
+            response.setMessage(res);
+            response.setAction("login done");
+            sendResponse(response);
         }
 
     }
 
-    private void changePicture(Message message) {
+    private void changePicture(Request message) {
         User user = UserDatabase.findUserByUsername(name);
         assert user != null;
-        new ProfileMenuController().changeProfileServer(user, message.getMessage());
+        new ProfileMenuController().changeProfileServer(user, (String) message.getData().get("url"));
     }
 
-    private void changePassword(Message message) throws IOException {
+    private void changePassword(Request message) throws IOException {
         User user = UserDatabase.findUserByUsername(name);
         assert user != null;
         String res = new ProfileMenuController().changePasswordServer(user,
-                (String) Request.fromJson(message.getMessage()).getData().get("newPassword"),
-                (String) Request.fromJson(message.getMessage()).getData().get("oldPassword"));
+                (String) message.getData().get("newPassword"),
+                (String) message.getData().get("oldPassword"));
         if (res.equals("password changed successfully!")) {
-            Message message1 = new Message();
-            message1.setMessage(user.toJson());
-            message1.setAction("change done");
-            sendMessageOnFirstSocket(message1);
+            Response response = new Response();
+            response.setMessage(user.toJson());
+            response.setAction("change done");
+            sendResponse(response);
         } else {
-            Message message1 = new Message();
-            message1.setMessage(res);
-            message1.setAction("change failed");
-            sendMessageOnFirstSocket(message1);
+            Response response = new Response();
+            response.setMessage(res);
+            response.setAction("change failed");
+            sendResponse(response);
         }
     }
 
-    private void changeNickname(Message message) throws IOException {
+    private void changeNickname(Request message) throws IOException {
         User user = UserDatabase.findUserByUsername(name);
         assert user != null;
         String res = new ProfileMenuController().changeNicknameServer(user,
-                (String) Request.fromJson(message.getMessage()).getData().get("nickName"));
+                (String) message.getData().get("nickName"));
         if (res.equals("nickname changed successfully!")) {
-            Message message1 = new Message();
-            message1.setMessage(user.toJson());
-            message1.setAction("change done");
-            sendMessageOnFirstSocket(message1);
+            Response response = new Response();
+            response.setMessage(user.toJson());
+            response.setAction("change done");
+            sendResponse(response);
         } else {
-            Message message1 = new Message();
-            message1.setMessage(res);
-            message1.setAction("changeNickname failed");
-            sendMessageOnFirstSocket(message1);
+            Response response = new Response();
+            response.setMessage(res);
+            response.setAction("changeNickname failed");
+            sendResponse(response);
         }
     }
 
