@@ -36,6 +36,7 @@ module game.civilization {
     opens game.civilization.Model.NetworkModels to com.google.gson;
 
     exports game.civilization.Controller.NetworkController to javafx.graphics;
+    exports game.civilization.Controller.NetworkController.Server to javafx.graphics;
     opens game.civilization to javafx.fxml;
     opens game.civilization.Controller.GameControllerPackage to com.google.gson, xstream;
     opens game.civilization.Model to com.google.gson, xstream, javafx.base;
@@ -45,5 +46,5 @@ module game.civilization {
     exports game.civilization.FxmlController.GameScenes to javafx.fxml;
     opens game.civilization.FxmlController.GameScenes to javafx.fxml;
     exports game.civilization.Controller.NetworkController.Client to javafx.graphics;
-    exports game.civilization.Controller.NetworkController.Server to javafx.graphics;
+    exports game.civilization.Controller.NetworkController.GameServer to javafx.graphics;
 }

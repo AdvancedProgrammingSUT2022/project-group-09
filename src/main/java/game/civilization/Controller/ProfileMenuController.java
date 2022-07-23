@@ -37,7 +37,7 @@ public class ProfileMenuController extends Controller {
         Request request = new Request();
         request.setAction("changeNickname");
         request.addData("nickname", newNickname);
-        Message message = Client.getClientSocketController().sendMessageAndGetMessage(request);
+        Message message = Client.getClientServerSocketController().sendMessageAndGetMessage(request);
         if (message.getAction().equals("change done")) {
             UserDatabase.setCurrentUser(User.fromJson(message.getMessage()));
             System.out.println("change nickname : " + UserDatabase.getCurrentUser().getNickname());
@@ -51,7 +51,7 @@ public class ProfileMenuController extends Controller {
         request.setAction("changePassword");
         request.addData("newPassword", newPassword);
         request.addData("oldPassword", oldPassword);
-        Message message = Client.getClientSocketController().sendMessageAndGetMessage(request);
+        Message message = Client.getClientServerSocketController().sendMessageAndGetMessage(request);
         if (message.getAction().equals("change done")) {
             UserDatabase.setCurrentUser(User.fromJson(message.getMessage()));
             System.out.println("change password : " + UserDatabase.getCurrentUser().getPassword());
@@ -64,7 +64,7 @@ public class ProfileMenuController extends Controller {
         Message request = new Message();
         request.setAction("changePicture");
         request.setMessage(url);
-        Client.getClientSocketController().sendMessage(request);
+        Client.getClientServerSocketController().sendMessage(request);
         InputStream inputStream;
         try {
             inputStream = new FileInputStream(url);

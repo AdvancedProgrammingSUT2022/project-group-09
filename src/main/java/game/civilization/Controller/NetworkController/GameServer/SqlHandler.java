@@ -1,6 +1,5 @@
-package game.civilization.Controller.NetworkController.Server;
+package game.civilization.Controller.NetworkController.GameServer;
 
-import game.civilization.Controller.UserDatabase;
 import game.civilization.Model.User;
 
 import java.sql.*;

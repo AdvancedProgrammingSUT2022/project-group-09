@@ -3,48 +3,36 @@ package game.civilization.Controller.NetworkController.Server;
 import com.thoughtworks.xstream.XStream;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
+import game.civilization.Controller.NetworkController.GameServer.Proxy;
+import game.civilization.Controller.NetworkController.GameServer.ProxySocketController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.Model.Improvements.Improvement;
-import game.civilization.Model.Resources.Resource;
 import game.civilization.Model.Units.Settler;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class Server extends Application {
-    public static String getXml() {
-        return xml;
-    }
 
-    public static void setXml(String xml) {
-        Server.xml = xml;
-    }
-
-    private static ArrayList<ServerSocketHandler> clientSockets = new ArrayList<>();
-    private static String xml;
-    private ServerSocket serverSocket;
+    private static final ArrayList<ServerSocketController> clientSockets = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         launch();
     }
 
-    public static ArrayList<ServerSocketHandler> getClientSockets() {
-        return clientSockets;
-    }
-
 
     private void connect() throws IOException {
-        serverSocket = new ServerSocket(700);
+        ServerSocket serverSocket = new ServerSocket(8000);
         while (true) {
             Socket socket = serverSocket.accept();
             System.out.println(socket + " first is connected");
             Socket socket2 = serverSocket.accept();
             System.out.println(socket + " second is connected");
-            ServerSocketHandler socketHandler = new ServerSocketHandler(socket, socket2);
+            ServerSocketController socketHandler = new ServerSocketController(socket, socket2);
             Server.getClientSockets().add(socketHandler);
         }
     }
@@ -52,12 +40,10 @@ public class Server extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         UserDatabase.loadUsers();
-        GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
-        ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
-        GameDataBase.getMainMap().getTerrain(0,0).setImprovement(Improvement.FARM);
-        GameDataBaseSaving.saveGame();
-        XStream xStream = new XStream();
-        Server.xml = xStream.toXML(GameDataBaseSaving.getInstance());
         connect();
+    }
+
+    public static ArrayList<ServerSocketController> getClientSockets() {
+        return clientSockets;
     }
 }

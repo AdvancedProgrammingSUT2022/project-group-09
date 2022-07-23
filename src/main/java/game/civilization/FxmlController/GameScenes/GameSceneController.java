@@ -193,7 +193,7 @@ public class GameSceneController implements Initializable {
         clearPane();
         new GameMenuController().doNextTurn();
         refresh();
-        Client.getClientSocketController().setGame();
+        Client.getClientProxySocketController().setGame();
     }
 
     public void refresh() {

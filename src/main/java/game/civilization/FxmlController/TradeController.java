@@ -1,16 +1,9 @@
 package game.civilization.FxmlController;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
-import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
-import game.civilization.Controller.GameControllerPackage.GameMenuController;
-import game.civilization.Controller.NetworkController.Client.Client;
-import game.civilization.Controller.NetworkController.Client.ClientSocketController;
 import game.civilization.Controller.UserDatabase;
-import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
-import game.civilization.MenuRegex.GameMenuRegex;
 import game.civilization.Model.City;
 import game.civilization.Model.Civilization;
-import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Resources.Resource;
 import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.TradingObject;
@@ -20,18 +13,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
 
 public class TradeController implements Initializable {
 

@@ -31,7 +31,7 @@ public class LoginMenuController extends Controller {
         request.addData("username", username);
         request.addData("nickname", nickname);
         request.addData("password", password);
-        Message message = Client.getClientSocketController().sendMessageAndGetMessage(request);
+        Message message = Client.getClientServerSocketController().sendMessageAndGetMessage(request);
         System.out.println(message.getMessage());
         return message.getMessage();
     }
@@ -41,7 +41,7 @@ public class LoginMenuController extends Controller {
         request.setAction("login");
         request.addData("username", username);
         request.addData("password", password);
-        Message message = Client.getClientSocketController().sendMessageAndGetMessage(request);
+        Message message = Client.getClientServerSocketController().sendMessageAndGetMessage(request);
         if (message.getAction().equals("login done")) {
             UserDatabase.setCurrentUser(User.fromJson(message.getMessage()));
             CurrentMenu.set(CurrentMenu.MainMenu);

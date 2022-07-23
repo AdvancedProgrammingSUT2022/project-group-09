@@ -4,7 +4,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
-import game.civilization.Controller.NetworkController.Server.Server;
+import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.Model.Civilization;
@@ -19,17 +19,16 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
-public class ClientSocketController {
+public class ClientServerSocketController {
     private final Socket socket;
     private final DataInputStream dataInputStream;
     private final DataOutputStream dataOutputStream;
     private final Socket socket2;
     private final DataInputStream dataInputStream2;
     private final DataOutputStream dataOutputStream2;
-    private boolean isListenCalledBefore = false;
-    private boolean isGameLoadedFOrFirstTime = false;
+    private boolean isListenCalledBefore;
 
-    public ClientSocketController(Socket socket, Socket socket2) throws IOException {
+    public ClientServerSocketController(Socket socket, Socket socket2) throws IOException {
         this.socket = socket;
         dataInputStream = new DataInputStream(socket.getInputStream());
         dataOutputStream = new DataOutputStream(socket.getOutputStream());
@@ -38,7 +37,7 @@ public class ClientSocketController {
         dataOutputStream2 = new DataOutputStream(socket2.getOutputStream());
         Message message = new Message();
         message.setAction("introduction");
-        message.setMessage(UserDatabase.getCurrentUser().getUsername());
+        message.setMessage("");
         sendMessage(message);
         listen();
     }
@@ -66,63 +65,7 @@ public class ClientSocketController {
     }
 
     private void handleReq(Message message) throws IOException, InterruptedException {
-        if (message.getAction().equals("GameDatabase"))
-            readGame(message);
-//        if (message.getAction().equals("receive trade")) {
-//            TradingObject tradingObject = TradingObject.fromJson(message.getMessage());
-//            loadTradingObject(tradingObject);
-//        }
-    }
 
-//    private void loadTradingObject(TradingObject tradingObject) {
-//        Civilization civilization = findCiv();
-//        assert civilization != null;
-//        civilization.getGold().setCurrentGold(civilization.getGold().getCurrentGold() + tradingObject.getGold());
-//        civilization.getCities().get(0).getTerrains().get(0).getResources().addAll(tradingObject.getResources());
-//        civilization.getTradingObjects().add(tradingObject);
-//    }
-
-    private Civilization findCiv() {
-        for (Civilization civilization1 : GameDataBase.getCivilizations()) {
-            if (civilization1.getName().equals(UserDatabase.getCurrentUser().getUsername()))
-                return civilization1;
-        }
-        return null;
-    }
-
-    private void readGame(Message message) throws InterruptedException {
-        String xml = message.getMessage();
-        XStream xStream = new XStream();
-        xStream.addPermission(AnyTypePermission.ANY);
-        if (xml.length() != 0) {
-            GameDataBaseSaving game = (GameDataBaseSaving) xStream.fromXML(xml);
-            game.setToGameDataBase();
-            isGameLoadedFOrFirstTime = true;
-            while (GameSceneDataBase.getInstance().getGameSceneController() == null) {
-                System.out.println("waiting!");
-                TimeUnit.MILLISECONDS.sleep(400);
-            }
-            if (GameSceneDataBase.getInstance().getGameSceneController() != null) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        GameSceneDataBase.getInstance().getGameSceneController().refresh();
-                    }
-                });
-            }
-            System.out.println("game loaded from Server");
-        }
-    }
-
-    public void setGame() throws IOException {
-        XStream xStream = new XStream();
-        String xml = xStream.toXML(GameDataBaseSaving.getInstance());
-
-        Message message = new Message();
-        message.setAction("set GameDatabase");
-        message.setMessage(xml);
-
-        sendMessage(message);
     }
 
     public void sendMessage(Message message) throws IOException {
@@ -146,11 +89,6 @@ public class ClientSocketController {
         System.out.println(Message.fromJson(messageJson).getAction() + " received");
         return Message.fromJson(messageJson);
     }
-
-    public boolean isGameLoadedFOrFirstTime() {
-        return isGameLoadedFOrFirstTime;
-    }
-
     private Message getMessage() throws IOException {
         int length = dataInputStream2.readInt();
         byte[] data = new byte[length];
@@ -158,6 +96,5 @@ public class ClientSocketController {
         String messageJson = new String(data, StandardCharsets.UTF_8);
         return Message.fromJson(messageJson);
     }
-
 
 }
