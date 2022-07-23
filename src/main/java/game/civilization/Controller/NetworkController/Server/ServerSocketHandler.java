@@ -1,21 +1,19 @@
 package game.civilization.Controller.NetworkController.Server;
 
-import game.civilization.Controller.LoginMenuController;
-import game.civilization.Controller.ProfileMenuController;
-import game.civilization.Controller.UserDatabase;
-import game.civilization.Model.NetworkModels.Message;
-import game.civilization.Model.Request;
-import game.civilization.Model.TradingObject;
-import game.civilization.Model.User;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public class ServerSocketHandler {
+import game.civilization.Controller.LoginMenuController;
+import game.civilization.Controller.ProfileMenuController;
+import game.civilization.Controller.UserDatabase;
+import game.civilization.Model.Request;
+import game.civilization.Model.User;
+import game.civilization.Model.NetworkModels.Message;
 
+public class ServerSocketHandler {
 
     private final Socket socket;
     private final DataInputStream dataInputStream;
@@ -32,7 +30,6 @@ public class ServerSocketHandler {
         this.socket2 = socket2;
         dataInputStream2 = new DataInputStream(socket2.getInputStream());
         dataOutputStream2 = new DataOutputStream(socket2.getOutputStream());
-        sendGame();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -58,91 +55,19 @@ public class ServerSocketHandler {
         }
     }
 
-    private void sendGameToAll() throws IOException {
-        for (ServerSocketHandler socketHandler : Server.getClientSockets()) {
-            if (socketHandler == this)
-                continue;
-            System.out.println("game is sending for " + socketHandler.socket2);
-            socketHandler.sendGame();
-        }
-    }
-
-    private void sendGame() throws IOException {
-        Message message = new Message();
-        message.setAction("GameDatabase");
-        message.setMessage(Server.getXml());
-        sendMessage(message);
-        System.out.println("game data base send");
-    }
-
     private void handleReq(Message message) throws IOException {
-        if (message.getAction().equals("set GameDatabase")) {
-            System.out.println("GameDatabase get from " + socket);
-            Server.setXml(message.getMessage());
-            sendGameToAll();
-            System.out.println("Xml Server updated");
-        }
-        if (message.getAction().equals("introduction")) {
-            System.out.println("introduction done client name is :" + message.getMessage());
-            name = message.getMessage();
-        }
         if (message.getAction().equals("register")) {
             register(message);
-        }
-        if (message.getAction().equals("login")) {
+        } else if (message.getAction().equals("login")) {
             login(message);
-        }
-        if (message.getAction().equals("changeNickname")) {
+        } else if (message.getAction().equals("changeNickname")) {
             changeNickname(message);
-        }
-        if (message.getAction().equals("changePassword")) {
+        } else if (message.getAction().equals("changePassword")) {
             changePassword(message);
-        }
-        if (message.getAction().equals("changePicture")) {
+        } else if (message.getAction().equals("changePicture")) {
             changePicture(message);
         }
     }
-
-    private void changePicture(Message message) {
-        User user = UserDatabase.findUserByUsername(name);
-        assert user != null;
-        new ProfileMenuController().changeProfileServer(user, message.getMessage());
-    }
-
-    private void changePassword(Message message) throws IOException {
-        User user = UserDatabase.findUserByUsername(name);
-        assert user != null;
-        String res = new ProfileMenuController().changePasswordServer(user, (String) Request.fromJson(message.getMessage()).getData().get("newPassword"), (String) Request.fromJson(message.getMessage()).getData().get("oldPassword"));
-        if (res.equals("password changed successfully!")) {
-            Message message1 = new Message();
-            message1.setMessage(user.toJson());
-            message1.setAction("change done");
-            sendMessageOnFirstData(message1);
-        } else {
-            Message message1 = new Message();
-            message1.setMessage(res);
-            message1.setAction("change failed");
-            sendMessageOnFirstData(message1);
-        }
-    }
-
-    private void changeNickname(Message message) throws IOException {
-        User user = UserDatabase.findUserByUsername(name);
-        assert user != null;
-        String res = new ProfileMenuController().changeNicknameServer(user, (String) Request.fromJson(message.getMessage()).getData().get("nickName"));
-        if (res.equals("nickname changed successfully!")) {
-            Message message1 = new Message();
-            message1.setMessage(user.toJson());
-            message1.setAction("change done");
-            sendMessageOnFirstData(message1);
-        } else {
-            Message message1 = new Message();
-            message1.setMessage(res);
-            message1.setAction("changeNickname failed");
-            sendMessageOnFirstData(message1);
-        }
-    }
-
 
     private Message getMessage() throws IOException {
         int length = dataInputStream.readInt();
@@ -166,6 +91,19 @@ public class ServerSocketHandler {
         dataOutputStream.writeInt(data.length);
         dataOutputStream.write(data);
         dataOutputStream.flush();
+    }
+
+    public Message sendMessageAndGetMessage(Request request) throws IOException {
+        Message message = new Message();
+        message.setMessage(request.toJson());
+        message.setAction(request.getAction());
+        sendMessage(message);
+        int length = dataInputStream.readInt();
+        byte[] data = new byte[length];
+        dataInputStream.readFully(data);
+        String messageJson = new String(data, StandardCharsets.UTF_8);
+        System.out.println(Message.fromJson(messageJson).getAction() + " received");
+        return Message.fromJson(messageJson);
     }
 
     public String getName() {
@@ -206,4 +144,48 @@ public class ServerSocketHandler {
         }
 
     }
+
+    private void changePicture(Message message) {
+        User user = UserDatabase.findUserByUsername(name);
+        assert user != null;
+        new ProfileMenuController().changeProfileServer(user, message.getMessage());
+    }
+
+    private void changePassword(Message message) throws IOException {
+        User user = UserDatabase.findUserByUsername(name);
+        assert user != null;
+        String res = new ProfileMenuController().changePasswordServer(user,
+                (String) Request.fromJson(message.getMessage()).getData().get("newPassword"),
+                (String) Request.fromJson(message.getMessage()).getData().get("oldPassword"));
+        if (res.equals("password changed successfully!")) {
+            Message message1 = new Message();
+            message1.setMessage(user.toJson());
+            message1.setAction("change done");
+            sendMessageOnFirstData(message1);
+        } else {
+            Message message1 = new Message();
+            message1.setMessage(res);
+            message1.setAction("change failed");
+            sendMessageOnFirstData(message1);
+        }
+    }
+
+    private void changeNickname(Message message) throws IOException {
+        User user = UserDatabase.findUserByUsername(name);
+        assert user != null;
+        String res = new ProfileMenuController().changeNicknameServer(user,
+                (String) Request.fromJson(message.getMessage()).getData().get("nickName"));
+        if (res.equals("nickname changed successfully!")) {
+            Message message1 = new Message();
+            message1.setMessage(user.toJson());
+            message1.setAction("change done");
+            sendMessageOnFirstData(message1);
+        } else {
+            Message message1 = new Message();
+            message1.setMessage(res);
+            message1.setAction("changeNickname failed");
+            sendMessageOnFirstData(message1);
+        }
+    }
+
 }
