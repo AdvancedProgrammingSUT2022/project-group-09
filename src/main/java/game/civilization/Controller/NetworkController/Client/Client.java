@@ -1,23 +1,14 @@
 package game.civilization.Controller.NetworkController.Client;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
-import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
-import game.civilization.Model.Resources.Resource;
-import game.civilization.Model.Units.Settler;
 import game.civilization.Model.User;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.concurrent.TimeUnit;
 
 public class Client extends Application {
     private Socket socket; //send
@@ -42,7 +33,7 @@ public class Client extends Application {
         UserDatabase.setCurrentUser(new User("a", "ll", "kk"));
         GameDataBase.buildCustomisableMap();
         SceneController.getInstance().setStage(stage);
-        SceneController.getInstance().buildMap();
+        SceneController.getInstance().MainMenu();
 //        connect();
 //        Client.clientSocketController = new ClientSocketController(socket, socket2);
 //        while (!clientSocketController.isGameLoadedFOrFirstTime()) {

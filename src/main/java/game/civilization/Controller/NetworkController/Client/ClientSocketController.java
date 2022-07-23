@@ -4,7 +4,6 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
-import game.civilization.Controller.NetworkController.Server.Server;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.Model.Civilization;
@@ -69,19 +68,7 @@ public class ClientSocketController {
     private void handleReq(Message message) throws IOException, InterruptedException {
         if (message.getAction().equals("GameDatabase"))
             readGame(message);
-//        if (message.getAction().equals("receive trade")) {
-//            TradingObject tradingObject = TradingObject.fromJson(message.getMessage());
-//            loadTradingObject(tradingObject);
-//        }
     }
-
-//    private void loadTradingObject(TradingObject tradingObject) {
-//        Civilization civilization = findCiv();
-//        assert civilization != null;
-//        civilization.getGold().setCurrentGold(civilization.getGold().getCurrentGold() + tradingObject.getGold());
-//        civilization.getCities().get(0).getTerrains().get(0).getResources().addAll(tradingObject.getResources());
-//        civilization.getTradingObjects().add(tradingObject);
-//    }
 
     private Civilization findCiv() {
         for (Civilization civilization1 : GameDataBase.getCivilizations()) {
