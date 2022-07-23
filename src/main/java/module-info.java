@@ -4,6 +4,8 @@ module game.civilization {
     requires transitive javafx.web;
     requires transitive javafx.graphics;
     requires transitive javafx.media;
+    requires transitive java.sql;
+    requires transitive org.postgresql.jdbc;
 
     requires transitive org.controlsfx.controls;
     requires transitive com.dlsc.formsfx;
