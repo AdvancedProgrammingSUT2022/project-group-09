@@ -73,6 +73,17 @@ public class User {
         this.lastLoginTime = lastLoginTime;
     }
 
+    public User(String username, String password, String nickname, String score, String lastWinTime, String lastLoginTime, String rank, String profileUrl, String inputStream) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.score = Integer.parseInt(score);
+        this.lastWinTime = lastWinTime;
+        this.lastLoginTime = lastLoginTime;
+        this.rank = Integer.parseInt(rank);
+        this.profileUrl = profileUrl;
+        this.inputStream = Boolean.parseBoolean(inputStream);
+    }
 
     public User(String username, String password, String nickname) {
         this.username = username;

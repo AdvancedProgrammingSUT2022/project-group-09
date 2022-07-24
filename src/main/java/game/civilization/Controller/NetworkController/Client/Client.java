@@ -1,11 +1,16 @@
 package game.civilization.Controller.NetworkController.Client;
 
+import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
+import game.civilization.Model.Improvements.Improvement;
+import game.civilization.Model.User;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 public class Client extends Application {
     private Socket socket; //send
@@ -38,35 +43,32 @@ public class Client extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        connect();
-        Client.clientServerSocketController = new ClientServerSocketController(socket, socket2);
-        SceneController.getInstance().setStage(stage);
-        stage.setTitle("CivilizationV");
-        SceneController.getInstance().LoginMenu();
+//        connect();
+//        Client.clientServerSocketController = new ClientServerSocketController(socket, socket2);
+//        SceneController.getInstance().setStage(stage);
+//        stage.setTitle("CivilizationV");
+//        SceneController.getInstance().LoginMenu();
 
 
         //******* BE IN PAEINI HA DAST NAZANID *******
-//        debugImprovement();
-//        UserDatabase.setCurrentUser(new User("a", "ll", "kk"));
-////        GameDataBase.buildCustomisableMap();
-////        SceneController.getInstance().setStage(stage);
-////        SceneController.getInstance().buildMap();
-//        connect();
-//        Client.clientSocketController = new ClientSocketController(socket, socket2);
-//        while (!clientSocketController.isGameLoadedFOrFirstTime()) {
-//            System.out.println("game not loaded yet");
-//            TimeUnit.MILLISECONDS.sleep(400);
-//        }
-//        System.out.println(GameDataBase.getMainMap().getTerrain(0,0).getImprovementPair().getKey());
-//        SceneController.getInstance().setStage(stage);
-//        stage.setTitle("CivilizationV ");//+UserDatabase.getCurrentUser().getUsername());
-//        SceneController.getInstance().game();
+        debugImprovement();
+        UserDatabase.setCurrentUser(new User("a", "ll", "kk"));
+        connect();
+        Client.clientProxySocketController = new ClientProxySocketController(socket, socket2);
+        while (!clientProxySocketController.isGameLoadedFOrFirstTime()) {
+            System.out.println("game not loaded yet");
+            TimeUnit.MILLISECONDS.sleep(400);
+        }
+        System.out.println(GameDataBase.getMainMap().getTerrain(0,0).getImprovementPair().getKey());
+        SceneController.getInstance().setStage(stage);
+        stage.setTitle("CivilizationV ");//+UserDatabase.getCurrentUser().getUsername());
+        SceneController.getInstance().game();
     }
 
-//    private void debugImprovement() {
-//        for (Improvement improvement : Improvement.getAllImprovements()) {
-//            improvement.getCanBeBuiltON();
-//            improvement.getRequiredTechnology();
-//        }
-//    }
+    private void debugImprovement() {
+        for (Improvement improvement : Improvement.getAllImprovements()) {
+            improvement.getCanBeBuiltON();
+            improvement.getRequiredTechnology();
+        }
+    }
 }

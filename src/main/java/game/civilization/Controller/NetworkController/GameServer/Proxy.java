@@ -51,6 +51,7 @@ public class Proxy extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         UserDatabase.loadUsers();
+        UserDatabase.saveUsers();
         GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
         ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
         GameDataBase.getMainMap().getTerrain(0,0).setImprovement(Improvement.FARM);
