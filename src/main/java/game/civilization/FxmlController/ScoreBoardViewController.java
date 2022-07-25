@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import game.civilization.Controller.LoginMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.Model.User;
 import javafx.beans.binding.Bindings;
@@ -19,6 +20,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 public class ScoreBoardViewController {
 
@@ -36,10 +40,14 @@ public class ScoreBoardViewController {
     private TableColumn<User, String> lastWinColumn;
     @FXML
     private TableColumn<User, String> lastLoginColumn;
+    @FXML
+    private TableColumn<User, String> isOnlineColumn;
 
     @FXML
     public void initialize() {
+        System.out.println("hello");
         ArrayList<User> users = UserDatabase.getUsers();
+        System.out.println("userdatabase.getUsers" + UserDatabase.getUsers());
         sortUsers(users);
         setAllCellValueFactory();
         scoreboardTable.setFixedCellSize(60);
@@ -54,6 +62,27 @@ public class ScoreBoardViewController {
             });
             return cell;
         });
+
+        isOnlineColumn.setCellFactory(col -> {
+            TableCell<User, String> cell = new TableCell<>();
+            cell.itemProperty().addListener((observableValue, o, newValue) -> {
+                if (newValue != null) {
+                    Circle circle = new Circle(20, 20, 20);
+                    circle.setFill(Color.RED);
+                    try {
+                        if (new LoginMenuController().isUserOnlineClient(newValue))
+                        circle.setFill(Color.GREEN);
+                        
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(circle));
+                }
+            });
+            return cell;
+        });
+
         ObservableList<User> usersObservableList = FXCollections.observableArrayList(users);
         scoreboardTable.setItems(usersObservableList);
 
@@ -78,9 +107,11 @@ public class ScoreBoardViewController {
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
         lastWinColumn.setCellValueFactory(new PropertyValueFactory<>("lastWinTime"));
         lastLoginColumn.setCellValueFactory(new PropertyValueFactory<>("lastLoginTime"));
+        isOnlineColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
     }
 
     private void sortUsers(ArrayList<User> users) {
+        System.out.println(users);
         Comparator<User> c = (user1, user2) -> Integer.compare(user2.getScore(), user1.getScore());
         c = c.thenComparing((user1, user2) -> user1.getLastWinTime().compareTo(user2.getLastWinTime()));
         c = c.thenComparing((user1, user2) -> user1.getLastLoginTime().compareTo(user2.getLastLoginTime()));

@@ -1,6 +1,8 @@
 package game.civilization.Controller.NetworkController.Client;
 
+import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
+import game.civilization.Model.User;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -42,6 +44,8 @@ public class Client extends Application {
         Client.clientServerSocketController = new ClientServerSocketController(socket, socket2);
         SceneController.getInstance().setStage(stage);
         stage.setTitle("CivilizationV");
+        UserDatabase.loadUsers();
+        UserDatabase.setCurrentUser(new User("pouya", "1234@asDF", "pouyaL"));
         SceneController.getInstance().LoginMenu();
 
 

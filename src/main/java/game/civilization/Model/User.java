@@ -79,6 +79,8 @@ public class User {
         this.password = password;
         this.nickname = nickname;
         this.score = 0;
+        this.lastLoginTime = "";
+        this.lastWinTime = "";
         profileUrl = Main.class.getResource("images/avatar/5.png").toExternalForm();
     }
 

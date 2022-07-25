@@ -6,7 +6,10 @@ import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.NetworkController.GameServer.Proxy;
 import game.civilization.Controller.NetworkController.GameServer.ProxySocketController;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.Model.Request;
+import game.civilization.Model.Response;
 import game.civilization.Model.Improvements.Improvement;
+import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Units.Settler;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -24,7 +27,6 @@ public class Server extends Application {
         launch();
     }
 
-
     private void connect() throws IOException {
         ServerSocket serverSocket = new ServerSocket(8000);
         while (true) {
@@ -40,7 +42,49 @@ public class Server extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         UserDatabase.loadUsers();
+        checkIsClientAlive();
         connect();
+    }
+
+    public void checkIsClientAlive() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public synchronized void run() {
+                while (true) {
+                    for (int i = 0; i < clientSockets.size(); i++) {
+                        ServerSocketController s = clientSockets.get(i);
+                        Thread tmpThread = new Thread(new Runnable() {
+                            @Override
+                            public synchronized void run() {
+                                try {
+                                    wait(600);
+                                    clientSockets.remove(s);
+                                } catch (InterruptedException e) {
+                                }
+                            }
+                        });
+                        tmpThread.start();
+                        Message message = new Message();
+                        message.setAction("are you alive?");
+                        try {
+                            s.sendMessageDirectly(message);
+                            wait(200);
+                        } catch (InterruptedException | IOException e) {
+                        }
+                        if (s.getIsAlive()) {
+                            tmpThread.interrupt();
+                            s.setIsAlive(false);
+                        }
+                    }
+                    try {
+                        wait(2000);
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
     }
 
     public static ArrayList<ServerSocketController> getClientSockets() {

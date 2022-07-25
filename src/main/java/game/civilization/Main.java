@@ -19,14 +19,19 @@ import game.civilization.Model.Units.Settler;
 import game.civilization.View.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
@@ -35,7 +40,12 @@ import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
     public static void main(String[] args) {
-        launch();
+        //     System.out.println(Main.class.getResource("images/avatar/1.png"));
+        // File fi = new File(Objects.requireNonNull(Main.class.getResource("images/avatar/1.png").toExternalForm()));
+        // byte[] fileContent = Files.readAllBytes(fi.toPath());
+        Image image = new Image(Main.class.getResource("images/avatar/1.png").toExternalForm());
+        System.out.println(image.getPixelReader().toString());
+        // launch();
     }
 
     @Override

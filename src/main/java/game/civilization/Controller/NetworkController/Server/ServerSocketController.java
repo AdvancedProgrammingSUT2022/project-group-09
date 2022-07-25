@@ -24,6 +24,7 @@ public class ServerSocketController {
     private final DataInputStream dataInputStream2;
     private final DataOutputStream dataOutputStream2;
     private String name;
+    private boolean isAlive = true;
 
     public ServerSocketController(Socket socket, Socket socket2) throws IOException {
         this.socket = socket;
@@ -64,6 +65,8 @@ public class ServerSocketController {
             case "changeNickname" -> changeNickname(request);
             case "changePassword" -> changePassword(request);
             case "changePicture" -> changePicture(request);
+            case "isOnline" -> isOnline(request);
+            case "stayin alive" -> isAlive = true;
         }
     }
 
@@ -75,7 +78,7 @@ public class ServerSocketController {
         return Request.fromJson(messageJson);
     }
 
-    private void sendMessageDirectly(Message message) throws IOException {
+    public void sendMessageDirectly(Message message) throws IOException {
         String temp = message.toJson();
         byte[] data = temp.getBytes(StandardCharsets.UTF_8);
         dataOutputStream2.writeInt(data.length);
@@ -89,6 +92,18 @@ public class ServerSocketController {
         dataOutputStream.writeInt(data.length);
         dataOutputStream.write(data);
         dataOutputStream.flush();
+    }
+
+    private void isOnline(Request request) throws IOException {
+        String username = (String) request.getData().get("username");
+        Response response = new Response();
+        response.setAction("isOnline done");
+        if (isUsernameOnline(username)) {
+            response.setMessage("online");
+        } else {
+            response.setMessage("offline");
+        }
+        sendResponse(response);
     }
 
     private void register(Request request) throws IOException {
@@ -167,5 +182,20 @@ public class ServerSocketController {
         }
     }
 
+    private boolean isUsernameOnline(String username) {
+        for (ServerSocketController s : Server.getClientSockets())
+                if (s != null && s.name != null)
+                    if (s.name.equals(username))
+                        return true;
+        return false;
+    }
+
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
+
+    public boolean getIsAlive() {
+        return this.isAlive;
+    }
 
 }

@@ -62,7 +62,15 @@ public class ClientServerSocketController {
     }
 
     private void handleReq(Message message) throws IOException, InterruptedException {
+        switch (message.getAction()) {
+            case "are you alive?" -> stayinAlive();
+        }
+    }
 
+    public void stayinAlive() throws IOException {
+        Request request = new Request();
+        request.setAction("stayin alive");
+        justSendRequest(request);
     }
 
     public void justSendRequest(Request request) throws IOException {

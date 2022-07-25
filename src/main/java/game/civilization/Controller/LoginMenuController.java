@@ -52,6 +52,19 @@ public class LoginMenuController extends Controller {
         return message.getMessage();
     }
 
+    public boolean isUserOnlineClient(String username) throws IOException {
+        Request request = new Request();
+        request.setAction("isOnline");
+        request.addData("username", username);
+        Response message = Client.getClientServerSocketController().sendRequestAndGetResponse(request);
+        if (message.getAction().equals("isOnline done")) {
+            if (message.getMessage().equals("online"))
+                return true;
+            else if (message.getMessage().equals("offline"))
+                return false;
+        }
+        return false;
+    }
 
     public String registerServer(String username, String nickname, String password) {
         if (LoginMenuRegex.getMatcher(username, LoginMenuRegex.USERNAME_FORMAT_REGEX) == null) {
