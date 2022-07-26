@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.LobbyController">
+   <children>
+      <ImageView fitHeight="764.0" fitWidth="1333.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/background/2380386.jpg" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="78.0" layoutY="146.0" prefHeight="54.0" prefWidth="150.0" text="GAMES" textAlignment="CENTER" textFill="#161f72" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="32.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="570.0" layoutY="243.0" prefHeight="54.0" prefWidth="150.0" text="YOUR GAMES" textAlignment="CENTER" textFill="#161f72" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="22.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="947.0" layoutY="147.0" prefHeight="71.0" prefWidth="221.0" text="BUILD A NEW GAME" textAlignment="CENTER" textFill="#161f72" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="24.0" />
+         </font>
+      </Label>
+      <TextField layoutX="939.0" layoutY="340.0" prefHeight="42.0" prefWidth="231.0" promptText="NUMBER OF PLAYERS" fx:id="number">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="ok" layoutX="1036.0" layoutY="526.0" mnemonicParsing="false" text="OK" onAction="#addGame">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="14.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="424.0" layoutY="16.0" prefHeight="75.0" prefWidth="450.0" text="LOBBY">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="71.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="0.4394299287410926" endY="0.5724465558194775" startX="0.3515439429928741" startY="0.3182897862232779">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.08497807383537292" green="0.10650584846735" blue="0.40789473056793213" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Button fx:id="refresh" layoutX="316.0" layoutY="626.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" text="REFRESH" onAction="#initialize">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="11.0" />
+         </font>
+      </Button>
+      <TextField layoutX="939.0" layoutY="412.0" prefHeight="42.0" prefWidth="231.0" promptText="ID" fx:id="id">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="14.0" />
+         </font>
+      </TextField>
+      <CheckBox layoutX="1015.0" layoutY="481.0" mnemonicParsing="false" text="PRIVATE" fx:id="privatee">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="12.0" />
+         </font>
+      </CheckBox>
+   </children>
+</AnchorPane>

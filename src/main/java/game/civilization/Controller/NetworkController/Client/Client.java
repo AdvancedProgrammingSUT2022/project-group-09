@@ -42,7 +42,8 @@ public class Client extends Application {
         Client.clientServerSocketController = new ClientServerSocketController(socket, socket2);
         SceneController.getInstance().setStage(stage);
         stage.setTitle("CivilizationV");
-        SceneController.getInstance().LoginMenu();
+//        SceneController.getInstance().LoginMenu();
+        SceneController.getInstance().Lobby();
 
 
         //******* BE IN PAEINI HA DAST NAZANID *******
