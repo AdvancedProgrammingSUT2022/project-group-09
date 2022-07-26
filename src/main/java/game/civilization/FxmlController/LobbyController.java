@@ -1,15 +1,20 @@
 package game.civilization.FxmlController;
 
+import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.NetworkController.Client.Client;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.FxmlController.GameScenes.SceneController.SettlerController;
 import game.civilization.Model.Game;
 import game.civilization.Model.Response;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
@@ -31,6 +36,7 @@ public class LobbyController implements Initializable {
     private TextField number;
     @FXML
     private CheckBox privatee;
+    private Pane gamePane;
 
     private ArrayList<Game> availableGames = new ArrayList<>();
     private ArrayList<Game> myGames = new ArrayList<>();
@@ -52,7 +58,7 @@ public class LobbyController implements Initializable {
         }
     }
 
-    public void buildTable(){
+    public void buildTable() {
         int x = 78, y = 146;
         for (Game availableGame : availableGames) {
             Label label = new Label(String.valueOf(availableGame.getId()));
@@ -62,34 +68,33 @@ public class LobbyController implements Initializable {
             label.setPrefWidth(70);
             label.setPrefHeight(30);
             label.setFont(new Font("Baloo Bhaina Regular", 12));
-            label.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    //todo make pane that shows details
-                }
-            });
             label.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    //todo make pane that Has a button for leave or add
+                    if (gamePane != null) {
+                        pane.getChildren().remove(gamePane);
+                        gamePane = null;
+                    } else {
+                        gamePane = makeGamePane(availableGame);
+                        pane.getChildren().add(gamePane);
+                    }
                 }
             });
             pane.getChildren().add(label);
         }
     }
 
-    public void addGame(){
-        if (id.getText().equals("")){
+    public void addGame() {
+        if (id.getText().equals("")) {
             return;
         }
-        if (number.getText().equals("")){
+        if (number.getText().equals("")) {
             return;
         }
         Game game = new Game();
-        if (privatee.isSelected()){
+        if (privatee.isSelected()) {
             game.setPrivate(true);
-        }
-        else {
+        } else {
             game.setPrivate(false);
         }
         game.setNumberOfPlayers(Integer.parseInt(number.getText()));
@@ -97,6 +102,48 @@ public class LobbyController implements Initializable {
 //        game.addPlayer(UserDatabase.getCurrentUser());
 //        game.setAdmin(UserDatabase.getCurrentUser());
         //todo build tabel for this
+    }
+
+    private Pane makeGamePane(Game game) {
+        Pane pane = new Pane();
+        Rectangle rectangle = new Rectangle();
+        rectangle.setStyle("-fx-arc-height: 20;-fx-arc-width: 20;-fx-fill: linear-gradient(#ffda4a, #ffd700)");
+        rectangle.setX(0);
+        rectangle.setY(0);
+        rectangle.setWidth(220);
+        rectangle.setHeight(60);
+        pane.getChildren().add(rectangle);
+        pane.minWidth(6000);
+        pane.minHeight(6000);
+        pane.maxWidth(6000);
+        pane.maxHeight(6000);
+        pane.prefHeight(6000);
+        pane.prefWidth(6000);
+        pane.setLayoutX(60);
+        pane.setLayoutY(70);
+
+        Button join = new Button();
+        if (game.getPlayers().contains(UserDatabase.getCurrentUser())) {
+            join.setText("leave");
+        } else {
+            join.setText("join");
+        }
+        join.setStyle(SettlerController.res);
+        join.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (join.getText().equals("join")) {
+                    game.getPlayers().add(UserDatabase.getCurrentUser());
+                    join.setText("leave");
+                } else {
+                    game.getPlayers().remove(UserDatabase.getCurrentUser());
+                    join.setText("join");
+                }
+
+            }
+        });
+        pane.getChildren().add(join);
+        return pane;
     }
 
 }
