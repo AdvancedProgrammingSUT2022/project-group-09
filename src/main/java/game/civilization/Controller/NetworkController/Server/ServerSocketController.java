@@ -36,6 +36,10 @@ public class ServerSocketController {
     private final DataOutputStream dataOutputStream2;
     private String name;
 
+    public String getName() {
+        return name;
+    }
+
     public ServerSocketController(Socket socket, Socket socket2) throws IOException {
         this.socket = socket;
         dataInputStream = new DataInputStream(socket.getInputStream());
@@ -81,7 +85,20 @@ public class ServerSocketController {
             case "add to game" -> addToGame(request);
             case "leave game" -> leaveGame(request);
             case "search game" -> changePicture(request);
+            case "launch game" -> launchGame(request);
             case "change visibility" -> changePicture(request);
+        }
+    }
+
+    private void launchGame(Request request) throws IOException {
+        Game game = (Game) request.getData().get("game");
+        Message message = new Message();
+        message.setAction("launch game");
+        for (ServerSocketController clientSocket : Server.getClientSockets()) {
+            for (User player : game.getPlayers()) {
+                if (player.getUsername().equals(clientSocket.getName()))
+                    clientSocket.sendMessageDirectly(message);
+            }
         }
     }
 
@@ -108,11 +125,10 @@ public class ServerSocketController {
 
     public void leaveGame(Request request) throws IOException {
         Game game = (Game) request.getData().get("game");
-        if (UserDatabase.getCurrentUser().equals(game.getAdmin())){
-            if (game.getPlayers().size() > 0){
+        if (UserDatabase.getCurrentUser().equals(game.getAdmin())) {
+            if (game.getPlayers().size() > 0) {
                 game.setAdmin(game.getPlayers().get(0));
-            }
-            else {
+            } else {
                 LobbyDatabase.getInstance().getAllGames().remove(game);
             }
         }

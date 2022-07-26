@@ -70,12 +70,12 @@ public class Client extends Application {
 //        startOnlineGame(stage);
     }
 
-    private void iJoinedLobby(Stage stage) throws IOException, InterruptedException {
+    public void iJoinedLobby() throws IOException, InterruptedException {
         connectForGame();
         Client.clientProxySocketController = new ClientProxySocketController(socket, socket2);
     }
 
-    private void startOnlineGame(Stage stage) throws IOException, InterruptedException {
+    public void startOnlineGame(Stage stage) throws IOException, InterruptedException {
         Message message = new Message();
         message.setAction("play game");
         Client.clientProxySocketController.sendMessage(message);
@@ -90,7 +90,7 @@ public class Client extends Application {
     }
 
 
-    private void startOfflineGame(Stage stage, ArrayList<User> users) throws IOException {
+    public void startOfflineGame(Stage stage, ArrayList<User> users) throws IOException {
         debugImprovement();
         GameDataBase.runGameForFirstTime(users);
         SceneController.getInstance().setStage(stage);
@@ -99,7 +99,7 @@ public class Client extends Application {
     }
 
 
-    private void startWatchingStream(Stage stage) throws IOException, InterruptedException {
+    public void startWatchingStream(Stage stage) throws IOException, InterruptedException {
         connectForGame();
         Client.clientProxySocketController = new ClientProxySocketController(socket, socket2);
         while (!clientProxySocketController.isGameLoadedFOrFirstTime()) {
@@ -112,7 +112,7 @@ public class Client extends Application {
         SceneController.getInstance().stream();
     }
 
-    private void playSavedOfflineGame(Stage stage) throws IOException {
+    public void playSavedOfflineGame(Stage stage) throws IOException {
         debugImprovement();
         GameDataBaseSaving.loadGame();
         SceneController.getInstance().setStage(stage);
@@ -120,7 +120,7 @@ public class Client extends Application {
         SceneController.getInstance().game();
     }
 
-    private void startSavedMapOfflineGame(Stage stage, ArrayList<User> users) throws IOException {
+    public void startSavedMapOfflineGame(Stage stage, ArrayList<User> users) throws IOException {
         debugImprovement();
         GameDataBaseSaving.loadMap();
         GameDataBase.runGameForFirstTimeWithSavedMap(users);
@@ -129,7 +129,7 @@ public class Client extends Application {
         SceneController.getInstance().game();
     }
 
-    private void startBuildMap(Stage stage) throws IOException {
+    public void startBuildMap(Stage stage) throws IOException {
         debugImprovement();
         GameDataBase.buildCustomisableMap();
         SceneController.getInstance().setStage(stage);
@@ -138,7 +138,7 @@ public class Client extends Application {
     }
 
 
-    private void debugImprovement() {
+    public void debugImprovement() {
         for (Improvement improvement : Improvement.getAllImprovements()) {
             improvement.getCanBeBuiltON();
             improvement.getRequiredTechnology();

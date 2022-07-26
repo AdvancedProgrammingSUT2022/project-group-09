@@ -5,6 +5,7 @@ import com.thoughtworks.xstream.security.AnyTypePermission;
 import game.civilization.Controller.ClientLobbyDatabase;
 import game.civilization.Controller.LobbyDatabase;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.FxmlController.SceneController;
 import game.civilization.Model.Game;
 import game.civilization.Model.Request;
 import game.civilization.Model.Response;
@@ -62,8 +63,14 @@ public class ClientServerSocketController {
     private void handleReq(Response response) throws IOException, InterruptedException {
         switch (response.getAction()) {
             case "update list" -> updateList(response);
+            case "launch game" -> launchRealGame();
 
         }
+    }
+
+    private void launchRealGame() throws IOException, InterruptedException {
+        Client.me.iJoinedLobby();
+        Client.me.startOnlineGame(SceneController.getInstance().getStage());
     }
 
     private void updateList(Response response) {
@@ -137,9 +144,16 @@ public class ClientServerSocketController {
     public void addGame(Game game) throws IOException {
         Request request = new Request();
         request.setAction("add game");
-        XStream xStream = new XStream();
         request.addData("game", game);
         System.out.println(request.getData());
+        justSendRequest(request);
+    }
+
+    public void launchGame(Game game) throws IOException {
+        //VAQTI START SHOD INO CALL KON
+        Request request = new Request();
+        request.setAction("launch game");
+        request.addData("game", game);
         justSendRequest(request);
     }
 

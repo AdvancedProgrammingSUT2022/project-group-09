@@ -26,6 +26,10 @@ public class SceneController {
         this.stage = stage;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
     public void LoginMenu() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/LoginMenuView.fxml")));
         Scene scene = new Scene(root);
