@@ -1,6 +1,7 @@
 package game.civilization.Controller.NetworkController.Client;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.AnyTypePermission;
 import game.civilization.Controller.ClientLobbyDatabase;
 import game.civilization.Controller.LobbyDatabase;
 import game.civilization.Controller.UserDatabase;
@@ -77,7 +78,7 @@ public class ClientServerSocketController {
     }
 
     public void justSendRequest(Request request) throws IOException {
-        String messageJson = request.toJson();
+        String messageJson = new XStream().toXML(request);
         byte[] data = messageJson.getBytes(StandardCharsets.UTF_8);
         dataOutputStream.writeInt(data.length);
         dataOutputStream.write(data);
@@ -91,8 +92,10 @@ public class ClientServerSocketController {
         byte[] data = new byte[length];
         dataInputStream.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
-        System.out.println(Response.fromJson(messageJson).getAction() + " received");
-        return Response.fromJson(messageJson);
+        XStream xStream = new XStream();
+        xStream.addPermission(AnyTypePermission.ANY);
+        System.out.println(((Response) xStream.fromXML(messageJson)).getAction() + " received");
+        return (Response) xStream.fromXML(messageJson);
     }
 
     private Response getMessage() throws IOException {
@@ -100,7 +103,9 @@ public class ClientServerSocketController {
         byte[] data = new byte[length];
         dataInputStream2.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
-        return Response.fromJson(messageJson);
+        XStream xStream = new XStream();
+        xStream.addPermission(AnyTypePermission.ANY);
+        return (Response) xStream.fromXML(messageJson);
     }
 
     private ArrayList<Game> buildList() {

@@ -151,7 +151,7 @@ public class ServerSocketController {
     }
 
     public void sendResponseDirectly(Response message) throws IOException {
-        String temp = message.toJson();
+        String temp = new XStream().toXML(message);
         byte[] data = temp.getBytes(StandardCharsets.UTF_8);
         dataOutputStream2.writeInt(data.length);
         dataOutputStream2.write(data);
@@ -163,7 +163,7 @@ public class ServerSocketController {
         ArrayList<Game> list2 = buildList2(request);
         Response response = new Response();
         response.addData("list1", list1);
-        response.addData("list2",list2);
+        response.addData("list2", list2);
         sendResponse(response);
     }
 
@@ -195,8 +195,11 @@ public class ServerSocketController {
     }
 
     public void addGame(Request request) throws IOException {
-            Game game = (Game) request.getData().get("game");
-            LobbyDatabase.getInstance().addGame(game);
+        System.out.println(0);
+        Game game = (Game) request.getData().get("game");
+        System.out.println(1);
+        LobbyDatabase.getInstance().addGame(game);
+        System.out.println(2);
     }
 
     private Request getMessage() throws IOException {
@@ -204,11 +207,13 @@ public class ServerSocketController {
         byte[] data = new byte[length];
         dataInputStream.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
-        return Request.fromJson(messageJson);
+        XStream xStream = new XStream();
+        xStream.addPermission(AnyTypePermission.ANY);
+        return (Request) xStream.fromXML(messageJson);
     }
 
     private void sendMessageDirectly(Message message) throws IOException {
-        String temp = message.toJson();
+        String temp = new XStream().toXML(message);
         byte[] data = temp.getBytes(StandardCharsets.UTF_8);
         dataOutputStream2.writeInt(data.length);
         dataOutputStream2.write(data);
@@ -216,7 +221,7 @@ public class ServerSocketController {
     }
 
     private void sendResponse(Response message) throws IOException {
-        String temp = message.toJson();
+        String temp = new XStream().toXML(message);
         byte[] data = temp.getBytes(StandardCharsets.UTF_8);
         dataOutputStream.writeInt(data.length);
         dataOutputStream.write(data);

@@ -53,6 +53,7 @@ public class LobbyController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println(pane);
         try {
             initialize();
         } catch (IOException e) {
