@@ -138,9 +138,19 @@ public class LobbyController implements Initializable {
             public void handle(ActionEvent actionEvent) {
                 if (join.getText().equals("join")) {
                     game.getPlayers().add(UserDatabase.getCurrentUser());
+                    try {
+                        Client.getClientServerSocketController().addToGame(game);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     join.setText("leave");
                 } else {
                     game.getPlayers().remove(UserDatabase.getCurrentUser());
+                    try {
+                        Client.getClientServerSocketController().leaveGame(game);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     join.setText("join");
                 }
 

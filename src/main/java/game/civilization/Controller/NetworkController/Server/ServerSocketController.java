@@ -79,7 +79,7 @@ public class ServerSocketController {
             case "init" -> initTables(request);
             case "add game" -> addGame(request);
             case "add to game" -> addToGame(request);
-            case "leave game" -> addToGame(request);
+            case "leave game" -> leaveGame(request);
             case "search game" -> changePicture(request);
             case "change visibility" -> changePicture(request);
         }
@@ -99,22 +99,30 @@ public class ServerSocketController {
         Game game = (Game) request.getData().get("game");
         for (Game allGame : LobbyDatabase.getInstance().getAllGames()) {
             if (allGame.getId().equals(game.getId())) {
+                int x = LobbyDatabase.getInstance().getAllGames().indexOf(allGame);
                 LobbyDatabase.getInstance().getAllGames().set(LobbyDatabase.getInstance().getAllGames().indexOf(allGame), game);
             }
-            sendGameToAll();
         }
+        sendGameToAll(request);
     }
 
-//    public Response leaveGame(Request request) throws IOException {
-////        Request request = new Request();
-////        request.setAction("add game");
-////        HashMap<String, Object> hashMap = new HashMap<>();
-////        hashMap.put("game", game);
-////        request.setData(hashMap);
-////        return sendRequestAndGetResponse(request);
-//        //TODO
-//        return null;
-//    }
+    public void leaveGame(Request request) throws IOException {
+        Game game = (Game) request.getData().get("game");
+        if (UserDatabase.getCurrentUser().equals(game.getAdmin())){
+            if (game.getPlayers().size() > 0){
+                game.setAdmin(game.getPlayers().get(0));
+            }
+            else {
+                LobbyDatabase.getInstance().getAllGames().remove(game);
+            }
+        }
+        for (Game allGame : LobbyDatabase.getInstance().getAllGames()) {
+            if (allGame.getId().equals(game.getId())) {
+                LobbyDatabase.getInstance().getAllGames().set(LobbyDatabase.getInstance().getAllGames().indexOf(allGame), game);
+            }
+            sendGameToAll(request);
+        }
+    }
 
     public Response searchForGame(Game game) throws IOException {
 //        Request request = new Request();
@@ -138,12 +146,10 @@ public class ServerSocketController {
         return null;
     }
 
-    private void sendGameToAll() throws IOException {
+    private void sendGameToAll(Request request) throws IOException {
         Response response = new Response();
         response.setAction("update list");
         response.addData("list1", LobbyDatabase.getInstance().getAllGames());
-        Request request = new Request();
-        request.addData("this", UserDatabase.getCurrentUser());
         response.addData("list2", buildList2(request));
         for (ServerSocketController clientSocket : Server.getClientSockets()) {
             clientSocket.sendResponseDirectly(response);
@@ -195,11 +201,8 @@ public class ServerSocketController {
     }
 
     public void addGame(Request request) throws IOException {
-        System.out.println(0);
         Game game = (Game) request.getData().get("game");
-        System.out.println(1);
         LobbyDatabase.getInstance().addGame(game);
-        System.out.println(2);
     }
 
     private Request getMessage() throws IOException {

@@ -143,26 +143,28 @@ public class ClientServerSocketController {
         justSendRequest(request);
     }
 
-    public Response addToGame(Game game) throws IOException {
+    public void addToGame(Game game) throws IOException {
         Request request = new Request();
         request.setAction("add to game");
         XStream xStream = new XStream();
         request.addData("game", game);
+        request.addData("this", UserDatabase.getCurrentUser());
 //        HashMap<String, Object> hashMap = new HashMap<>();
 //        hashMap.put("game", game);
 //        request.setData(hashMap);
-        return sendRequestAndGetResponse(request);
+        justSendRequest(request);
     }
 
-    public Response leaveGame(Game game) throws IOException {
+    public void leaveGame(Game game) throws IOException {
         Request request = new Request();
         request.setAction("leave game");
         XStream xStream = new XStream();
         request.addData("game", game);
+        request.addData("this", UserDatabase.getCurrentUser());
 //        HashMap<String, Object> hashMap = new HashMap<>();
 //        hashMap.put("game", game);
 //        request.setData(hashMap);
-        return sendRequestAndGetResponse(request);
+        justSendRequest(request);
     }
 
     public Response searchForGame(String id) throws IOException {
