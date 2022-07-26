@@ -108,12 +108,13 @@ public class ServerSocketController {
 
     public void leaveGame(Request request) throws IOException {
         Game game = (Game) request.getData().get("game");
-        if (UserDatabase.getCurrentUser().equals(game.getAdmin())){
+        if (((User)request.getData().get("this")).getUsername().equals(game.getAdmin().getUsername())){
             if (game.getPlayers().size() > 0){
                 game.setAdmin(game.getPlayers().get(0));
             }
             else {
                 LobbyDatabase.getInstance().getAllGames().remove(game);
+                System.out.println(LobbyDatabase.getInstance().getAllGames() + " ...");
             }
         }
         for (Game allGame : LobbyDatabase.getInstance().getAllGames()) {
@@ -195,6 +196,7 @@ public class ServerSocketController {
         for (Game game : LobbyDatabase.getInstance().getAllGames()) {
             if (game.getAdmin().getUsername().equals(((User) request.getData().get("this")).getUsername())) {
                 arrayList.add(game);
+                System.out.println("yes");
             }
         }
         return arrayList;
