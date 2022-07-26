@@ -45,7 +45,8 @@ public class LobbyController implements Initializable {
 
     public void initialize() throws IOException {
         Response response = Client.getClientServerSocketController().initializeTabel();
-        availableGames = (ArrayList<Game>) response.getData().get("table");
+        availableGames = (ArrayList<Game>) response.getData().get("list1");
+        myGames = (ArrayList<Game>) response.getData().get("list2");
         buildTable();
     }
 

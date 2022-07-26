@@ -50,6 +50,7 @@ public class Client extends Application {
     private void connect() throws IOException {
         socket = new Socket("localhost", 8000);
         socket2 = new Socket("localhost", 8000);
+        clientServerSocketController = new ClientServerSocketController(socket, socket2);
     }
 
     @Override

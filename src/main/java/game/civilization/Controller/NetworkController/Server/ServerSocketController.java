@@ -143,18 +143,17 @@ public class ServerSocketController {
         sendResponse(response);
     }
 
-    private ArrayList<Game> buildList1(){
-        if (LobbyDatabase.getInstance().getAllGames().size() <= 10){
+    private ArrayList<Game> buildList1() {
+        if (LobbyDatabase.getInstance().getAllGames().size() <= 10) {
             return LobbyDatabase.getInstance().getAllGames();
         }
         ArrayList<Game> arrayList = new ArrayList<>();
         Random random = new Random();
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             int x = random.nextInt(LobbyDatabase.getInstance().getAllGames().size());
-            if (arrayList.contains(LobbyDatabase.getInstance().getAllGames().get(x))){
+            if (arrayList.contains(LobbyDatabase.getInstance().getAllGames().get(x))) {
                 i--;
-            }
-            else {
+            } else {
                 arrayList.add(LobbyDatabase.getInstance().getAllGames().get(x));
             }
         }
@@ -164,7 +163,7 @@ public class ServerSocketController {
     private ArrayList<Game> buildList2(Request request) {
         ArrayList<Game> arrayList = new ArrayList<>();
         for (Game game : LobbyDatabase.getInstance().getAllGames()) {
-            if(game.getAdmin().getUsername().equals(((User)request.getData().get("this")).getUsername())){
+            if (game.getAdmin().getUsername().equals(((User) request.getData().get("this")).getUsername())) {
                 arrayList.add(game);
             }
         }
@@ -202,6 +201,7 @@ public class ServerSocketController {
         dataOutputStream.writeInt(data.length);
         dataOutputStream.write(data);
         dataOutputStream.flush();
+        System.out.println("message  action " + message.getAction() + " send");
     }
 
     private void register(Request request) throws IOException {

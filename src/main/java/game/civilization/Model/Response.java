@@ -8,7 +8,7 @@ public class Response {
     private int status;
     private String message;
     private String action;
-    private HashMap<String, Object> data;
+    private HashMap<String, Object> data = new HashMap<>();
 
     public HashMap<String, Object> getData() {
         return data;
