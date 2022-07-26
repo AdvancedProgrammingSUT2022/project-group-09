@@ -2,10 +2,21 @@ package game.civilization.Model;
 
 import com.google.gson.Gson;
 
+import java.util.HashMap;
+
 public class Response {
     private int status;
     private String message;
     private String action;
+    private HashMap<String, Object> data;
+
+    public HashMap<String, Object> getData() {
+        return data;
+    }
+
+    public void addData(String key, Object value) {
+        this.data.put(key, value);
+    }
 
     public void setStatus(int status) {
         this.status = status;

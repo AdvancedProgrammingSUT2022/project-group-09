@@ -82,6 +82,13 @@ public class SceneController {
         stage.show();
     }
 
+    public void Lobby() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/Lobby.fxml")));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void cheat() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/Cheat.fxml")));
         Scene scene = new Scene(root);
