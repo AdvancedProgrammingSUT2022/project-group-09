@@ -1,5 +1,6 @@
 package game.civilization.Controller.NetworkController.Server;
 
+import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.LobbyDatabase;
 import game.civilization.Controller.LoginMenuController;
 import game.civilization.Controller.NetworkController.GameServer.Proxy;
@@ -69,7 +70,114 @@ public class ServerSocketController {
             case "changeNickname" -> changeNickname(request);
             case "changePassword" -> changePassword(request);
             case "changePicture" -> changePicture(request);
+
+            case "init" -> initTables(request);
+            case "add game" -> addGame(request);
+            case "add to game" -> changeNickname(request);
+            case "leave game" -> changePassword(request);
+            case "search game" -> changePicture(request);
+            case "change visibility" -> changePicture(request);
         }
+    }
+
+//    public Response initializeTabel() throws IOException {
+//        Request request = new Request();
+//        request.setAction("init");
+//        HashMap<String, Object> hashMap = new HashMap<>();
+//        hashMap.put("games", buildList());
+//        request.setData(hashMap);
+//        return sendRequestAndGetResponse(request);
+//    }
+
+
+    public Response addToGame(Game game) throws IOException {
+//        Request request = new Request();
+//        request.setAction("add game");
+//        HashMap<String, Object> hashMap = new HashMap<>();
+//        hashMap.put("game", game);
+//        request.setData(hashMap);
+//        return sendRequestAndGetResponse(request);
+        //TODO
+        return null;
+    }
+
+    public Response leaveGame(Game game) throws IOException {
+//        Request request = new Request();
+//        request.setAction("add game");
+//        HashMap<String, Object> hashMap = new HashMap<>();
+//        hashMap.put("game", game);
+//        request.setData(hashMap);
+//        return sendRequestAndGetResponse(request);
+        //TODO
+        return null;
+    }
+
+    public Response searchForGame(Game game) throws IOException {
+//        Request request = new Request();
+//        request.setAction("add game");
+//        HashMap<String, Object> hashMap = new HashMap<>();
+//        hashMap.put("game", game);
+//        request.setData(hashMap);
+//        return sendRequestAndGetResponse(request);
+        //TODO
+        return null;
+    }
+
+    public Response changeVisibility(Game game) throws IOException {
+//        Request request = new Request();
+//        request.setAction("add game");
+//        HashMap<String, Object> hashMap = new HashMap<>();
+//        hashMap.put("game", game);
+//        request.setData(hashMap);
+//        return sendRequestAndGetResponse(request);
+        //TODO
+        return null;
+    }
+
+    private void initTables(Request request) throws IOException {
+        ArrayList<Game> list1 = buildList1();
+        ArrayList<Game> list2 = buildList2(request);
+        Response response = new Response();
+        response.addData("list1", list1);
+        response.addData("list2", list2);
+        sendResponse(response);
+    }
+
+    private ArrayList<Game> buildList1(){
+        if (LobbyDatabase.getInstance().getAllGames().size() <= 10){
+            return LobbyDatabase.getInstance().getAllGames();
+        }
+        ArrayList<Game> arrayList = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < 10; i++){
+            int x = random.nextInt(LobbyDatabase.getInstance().getAllGames().size());
+            if (arrayList.contains(LobbyDatabase.getInstance().getAllGames().get(x))){
+                i--;
+            }
+            else {
+                arrayList.add(LobbyDatabase.getInstance().getAllGames().get(x));
+            }
+        }
+        return arrayList;
+    }
+
+    private ArrayList<Game> buildList2(Request request) {
+        ArrayList<Game> arrayList = new ArrayList<>();
+        for (Game game : LobbyDatabase.getInstance().getAllGames()) {
+            if(game.getAdmin().getUsername().equals(((User)request.getData().get("this")).getUsername())){
+                arrayList.add(game);
+            }
+        }
+        return arrayList;
+    }
+
+    public void addGame(Request request) throws IOException {
+        Game game = (Game) request.getData().get("game");
+        LobbyDatabase.getInstance().addGame(game);
+//        HashMap<String, Object> hashMap = new HashMap<>();
+//        hashMap.put("game", game);
+//        request.setData(hashMap);
+//        return sendRequestAndGetResponse(request);
     }
 
     private Request getMessage() throws IOException {
@@ -170,85 +278,6 @@ public class ServerSocketController {
             response.setAction("changeNickname failed");
             sendResponse(response);
         }
-    }
-    private ArrayList<Game> buildList(){
-        if (LobbyDatabase.getInstance().getAllGames().size() <= 10){
-            return LobbyDatabase.getInstance().getAllGames();
-        }
-        ArrayList<Game> arrayList = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < 10; i++){
-            int x = random.nextInt(LobbyDatabase.getInstance().getAllGames().size());
-            if (arrayList.contains(LobbyDatabase.getInstance().getAllGames().get(x))){
-                i--;
-            }
-            else {
-                arrayList.add(LobbyDatabase.getInstance().getAllGames().get(x));
-            }
-        }
-        return arrayList;
-    }
-
-    public Response initializeTabel() throws IOException {
-        Request request = new Request();
-        request.setAction("init");
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("games", buildList());
-        request.setData(hashMap);
-        return sendRequestAndGetResponse(request);
-    }
-
-    public Response addGame(Game game) throws IOException {
-        Request request = new Request();
-        request.setAction("add game");
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("game", game);
-        request.setData(hashMap);
-        return sendRequestAndGetResponse(request);
-    }
-
-    public Response addToGame(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
-    }
-
-    public Response leaveGame(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
-    }
-
-    public Response searchForGame(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
-    }
-
-    public Response changeVisibility(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
     }
 
 

@@ -118,63 +118,56 @@ public class ClientServerSocketController {
     public Response initializeTabel() throws IOException {
         Request request = new Request();
         request.setAction("init");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("games", buildList());
-//        request.setData(hashMap);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("this", UserDatabase.getCurrentUser());
+        request.setData(hashMap);
         return sendRequestAndGetResponse(request);
     }
 
-    public Response addGame(Game game) throws IOException {
+    public void addGame(Game game) throws IOException {
         Request request = new Request();
         request.setAction("add game");
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("game", game);
+        request.setData(hashMap);
+        justSendRequest(request);
+        return;
+    }
+
+    public Response addToGame(Game game) throws IOException {
+        Request request = new Request();
+        request.setAction("add to game");
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("game", game);
         request.setData(hashMap);
         return sendRequestAndGetResponse(request);
     }
 
-    public Response addToGame(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
-    }
-
     public Response leaveGame(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
+        Request request = new Request();
+        request.setAction("leave game");
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("game", game);
+        request.setData(hashMap);
+        return sendRequestAndGetResponse(request);
     }
 
     public Response searchForGame(String id) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
+        Request request = new Request();
+        request.setAction("search game");
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("id", id);
+        request.setData(hashMap);
+        return sendRequestAndGetResponse(request);
     }
 
     public Response changeVisibility(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
+        Request request = new Request();
+        request.setAction("chhange visibility");
 //        HashMap<String, Object> hashMap = new HashMap<>();
 //        hashMap.put("game", game);
 //        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
+        return sendRequestAndGetResponse(request);
     }
 
 
