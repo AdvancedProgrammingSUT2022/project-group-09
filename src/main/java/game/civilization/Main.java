@@ -12,6 +12,7 @@ import game.civilization.FxmlController.GameScenes.GameSceneController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.FxmlController.SceneController;
 import game.civilization.Model.City;
+import game.civilization.Model.JSONWebToken;
 import game.civilization.Model.Improvements.Improvement;
 import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.Terrains.TerrainType;
@@ -40,11 +41,16 @@ import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
     public static void main(String[] args) {
+        String token = JSONWebToken.create("hello world", "pouya");
+        System.out.println(token);
+        System.out.println(JSONWebToken.verify(token , "pouya"));
+        System.out.println(JSONWebToken.decode(token, "pouya").toString());
+        return;
         //     System.out.println(Main.class.getResource("images/avatar/1.png"));
         // File fi = new File(Objects.requireNonNull(Main.class.getResource("images/avatar/1.png").toExternalForm()));
         // byte[] fileContent = Files.readAllBytes(fi.toPath());
-        Image image = new Image(Main.class.getResource("images/avatar/1.png").toExternalForm());
-        System.out.println(image.getPixelReader().toString());
+        // Image image = new Image(Main.class.getResource("images/avatar/1.png").toExternalForm());
+        // System.out.println(image.getPixelReader().toString());
         // launch();
     }
 

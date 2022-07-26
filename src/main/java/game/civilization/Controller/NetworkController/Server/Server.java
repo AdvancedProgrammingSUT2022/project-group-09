@@ -77,7 +77,7 @@ public class Server extends Application {
                         }
                     }
                     try {
-                        wait(2000);
+                        wait(5000);
                     } catch (InterruptedException e) {
                     }
                 }

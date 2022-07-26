@@ -58,6 +58,11 @@
       </exclusions>
     </dependency>
     <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>4.0.0</version>
+    </dependency>
+    <dependency>
       <groupId>org.kordamp.ikonli</groupId>
       <artifactId>ikonli-javafx</artifactId>
       <version>12.2.0</version>

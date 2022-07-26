@@ -8,6 +8,7 @@ import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.Model.Civilization;
+import game.civilization.Model.JSONWebToken;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Request;
 import game.civilization.Model.Response;
@@ -74,6 +75,7 @@ public class ClientServerSocketController {
     }
 
     public void justSendRequest(Request request) throws IOException {
+        // String messageJson = JSONWebToken.create(request.toJson(), "client");
         String messageJson = request.toJson();
         byte[] data = messageJson.getBytes(StandardCharsets.UTF_8);
         dataOutputStream.writeInt(data.length);

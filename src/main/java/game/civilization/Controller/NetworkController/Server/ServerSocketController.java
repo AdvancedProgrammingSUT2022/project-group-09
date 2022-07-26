@@ -6,6 +6,7 @@ import game.civilization.Controller.NetworkController.GameServer.ProxySocketCont
 import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.Model.NetworkModels.Message;
+import game.civilization.Model.JSONWebToken;
 import game.civilization.Model.Request;
 import game.civilization.Model.Response;
 import game.civilization.Model.User;
@@ -75,6 +76,11 @@ public class ServerSocketController {
         byte[] data = new byte[length];
         dataInputStream.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
+        // if (JSONWebToken.verify(messageJson, "client")) {
+        //     messageJson = JSONWebToken.decode(messageJson, "client");
+        // } else {
+        //     System.out.println("ERROR");
+        // }
         return Request.fromJson(messageJson);
     }
 
