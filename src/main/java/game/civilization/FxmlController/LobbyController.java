@@ -7,6 +7,7 @@ import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.GameScenes.SceneController.SettlerController;
 import game.civilization.Model.Game;
 import game.civilization.Model.Response;
+import game.civilization.Model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -38,6 +39,7 @@ public class LobbyController implements Initializable {
     @FXML
     private CheckBox privatee;
     private Pane gamePane;
+    private Pane anotherPane;
 
     private ArrayList<Game> availableGames = new ArrayList<>();
     private ArrayList<Game> myGames = new ArrayList<>();
@@ -49,6 +51,7 @@ public class LobbyController implements Initializable {
         availableGames = (ArrayList<Game>) response.getData().get("list1");
         myGames = (ArrayList<Game>) response.getData().get("list2");
         buildTable();
+        buildTable2();
     }
 
     @Override
@@ -115,7 +118,7 @@ public class LobbyController implements Initializable {
         rectangle.setX(0);
         rectangle.setY(0);
         rectangle.setWidth(220);
-        rectangle.setHeight(60);
+        rectangle.setHeight(90);
         pane.getChildren().add(rectangle);
         pane.minWidth(6000);
         pane.minHeight(6000);
@@ -127,7 +130,9 @@ public class LobbyController implements Initializable {
         pane.setLayoutY(70);
 
         Button join = new Button();
-        if (game.getPlayers().contains(UserDatabase.getCurrentUser())) {
+        join.setLayoutX(50);
+        join.setLayoutY(70);
+        if (isInGame(game) != null) {
             join.setText("leave");
         } else {
             join.setText("join");
@@ -136,7 +141,9 @@ public class LobbyController implements Initializable {
         join.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                System.out.println(UserDatabase.getCurrentUser().getUsername());
                 if (join.getText().equals("join")) {
+
                     game.getPlayers().add(UserDatabase.getCurrentUser());
                     try {
                         Client.getClientServerSocketController().addToGame(game);
@@ -145,7 +152,7 @@ public class LobbyController implements Initializable {
                     }
                     join.setText("leave");
                 } else {
-                    game.getPlayers().remove(UserDatabase.getCurrentUser());
+                    game.getPlayers().remove(isInGame(game));
                     try {
                         Client.getClientServerSocketController().leaveGame(game);
                     } catch (IOException e) {
@@ -157,6 +164,7 @@ public class LobbyController implements Initializable {
             }
         });
         pane.getChildren().add(join);
+        showDetails(pane, game);
         return pane;
     }
 
@@ -182,5 +190,70 @@ public class LobbyController implements Initializable {
 
     public ArrayList<Game> getGamesIn() {
         return gamesIn;
+    }
+
+    private User isInGame(Game game){
+        for (User player : game.getPlayers()) {
+            if (player.getUsername().equals(UserDatabase.getCurrentUser().getUsername()))
+                return player;
+        }
+        return null;
+    }
+
+    private void showDetails(Pane pane, Game game){
+        Label label1 = new Label("max players: " + String.valueOf(game.getNumberOfPlayers()));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("players: ");
+        for (User player : game.getPlayers()) {
+            stringBuilder.append(player.getUsername()).append("  ");
+        }
+        Label label2 = new Label(stringBuilder.toString());
+        label1.setFont(new Font("Baloo Bhaina Regular", 12));
+        label2.setFont(new Font("Baloo Bhaina Regular", 12));
+        label1.setLayoutX(0);
+        label1.setLayoutY(0);
+        label2.setLayoutX(0);
+        label2.setLayoutY(20);
+        pane.getChildren().add(label1);
+        pane.getChildren().add(label2);
+    }
+
+    public void buildTable2(){
+        int x = 570, y = 243;
+        for (Game myGame : myGames) {
+            System.out.println("okkk");
+            Label label = new Label(String.valueOf(myGame.getId()));
+            label.setTextAlignment(TextAlignment.CENTER);
+            label.setLayoutX(x);
+            label.setLayoutY(y += 50);
+            label.setPrefWidth(70);
+            label.setPrefHeight(30);
+            label.setFont(new Font("Baloo Bhaina Regular", 12));
+            label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (anotherPane != null) {
+                        pane.getChildren().remove(anotherPane);
+                        anotherPane = null;
+                    } else {
+                        anotherPane = makeGamePane(myGame);
+                        Button button = new Button("start");
+                        button.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                //todo
+                            }
+                        });
+                        button.setLayoutX(0);
+                        button.setLayoutY(70);
+                        button.setStyle(SettlerController.res);
+                        button.setFont(new Font("Baloo Bhaina Regular", 12));
+                        anotherPane.getChildren().add(button);
+                        pane.getChildren().add(anotherPane);
+                    }
+                }
+            });
+            pane.getChildren().add(label);
+        }
     }
 }
