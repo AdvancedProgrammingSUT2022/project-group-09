@@ -78,8 +78,8 @@ public class ServerSocketController {
 
             case "init" -> initTables(request);
             case "add game" -> addGame(request);
-            case "add to game" -> changeNickname(request);
-            case "leave game" -> changePassword(request);
+            case "add to game" -> addToGame(request);
+            case "leave game" -> addToGame(request);
             case "search game" -> changePicture(request);
             case "change visibility" -> changePicture(request);
         }
@@ -95,27 +95,32 @@ public class ServerSocketController {
 //    }
 
 
-    public Response addToGame(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
+    public void addToGame(Request request) throws IOException {
+        String xml = (String) request.getData().get("game");
+        System.out.println(xml);
+        XStream xStream = new XStream();
+        xStream.addPermission(AnyTypePermission.ANY);
+        if (xml.length() != 0) {
+            Game game = (Game) xStream.fromXML(xml);
+            for (Game allGame : LobbyDatabase.getInstance().getAllGames()) {
+                if (allGame.getId().equals(game.getId())){
+                    LobbyDatabase.getInstance().getAllGames().set(LobbyDatabase.getInstance().getAllGames().indexOf(allGame), game);
+                }
+            }
+            sendGameToAll();
+        }
     }
 
-    public Response leaveGame(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
-    }
+//    public Response leaveGame(Request request) throws IOException {
+////        Request request = new Request();
+////        request.setAction("add game");
+////        HashMap<String, Object> hashMap = new HashMap<>();
+////        hashMap.put("game", game);
+////        request.setData(hashMap);
+////        return sendRequestAndGetResponse(request);
+//        //TODO
+//        return null;
+//    }
 
     public Response searchForGame(Game game) throws IOException {
 //        Request request = new Request();
@@ -139,12 +144,32 @@ public class ServerSocketController {
         return null;
     }
 
+    private void sendGameToAll() throws IOException {
+        Response response = new Response();
+        response.setAction("update list");
+        response.addData("list1", new XStream().toXML(LobbyDatabase.getInstance().getAllGames()));
+        Request request = new Request();
+        request.addData("this", UserDatabase.getCurrentUser());
+        response.addData("list2", new XStream().toXML(buildList2(request)));
+        for (ServerSocketController clientSocket : Server.getClientSockets()) {
+            clientSocket.sendResponseDirectly(response);
+        }
+    }
+
+    public void sendResponseDirectly(Response message) throws IOException {
+        String temp = message.toJson();
+        byte[] data = temp.getBytes(StandardCharsets.UTF_8);
+        dataOutputStream2.writeInt(data.length);
+        dataOutputStream2.write(data);
+        dataOutputStream2.flush();
+    }
+
     private void initTables(Request request) throws IOException {
         ArrayList<Game> list1 = buildList1();
         ArrayList<Game> list2 = buildList2(request);
         Response response = new Response();
-        response.addData("list1", list1);
-        response.addData("list2", list2);
+        response.addData("list1", new XStream().toXML(list1));
+        response.addData("list2", new XStream().toXML(list2));
         sendResponse(response);
     }
 

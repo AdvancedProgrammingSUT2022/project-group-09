@@ -1,19 +1,12 @@
 package game.civilization.Controller.NetworkController.Client;
 
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.security.AnyTypePermission;
-import game.civilization.Controller.GameControllerPackage.GameDataBase;
-import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
+import game.civilization.Controller.ClientLobbyDatabase;
 import game.civilization.Controller.LobbyDatabase;
-import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
-import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
-import game.civilization.Model.Civilization;
 import game.civilization.Model.Game;
-import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Request;
 import game.civilization.Model.Response;
-import javafx.application.Platform;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -22,9 +15,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class ClientServerSocketController {
     private final Socket socket;
@@ -55,7 +46,7 @@ public class ClientServerSocketController {
             public void run() {
                 try {
                     while (true) {
-                        Message message = getMessage();
+                        Response message = getMessage();
                         System.out.println(message.getAction() + " received");
                         handleReq(message);
                     }
@@ -67,9 +58,23 @@ public class ClientServerSocketController {
         thread.start();
     }
 
-    private void handleReq(Message message) throws IOException, InterruptedException {
-        //TODO update lobby menu
+    private void handleReq(Response response) throws IOException, InterruptedException {
+        switch (response.getAction()) {
+            case "update list" -> updateList(response);
+
         }
+    }
+
+    private void updateList(Response response) {
+        ClientLobbyDatabase.getInstance().getLobbyController().setMyGames((ArrayList<Game>) response.getData().get("list2"));
+        for (Game availableGame : ClientLobbyDatabase.getInstance().getLobbyController().getAvailableGames()) {
+            for (Game game : ((ArrayList<Game>) response.getData().get("list2"))) {
+                if (game.getId().equals(availableGame.getId())) {
+                    ClientLobbyDatabase.getInstance().getLobbyController().getAvailableGames().set(ClientLobbyDatabase.getInstance().getLobbyController().getAvailableGames().indexOf(availableGame), game);
+                }
+            }
+        }
+    }
 
     public void justSendRequest(Request request) throws IOException {
         String messageJson = request.toJson();
@@ -86,29 +91,29 @@ public class ClientServerSocketController {
         byte[] data = new byte[length];
         dataInputStream.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
-        System.out.println(Response.fromJson(messageJson).getAction()+ " received");
+        System.out.println(Response.fromJson(messageJson).getAction() + " received");
         return Response.fromJson(messageJson);
     }
-    private Message getMessage() throws IOException {
+
+    private Response getMessage() throws IOException {
         int length = dataInputStream2.readInt();
         byte[] data = new byte[length];
         dataInputStream2.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
-        return Message.fromJson(messageJson);
+        return Response.fromJson(messageJson);
     }
 
-    private ArrayList<Game> buildList(){
-        if (LobbyDatabase.getInstance().getAllGames().size() <= 10){
+    private ArrayList<Game> buildList() {
+        if (LobbyDatabase.getInstance().getAllGames().size() <= 10) {
             return LobbyDatabase.getInstance().getAllGames();
         }
         ArrayList<Game> arrayList = new ArrayList<>();
         Random random = new Random();
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             int x = random.nextInt(LobbyDatabase.getInstance().getAllGames().size());
-            if (arrayList.contains(LobbyDatabase.getInstance().getAllGames().get(x))){
+            if (arrayList.contains(LobbyDatabase.getInstance().getAllGames().get(x))) {
                 i--;
-            }
-            else {
+            } else {
                 arrayList.add(LobbyDatabase.getInstance().getAllGames().get(x));
             }
         }
@@ -119,7 +124,7 @@ public class ClientServerSocketController {
         Request request = new Request();
         request.setAction("init");
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("this", UserDatabase.getCurrentUser());
+        hashMap.put("this", new XStream().toXML(UserDatabase.getCurrentUser()));
         request.setData(hashMap);
         return sendRequestAndGetResponse(request);
     }
@@ -127,9 +132,9 @@ public class ClientServerSocketController {
     public void addGame(Game game) throws IOException {
         Request request = new Request();
         request.setAction("add game");
-        XStream xStream=new XStream();
-        String res=xStream.toXML(game);
-        request.addData("game",res);
+        XStream xStream = new XStream();
+        String res = xStream.toXML(game);
+        request.addData("game", res);
         System.out.println(request.getData());
         justSendRequest(request);
     }
@@ -137,18 +142,24 @@ public class ClientServerSocketController {
     public Response addToGame(Game game) throws IOException {
         Request request = new Request();
         request.setAction("add to game");
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("game", game);
-        request.setData(hashMap);
+        XStream xStream = new XStream();
+        String res = xStream.toXML(game);
+        request.addData("game", res);
+//        HashMap<String, Object> hashMap = new HashMap<>();
+//        hashMap.put("game", game);
+//        request.setData(hashMap);
         return sendRequestAndGetResponse(request);
     }
 
     public Response leaveGame(Game game) throws IOException {
         Request request = new Request();
         request.setAction("leave game");
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("game", game);
-        request.setData(hashMap);
+        XStream xStream = new XStream();
+        String res = xStream.toXML(game);
+        request.addData("game", res);
+//        HashMap<String, Object> hashMap = new HashMap<>();
+//        hashMap.put("game", game);
+//        request.setData(hashMap);
         return sendRequestAndGetResponse(request);
     }
 

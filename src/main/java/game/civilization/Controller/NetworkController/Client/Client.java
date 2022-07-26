@@ -48,8 +48,8 @@ public class Client extends Application {
     }
 
     private void connect() throws IOException {
-        socket = new Socket("localhost", 8000);
-        socket2 = new Socket("localhost", 8000);
+        socket = new Socket("localhost", 8010);
+        socket2 = new Socket("localhost", 8010);
         clientServerSocketController = new ClientServerSocketController(socket, socket2);
     }
 

@@ -1,5 +1,6 @@
 package game.civilization.FxmlController;
 
+import game.civilization.Controller.ClientLobbyDatabase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.NetworkController.Client.Client;
 import game.civilization.Controller.UserDatabase;
@@ -57,6 +58,7 @@ public class LobbyController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ClientLobbyDatabase.getInstance().setLobbyController(this);
     }
 
     public void buildTable() {
@@ -147,4 +149,27 @@ public class LobbyController implements Initializable {
         return pane;
     }
 
+    public void setAvailableGames(ArrayList<Game> availableGames) {
+        this.availableGames = availableGames;
+    }
+
+    public void setMyGames(ArrayList<Game> myGames) {
+        this.myGames = myGames;
+    }
+
+    public ArrayList<Game> getAvailableGames() {
+        return availableGames;
+    }
+
+    public ArrayList<Game> getMyGames() {
+        return myGames;
+    }
+
+    public void setGamesIn(ArrayList<Game> gamesIn) {
+        this.gamesIn = gamesIn;
+    }
+
+    public ArrayList<Game> getGamesIn() {
+        return gamesIn;
+    }
 }
