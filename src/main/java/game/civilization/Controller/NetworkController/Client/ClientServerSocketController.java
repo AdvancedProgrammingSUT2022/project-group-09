@@ -86,7 +86,7 @@ public class ClientServerSocketController {
         byte[] data = new byte[length];
         dataInputStream.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
-        System.out.println(Response.fromJson(messageJson)+ " received");
+        System.out.println(Response.fromJson(messageJson).getAction()+ " received");
         return Response.fromJson(messageJson);
     }
     private Message getMessage() throws IOException {
@@ -127,9 +127,10 @@ public class ClientServerSocketController {
     public void addGame(Game game) throws IOException {
         Request request = new Request();
         request.setAction("add game");
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("game", game);
-        request.setData(hashMap);
+        XStream xStream=new XStream();
+        String res=xStream.toXML(game);
+        request.addData("game",res);
+        System.out.println(request.getData());
         justSendRequest(request);
     }
 

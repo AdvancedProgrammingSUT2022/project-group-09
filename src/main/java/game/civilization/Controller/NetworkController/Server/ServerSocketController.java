@@ -1,6 +1,9 @@
 package game.civilization.Controller.NetworkController.Server;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.AnyTypePermission;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.LobbyDatabase;
 import game.civilization.Controller.LoginMenuController;
 import game.civilization.Controller.NetworkController.GameServer.Proxy;
@@ -18,6 +21,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -171,12 +176,14 @@ public class ServerSocketController {
     }
 
     public void addGame(Request request) throws IOException {
-        Game game = (Game) request.getData().get("game");
-        LobbyDatabase.getInstance().addGame(game);
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
+        String xml = (String) request.getData().get("game");
+        System.out.println(xml);
+        XStream xStream = new XStream();
+        xStream.addPermission(AnyTypePermission.ANY);
+        if (xml.length() != 0) {
+            Game game = (Game) xStream.fromXML(xml);
+            LobbyDatabase.getInstance().addGame(game);
+        }
     }
 
     private Request getMessage() throws IOException {
