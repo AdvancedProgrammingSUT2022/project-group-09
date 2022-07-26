@@ -124,7 +124,7 @@ public class ClientServerSocketController {
         Request request = new Request();
         request.setAction("init");
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("this", new XStream().toXML(UserDatabase.getCurrentUser()));
+        hashMap.put("this", UserDatabase.getCurrentUser());
         request.setData(hashMap);
         return sendRequestAndGetResponse(request);
     }
@@ -133,8 +133,7 @@ public class ClientServerSocketController {
         Request request = new Request();
         request.setAction("add game");
         XStream xStream = new XStream();
-        String res = xStream.toXML(game);
-        request.addData("game", res);
+        request.addData("game", game);
         System.out.println(request.getData());
         justSendRequest(request);
     }
@@ -143,8 +142,7 @@ public class ClientServerSocketController {
         Request request = new Request();
         request.setAction("add to game");
         XStream xStream = new XStream();
-        String res = xStream.toXML(game);
-        request.addData("game", res);
+        request.addData("game", game);
 //        HashMap<String, Object> hashMap = new HashMap<>();
 //        hashMap.put("game", game);
 //        request.setData(hashMap);
@@ -155,8 +153,7 @@ public class ClientServerSocketController {
         Request request = new Request();
         request.setAction("leave game");
         XStream xStream = new XStream();
-        String res = xStream.toXML(game);
-        request.addData("game", res);
+        request.addData("game", game);
 //        HashMap<String, Object> hashMap = new HashMap<>();
 //        hashMap.put("game", game);
 //        request.setData(hashMap);

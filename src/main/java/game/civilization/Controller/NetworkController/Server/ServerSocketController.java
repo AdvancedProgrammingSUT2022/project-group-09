@@ -96,16 +96,10 @@ public class ServerSocketController {
 
 
     public void addToGame(Request request) throws IOException {
-        String xml = (String) request.getData().get("game");
-        System.out.println(xml);
-        XStream xStream = new XStream();
-        xStream.addPermission(AnyTypePermission.ANY);
-        if (xml.length() != 0) {
-            Game game = (Game) xStream.fromXML(xml);
-            for (Game allGame : LobbyDatabase.getInstance().getAllGames()) {
-                if (allGame.getId().equals(game.getId())){
-                    LobbyDatabase.getInstance().getAllGames().set(LobbyDatabase.getInstance().getAllGames().indexOf(allGame), game);
-                }
+        Game game = (Game) request.getData().get("game");
+        for (Game allGame : LobbyDatabase.getInstance().getAllGames()) {
+            if (allGame.getId().equals(game.getId())) {
+                LobbyDatabase.getInstance().getAllGames().set(LobbyDatabase.getInstance().getAllGames().indexOf(allGame), game);
             }
             sendGameToAll();
         }
@@ -147,10 +141,10 @@ public class ServerSocketController {
     private void sendGameToAll() throws IOException {
         Response response = new Response();
         response.setAction("update list");
-        response.addData("list1", new XStream().toXML(LobbyDatabase.getInstance().getAllGames()));
+        response.addData("list1", LobbyDatabase.getInstance().getAllGames());
         Request request = new Request();
         request.addData("this", UserDatabase.getCurrentUser());
-        response.addData("list2", new XStream().toXML(buildList2(request)));
+        response.addData("list2", buildList2(request));
         for (ServerSocketController clientSocket : Server.getClientSockets()) {
             clientSocket.sendResponseDirectly(response);
         }
@@ -168,8 +162,8 @@ public class ServerSocketController {
         ArrayList<Game> list1 = buildList1();
         ArrayList<Game> list2 = buildList2(request);
         Response response = new Response();
-        response.addData("list1", new XStream().toXML(list1));
-        response.addData("list2", new XStream().toXML(list2));
+        response.addData("list1", list1);
+        response.addData("list2",list2);
         sendResponse(response);
     }
 
@@ -201,14 +195,8 @@ public class ServerSocketController {
     }
 
     public void addGame(Request request) throws IOException {
-        String xml = (String) request.getData().get("game");
-        System.out.println(xml);
-        XStream xStream = new XStream();
-        xStream.addPermission(AnyTypePermission.ANY);
-        if (xml.length() != 0) {
-            Game game = (Game) xStream.fromXML(xml);
+            Game game = (Game) request.getData().get("game");
             LobbyDatabase.getInstance().addGame(game);
-        }
     }
 
     private Request getMessage() throws IOException {
