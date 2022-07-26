@@ -2,6 +2,7 @@ package game.civilization.FxmlController;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.Model.City;
 import game.civilization.Model.Civilization;
 import game.civilization.Model.Resources.Resource;
@@ -162,6 +163,7 @@ public class TradeController implements Initializable {
         targetCivilization.setText("done !");
         firstMessage = targetCivilization.getText();
         setResult();
+        GameSceneDataBase.getInstance().getGameSceneController().refresh();
     }
 
     private void initializeCivButtons() {

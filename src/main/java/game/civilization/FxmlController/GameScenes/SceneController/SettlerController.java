@@ -67,6 +67,7 @@ public class SettlerController {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println(new UnitController().foundCity());
+                UnitsController.getInstance().setUnitClicked(false);
                 GameSceneDataBase.getInstance().getGameSceneController().refresh();
                 GameSceneDataBase.getInstance().getBackPane().getChildren().remove(UnitsController.getInstance().getUnitPanel());
                 UnitsController.getInstance().setUnitPanel(null);

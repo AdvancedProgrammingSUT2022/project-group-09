@@ -1,5 +1,9 @@
 package game.civilization.FxmlController.GameScenes.SceneController;
 
+import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
+import game.civilization.FxmlController.GameScenes.GameSceneController;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
+import game.civilization.FxmlController.SceneController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -9,6 +13,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+
+import java.io.IOException;
 
 public class SettingController {
     private static SettingController instance;
@@ -22,11 +28,12 @@ public class SettingController {
     private SettingController() {
         Media media = new Media(getClass().getResource("/game/civilization/musics/music.mp3").toExternalForm());
         mediaPlayer = new MediaPlayer(media);
-        pane=makeSettingPane();
+        pane = makeSettingPane();
     }
 
     private final MediaPlayer mediaPlayer;
     private final Pane pane;
+    private boolean autoSave;
 
     private Pane makeSettingPane() {
         Pane pane = new Pane();
@@ -52,12 +59,10 @@ public class SettingController {
         musicButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if (mediaPlayer.isAutoPlay())
-                {
+                if (mediaPlayer.isAutoPlay()) {
                     mediaPlayer.pause();
                     mediaPlayer.setAutoPlay(false);
-                }
-                else
+                } else
                     mediaPlayer.setAutoPlay(true);
             }
         });
@@ -70,7 +75,34 @@ public class SettingController {
         saveAndExit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-               //TODO
+                GameDataBaseSaving.saveGame();
+                try {
+                    SceneController.getInstance().MainMenu();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        Button autoSave = new Button();
+        if (isAutoSave()) {
+            autoSave.setText("auto save ON");
+        } else {
+            autoSave.setText("auto save OFF");
+        }
+        autoSave.setLayoutX(60);
+        autoSave.setLayoutY(60);
+        autoSave.setStyle(SettlerController.res);
+        autoSave.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                setAutoSave(!isAutoSave());
+                if (isAutoSave()) {
+                    autoSave.setText("auto save ON");
+                } else {
+                    autoSave.setText("auto save OFF");
+                }
             }
         });
 
@@ -81,5 +113,13 @@ public class SettingController {
 
     public Pane getPane() {
         return pane;
+    }
+
+    public boolean isAutoSave() {
+        return autoSave;
+    }
+
+    public void setAutoSave(boolean autoSave) {
+        this.autoSave = autoSave;
     }
 }

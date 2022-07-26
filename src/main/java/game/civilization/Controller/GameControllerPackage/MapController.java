@@ -252,6 +252,7 @@ public class MapController {
         ArrayList<TechnologyType> technologies = GameDataBase.getCurrentCivilization().getTechnologies()
                 .getTechnologiesResearched();
         for (Resource resource : terrain.getResources()) {
+            System.out.println(resource);
             if (technologies.contains(resource.getRequiredTechnology())) {
                 stringBuilder.append(resource + "\n");
             }

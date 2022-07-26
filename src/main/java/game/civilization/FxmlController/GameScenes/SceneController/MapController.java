@@ -6,6 +6,7 @@ import game.civilization.Model.Terrains.TerrainState;
 import game.civilization.Model.Units.Unit;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.FxmlController.GameScenes.SceneModels.Tile;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -133,12 +134,20 @@ public class MapController {
             if (GameDataBase.getCurrentCivilization().getMap().getTerrainStates()[tile.getTerrain().getXPosition()][tile.getTerrain().getYPosition()]
                     != TerrainState.FOG_OF_WAR) {
                 tile.setOnMouseEntered(mouseEvent -> {
+                    try {
+                        GameSceneDataBase.getInstance().getGameSceneController().changeCursor(Cursor.HAND);
+                    } catch (Exception ignore) {
+                    }
                     if (!UnitsController.getInstance().isUnitClicked()) {
                         setTerrainInfoPane(makeTerrainPanelPane(tile));
                         GameSceneDataBase.getInstance().getBackPane().getChildren().add(getTerrainInfoPane());
                     }
                 });
                 tile.setOnMouseExited(mouseEvent -> {
+                    try {
+                        GameSceneDataBase.getInstance().getGameSceneController().changeCursor(Cursor.DEFAULT);
+                    } catch (Exception ignore) {
+                    }
                     GameSceneDataBase.getInstance().getBackPane().getChildren().remove(getTerrainInfoPane());
                     setTerrainInfoPane(null);
                 });

@@ -1,4 +1,4 @@
-package game.civilization.Controller.NetworkController.GameServer;
+package game.civilization.Controller.GameControllerPackage;
 
 import com.google.gson.Gson;
 import game.civilization.Controller.UserDatabase;

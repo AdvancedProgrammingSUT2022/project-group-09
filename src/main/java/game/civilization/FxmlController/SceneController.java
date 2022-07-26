@@ -109,4 +109,11 @@ public class SceneController {
         cheatStage.setScene(scene);
         cheatStage.show();
     }
+
+    public void stream() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("fxml/Stream.fxml")));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

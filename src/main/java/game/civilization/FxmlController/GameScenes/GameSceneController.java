@@ -1,6 +1,7 @@
 package game.civilization.FxmlController.GameScenes;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.GameControllerPackage.GameMenuController;
 import game.civilization.Controller.GameControllerPackage.InfoController;
 import game.civilization.Controller.NetworkController.Client.Client;
@@ -15,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -81,6 +83,7 @@ public class GameSceneController implements Initializable {
         UnitPanel.getInstance().run();
         CityPanel.getInstance().run();
         loadPane();
+        refresh();
     }
 
     private void handleDemographic() {
@@ -150,6 +153,13 @@ public class GameSceneController implements Initializable {
     }
 
     private void setNotification() {
+        notification.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                pane.setLayoutX(0);
+                pane.setLayoutY(0);
+            }
+        });
         notification.setEditable(false);
         try {
             notification.setText((Objects.requireNonNull(GameDataBase.findCiv(UserDatabase.getCurrentUser().getUsername()))).getNotification());
@@ -193,7 +203,8 @@ public class GameSceneController implements Initializable {
         clearPane();
         new GameMenuController().doNextTurn();
         refresh();
-        Client.getClientProxySocketController().setGame();
+        if (GameDataBase.isOnline())
+            Client.getClientProxySocketController().setGame();
     }
 
     public void refresh() {
@@ -306,5 +317,9 @@ public class GameSceneController implements Initializable {
             backPane.getChildren().remove(SettingController.getInstance().getPane());
         else
             backPane.getChildren().add(SettingController.getInstance().getPane());
+    }
+
+    public void changeCursor(Cursor cursor) {
+        pane.getScene().setCursor(cursor);
     }
 }

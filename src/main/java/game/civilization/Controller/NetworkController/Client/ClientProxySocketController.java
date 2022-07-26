@@ -37,7 +37,7 @@ public class ClientProxySocketController {
         dataOutputStream2 = new DataOutputStream(socket2.getOutputStream());
         Message message = new Message();
         message.setAction("introduction");
-        message.setMessage(UserDatabase.getCurrentUser().getUsername());
+        message.setMessage(UserDatabase.getCurrentUser().toJson());
         sendMessage(message);
         listen();
     }
@@ -87,7 +87,7 @@ public class ClientProxySocketController {
             game.setToGameDataBase();
             isGameLoadedFOrFirstTime = true;
             while (GameSceneDataBase.getInstance().getGameSceneController() == null) {
-                System.out.println("waiting!");
+                System.out.println("waiting to launch");
                 TimeUnit.MILLISECONDS.sleep(400);
             }
             if (GameSceneDataBase.getInstance().getGameSceneController() != null) {

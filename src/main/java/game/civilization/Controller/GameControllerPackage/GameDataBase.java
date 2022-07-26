@@ -1,6 +1,8 @@
 package game.civilization.Controller.GameControllerPackage;
 
 
+import game.civilization.Controller.UserDatabase;
+import game.civilization.FxmlController.GameScenes.SceneController.SettingController;
 import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.Terrains.TerrainType;
 import game.civilization.Model.Units.Settler;
@@ -16,6 +18,7 @@ public class GameDataBase {
     static private ArrayList<User> players; //ina bazi mikonan avalesh inja sabt mishe
     static private Civilization currentCivilization;
     static private HashMap<User, Civilization> civilizations;
+    private static boolean online;
 
     static private Selectable selected;
 
@@ -23,6 +26,32 @@ public class GameDataBase {
         GameDataBase.civilizations = new HashMap<>();
         GameDataBase.players = players;
         setGameDataBase();
+    }
+
+    public static void runGameForFirstTimeWithSavedMap(ArrayList<User> players) {
+        GameDataBaseSaving.loadMap();
+        GameDataBase.civilizations = new HashMap<>();
+        GameDataBase.players = players;
+        setGameDataBaseWithSavedMap();
+    }
+
+    private static void setGameDataBaseWithSavedMap() {
+        for (User player : players) {
+            civilizations.put(player, new Civilization(player.getUsername()));
+        }
+        currentCivilization = civilizations.get(players.get(0));
+        turn = 0;
+        Random random = new Random();
+        for (Civilization civilization : GameDataBase.getCivilizations()) {
+            Coordination coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
+            while (coordination.getTerrain().getType() == TerrainType.MOUNTAIN || coordination.getTerrain().getType() == TerrainType.OCEAN ||
+                    coordination.getTerrain().getCivilization() != null || coordination.getTerrain().getCivilianUnit() != null)
+                coordination = mainMap.getDrought().get(random.nextInt(mainMap.getDrought().size()));
+            Terrain terrain = GameDataBase.getMainMap().getTerrain(coordination.getX(), coordination.getY());
+            new Settler(terrain, civilization);
+        }
+        setRuins();
+        GameDataBase.getCurrentCivilization().getMap().updateExploration();
     }
 
     public static void buildCustomisableMap() {
@@ -138,6 +167,15 @@ public class GameDataBase {
         removeLosers();
         turn++;
         setCurrentCivilization(getCivilizations().get(turn % getCivilizations().size()));
+        if (!online) {
+            UserDatabase.setCurrentUser(GameDataBase.getPlayers().get(turn % getCivilizations().size()));
+            saveGameIfIsAutoSave();
+        }
+    }
+
+    private static void saveGameIfIsAutoSave() {
+        if (SettingController.getInstance().isAutoSave())
+            GameDataBaseSaving.saveGame();
     }
 
     private static void handleYear2050() {
@@ -203,4 +241,11 @@ public class GameDataBase {
         return turn * turnToYear;
     }
 
+    public static boolean isOnline() {
+        return online;
+    }
+
+    public static void setOnline(boolean online) {
+        GameDataBase.online = online;
+    }
 }

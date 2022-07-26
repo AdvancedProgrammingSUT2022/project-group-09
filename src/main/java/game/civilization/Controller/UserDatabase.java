@@ -1,20 +1,11 @@
 package game.civilization.Controller;
 
-import game.civilization.Controller.NetworkController.GameServer.SqlHandler;
+import game.civilization.Controller.GameControllerPackage.SqlHandler;
 import game.civilization.Model.User;
-import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class UserDatabase {

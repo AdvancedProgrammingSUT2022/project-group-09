@@ -1,6 +1,7 @@
 package game.civilization.FxmlController;
 
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.FxmlController.GameScenes.SceneController.*;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.FxmlController.GameScenes.SceneModels.Tile;
@@ -69,8 +70,9 @@ public class BuildMapController implements Initializable {
         loadPane();
     }
 
-    public void finish(ActionEvent actionEvent) {
-
+    public void finish(ActionEvent actionEvent) throws IOException {
+        GameDataBaseSaving.saveMap();
+        SceneController.getInstance().MainMenu();
     }
 
     public Tile getTile() {

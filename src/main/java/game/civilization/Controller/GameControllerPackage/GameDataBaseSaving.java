@@ -23,6 +23,7 @@ public class GameDataBaseSaving {
     private Selectable selected;
     private Improvement[][] improvements = new Improvement[Map.getRow()][Map.getColumn()];
     private Boolean[][] improvementsBoolean = new Boolean[Map.getRow()][Map.getColumn()];
+    private boolean online;
 
 
     private GameDataBaseSaving() {
@@ -40,7 +41,7 @@ public class GameDataBaseSaving {
                 data.improvements[i][j] = GameDataBase.getMainMap().getTerrain(i, j).getImprovement();
                 data.improvementsBoolean[i][j] = GameDataBase.getMainMap().getTerrain(i, j).getImprovementPair().getValue();
             }
-
+        data.online = GameDataBase.isOnline();
         return data;
     }
 
@@ -55,7 +56,7 @@ public class GameDataBaseSaving {
             civilizationHashMap.put(players.get(i), civilizations.get(i));
         }
         GameDataBase.setCivilizations(civilizationHashMap);
-
+        GameDataBase.setOnline(online);
         for (int i = 0; i < Map.getColumn(); i++)
             for (int j = 0; j < Map.getRow(); j++) {
                 GameDataBase.getMainMap().getTerrain(i, j).setImprovement(improvements[i][j]);
@@ -80,9 +81,38 @@ public class GameDataBaseSaving {
         }
     }
 
+    public static void saveMap() {
+        try {
+            FileWriter fileWriter;
+            if (Files.exists(Paths.get("data/map.xml")))
+                fileWriter = new FileWriter("data/map.xml", false);
+            else {
+                new File("data").mkdir();
+                fileWriter = new FileWriter("data/map.xml", false);
+            }
+            XStream xStream = new XStream();
+            fileWriter.write(xStream.toXML(GameDataBaseSaving.getInstance()));
+            fileWriter.close();
+        } catch (IOException ignored) {
+        }
+    }
+
     public static void loadGame() {
         try {
             String xml = new String(Files.readAllBytes(Paths.get("data/gameInformation.xml")));
+            XStream xStream = new XStream();
+            xStream.addPermission(AnyTypePermission.ANY);
+            if (xml.length() != 0) {
+                GameDataBaseSaving game = (GameDataBaseSaving) xStream.fromXML(xml);
+                game.setToGameDataBase();
+            }
+        } catch (IOException ignored) {
+        }
+    }
+
+    public static void loadMap() {
+        try {
+            String xml = new String(Files.readAllBytes(Paths.get("data/map.xml")));
             XStream xStream = new XStream();
             xStream.addPermission(AnyTypePermission.ANY);
             if (xml.length() != 0) {

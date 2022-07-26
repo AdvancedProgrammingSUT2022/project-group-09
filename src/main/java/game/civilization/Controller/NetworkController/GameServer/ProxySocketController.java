@@ -5,7 +5,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
+import com.thoughtworks.xstream.XStream;
+import game.civilization.Controller.GameControllerPackage.GameDataBase;
+import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.LoginMenuController;
 import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
@@ -30,7 +34,6 @@ public class ProxySocketController {
         this.socket2 = socket2;
         dataInputStream2 = new DataInputStream(socket2.getInputStream());
         dataOutputStream2 = new DataOutputStream(socket2.getOutputStream());
-        sendGame();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -58,14 +61,14 @@ public class ProxySocketController {
 
     private void sendGameToAll() throws IOException {
         for (ProxySocketController socketHandler : Proxy.getClientSockets()) {
-            if (socketHandler == this)
-                continue;
+//            if (socketHandler == this)
+//                continue;
             System.out.println("game is sending for " + socketHandler.socket2);
             socketHandler.sendGame();
         }
     }
 
-    private void sendGame() throws IOException {
+    public void sendGame() throws IOException {
         Message message = new Message();
         message.setAction("GameDatabase");
         message.setMessage(Proxy.getXml());
@@ -82,8 +85,20 @@ public class ProxySocketController {
                 System.out.println("Xml Server updated");
             }
             case "introduction" -> {
-                System.out.println("introduction done client name is :" + message.getMessage());
-                name = message.getMessage();
+                System.out.println("introduction done client name is :" + User.fromJson(message.getMessage()).getUsername());
+                name = User.fromJson(message.getMessage()).getUsername();
+                UserDatabase.getUsers().add(User.fromJson(message.getMessage()));
+            }
+            case "play game" -> {
+                if (!Objects.equals(Proxy.getXml(), null))
+                    return;
+                System.out.println("game created");
+                GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
+                GameDataBase.setOnline(true);
+                GameDataBaseSaving.saveGame();
+                XStream xStream = new XStream();
+                Proxy.setXml(xStream.toXML(GameDataBaseSaving.getInstance()));
+                sendGameToAll();
             }
             case "register" -> register(message);
             case "login" -> login(message);
@@ -211,5 +226,4 @@ public class ProxySocketController {
             sendMessageOnFirstData(message1);
         }
     }
-
 }
