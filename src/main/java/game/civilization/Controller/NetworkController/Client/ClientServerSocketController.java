@@ -131,7 +131,6 @@ public class ClientServerSocketController {
         hashMap.put("game", game);
         request.setData(hashMap);
         justSendRequest(request);
-        return;
     }
 
     public Response addToGame(Game game) throws IOException {

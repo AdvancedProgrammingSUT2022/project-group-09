@@ -85,7 +85,7 @@ public class LobbyController implements Initializable {
         }
     }
 
-    public void addGame() {
+    public void addGame() throws IOException {
         if (id.getText().equals("")) {
             return;
         }
@@ -100,9 +100,9 @@ public class LobbyController implements Initializable {
         }
         game.setNumberOfPlayers(Integer.parseInt(number.getText()));
         game.setId(id.getText());
-//        game.addPlayer(UserDatabase.getCurrentUser());
-//        game.setAdmin(UserDatabase.getCurrentUser());
-        //todo build tabel for this
+        game.addPlayer(UserDatabase.getCurrentUser());
+        game.setAdmin(UserDatabase.getCurrentUser());
+        Client.getClientServerSocketController().addGame(game);
     }
 
     private Pane makeGamePane(Game game) {

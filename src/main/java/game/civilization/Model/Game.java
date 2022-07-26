@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Game {
     private int numberOfPlayers;
-    private ArrayList<User> players;
+    private ArrayList<User> players=new ArrayList<>();
     private User admin;
     private boolean isPrivate;
     private String id;
