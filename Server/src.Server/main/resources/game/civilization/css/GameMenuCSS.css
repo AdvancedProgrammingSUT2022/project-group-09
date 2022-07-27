@@ -1,0 +1,53 @@
+.root {
+  -fx-background-image: url("../images/background/3118885.jpg");
+  -fx-background-size: contain;
+  -fx-background-color: transparent;
+}
+
+Button {
+  -fx-background-color: linear-gradient(#ffd65b, #e68400),
+    linear-gradient(#ffef84, #f2ba44), linear-gradient(#ffea6a, #ff9921),
+    linear-gradient(#ffe657 0%, #ff9921 50%, #ff9921 100%);
+
+  -fx-text-fill: #654b00;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-font-family: "Lucida Handwriting";
+  -fx-background-radius: 30;
+}
+
+.customLabel {
+  -fx-text-fill: white;
+  -fx-font-family: "Lucida Handwriting";
+  -fx-font-size: 14;
+}
+
+.heightWidthLabel {
+  -fx-font-family: "Lucida Handwriting";
+  -fx-text-fill: white;
+  -fx-font-size: 15;
+}
+
+.tooltip {
+  -fx-text-fill: white;
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 15;
+}
+
+ChoiceBox {
+  -fx-background-color: linear-gradient(#ffd65b, #e68400),
+    linear-gradient(#ffef84, #f2ba44), linear-gradient(#ffea6a, #ff9921),
+    linear-gradient(#ffe657 0%, #ff9921 50%, #ff9921 100%);
+
+  -fx-text-fill: #654b00;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-font-family: "Lucida Handwriting";
+  -fx-background-radius: 30;
+}
+
+.inbox {
+  -fx-fill: linear-gradient(#ffd65b, #e68400),
+    linear-gradient(#ffef84, #f2ba44), linear-gradient(#ffea6a, #ff9921),
+    linear-gradient(#ffe657 0%, #ff9921 50%, #ff9921 100%);
+}

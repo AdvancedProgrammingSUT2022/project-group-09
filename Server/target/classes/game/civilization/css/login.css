@@ -1,0 +1,25 @@
+.button{
+    -fx-background-color:
+            linear-gradient(#ffd65b, #e68400),
+            linear-gradient(#ffef84, #f2ba44),
+            linear-gradient(#ffea6a, #ff9921),
+            linear-gradient(#ffe657 0%, #ff9921 50%, #ff9921 100%);
+
+    -fx-text-fill: #654b00;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-font-family: "Baloo Bhaina";
+    -fx-background-radius: 30;
+}
+
+.text-field{
+    /*-fx-background-color: linear-gradient(#f1df60dd, #ff9921dd);*/
+    -fx-background-color: white;
+    -fx-prompt-text-fill: #aaaaaa;
+}
+
+.password-field{
+    /*-fx-background-color: linear-gradient(#f1df60dd, #ff9921dd);*/
+    -fx-background-color: white;
+    -fx-prompt-text-fill: #aaaaaa;
+}

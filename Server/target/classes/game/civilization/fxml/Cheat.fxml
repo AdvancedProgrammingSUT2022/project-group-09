@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="773.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.CheatSceneController">
+    <children>
+        <TextArea fx:id="text" layoutX="14.0" layoutY="15.0" prefHeight="445.0" prefWidth="749.0" style="-fx-control-inner-background: #000000; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; -fx-background-color: black;" text="enter your cheat:">
+         <font>
+            <Font size="25.0" />
+         </font></TextArea>
+    </children>
+</Pane>
