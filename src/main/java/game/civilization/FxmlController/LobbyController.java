@@ -26,6 +26,8 @@ import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LobbyController implements Initializable {
     public TextField searchField;
@@ -260,7 +262,6 @@ public class LobbyController implements Initializable {
     public void buildTable2() {
         int x = 570, y = 243;
         for (Game myGame : myGames) {
-            System.out.println("okkk");
             Label label = new Label(String.valueOf(myGame.getId()));
             label.setTextAlignment(TextAlignment.CENTER);
             label.setLayoutX(x);
@@ -280,6 +281,24 @@ public class LobbyController implements Initializable {
                         button.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
+                                if(myGame.getPlayers().size()==1) {
+                                    Label label1=new Label();
+                                    label1.setText("1 nafari nemitooni bazi koni");
+                                    pane.getChildren().add(label1);
+                                    Timer timer=new Timer();
+                                    timer.schedule(new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            Platform.runLater(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    pane.getChildren().remove(label1);
+                                                }
+                                            });
+                                        }
+                                    },4000);
+                                    return;
+                                }
                                 try {
                                     Client.getClientServerSocketController().launchGame(myGame);
                                 } catch (IOException e) {

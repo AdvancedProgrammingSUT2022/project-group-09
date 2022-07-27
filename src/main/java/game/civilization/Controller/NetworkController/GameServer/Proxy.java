@@ -5,6 +5,8 @@ import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.Model.Improvements.Improvement;
+import game.civilization.Model.JSONWebToken;
+import game.civilization.Model.Units.MilitaryUnit;
 import game.civilization.Model.Units.Settler;
 import game.civilization.Model.User;
 import javafx.application.Application;

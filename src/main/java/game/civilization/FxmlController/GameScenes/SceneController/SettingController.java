@@ -4,6 +4,9 @@ import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.FxmlController.GameScenes.GameSceneController;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.FxmlController.SceneController;
+import game.civilization.Model.Terrains.TerrainType;
+import game.civilization.Model.Units.Unit;
+import game.civilization.Model.Units.UnitType;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -106,6 +109,22 @@ public class SettingController {
             }
         });
 
+
+        Button speed = new Button();
+        speed.setText("speed Boost");
+        speed.setLayoutX(60);
+        speed.setLayoutY(90);
+        speed.setStyle(SettlerController.res);
+        speed.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                for (UnitType unitType : UnitType.getAllUnits()) {
+                    unitType.setMovement(unitType.getMovement() * 2);
+                }
+            }
+        });
+
+        pane.getChildren().add(speed);
         pane.getChildren().add(autoSave);
         pane.getChildren().add(musicButton);
         pane.getChildren().add(saveAndExit);
