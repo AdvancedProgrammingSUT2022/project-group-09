@@ -67,6 +67,14 @@ public class ProxySocketController {
             socketHandler.sendGame();
         }
     }
+    private void sendGameToAllButMe() throws IOException {
+        for (ProxySocketController socketHandler : Proxy.getClientSockets()) {
+            if (socketHandler == this)
+                continue;
+            System.out.println("game is sending for " + socketHandler.socket2);
+            socketHandler.sendGame();
+        }
+    }
 
     public void sendGame() throws IOException {
         Message message = new Message();
@@ -81,7 +89,7 @@ public class ProxySocketController {
             case "set GameDatabase" -> {
                 System.out.println("GameDatabase get from " + socket);
                 Proxy.setXml(message.getMessage());
-                sendGameToAll();
+                sendGameToAllButMe();
                 System.out.println("Xml Server updated");
             }
             case "introduction" -> {

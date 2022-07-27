@@ -241,7 +241,11 @@ public class LobbyController implements Initializable {
                         button.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                //todo
+                                try {
+                                    Client.getClientServerSocketController().launchGame(myGame);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                         button.setLayoutX(0);

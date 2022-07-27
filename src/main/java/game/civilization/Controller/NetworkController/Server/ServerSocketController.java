@@ -26,6 +26,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class ServerSocketController {
     private final Socket socket;
@@ -41,6 +43,9 @@ public class ServerSocketController {
     }
 
     public ServerSocketController(Socket socket, Socket socket2) throws IOException {
+        System.out.println("enter your name");
+        Scanner scanner = new Scanner(System.in);
+        name = scanner.next();
         this.socket = socket;
         dataInputStream = new DataInputStream(socket.getInputStream());
         dataOutputStream = new DataOutputStream(socket.getOutputStream());
@@ -72,7 +77,7 @@ public class ServerSocketController {
         }
     }
 
-    private void handleReq(Request request) throws IOException {
+    private void handleReq(Request request) throws IOException, InterruptedException {
         switch (request.getAction()) {
             case "register" -> register(request);
             case "login" -> login(request);
@@ -90,14 +95,18 @@ public class ServerSocketController {
         }
     }
 
-    private void launchGame(Request request) throws IOException {
+    private void launchGame(Request request) throws IOException, InterruptedException {
         Game game = (Game) request.getData().get("game");
-        Message message = new Message();
+        if (game.getPlayers().size() <= 1)
+            return;
+        Response message = new Response();
         message.setAction("launch game");
         for (ServerSocketController clientSocket : Server.getClientSockets()) {
             for (User player : game.getPlayers()) {
-                if (player.getUsername().equals(clientSocket.getName()))
-                    clientSocket.sendMessageDirectly(message);
+                if (player.getUsername().equals(clientSocket.getName())) {
+                    clientSocket.sendResponseDirectly(message);
+                    TimeUnit.MILLISECONDS.sleep(300);
+                }
             }
         }
     }
@@ -125,11 +134,10 @@ public class ServerSocketController {
 
     public void leaveGame(Request request) throws IOException {
         Game game = (Game) request.getData().get("game");
-        if (((User)request.getData().get("this")).getUsername().equals(game.getAdmin().getUsername())){
-            if (game.getPlayers().size() > 0){
+        if (((User) request.getData().get("this")).getUsername().equals(game.getAdmin().getUsername())) {
+            if (game.getPlayers().size() > 0) {
                 game.setAdmin(game.getPlayers().get(0));
-            }
-            else {
+            } else {
                 LobbyDatabase.getInstance().getAllGames().remove(game);
                 System.out.println(LobbyDatabase.getInstance().getAllGames() + " ...");
             }
@@ -232,14 +240,6 @@ public class ServerSocketController {
         XStream xStream = new XStream();
         xStream.addPermission(AnyTypePermission.ANY);
         return (Request) xStream.fromXML(messageJson);
-    }
-
-    private void sendMessageDirectly(Message message) throws IOException {
-        String temp = new XStream().toXML(message);
-        byte[] data = temp.getBytes(StandardCharsets.UTF_8);
-        dataOutputStream2.writeInt(data.length);
-        dataOutputStream2.write(data);
-        dataOutputStream2.flush();
     }
 
     private void sendResponse(Response message) throws IOException {
