@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<?import java.net.URL?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="600.0" prefWidth="400.0" stylesheets="@../css/users-page.css">
-    <AnchorPane styleClass="header" prefHeight="48" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
-        <Label styleClass="header-text" text="Messages"  AnchorPane.topAnchor="8" AnchorPane.bottomAnchor="8" AnchorPane.rightAnchor="24" AnchorPane.leftAnchor="24"/>
-        <Button styleClass="back-button" onAction="#backClicked" AnchorPane.topAnchor="8" AnchorPane.bottomAnchor="8" AnchorPane.rightAnchor="24" AnchorPane.leftAnchor="354" />
+<AnchorPane prefHeight="600.0" prefWidth="400.0" stylesheets="@../css/users-page.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane prefHeight="48" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <Label styleClass="header-text" text="Messages" AnchorPane.bottomAnchor="8" AnchorPane.leftAnchor="24" AnchorPane.rightAnchor="24" AnchorPane.topAnchor="8" />
+        <Button onAction="#backClicked" styleClass="back-button" AnchorPane.bottomAnchor="8" AnchorPane.leftAnchor="354" AnchorPane.rightAnchor="24" AnchorPane.topAnchor="8" />
+      <AnchorPane layoutX="111.0" prefHeight="48.0" prefWidth="195.0">
+         <children>
+            <Button fx:id="removeButton" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" text="Remove" />
+            <Button fx:id="editButton" layoutX="144.0" layoutY="12.0" mnemonicParsing="false" text="Edit" />
+         </children>
+      </AnchorPane>
     </AnchorPane>
-    <ScrollPane AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="48" AnchorPane.bottomAnchor="24">
+    <ScrollPane AnchorPane.bottomAnchor="24" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="48">
         <VBox fx:id="messagesList" minWidth="380">
 
         </VBox>
     </ScrollPane>
-    <TextField AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" fx:id="newMessageField"/>
+    <TextField fx:id="newMessageField" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" />
 
 </AnchorPane>

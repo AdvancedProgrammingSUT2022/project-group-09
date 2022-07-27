@@ -12,12 +12,14 @@ import game.civilization.Controller.NetworkController.Client.Client;
 import game.civilization.Model.Request;
 import game.civilization.Model.Response;
 import game.civilization.Model.Chat.ChatMessage;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -33,6 +35,10 @@ public class ChatPageController {
     public VBox messagesList;
     @FXML
     public TextField newMessageField;
+    @FXML
+    private Button editButton;
+    @FXML
+    private Button removeButton;
     private ClientChatController clientChatController;
     private static ChatPageController chatPageController;
 
@@ -56,7 +62,8 @@ public class ChatPageController {
         controller.runForFirstTime();
     }
 
-    public void runForFirstTime() throws IOException, InterruptedException{
+    public void runForFirstTime() throws IOException, InterruptedException {
+        disableButtons();
         clientChatController = new ClientChatController();
         Request request = new Request();
         request.setAction("get_messages");
@@ -67,7 +74,8 @@ public class ChatPageController {
         clientChatController.addMessagesToChat(messages);
         showMessages();
         newMessageField.setOnKeyPressed(keyEvent -> {
-            if (keyEvent.getCode().getCode() == 10) {
+            disableButtons();
+            if (keyEvent.getCode().getCode() == 10 && !newMessageField.getText().equals("")) {
                 Request request1 = new Request();
                 request1.setAction("send_message");
                 request1.addData("text", newMessageField.getText());
@@ -96,11 +104,11 @@ public class ChatPageController {
             }
         });
     }
-    
 
     public void showMessages() throws IOException, InterruptedException {
         messagesList.getChildren().clear();
-        ArrayList<ChatMessage> messages = new ClientChatController().getMessagesOfChat(senderUsername, receiverUsername);
+        ArrayList<ChatMessage> messages = new ClientChatController().getMessagesOfChat(senderUsername,
+                receiverUsername);
         for (ChatMessage message : messages) {
             String sender = message.getSenderUsename();
             VBox vBox = new VBox();
@@ -114,7 +122,18 @@ public class ChatPageController {
                 holder.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        
+                        enableButtons();
+                        removeButton.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent actionEvent) {
+                                disableButtons();
+                                try {
+                                    clientChatController.removeMessageFromServer(message);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                     }
                 });
             } else {
@@ -143,5 +162,19 @@ public class ChatPageController {
 
     public void setReceiverUsername(String receiverUsername) {
         this.receiverUsername = receiverUsername;
+    }
+
+    public void disableButtons() {
+        this.removeButton.setDisable(true);
+        this.editButton.setDisable(true);
+        this.removeButton.setVisible(false);
+        this.editButton.setVisible(false);
+    }
+
+    public void enableButtons() {
+        this.removeButton.setDisable(false);
+        this.editButton.setDisable(false);
+        this.removeButton.setVisible(true);
+        this.editButton.setVisible(true);
     }
 }
