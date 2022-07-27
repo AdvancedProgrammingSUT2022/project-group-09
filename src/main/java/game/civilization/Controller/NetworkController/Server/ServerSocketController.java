@@ -97,6 +97,7 @@ public class ServerSocketController {
             case "send invitation" -> sendInvitation(request);
             case "accept invitation" -> acceptInvitation(request);
             case "deny invitation" -> denyInvitation(request);
+            case "remove message" -> removeMessage(request);
         }
     }
 
@@ -125,6 +126,27 @@ public class ServerSocketController {
     private void denyInvitation(Request request) {
         Invitation invitation = (Invitation) request.getData().get("invitation");
         InvitationDatabase.getInstance().removeInvitation(invitation);
+    }
+
+    private void removeMessage(Request request) throws IOException {
+        String senderUsername = (String) request.getData().get("senderUsername");
+        String receiverUsername = (String) request.getData().get("receiverUsername");
+        String text = (String) request.getData().get("text");
+        Response response = new Response();
+        response.setAction("remove message");
+        response.addData("receiverUsername", receiverUsername);
+        response.addData("senderUsername", senderUsername);
+        response.addData("text", text);
+        ServerSocketController receiverSocketController = Server.getClientSocketByUsername(receiverUsername);
+        if (receiverSocketController != null) {
+            System.out.println("about to send this response directly");
+            receiverSocketController.sendResponseDirectly(response);
+            System.out.println("response sent successfully");
+        }
+        else {
+            System.out.println("null shode in sockete lamasab");
+        }
+        System.out.println("update sent to desired user");
     }
 
     private void launchGame(Request request) throws IOException, InterruptedException {
@@ -341,7 +363,6 @@ public class ServerSocketController {
     }
 
     private void sendMessage(Request request) throws IOException {
-        System.out.println("I'm sending the message bro");
         String text = (String) request.getData().get("text");
         String senderUsername = (String) request.getData().get("senderUsername");
         String receiverUsername = (String) request.getData().get("receiverUsername");

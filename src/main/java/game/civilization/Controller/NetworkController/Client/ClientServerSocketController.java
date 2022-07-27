@@ -73,7 +73,25 @@ public class ClientServerSocketController {
             case "launch game" -> launchRealGame();
             case "are you alive?" -> stayinAlive();
             case "message" -> receiveMessage(response);
+            case "remove message" -> removeMessage(response);
         }
+    }
+
+    private void removeMessage(Response response) {
+        String senderUsername = (String) response.getData().get("senderUsername");
+        String receiverUsername = (String) response.getData().get("receiverUsername");
+        String text = (String) response.getData().get("text");
+        new ClientChatController().removeMessageFromChat(text, senderUsername, receiverUsername);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ChatPageController.getChatPageController().showMessages();
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void receiveMessage(Response response) {
