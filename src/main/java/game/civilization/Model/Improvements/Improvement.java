@@ -167,6 +167,7 @@ public enum Improvement {
     }
 
     public boolean checkIsPossible(Terrain terrain) {
+        System.out.println(this);
         if (this == ROAD && !terrain.isHasRoad())
             return true;
         if (this == REMOVE_MARSH && terrain.getTerrainFeatures().contains(TerrainFeature.MARSH))

@@ -163,7 +163,7 @@ public class GameDataBase {
     }
 
     public static void nextTurn() {
-        handleYear2050();
+   //     handleYear2050();
         removeLosers();
         turn++;
         setCurrentCivilization(getCivilizations().get(turn % getCivilizations().size()));
