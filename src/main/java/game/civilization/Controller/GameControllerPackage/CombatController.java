@@ -2,6 +2,7 @@ package game.civilization.Controller.GameControllerPackage;
 
 import game.civilization.Model.City;
 import game.civilization.Model.Coordination;
+import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.Units.MilitaryUnit;
 import game.civilization.Model.Units.SiegeMilitaryUnit;
 import game.civilization.Model.Units.Unit;
@@ -19,20 +20,31 @@ public class CombatController {
         MilitaryUnit militaryUnit = ((MilitaryUnit) GameDataBase.getSelected());
         Coordination coordinate1 = militaryUnit.getTerrain().getCoordination();
         //start
-//        ArrayList<Coordination> path = new UnitController().getBestPath(coordinate2.getTerrain(),
-//                coordinate1.getTerrain(),
-//                militaryUnit);
-//        if (path == null)
-//            return "unfortunately there is no available path for your unit to move to your desired destination";
-//        int turnNeed = new UnitController().turnNeedToMove(coordinate2.getTerrain(), coordinate1.getTerrain(),
-//                militaryUnit);
-//        if (turnNeed <= 1)
-//            while (path.size() > militaryUnit.getMyType().getRange()) {
-//                militaryUnit.setTerrain(path.get(0).getTerrain());
-//                path.remove(0);
-//            }
-//        else
-//            return "bish az 1 turn mikhad va mojaz nist";
+        boolean safa = false;
+        for (Terrain terrain : coordination.getTerrain().getSurroundingTerrain()) {
+            for (Terrain terrain1 : terrain.getSurroundingTerrain()) {
+                if (terrain.getMilitaryUnit() == ((MilitaryUnit) GameDataBase.getSelected())) {
+                    safa = true;
+                    break;
+                }
+            }
+        }
+        if (!safa) {
+            ArrayList<Coordination> path = new UnitController().getBestPath(coordinate2.getTerrain(),
+                    coordinate1.getTerrain(),
+                    militaryUnit);
+            if (path == null)
+                return "unfortunately there is no available path for your unit to move to your desired destination";
+            int turnNeed = new UnitController().turnNeedToMove(coordinate2.getTerrain(), coordinate1.getTerrain(),
+                    militaryUnit);
+            if (turnNeed <= 1)
+                while (path.size() > militaryUnit.getMyType().getRange()) {
+                    militaryUnit.setTerrain(path.get(0).getTerrain());
+                    path.remove(0);
+                }
+            else
+                return "bish az 1 turn mikhad va mojaz nist";
+        }
         //end
         if (!coordinate2.isValidCoordination()) {
             return "Coordinate is not valid!";

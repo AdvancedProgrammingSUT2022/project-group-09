@@ -111,10 +111,14 @@ public enum UnitType {
     private final int combatStrength;
     private final int rangedCombatStrengh;
     private final int Range;
-    private final int movement;
+    private int movement;
     private final Resource requiredResourse;
     private final TechnologyType requiredTechnology;
     private final Image image;
+
+    public void setMovement(int movement) {
+        this.movement = movement;
+    }
 
     public static ArrayList<UnitType> getAllUnits() {
         return new ArrayList<>(List.of(UnitType.values()));
