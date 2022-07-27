@@ -26,13 +26,22 @@ public class ClientChatController {
         return onlineUsers;
     }
 
+    public ArrayList<ChatMessage> getMessagesFromServer(String senderUsername, String receiverUsername) throws IOException {
+        Request request = new Request();
+        request.setAction("get_messages");
+        request.addData("senderUsername", senderUsername);
+        request.addData("receiverUsername", receiverUsername);
+        Response response = Client.getClientServerSocketController().sendRequestAndGetResponse(request);
+        ArrayList<ChatMessage> messages = (ArrayList<ChatMessage>) response.getData().get("messages");
+        return messages;
+    }
+
     public ArrayList<ChatMessage> getMessagesOfChat(String user1Nickname, String user2Nickname) {
         ArrayList<ChatMessage> messages = ClientChatDatabase.getInstance().getMessages();
         ArrayList<ChatMessage> ans = new ArrayList<>();
         for (ChatMessage message : messages) {
             if ((message.getReceiverUsername().equals(user1Nickname) && message.getSenderUsename().equals(user2Nickname))
-                    || (message.getSenderUsename().equals(user1Nickname)
-                            && message.getReceiverUsername().equals(user2Nickname))) {
+                    || (message.getSenderUsename().equals(user1Nickname) && message.getReceiverUsername().equals(user2Nickname))) {
                 ans.add(message);
             }
         }

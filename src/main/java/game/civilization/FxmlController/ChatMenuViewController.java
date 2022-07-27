@@ -63,7 +63,7 @@ public class ChatMenuViewController {
             holder.setOnMouseClicked(mouseEvent -> {
                 try {
                     ChatPageController.run(UserDatabase.getCurrentUser().getUsername(), user.getUsername());
-                } catch (IOException e) {
+                } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
             });

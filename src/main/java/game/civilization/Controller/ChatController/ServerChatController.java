@@ -17,23 +17,33 @@ import game.civilization.Model.NetworkModels.Message;
 public class ServerChatController {
 
     public static void addMessage(String text, String receiverUsername, String senderUsername) throws IOException {
+        System.out.println("adding messaage");
         ChatMessage message = new ChatMessage();
         message.setText(text);
         message.setReceiverUsername(receiverUsername);
         message.setSenderUsername(senderUsername);
         message.setSentAt(LocalDateTime.now());
 
-        User receiver = UserDatabase.findUserByUsername(receiverUsername);
-        receiver.addReceivedMessage(message);
-        User sender = UserDatabase.findUserByUsername(senderUsername);
-        sender.addSentMessage(message);
+        // User receiver = UserDatabase.findUserByUsername(receiverUsername);
+        // receiver.addReceivedMessage(message);
+        // User sender = UserDatabase.findUserByUsername(senderUsername);
+        // sender.addSentMessage(message);
 
         ServerChatDatabase.getInstance().getMessages().add(message);
+        System.out.println("messages in server: " + ServerChatDatabase.getInstance().getMessages());
         Response response = new Response();
-        response.addData("message", message);
+        response.setAction("message");
+        response.addData("message", message.toJson());
         response.addData("fromUsername", senderUsername);
         ServerSocketController receiverSocketController = Server.getClientSocketByUsername(receiverUsername);
-        receiverSocketController.sendResponseDirectly(response);
+        if (receiverSocketController != null) {
+            System.out.println("about to send this response directly");
+            receiverSocketController.sendResponseDirectly(response);
+            System.out.println("response sent successfully");
+        }
+        else {
+            System.out.println("null shode in sockete lamasab");
+        }
         System.out.println("update sent to desired user");
     }
 
@@ -51,6 +61,5 @@ public class ServerChatController {
         messages.sort(Comparator.comparing(ChatMessage::getSentAt));
         return messages;
     }
-
 
 }
