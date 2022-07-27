@@ -122,18 +122,6 @@ public class ClientProxySocketController {
         System.out.println("message  action " + message.getAction() + " send");
     }
 
-//    public Message sendMessageAndGetMessage(Request request) throws IOException {
-//        Message message = new Message();
-//        message.setMessage(request.toJson());
-//        message.setAction(request.getAction());
-//        sendMessage(message);
-//        int length = dataInputStream.readInt();
-//        byte[] data = new byte[length];
-//        dataInputStream.readFully(data);
-//        String messageJson = new String(data, StandardCharsets.UTF_8);
-//        System.out.println(Message.fromJson(messageJson).getAction() + " received");
-//        return Message.fromJson(messageJson);
-//    }
 
     public boolean isGameLoadedFOrFirstTime() {
         return isGameLoadedFOrFirstTime;

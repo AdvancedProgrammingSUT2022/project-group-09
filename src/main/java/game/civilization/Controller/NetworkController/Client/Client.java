@@ -32,6 +32,7 @@ public class Client extends Application {
     }
 
     public static Client me;
+    public static int menu;
 
     public static ClientProxySocketController getClientProxySocketController() {
         return clientProxySocketController;
@@ -55,6 +56,7 @@ public class Client extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Client.me = this;
         UserDatabase.setCurrentUser(new User("a", "a", "a"));
         connect();
         SceneController.getInstance().setStage(stage);

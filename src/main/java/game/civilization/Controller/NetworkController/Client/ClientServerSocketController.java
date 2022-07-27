@@ -9,6 +9,7 @@ import game.civilization.FxmlController.SceneController;
 import game.civilization.Model.Game;
 import game.civilization.Model.Request;
 import game.civilization.Model.Response;
+import javafx.application.Platform;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -69,8 +70,17 @@ public class ClientServerSocketController {
     }
 
     private void launchRealGame() throws IOException, InterruptedException {
-        Client.me.iJoinedLobby();
-        Client.me.startOnlineGame(SceneController.getInstance().getStage());
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Client.me.iJoinedLobby();
+                    Client.me.startOnlineGame(SceneController.getInstance().getStage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void updateList(Response response) {
@@ -150,7 +160,6 @@ public class ClientServerSocketController {
     }
 
     public void launchGame(Game game) throws IOException {
-        //VAQTI START SHOD INO CALL KON
         Request request = new Request();
         request.setAction("launch game");
         request.addData("game", game);
@@ -160,24 +169,16 @@ public class ClientServerSocketController {
     public void addToGame(Game game) throws IOException {
         Request request = new Request();
         request.setAction("add to game");
-        XStream xStream = new XStream();
         request.addData("game", game);
         request.addData("this", UserDatabase.getCurrentUser());
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
         justSendRequest(request);
     }
 
     public void leaveGame(Game game) throws IOException {
         Request request = new Request();
         request.setAction("leave game");
-        XStream xStream = new XStream();
         request.addData("game", game);
         request.addData("this", UserDatabase.getCurrentUser());
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
         justSendRequest(request);
     }
 
