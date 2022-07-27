@@ -137,7 +137,16 @@ public class LobbyController implements Initializable {
         pane.prefWidth(6000);
         pane.setLayoutX(60);
         pane.setLayoutY(70);
-
+        Button stream = new Button("stream");
+        stream.setLayoutX(102);
+        stream.setLayoutY(70);
+        stream.setStyle(SettlerController.res);
+        stream.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                //todo
+            }
+        });
         Button join = new Button();
         join.setLayoutX(50);
         join.setLayoutY(70);
@@ -174,6 +183,7 @@ public class LobbyController implements Initializable {
 
             }
         });
+        pane.getChildren().add(stream);
         pane.getChildren().add(join);
         showDetails(pane, game);
         return pane;
