@@ -95,9 +95,8 @@ public class ServerSocketController {
             case "add game" -> addGame(request);
             case "add to game" -> addToGame(request);
             case "leave game" -> leaveGame(request);
-            case "search game" -> changePicture(request);
+            case "search game" -> searchForGame(request);
             case "launch game" -> launchGame(request);
-            case "change visibility" -> changePicture(request);
             case "isOnline" -> isOnline(request);
             case "stayin alive" -> isAlive = true;
             case "get online users" -> getOnlineUsers();
@@ -271,7 +270,6 @@ public class ServerSocketController {
         dataOutputStream.writeInt(data.length);
         dataOutputStream.write(data);
         dataOutputStream.flush();
-        System.out.println("message  action " + message.getAction() + " send");
         System.out.println("message  action " + message.getAction() + " send");
     }
 
