@@ -377,10 +377,13 @@ public class ServerSocketController {
     }
 
     private void changeNickname(Request message) throws IOException {
+        System.out.println("inja");
         User user = UserDatabase.findUserByUsername(name);
         assert user != null;
+        System.out.println("inja");
         String res = new ProfileMenuController().changeNicknameServer(user,
-                (String) message.getData().get("nickName"));
+                (String) message.getData().get("nickname"));
+        System.out.println("inja");
         if (res.equals("nickname changed successfully!")) {
             Response response = new Response();
             response.setMessage(user.toJson());

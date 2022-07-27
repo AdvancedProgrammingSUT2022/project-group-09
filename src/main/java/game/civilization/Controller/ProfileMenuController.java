@@ -85,11 +85,14 @@ public class ProfileMenuController extends Controller {
             return "nickname format is invalid";
         }
         user.setNickname(newNickname);
+        UserDatabase.saveUsers();
         return "nickname changed successfully!";
     }
 
     public String changePasswordServer(User user,String newPassword, String oldPassword) {
-        if (!Objects.equals(UserDatabase.getCurrentUser().getPassword(), oldPassword))
+        System.out.println(oldPassword);
+        System.out.println(newPassword);
+        if (!Objects.equals(user.getPassword(), oldPassword))
             return "current password is invalid";
         if (Objects.equals(oldPassword, newPassword))
             return "please enter a new password";
@@ -97,12 +100,14 @@ public class ProfileMenuController extends Controller {
             return "password is weak";
         }
         user.setPassword(newPassword);
+        UserDatabase.saveUsers();
         return "password changed successfully!";
     }
 
     public void changeProfileServer(User user, String url) {
         user.setInputStream(true);
         user.setProfileUrl(url);
+        UserDatabase.saveUsers();
     }
 
 }

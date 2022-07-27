@@ -3,6 +3,8 @@ package game.civilization.FxmlController;
 import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.Main;
+import game.civilization.Model.Terrains.Terrain;
+import game.civilization.Model.Terrains.TerrainType;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -89,39 +91,35 @@ public class ProfileMenuViewController implements Initializable {
     }
 
     public void changeAvatar(ActionEvent event) throws IOException {
-        if (!url.getText().equals("")){
+        if (!url.getText().equals("")) {
             String output;
-            if (!(output = profileMenuController.changeProfileCLinet(picProfile, url.getText())).equals("ok")){
+            if (!(output = profileMenuController.changeProfileCLinet(picProfile, url.getText())).equals("ok")) {
                 avatarLabel.setText(output);
                 avatarLabel.setFont(Font.font("Baloo Bhaijaan Regular"));
                 avatarLabel.setTextFill(Color.RED);
-            }
-            else
+            } else
                 avatarLabel.setText("");
-        }
-        else if (picNumber != 0){
+        } else if (picNumber != 0) {
             profileMenuController.changeProfileCLinet(picProfile, Objects.requireNonNull(Main.class.getResource("images/avatar/" + picNumber + ".png")).toExternalForm());
             UserDatabase.getCurrentUser().setInputStream(false);
             UserDatabase.getCurrentUser().setProfileUrl(Objects.requireNonNull(Main.class.getResource("images/avatar/" + picNumber + ".png")).toExternalForm());
             Image image = new Image(Objects.requireNonNull(Main.class.getResource("images/avatar/" + picNumber + ".png")).toExternalForm());
             picProfile.setImage(image);
-            if (picNumber == 1){
-                picProfile.setScaleX(56/42f);
-                picProfile.setScaleY(56/42f);
-            }
-            else {
+            if (picNumber == 1) {
+                picProfile.setScaleX(56 / 42f);
+                picProfile.setScaleY(56 / 42f);
+            } else {
                 picProfile.setScaleX(1);
                 picProfile.setScaleY(1);
             }
         }
     }
 
-    public void back(ActionEvent event) throws IOException{
+    public void back(ActionEvent event) throws IOException {
         SceneController.getInstance().MainMenu();
     }
 
     public void changeNicknameOrPassword(ActionEvent event) throws IOException {
-        System.out.println(UserDatabase.getCurrentUser().getPassword());
         String output;
         nicknamePasswordLabel.setFont(Font.font("Baloo Bhaijaan Regular"));
         nicknamePasswordLabel.setTextFill(Color.RED);
@@ -138,22 +136,22 @@ public class ProfileMenuViewController implements Initializable {
             }
         }
         if (profileNewPassword.getText().equals("") && profileOldPassword.getText().equals("") && profileNickname.getText().equals("")) {
-                nicknamePasswordLabel.setText("");
-                return;
+            nicknamePasswordLabel.setText("");
+            return;
         }
         nicknamePasswordLabel.setText("changed successful");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (UserDatabase.getCurrentUser().isInputStream()){
+        System.out.println(UserDatabase.getCurrentUser().getProfileUrl().substring(76));
+        if (UserDatabase.getCurrentUser().isInputStream()) {
             try {
-                picProfile.setImage(new Image(new FileInputStream(UserDatabase.getCurrentUser().getProfileUrl())));
-            } catch (FileNotFoundException e) {
+                picProfile.setImage(new Image(Main.class.getResource(UserDatabase.getCurrentUser().getProfileUrl().substring(76)).toExternalForm()));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             picProfile.setImage(new Image(UserDatabase.getCurrentUser().getProfileUrl()));
         }
     }
