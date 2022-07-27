@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LobbyController implements Initializable {
+    public TextField searchField;
+    public Button search;
     @FXML
     private AnchorPane pane;
     @FXML
@@ -265,6 +267,21 @@ public class LobbyController implements Initializable {
             });
             allLabels.add(label);
             pane.getChildren().add(label);
+        }
+    }
+
+    public void search() throws IOException {
+        String id = searchField.getText();
+        if (!id.equals("")){
+            Response response = Client.getClientServerSocketController().searchForGame(id);
+            Game game = (Game) response.getData().get("game");
+            if (game != null){
+                availableGames = new ArrayList<Game>();
+                availableGames.add(game);
+                clear();
+                buildTable();
+                buildTable2();
+            }
         }
     }
 }

@@ -65,7 +65,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Button fx:id="refresh" layoutX="316.0" layoutY="626.0" mnemonicParsing="false" onAction="#initialize" prefHeight="26.0" prefWidth="65.0" text="REFRESH">
+      <Button fx:id="refresh" layoutX="269.0" layoutY="626.0" mnemonicParsing="false" onAction="#initialize" prefHeight="26.0" prefWidth="65.0" text="REFRESH">
          <font>
             <Font name="Baloo Bhaina Regular" size="11.0" />
          </font>
@@ -80,5 +80,11 @@
             <Font name="Baloo Bhaina Regular" size="12.0" />
          </font>
       </CheckBox>
+      <TextField fx:id="searchField" layoutX="379.0" layoutY="629.0" />
+      <Button fx:id="search" layoutX="432.0" layoutY="658.0" mnemonicParsing="false" onAction="#search" text="SEARCH">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="10.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -80,8 +80,7 @@ public class ServerSocketController {
             case "add game" -> addGame(request);
             case "add to game" -> addToGame(request);
             case "leave game" -> leaveGame(request);
-            case "search game" -> changePicture(request);
-            case "change visibility" -> changePicture(request);
+            case "search game" -> searchForGame(request);
         }
     }
 
@@ -132,26 +131,12 @@ public class ServerSocketController {
         return null;
     }
 
-    public Response searchForGame(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
-    }
-
-    public Response changeVisibility(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
+    public void searchForGame(Request request) throws IOException {
+        String id = (String) request.getData().get("id");
+        Game game = findPrivateGameById(id);
+        Response response = new Response();
+        response.addData("game", game);
+        sendResponse(response);
     }
 
     private void sendGameToAll(Request request) throws IOException {
@@ -173,7 +158,7 @@ public class ServerSocketController {
     }
 
     private void initTables(Request request) throws IOException {
-        ArrayList<Game> list1 = buildList1();
+        ArrayList<Game> list1 = buildList1(request);
         ArrayList<Game> list2 = buildList2(request);
         Response response = new Response();
         response.addData("list1", list1);
@@ -181,21 +166,40 @@ public class ServerSocketController {
         sendResponse(response);
     }
 
-    private ArrayList<Game> buildList1() {
-        if (LobbyDatabase.getInstance().getAllGames().size() <= 10) {
-            return LobbyDatabase.getInstance().getAllGames();
+    private ArrayList<Game> buildList1(Request request) {
+        ArrayList<Game> arrayListPublic = findPublicGames();
+        if (arrayListPublic.size() <= 10) {
+            return arrayListPublic;
         }
         ArrayList<Game> arrayList = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
             int x = random.nextInt(LobbyDatabase.getInstance().getAllGames().size());
-            if (arrayList.contains(LobbyDatabase.getInstance().getAllGames().get(x))) {
+            if (arrayList.contains(LobbyDatabase.getInstance().getAllGames().get(x)) || LobbyDatabase.getInstance().getAllGames().get(x).isPrivate()) {
                 i--;
             } else {
                 arrayList.add(LobbyDatabase.getInstance().getAllGames().get(x));
             }
         }
         return arrayList;
+    }
+
+    private ArrayList<Game> findPublicGames(){
+        ArrayList<Game> arrayList = new ArrayList<>();
+        for (Game game : LobbyDatabase.getInstance().getAllGames()) {
+            if (!game.isPrivate())
+                arrayList.add(game);
+        }
+        return arrayList;
+    }
+
+    private Game findPrivateGameById(String id){
+        for (Game game : LobbyDatabase.getInstance().getAllGames()) {
+            if (game.getId().equals(id)){
+                return game;
+            }
+        }
+        return null;
     }
 
     private ArrayList<Game> buildList2(Request request) {
