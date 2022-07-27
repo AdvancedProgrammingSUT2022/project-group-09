@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import game.civilization.Controller.ChatController.ClientChatController;
 import game.civilization.Controller.LoginMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.Model.User;
@@ -44,9 +45,10 @@ public class ScoreBoardViewController {
     private TableColumn<User, String> isOnlineColumn;
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         System.out.println("hello");
-        ArrayList<User> users = UserDatabase.getUsers();
+        ArrayList<User> users //UserDatabase.getUsers();
+                = new ClientChatController().getOnlineUsers();
         System.out.println("userdatabase.getUsers" + UserDatabase.getUsers());
         sortUsers(users);
         setAllCellValueFactory();
@@ -71,8 +73,8 @@ public class ScoreBoardViewController {
                     circle.setFill(Color.RED);
                     try {
                         if (new LoginMenuController().isUserOnlineClient(newValue))
-                        circle.setFill(Color.GREEN);
-                        
+                            circle.setFill(Color.GREEN);
+
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();

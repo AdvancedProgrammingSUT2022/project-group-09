@@ -106,6 +106,7 @@ public class SettingController {
             }
         });
 
+        pane.getChildren().add(autoSave);
         pane.getChildren().add(musicButton);
         pane.getChildren().add(saveAndExit);
         return pane;

@@ -4,6 +4,7 @@ import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.FxmlController.GameScenes.SceneController.*;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
 import game.civilization.FxmlController.MapMovement;
+import game.civilization.Model.Civilization;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;

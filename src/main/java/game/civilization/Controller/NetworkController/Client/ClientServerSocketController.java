@@ -3,6 +3,7 @@ package game.civilization.Controller.NetworkController.Client;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 import game.civilization.Controller.ClientLobbyDatabase;
+import game.civilization.Controller.GameControllerPackage.SqlHandler;
 import game.civilization.Controller.LobbyDatabase;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
@@ -33,7 +34,7 @@ public class ClientServerSocketController {
     private final DataOutputStream dataOutputStream2;
     private boolean isListenCalledBefore;
 
-    public ClientServerSocketController(Socket socket, Socket socket2) throws IOException {
+    public ClientServerSocketController(Socket socket, Socket socket2) throws IOException{
         this.socket = socket;
         dataInputStream = new DataInputStream(socket.getInputStream());
         dataOutputStream = new DataOutputStream(socket.getOutputStream());

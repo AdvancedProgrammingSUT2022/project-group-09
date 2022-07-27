@@ -56,39 +56,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Terrain terrain = new Terrain();
-        terrain.setType(TerrainType.DESERT);
-        System.out.println(Improvement.FARM.checkIsPossible(terrain));
-        //CLIENT VA SERVER RO RUN KONID
-
-        //ghabl az start userdatabase.json ro por konid ba 2 user masalan
-        //[{"username" :"payam","password":"pass","nickname":"payam","score":0,"lastLoginTime":"2022/06/09 01:04:18","rank":0,"inputStream":false},{"username":"aylin","password":"pass","nickname":"payam","score":0,"rank":0,"inputStream":false}]
-        SceneController.getInstance().setStage(stage);
-        //   GameDataBaseSaving.loadGame();
-        //     GameDataBase.runGameForFirstTime(UserDatabase.getUsers());
-        //    ((Settler) (GameDataBase.getCurrentCivilization().getUnits().get(0))).foundCity();
-        //    stage.setTitle("CivilizationV");
-        //    SceneController.getInstance().game();
-        //    GameDataBaseSaving.saveGame();
-
-
-//
         UserDatabase.loadUsers();
-        handleCloseRequest(stage);
-//        UserDatabase.setCurrentUser(UserDatabase.getUsers().get(0));
-        stage.setTitle("CivilizationV");
-        // SceneController.getInstance().scoreBoard(stage);
-        SceneController.getInstance().LoginMenu();
-
-        // preStartRequired(stage);
-        // stage.setTitle("CivilizationV");
-        // stage.sizeToScene();
-        // stage.setMinWidth(1144);
-        // stage.setMinHeight(670);
-        // stage.setMaxWidth(1144);
-        // stage.setMaxHeight(670);
-        // UserDatabase.setCurrentUser(new User("hi", "hi", "hi"));
-        // SceneController.getInstance().chatMenu(stage);
     }
 
     private void handleCloseRequest(Stage stage) {

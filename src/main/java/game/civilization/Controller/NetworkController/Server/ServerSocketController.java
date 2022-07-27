@@ -11,6 +11,7 @@ import game.civilization.Controller.NetworkController.GameServer.ProxySocketCont
 import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.Controller.ChatController.ServerChatController;
+import game.civilization.FxmlController.ScoreBoardViewController;
 import game.civilization.Model.Game;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.JSONWebToken;
