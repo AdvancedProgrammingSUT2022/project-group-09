@@ -85,7 +85,7 @@ public class Client extends Application {
 
 
     public void startOfflineGame(Stage stage, ArrayList<User> users) throws IOException {
-        debugImprovement();
+       // debugImprovement();
         GameDataBase.runGameForFirstTime(users);
         SceneController.getInstance().setStage(stage);
         stage.setTitle("CivilizationV ");

@@ -3,10 +3,15 @@ package game.civilization.FxmlController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 
+import game.civilization.Controller.NetworkController.Client.Client;
+import game.civilization.Controller.UserDatabase;
 import game.civilization.Main;
 import game.civilization.FxmlController.Components.SwitchButton;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.print.PageLayout;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.Tooltip;
@@ -22,7 +27,7 @@ public class GameMenuViewController {
     private ChoiceBox<String> autoSaveChoiceBox;
     @FXML
     private Circle inbox;
-    
+
     private SwitchButton musicButton;
     private Spinner<Integer> widthSpinner;
     private Spinner<Integer> heightSpinner;
@@ -36,15 +41,15 @@ public class GameMenuViewController {
         widthSpinnerInitialization();
         heightSpinnerInitialization();
         musicButtonInitialization();
-        inbox.setFill(new ImagePattern(new Image(Main.class.getResource("images/randomRequirements/message_transparent_background.png").toString(),50, 50, false, true)));
+        inbox.setFill(new ImagePattern(new Image(Main.class.getResource("images/randomRequirements/message_transparent_background.png").toString(), 50, 50, false, true)));
         System.out.println(Main.class.getResource("images/randomRequirements/message_transparent_background.png"));
         autoSaveChoiceBox.getItems().addAll(Arrays.asList("----------", "round", "option 3", "option 4"));
     }
-    
+
     public void back() throws IOException {
         SceneController.getInstance().MainMenu();
     }
-    
+
     private void musicButtonInitialization() {
         musicButton = new SwitchButton();
         musicButton.setScaleX(1.5);
@@ -80,23 +85,61 @@ public class GameMenuViewController {
         Tooltip.install(heightSpinner, heightTooltip);
     }
 
-    public void enterLobby() {
-
+    public void enterLobby() throws IOException {
+        SceneController.getInstance().Lobby();
     }
 
     public void playGame() {
-
+        UserDatabase.loadUsers();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Client.me.startOfflineGame(SceneController.getInstance().getStage(), UserDatabase.getUsers());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public void buildMap() {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Client.me.startBuildMap(SceneController.getInstance().getStage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public void continueGame() {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Client.me.playSavedOfflineGame(SceneController.getInstance().getStage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public void loadMap() {
-        
+        UserDatabase.loadUsers();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Client.me.startSavedMapOfflineGame(SceneController.getInstance().getStage(), UserDatabase.getUsers());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

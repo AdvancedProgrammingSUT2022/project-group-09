@@ -71,6 +71,9 @@ public class GameSceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!GameDataBase.isOnline()) {
+            UserDatabase.setCurrentUser(GameDataBase.getPlayers().get(GameDataBase.getTurn() % GameDataBase.getCivilizations().size()));
+        }
         handleDemographic();
         handleMilitary();
         handleEconomy();
