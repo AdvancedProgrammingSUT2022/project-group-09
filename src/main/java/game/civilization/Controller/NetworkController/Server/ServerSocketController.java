@@ -168,7 +168,7 @@ public class ServerSocketController {
                         if (game.getPlayers().size() == num)
                             LobbyDatabase.getInstance().getAllGames().remove(game);
                     }
-                }, 30000);
+                }, 300000);
             }
         }
         sendGameToAll(request);
@@ -292,7 +292,7 @@ public class ServerSocketController {
                 if (game.getPlayers().size() == num)
                     LobbyDatabase.getInstance().getAllGames().remove(game);
             }
-        }, 30000);
+        }, 300000);
     }
 
     private Request getMessage() throws IOException {
