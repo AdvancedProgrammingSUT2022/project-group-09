@@ -47,11 +47,13 @@ public class Client extends Application {
     private void connectForGame() throws IOException {
         socket = new Socket("localhost", 700);
         socket2 = new Socket("localhost", 700);
+        Client.clientProxySocketController = new ClientProxySocketController(socket, socket2);
     }
 
     private void connect() throws IOException {
         socket = new Socket("localhost", 8000);
         socket2 = new Socket("localhost", 8000);
+        clientServerSocketController=new ClientServerSocketController(socket,socket2);
     }
 
     @Override
@@ -65,7 +67,6 @@ public class Client extends Application {
 
     public void iJoinedLobby() throws IOException, InterruptedException {
         connectForGame();
-        Client.clientProxySocketController = new ClientProxySocketController(socket, socket2);
     }
 
     public void startOnlineGame(Stage stage) throws IOException, InterruptedException {
@@ -94,7 +95,6 @@ public class Client extends Application {
 
     public void startWatchingStream(Stage stage) throws IOException, InterruptedException {
         connectForGame();
-        Client.clientProxySocketController = new ClientProxySocketController(socket, socket2);
         while (!clientProxySocketController.isGameLoadedFOrFirstTime()) {
             System.out.println("game not loaded yet");
             TimeUnit.MILLISECONDS.sleep(400);
