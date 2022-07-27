@@ -21,30 +21,30 @@ public class UserDatabase {
     static private ArrayList<User> users = new ArrayList<>();
     static private User currentUser;
 
-    static public void loadUsers() {
-        SqlHandler.loadUsers();
-    }
-
-
 //    static public void loadUsers() {
-//        try {
-//            File myObj = new File("UserDatabase.json");
-//            if (!myObj.exists())
-//                myObj.createNewFile();
-//            List<User> users1 = new ArrayList<>();
-//            Gson gson = new Gson();
-//            Reader reader = Files.newBufferedReader(Paths.get("UserDatabase.json"));
-//            User[] tempList = gson.fromJson(reader, User[].class);
-//            if (tempList != null)
-//                users1 = Arrays.asList(tempList);
-//            ArrayList<User> userArrayList = new ArrayList<>(users1);
-//            reader.close();
-//            users.addAll(userArrayList);
-//        } catch (IOException e) {
-//            System.err.println("ERROR! in loading UserDatabase[JSON]");
-//            throw new RuntimeException(e);
-//        }
+//        SqlHandler.loadUsers();
 //    }
+
+
+    static public void loadUsers() {
+        try {
+            File myObj = new File("UserDatabase.json");
+            if (!myObj.exists())
+                myObj.createNewFile();
+            List<User> users1 = new ArrayList<>();
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get("UserDatabase.json"));
+            User[] tempList = gson.fromJson(reader, User[].class);
+            if (tempList != null)
+                users1 = Arrays.asList(tempList);
+            ArrayList<User> userArrayList = new ArrayList<>(users1);
+            reader.close();
+            users.addAll(userArrayList);
+        } catch (IOException e) {
+            System.err.println("ERROR! in loading UserDatabase[JSON]");
+            throw new RuntimeException(e);
+        }
+    }
     public static void updateData() {
         if (currentUser != null) {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -54,21 +54,21 @@ public class UserDatabase {
         saveUsers();
     }
 
-    static public void saveUsers() {
-        SqlHandler.saveUsers();
-    }
-
 //    static public void saveUsers() {
-//        Gson gson = new Gson();
-//        try {
-//            Writer writer = Files.newBufferedWriter(Paths.get("UserDatabase.json"));
-//            gson.toJson(users, writer);
-//            writer.close();
-//        } catch (IOException e) {
-//            System.err.println("ERROR! in SavingUser[JSON]");
-//            throw new RuntimeException(e);
-//        }
+//        SqlHandler.saveUsers();
 //    }
+
+    static public void saveUsers() {
+        Gson gson = new Gson();
+        try {
+            Writer writer = Files.newBufferedWriter(Paths.get("UserDatabase.json"));
+            gson.toJson(users, writer);
+            writer.close();
+        } catch (IOException e) {
+            System.err.println("ERROR! in SavingUser[JSON]");
+            throw new RuntimeException(e);
+        }
+    }
 
     static public boolean isUsernameDuplicate(User user) {
         for (User user1 : users) {
