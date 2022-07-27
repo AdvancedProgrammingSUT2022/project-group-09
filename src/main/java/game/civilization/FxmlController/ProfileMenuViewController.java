@@ -144,7 +144,6 @@ public class ProfileMenuViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println(UserDatabase.getCurrentUser().getProfileUrl().substring(76));
         if (UserDatabase.getCurrentUser().isInputStream()) {
             try {
                 picProfile.setImage(new Image(Main.class.getResource(UserDatabase.getCurrentUser().getProfileUrl().substring(76)).toExternalForm()));
