@@ -300,6 +300,7 @@ public class ServerSocketController {
     }
 
     private void sendMessage(Request request) throws IOException {
+        System.out.println("I'm sending the message bro");
         String text = (String) request.getData().get("text");
         String senderUsername = (String) request.getData().get("senderUsername");
         String receiverUsername = (String) request.getData().get("receiverUsername");

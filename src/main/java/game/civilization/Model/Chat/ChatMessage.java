@@ -52,4 +52,9 @@ public class ChatMessage {
         return gson.fromJson(json, ChatMessage.class);
     }
 
+    @Override
+    public String toString() {
+        return this.text + " from " + this.senderUsername + " to " + this.receiverUsername;
+    }
+
 }

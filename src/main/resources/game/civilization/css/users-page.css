@@ -7,6 +7,18 @@
     -fx-font-weight: bolder;
 }
 
+Button {
+    -fx-background-color: linear-gradient(#ffd65b, #e68400),
+      linear-gradient(#ffef84, #f2ba44), linear-gradient(#ffea6a, #ff9921),
+      linear-gradient(#ffe657 0%, #ff9921 50%, #ff9921 100%);
+  
+    -fx-text-fill: #654b00;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-font-family: "Times New Roman";
+    -fx-background-radius: 30;
+  }
+
 .header-button {
     -fx-pref-width: 10;
     -fx-pref-height: 10;

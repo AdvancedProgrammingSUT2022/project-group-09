@@ -6,6 +6,8 @@ import game.civilization.Controller.ClientLobbyDatabase;
 import game.civilization.Controller.GameControllerPackage.SqlHandler;
 import game.civilization.Controller.LobbyDatabase;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.Controller.ChatController.ClientChatController;
+import game.civilization.FxmlController.ChatPageController;
 import game.civilization.FxmlController.SceneController;
 import game.civilization.Model.Game;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
@@ -14,6 +16,7 @@ import game.civilization.Model.JSONWebToken;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Request;
 import game.civilization.Model.Response;
+import game.civilization.Model.Chat.ChatMessage;
 import javafx.application.Platform;
 
 import java.io.DataInputStream;
@@ -34,7 +37,7 @@ public class ClientServerSocketController {
     private final DataOutputStream dataOutputStream2;
     private boolean isListenCalledBefore;
 
-    public ClientServerSocketController(Socket socket, Socket socket2) throws IOException{
+    public ClientServerSocketController(Socket socket, Socket socket2) throws IOException {
         this.socket = socket;
         dataInputStream = new DataInputStream(socket.getInputStream());
         dataOutputStream = new DataOutputStream(socket.getOutputStream());
@@ -47,7 +50,7 @@ public class ClientServerSocketController {
     private void listen() throws IOException {
         if (isListenCalledBefore)
             return;
-        //ino zadam ke yebar faghat az in tabe estefade beshe
+        // ino zadam ke yebar faghat az in tabe estefade beshe
         isListenCalledBefore = true;
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -71,7 +74,24 @@ public class ClientServerSocketController {
             case "update list" -> updateList(response);
             case "launch game" -> launchRealGame();
             case "are you alive?" -> stayinAlive();
+            case "message" -> receiveMessage(response);
         }
+    }
+
+    private void receiveMessage(Response response) {
+        ChatMessage message = ChatMessage.fromJson((String) response.getData().get("message"));
+        String senderUsername = (String) response.getData().get("fromUsername");
+        new ClientChatController().addMessageToChat(message);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ChatPageController.getChatPageController().showMessages();
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void launchRealGame() throws IOException, InterruptedException {
@@ -89,11 +109,13 @@ public class ClientServerSocketController {
     }
 
     private void updateList(Response response) throws IOException {
-        ClientLobbyDatabase.getInstance().getLobbyController().setMyGames((ArrayList<Game>) response.getData().get("list2"));
+        ClientLobbyDatabase.getInstance().getLobbyController()
+                .setMyGames((ArrayList<Game>) response.getData().get("list2"));
         for (Game availableGame : ClientLobbyDatabase.getInstance().getLobbyController().getAvailableGames()) {
             for (Game game : ((ArrayList<Game>) response.getData().get("list2"))) {
                 if (game.getId().equals(availableGame.getId())) {
-                    ClientLobbyDatabase.getInstance().getLobbyController().getAvailableGames().set(ClientLobbyDatabase.getInstance().getLobbyController().getAvailableGames().indexOf(availableGame), game);
+                    ClientLobbyDatabase.getInstance().getLobbyController().getAvailableGames().set(ClientLobbyDatabase
+                            .getInstance().getLobbyController().getAvailableGames().indexOf(availableGame), game);
                 }
             }
         }
@@ -199,6 +221,5 @@ public class ClientServerSocketController {
         request.addData("id", id);
         return sendRequestAndGetResponse(request);
     }
-
 
 }
