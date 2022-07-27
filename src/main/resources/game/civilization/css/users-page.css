@@ -1,0 +1,28 @@
+.header {
+    -fx-background-color: #919191;
+}
+
+.header-text {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bolder;
+}
+
+.header-button {
+    -fx-pref-width: 10;
+    -fx-pref-height: 10;
+    -fx-background-color: transparent;
+    -fx-background-image: url('../images/randomRequirements/refresh.png');
+    -fx-background-size: 28;
+    -fx-background-position: 2 2;
+    -fx-background-repeat: no-repeat;
+}
+
+.back-button {
+    -fx-pref-width: 10;
+    -fx-pref-height: 10;
+    -fx-background-color: transparent;
+    -fx-background-image: url('../images//randomRequirements/back.png');
+    -fx-background-size: 16;
+    -fx-background-position: 2 2;
+    -fx-background-repeat: no-repeat;
+}

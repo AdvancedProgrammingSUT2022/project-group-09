@@ -5,17 +5,23 @@ import game.civilization.Controller.NetworkController.GameServer.Proxy;
 import game.civilization.Controller.NetworkController.GameServer.ProxySocketController;
 import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.Controller.ChatController.ServerChatController;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.JSONWebToken;
 import game.civilization.Model.Request;
 import game.civilization.Model.Response;
 import game.civilization.Model.User;
+import game.civilization.Model.Chat.ChatMessage;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.AnyTypePermission;
 
 public class ServerSocketController {
     private final Socket socket;
@@ -26,6 +32,10 @@ public class ServerSocketController {
     private final DataOutputStream dataOutputStream2;
     private String name;
     private boolean isAlive = true;
+
+    public String getName() {
+        return this.name;
+    }
 
     public ServerSocketController(Socket socket, Socket socket2) throws IOException {
         this.socket = socket;
@@ -68,6 +78,9 @@ public class ServerSocketController {
             case "changePicture" -> changePicture(request);
             case "isOnline" -> isOnline(request);
             case "stayin alive" -> isAlive = true;
+            case "get online users" -> getOnlineUsers();
+            case "get_messages" -> getMessages(request);
+            case "send_message" -> sendMessage(request);
         }
     }
 
@@ -76,16 +89,13 @@ public class ServerSocketController {
         byte[] data = new byte[length];
         dataInputStream.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
-        // if (JSONWebToken.verify(messageJson, "client")) {
-        //     messageJson = JSONWebToken.decode(messageJson, "client");
-        // } else {
-        //     System.out.println("ERROR");
-        // }
-        return Request.fromJson(messageJson);
+        XStream xStream = new XStream();
+        xStream.addPermission(AnyTypePermission.ANY);
+        return (Request) xStream.fromXML(messageJson);
     }
 
     public void sendMessageDirectly(Message message) throws IOException {
-        String temp = message.toJson();
+        String temp = new XStream().toXML(message);
         byte[] data = temp.getBytes(StandardCharsets.UTF_8);
         dataOutputStream2.writeInt(data.length);
         dataOutputStream2.write(data);
@@ -93,11 +103,53 @@ public class ServerSocketController {
     }
 
     private void sendResponse(Response message) throws IOException {
-        String temp = message.toJson();
+        String temp = new XStream().toXML(message);
         byte[] data = temp.getBytes(StandardCharsets.UTF_8);
         dataOutputStream.writeInt(data.length);
         dataOutputStream.write(data);
         dataOutputStream.flush();
+        System.out.println("message  action " + message.getAction() + " send");
+    }
+
+    public void sendResponseDirectly(Response message) throws IOException {
+        String temp = new XStream().toXML(message);
+        byte[] data = temp.getBytes(StandardCharsets.UTF_8);
+        dataOutputStream2.writeInt(data.length);
+        dataOutputStream2.write(data);
+        dataOutputStream2.flush();
+    }
+
+    private void getOnlineUsers() throws IOException {
+        Response response = new Response();
+        response.setAction("khaste nabashid");
+        response.setMessage("faghat baraye inke inja khali nabashe");
+        ArrayList<User> users = Server.getOnlineUsers();
+        response.addData("count", users.size());
+        for (int i = 0; i < users.size(); i++) {
+            response.addData("user" + i, users.get(i).toJson());
+        }
+        sendResponse(response);
+    }
+
+    private void getMessages(Request request) throws IOException {
+        String senderUsername = (String) request.getData().get("senderUsername");
+        String receiverUsername = (String) request.getData().get("receiverUsername");
+        ArrayList<ChatMessage> messages = ServerChatController.getMessagesOfChat(receiverUsername, senderUsername);
+        Response response = new Response();
+        response.setAction("get messages done");
+        // response.addData("count", messages.size());
+        // for (int i = 0; i< messages.size(); i++) {
+        //     response.addData("message" + i, messages.get(i));
+        // }
+        response.addData("messages", messages);
+        sendResponse(response);
+    }
+
+    private void sendMessage(Request request) throws IOException {
+        String text = (String) request.getData().get("text");
+        String senderUsername = (String) request.getData().get("senderUsername");
+        String receiverUsername = (String) request.getData().get("receiverUsername");
+        ServerChatController.addMessage(text, receiverUsername, senderUsername);
     }
 
     private void isOnline(Request request) throws IOException {

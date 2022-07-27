@@ -8,6 +8,7 @@ import game.civilization.Controller.NetworkController.GameServer.ProxySocketCont
 import game.civilization.Controller.UserDatabase;
 import game.civilization.Model.Request;
 import game.civilization.Model.Response;
+import game.civilization.Model.User;
 import game.civilization.Model.Improvements.Improvement;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Units.Settler;
@@ -64,10 +65,10 @@ public class Server extends Application {
                             }
                         });
                         tmpThread.start();
-                        Message message = new Message();
+                        Response message = new Response();
                         message.setAction("are you alive?");
                         try {
-                            s.sendMessageDirectly(message);
+                            s.sendResponseDirectly(message);
                             wait(200);
                         } catch (InterruptedException | IOException e) {
                         }
@@ -77,7 +78,7 @@ public class Server extends Application {
                         }
                     }
                     try {
-                        wait(5000);
+                        wait(10000);
                     } catch (InterruptedException e) {
                     }
                 }
@@ -89,5 +90,22 @@ public class Server extends Application {
 
     public static ArrayList<ServerSocketController> getClientSockets() {
         return clientSockets;
+    }
+
+    public static ServerSocketController getClientSocketByUsername(String username) {
+        for (ServerSocketController s : clientSockets) 
+            if (s.getName().equals(username))
+                return s;
+        return null;
+    }
+
+    public static ArrayList<User> getOnlineUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        for (ServerSocketController s : Server.getClientSockets()) {
+            User user = UserDatabase.findUserByUsername(s.getName());
+            if (user != null)
+                users.add(user);
+        }
+        return users;
     }
 }

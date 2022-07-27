@@ -50,7 +50,7 @@ public class ClientServerSocketController {
             public void run() {
                 try {
                     while (true) {
-                        Message message = getMessage();
+                        Response message = getMessage();
                         System.out.println(message.getAction() + " received");
                         handleReq(message);
                     }
@@ -62,7 +62,7 @@ public class ClientServerSocketController {
         thread.start();
     }
 
-    private void handleReq(Message message) throws IOException, InterruptedException {
+    private void handleReq(Response message) throws IOException, InterruptedException {
         switch (message.getAction()) {
             case "are you alive?" -> stayinAlive();
         }
@@ -75,8 +75,7 @@ public class ClientServerSocketController {
     }
 
     public void justSendRequest(Request request) throws IOException {
-        // String messageJson = JSONWebToken.create(request.toJson(), "client");
-        String messageJson = request.toJson();
+        String messageJson = new XStream().toXML(request);
         byte[] data = messageJson.getBytes(StandardCharsets.UTF_8);
         dataOutputStream.writeInt(data.length);
         dataOutputStream.write(data);
@@ -90,15 +89,19 @@ public class ClientServerSocketController {
         byte[] data = new byte[length];
         dataInputStream.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
-        System.out.println(Response.fromJson(messageJson)+ " received");
-        return Response.fromJson(messageJson);
+        XStream xStream = new XStream();
+        xStream.addPermission(AnyTypePermission.ANY);
+        System.out.println(((Response) xStream.fromXML(messageJson)).getAction() + " received");
+        return (Response) xStream.fromXML(messageJson);
     }
-    private Message getMessage() throws IOException {
+    private Response getMessage() throws IOException {
         int length = dataInputStream2.readInt();
         byte[] data = new byte[length];
         dataInputStream2.readFully(data);
         String messageJson = new String(data, StandardCharsets.UTF_8);
-        return Message.fromJson(messageJson);
+        XStream xStream = new XStream();
+        xStream.addPermission(AnyTypePermission.ANY);
+        return (Response) xStream.fromXML(messageJson);
     }
 
 }

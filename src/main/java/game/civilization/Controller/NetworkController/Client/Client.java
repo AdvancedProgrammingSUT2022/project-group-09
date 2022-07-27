@@ -27,7 +27,6 @@ public class Client extends Application {
         return clientServerSocketController;
     }
 
-
     private void connectForGame() throws IOException {
         socket = new Socket("localhost", 700);
         socket2 = new Socket("localhost", 700);
@@ -47,7 +46,6 @@ public class Client extends Application {
         UserDatabase.loadUsers();
         UserDatabase.setCurrentUser(new User("pouya", "1234@asDF", "pouyaL"));
         SceneController.getInstance().LoginMenu();
-
 
         //******* BE IN PAEINI HA DAST NAZANID *******
 //        debugImprovement();

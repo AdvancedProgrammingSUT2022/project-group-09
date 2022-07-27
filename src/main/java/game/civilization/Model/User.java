@@ -2,9 +2,11 @@ package game.civilization.Model;
 
 import com.google.gson.Gson;
 import game.civilization.Main;
+import game.civilization.Model.Chat.ChatMessage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class User {
     private String username;
@@ -16,6 +18,8 @@ public class User {
     private int rank;
     private String profileUrl;
     private boolean inputStream = false;
+    private transient ArrayList<ChatMessage> sentMessages = new ArrayList<>();
+    private transient ArrayList<ChatMessage> receivedMessages = new ArrayList<>();
 
     public void setRank(int rank) {
         this.rank = rank;
@@ -118,5 +122,29 @@ public class User {
 
     public void setInputStream(boolean inputStream) {
         this.inputStream = inputStream;
+    }
+
+    public ArrayList<ChatMessage> getSentMessages() {
+        return this.sentMessages;
+    }
+
+    public ArrayList<ChatMessage> getReceivedMessages() {
+        return this.receivedMessages;
+    }
+
+    public void setSentMessages(ArrayList<ChatMessage> sentMessages) {
+        this.sentMessages = sentMessages;
+    }
+
+    public void setReceivedMessages(ArrayList<ChatMessage> receivedMessages) {
+        this.receivedMessages = receivedMessages;
+    }
+
+    public void addReceivedMessage(ChatMessage message) {
+        this.receivedMessages.add(message);
+    }
+
+    public void addSentMessage(ChatMessage message) {
+        this.sentMessages.add(message);
     }
 }
