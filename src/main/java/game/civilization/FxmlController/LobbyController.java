@@ -22,6 +22,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
+import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -172,12 +173,18 @@ public class LobbyController implements Initializable {
             public void handle(ActionEvent actionEvent) {
                 System.out.println(UserDatabase.getCurrentUser().getUsername());
                 if (join.getText().equals("join")) {
-
                     game.getPlayers().add(UserDatabase.getCurrentUser());
                     try {
                         Client.getClientServerSocketController().addToGame(game);
                     } catch (IOException e) {
                         e.printStackTrace();
+                    }
+                    if (game.getPlayers().size() >= game.getNumberOfPlayers()) {
+                        try {
+                            Client.getClientServerSocketController().launchGame(game);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                     join.setText("leave");
                 } else {
