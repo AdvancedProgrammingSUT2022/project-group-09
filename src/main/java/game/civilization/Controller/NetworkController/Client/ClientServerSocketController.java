@@ -34,7 +34,7 @@ public class ClientServerSocketController {
     private final DataOutputStream dataOutputStream2;
     private boolean isListenCalledBefore;
 
-    public ClientServerSocketController(Socket socket, Socket socket2) throws IOException{
+    public ClientServerSocketController(Socket socket, Socket socket2) throws IOException {
         this.socket = socket;
         dataInputStream = new DataInputStream(socket.getInputStream());
         dataOutputStream = new DataOutputStream(socket.getOutputStream());
@@ -89,6 +89,8 @@ public class ClientServerSocketController {
     }
 
     private void updateList(Response response) throws IOException {
+        if (ClientLobbyDatabase.getInstance().getLobbyController() == null)
+            return;
         ClientLobbyDatabase.getInstance().getLobbyController().setMyGames((ArrayList<Game>) response.getData().get("list2"));
         for (Game availableGame : ClientLobbyDatabase.getInstance().getLobbyController().getAvailableGames()) {
             for (Game game : ((ArrayList<Game>) response.getData().get("list2"))) {

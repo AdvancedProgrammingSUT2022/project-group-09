@@ -25,16 +25,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.util.*;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.AnyTypePermission;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class ServerSocketController {
@@ -137,6 +135,16 @@ public class ServerSocketController {
             if (allGame.getId().equals(game.getId())) {
                 int x = LobbyDatabase.getInstance().getAllGames().indexOf(allGame);
                 LobbyDatabase.getInstance().getAllGames().set(LobbyDatabase.getInstance().getAllGames().indexOf(allGame), game);
+                Timer timer = new Timer();
+                int num = game.getPlayers().size();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        System.out.println("alan");
+                        if (game.getPlayers().size() == num)
+                            LobbyDatabase.getInstance().getAllGames().remove(game);
+                    }
+                }, 30000);
             }
         }
         sendGameToAll(request);
@@ -147,8 +155,7 @@ public class ServerSocketController {
         if (((User) request.getData().get("this")).getUsername().equals(game.getAdmin().getUsername())) {
             if (game.getPlayers().size() > 0) {
                 game.setAdmin(game.getPlayers().get(0));
-            }
-            else {
+            } else {
                 LobbyDatabase.getInstance().getAllGames().remove(findGame(game));
             }
         }
@@ -160,7 +167,7 @@ public class ServerSocketController {
         }
     }
 
-    private Game findGame(Game game){
+    private Game findGame(Game game) {
         for (Game allGame : LobbyDatabase.getInstance().getAllGames()) {
             if (allGame.getId().equals(game.getId()))
                 return allGame;
@@ -221,7 +228,7 @@ public class ServerSocketController {
         return arrayList;
     }
 
-    private ArrayList<Game> findPublicGames(){
+    private ArrayList<Game> findPublicGames() {
         ArrayList<Game> arrayList = new ArrayList<>();
         for (Game game : LobbyDatabase.getInstance().getAllGames()) {
             if (!game.isPrivate())
@@ -230,9 +237,9 @@ public class ServerSocketController {
         return arrayList;
     }
 
-    private Game findPrivateGameById(String id){
+    private Game findPrivateGameById(String id) {
         for (Game game : LobbyDatabase.getInstance().getAllGames()) {
-            if (game.getId().equals(id)){
+            if (game.getId().equals(id)) {
                 return game;
             }
         }
@@ -252,6 +259,16 @@ public class ServerSocketController {
     public void addGame(Request request) throws IOException {
         Game game = (Game) request.getData().get("game");
         LobbyDatabase.getInstance().addGame(game);
+        Timer timer = new Timer();
+        int num = game.getPlayers().size();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("alan");
+                if (game.getPlayers().size() == num)
+                    LobbyDatabase.getInstance().getAllGames().remove(game);
+            }
+        }, 30000);
     }
 
     private Request getMessage() throws IOException {
@@ -399,9 +416,9 @@ public class ServerSocketController {
 
     private boolean isUsernameOnline(String username) {
         for (ServerSocketController s : Server.getClientSockets())
-                if (s != null && s.name != null)
-                    if (s.name.equals(username))
-                        return true;
+            if (s != null && s.name != null)
+                if (s.name.equals(username))
+                    return true;
         return false;
     }
 

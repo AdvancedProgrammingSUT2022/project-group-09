@@ -17,6 +17,7 @@ import game.civilization.Model.Improvements.Improvement;
 import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.Terrains.TerrainType;
 import game.civilization.Model.Units.Settler;
+import game.civilization.Model.User;
 import game.civilization.View.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -41,7 +42,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
     public static void main(String[] args) {
-
+        UserDatabase.loadUsers();
+        UserDatabase.saveUsers();
     }
 
     @Override
