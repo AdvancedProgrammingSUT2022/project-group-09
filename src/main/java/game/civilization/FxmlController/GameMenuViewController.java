@@ -79,4 +79,24 @@ public class GameMenuViewController {
         heightTooltip.setStyle(toolTipStyle);
         Tooltip.install(heightSpinner, heightTooltip);
     }
+
+    public void enterLobby() {
+
+    }
+
+    public void playGame() {
+
+    }
+
+    public void buildMap() {
+
+    }
+
+    public void continueGame() {
+
+    }
+
+    public void loadMap() {
+        
+    }
 }

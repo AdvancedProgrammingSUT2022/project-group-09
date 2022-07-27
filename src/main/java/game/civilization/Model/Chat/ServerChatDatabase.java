@@ -8,12 +8,7 @@ public class ServerChatDatabase {
     private static ServerChatDatabase instance;
 
     private ServerChatDatabase() {
-        ChatMessage message = new ChatMessage();
-        message.setReceiverUsername("aylin");
-        message.setSenderUsername("pouya");
-        message.setSentAt(LocalDateTime.now());
-        message.setText("kos mikham");
-        messages.add(message);
+        
     }
 
     public static ServerChatDatabase getInstance() {
