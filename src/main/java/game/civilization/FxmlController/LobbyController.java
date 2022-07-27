@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LobbyController implements Initializable {
+    public TextField searchField;
+    public Button search;
     @FXML
     private AnchorPane pane;
     @FXML
@@ -44,14 +46,20 @@ public class LobbyController implements Initializable {
     private ArrayList<Game> availableGames = new ArrayList<>();
     private ArrayList<Game> myGames = new ArrayList<>();
     private ArrayList<Game> gamesIn = new ArrayList<>();
+    private ArrayList<Object> allLabels = new ArrayList<>();
 
 
     public void initialize() throws IOException {
+        clear();
         Response response = Client.getClientServerSocketController().initializeTabel();
         availableGames = (ArrayList<Game>) response.getData().get("list1");
         myGames = (ArrayList<Game>) response.getData().get("list2");
         buildTable();
         buildTable2();
+    }
+
+    private void clear(){
+        pane.getChildren().removeAll(allLabels);
     }
 
     @Override
@@ -87,6 +95,7 @@ public class LobbyController implements Initializable {
                     }
                 }
             });
+            allLabels.add(label);
             pane.getChildren().add(label);
         }
     }
@@ -153,12 +162,14 @@ public class LobbyController implements Initializable {
                     join.setText("leave");
                 } else {
                     game.getPlayers().remove(isInGame(game));
+                    System.out.println(game.getPlayers().size());
                     try {
                         Client.getClientServerSocketController().leaveGame(game);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     join.setText("join");
+                    allLabels.add(gamePane);
                 }
 
             }
@@ -254,10 +265,27 @@ public class LobbyController implements Initializable {
                         button.setFont(new Font("Baloo Bhaina Regular", 12));
                         anotherPane.getChildren().add(button);
                         pane.getChildren().add(anotherPane);
+                        allLabels.add(anotherPane);
                     }
                 }
             });
+            allLabels.add(label);
             pane.getChildren().add(label);
+        }
+    }
+
+    public void search() throws IOException {
+        String id = searchField.getText();
+        if (!id.equals("")){
+            Response response = Client.getClientServerSocketController().searchForGame(id);
+            Game game = (Game) response.getData().get("game");
+            if (game != null){
+                availableGames = new ArrayList<Game>();
+                availableGames.add(game);
+                clear();
+                buildTable();
+                buildTable2();
+            }
         }
     }
 }

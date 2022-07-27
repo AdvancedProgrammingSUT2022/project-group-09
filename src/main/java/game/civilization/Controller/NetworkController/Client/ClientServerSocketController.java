@@ -185,18 +185,7 @@ public class ClientServerSocketController {
     public Response searchForGame(String id) throws IOException {
         Request request = new Request();
         request.setAction("search game");
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("id", id);
-        request.setData(hashMap);
-        return sendRequestAndGetResponse(request);
-    }
-
-    public Response changeVisibility(Game game) throws IOException {
-        Request request = new Request();
-        request.setAction("chhange visibility");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
+        request.addData("id", id);
         return sendRequestAndGetResponse(request);
     }
 

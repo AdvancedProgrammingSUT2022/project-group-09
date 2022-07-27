@@ -43,9 +43,6 @@ public class ServerSocketController {
     }
 
     public ServerSocketController(Socket socket, Socket socket2) throws IOException {
-        System.out.println("enter your name");
-        Scanner scanner = new Scanner(System.in);
-        name = scanner.next();
         this.socket = socket;
         dataInputStream = new DataInputStream(socket.getInputStream());
         dataOutputStream = new DataOutputStream(socket.getOutputStream());
@@ -137,9 +134,9 @@ public class ServerSocketController {
         if (((User) request.getData().get("this")).getUsername().equals(game.getAdmin().getUsername())) {
             if (game.getPlayers().size() > 0) {
                 game.setAdmin(game.getPlayers().get(0));
-            } else {
-                LobbyDatabase.getInstance().getAllGames().remove(game);
-                System.out.println(LobbyDatabase.getInstance().getAllGames() + " ...");
+            }
+            else {
+                LobbyDatabase.getInstance().getAllGames().remove(findGame(game));
             }
         }
         for (Game allGame : LobbyDatabase.getInstance().getAllGames()) {
@@ -150,26 +147,20 @@ public class ServerSocketController {
         }
     }
 
-    public Response searchForGame(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
+    private Game findGame(Game game){
+        for (Game allGame : LobbyDatabase.getInstance().getAllGames()) {
+            if (allGame.getId().equals(game.getId()))
+                return allGame;
+        }
         return null;
     }
 
-    public Response changeVisibility(Game game) throws IOException {
-//        Request request = new Request();
-//        request.setAction("add game");
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("game", game);
-//        request.setData(hashMap);
-//        return sendRequestAndGetResponse(request);
-        //TODO
-        return null;
+    public void searchForGame(Request request) throws IOException {
+        String id = (String) request.getData().get("id");
+        Game game = findPrivateGameById(id);
+        Response response = new Response();
+        response.addData("game", game);
+        sendResponse(response);
     }
 
     private void sendGameToAll(Request request) throws IOException {
@@ -191,7 +182,7 @@ public class ServerSocketController {
     }
 
     private void initTables(Request request) throws IOException {
-        ArrayList<Game> list1 = buildList1();
+        ArrayList<Game> list1 = buildList1(request);
         ArrayList<Game> list2 = buildList2(request);
         Response response = new Response();
         response.addData("list1", list1);
@@ -199,15 +190,16 @@ public class ServerSocketController {
         sendResponse(response);
     }
 
-    private ArrayList<Game> buildList1() {
-        if (LobbyDatabase.getInstance().getAllGames().size() <= 10) {
-            return LobbyDatabase.getInstance().getAllGames();
+    private ArrayList<Game> buildList1(Request request) {
+        ArrayList<Game> arrayListPublic = findPublicGames();
+        if (arrayListPublic.size() <= 10) {
+            return arrayListPublic;
         }
         ArrayList<Game> arrayList = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
             int x = random.nextInt(LobbyDatabase.getInstance().getAllGames().size());
-            if (arrayList.contains(LobbyDatabase.getInstance().getAllGames().get(x))) {
+            if (arrayList.contains(LobbyDatabase.getInstance().getAllGames().get(x)) || LobbyDatabase.getInstance().getAllGames().get(x).isPrivate()) {
                 i--;
             } else {
                 arrayList.add(LobbyDatabase.getInstance().getAllGames().get(x));
@@ -216,12 +208,29 @@ public class ServerSocketController {
         return arrayList;
     }
 
+    private ArrayList<Game> findPublicGames(){
+        ArrayList<Game> arrayList = new ArrayList<>();
+        for (Game game : LobbyDatabase.getInstance().getAllGames()) {
+            if (!game.isPrivate())
+                arrayList.add(game);
+        }
+        return arrayList;
+    }
+
+    private Game findPrivateGameById(String id){
+        for (Game game : LobbyDatabase.getInstance().getAllGames()) {
+            if (game.getId().equals(id)){
+                return game;
+            }
+        }
+        return null;
+    }
+
     private ArrayList<Game> buildList2(Request request) {
         ArrayList<Game> arrayList = new ArrayList<>();
         for (Game game : LobbyDatabase.getInstance().getAllGames()) {
             if (game.getAdmin().getUsername().equals(((User) request.getData().get("this")).getUsername())) {
                 arrayList.add(game);
-                System.out.println("yes");
             }
         }
         return arrayList;
