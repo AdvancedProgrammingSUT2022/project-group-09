@@ -10,17 +10,24 @@ import game.civilization.Controller.NetworkController.GameServer.Proxy;
 import game.civilization.Controller.NetworkController.GameServer.ProxySocketController;
 import game.civilization.Controller.ProfileMenuController;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.Controller.ChatController.ServerChatController;
 import game.civilization.Model.Game;
 import game.civilization.Model.NetworkModels.Message;
+import game.civilization.Model.JSONWebToken;
 import game.civilization.Model.Request;
 import game.civilization.Model.Response;
 import game.civilization.Model.User;
+import game.civilization.Model.Chat.ChatMessage;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.AnyTypePermission;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -37,9 +44,10 @@ public class ServerSocketController {
     private final DataInputStream dataInputStream2;
     private final DataOutputStream dataOutputStream2;
     private String name;
+    private boolean isAlive = true;
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public ServerSocketController(Socket socket, Socket socket2) throws IOException {
@@ -89,6 +97,11 @@ public class ServerSocketController {
             case "search game" -> changePicture(request);
             case "launch game" -> launchGame(request);
             case "change visibility" -> changePicture(request);
+            case "isOnline" -> isOnline(request);
+            case "stayin alive" -> isAlive = true;
+            case "get online users" -> getOnlineUsers();
+            case "get_messages" -> getMessages(request);
+            case "send_message" -> sendMessage(request);
         }
     }
 
@@ -258,6 +271,52 @@ public class ServerSocketController {
         dataOutputStream.write(data);
         dataOutputStream.flush();
         System.out.println("message  action " + message.getAction() + " send");
+        System.out.println("message  action " + message.getAction() + " send");
+    }
+
+    private void getOnlineUsers() throws IOException {
+        Response response = new Response();
+        response.setAction("khaste nabashid");
+        response.setMessage("faghat baraye inke inja khali nabashe");
+        ArrayList<User> users = Server.getOnlineUsers();
+        response.addData("count", users.size());
+        for (int i = 0; i < users.size(); i++) {
+            response.addData("user" + i, users.get(i).toJson());
+        }
+        sendResponse(response);
+    }
+
+    private void getMessages(Request request) throws IOException {
+        String senderUsername = (String) request.getData().get("senderUsername");
+        String receiverUsername = (String) request.getData().get("receiverUsername");
+        ArrayList<ChatMessage> messages = ServerChatController.getMessagesOfChat(receiverUsername, senderUsername);
+        Response response = new Response();
+        response.setAction("get messages done");
+        // response.addData("count", messages.size());
+        // for (int i = 0; i< messages.size(); i++) {
+        //     response.addData("message" + i, messages.get(i));
+        // }
+        response.addData("messages", messages);
+        sendResponse(response);
+    }
+
+    private void sendMessage(Request request) throws IOException {
+        String text = (String) request.getData().get("text");
+        String senderUsername = (String) request.getData().get("senderUsername");
+        String receiverUsername = (String) request.getData().get("receiverUsername");
+        ServerChatController.addMessage(text, receiverUsername, senderUsername);
+    }
+
+    private void isOnline(Request request) throws IOException {
+        String username = (String) request.getData().get("username");
+        Response response = new Response();
+        response.setAction("isOnline done");
+        if (isUsernameOnline(username)) {
+            response.setMessage("online");
+        } else {
+            response.setMessage("offline");
+        }
+        sendResponse(response);
     }
 
     private void register(Request request) throws IOException {
@@ -336,5 +395,20 @@ public class ServerSocketController {
         }
     }
 
+    private boolean isUsernameOnline(String username) {
+        for (ServerSocketController s : Server.getClientSockets())
+                if (s != null && s.name != null)
+                    if (s.name.equals(username))
+                        return true;
+        return false;
+    }
+
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
+
+    public boolean getIsAlive() {
+        return this.isAlive;
+    }
 
 }

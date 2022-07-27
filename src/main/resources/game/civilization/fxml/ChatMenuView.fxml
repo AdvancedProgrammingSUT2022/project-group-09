@@ -6,12 +6,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="670.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.ChatMenuViewController">
+<AnchorPane prefHeight="670.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.civilization.FxmlController.ChatMenuViewController" stylesheets="@../css/ChatMenuCSS.css">
    <children>
       <ImageView fitHeight="730.0" fitWidth="1158.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -47,7 +48,7 @@
       </ScrollPane>
       <ScrollPane layoutX="795.0" layoutY="129.0" prefHeight="398.0" prefWidth="312.0">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="388.0">
+            <VBox fx:id="privateChatVBox" minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="296.0">
                <children>
                   <ImageView fitHeight="518.0" fitWidth="713.0" layoutY="-1.0" pickOnBounds="true" smooth="false">
                      <image>
@@ -55,7 +56,7 @@
                      </image>
                   </ImageView>
                </children>
-            </AnchorPane>
+            </VBox>
          </content>
       </ScrollPane>
       <Label alignment="CENTER" layoutX="103.0" layoutY="48.0" prefHeight="50.0" prefWidth="160.0" text="ROOMS" textFill="WHITE">
@@ -68,7 +69,7 @@
             <Font name="Baloo Bhaina Regular" size="26.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="849.0" layoutY="48.0" prefHeight="60.0" prefWidth="202.0" text="PRIVATE CHATS" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="795.0" layoutY="47.0" prefHeight="60.0" prefWidth="202.0" text="PRIVATE CHATS" textFill="WHITE">
          <font>
             <Font name="Baloo Bhaina Regular" size="26.0" />
          </font>
@@ -79,5 +80,6 @@
       <Line endX="370.996826171875" endY="572.0" startX="370.9968566894531" startY="47.99998092651367" stroke="WHITE" />
       <Line endX="370.996826171875" endY="588.5210571289062" layoutX="388.0" layoutY="-15.0" startX="370.996826171875" startY="64.56047058105469" stroke="WHITE" />
       <Button layoutX="31.0" layoutY="683.0" mnemonicParsing="false" onAction="#back" text="back" />
+      <Button onAction="#refresh" styleClass="header-button" layoutX="1055.0" layoutY="61.0" mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>

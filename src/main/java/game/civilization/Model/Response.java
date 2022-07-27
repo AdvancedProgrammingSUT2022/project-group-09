@@ -1,5 +1,7 @@
 package game.civilization.Model;
 
+import java.util.HashMap;
+
 import com.google.gson.Gson;
 
 import java.util.HashMap;

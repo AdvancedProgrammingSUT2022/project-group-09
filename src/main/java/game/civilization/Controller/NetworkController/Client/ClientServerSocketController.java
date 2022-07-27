@@ -7,6 +7,10 @@ import game.civilization.Controller.LobbyDatabase;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
 import game.civilization.Model.Game;
+import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
+import game.civilization.Model.Civilization;
+import game.civilization.Model.JSONWebToken;
+import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Request;
 import game.civilization.Model.Response;
 import javafx.application.Platform;
@@ -65,10 +69,9 @@ public class ClientServerSocketController {
         switch (response.getAction()) {
             case "update list" -> updateList(response);
             case "launch game" -> launchRealGame();
-
+            case "are you alive?" -> stayinAlive();
         }
     }
-
     private void launchRealGame() throws IOException, InterruptedException {
         Platform.runLater(new Runnable() {
             @Override
@@ -92,7 +95,10 @@ public class ClientServerSocketController {
                 }
             }
         }
-    }
+    public void stayinAlive() throws IOException {
+        Request request = new Request();
+        request.setAction("stayin alive");
+        justSendRequest(request);
 
     public void justSendRequest(Request request) throws IOException {
         String messageJson = new XStream().toXML(request);

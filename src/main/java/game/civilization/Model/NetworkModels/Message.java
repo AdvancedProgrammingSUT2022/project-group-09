@@ -1,10 +1,21 @@
 package game.civilization.Model.NetworkModels;
 
+import java.util.HashMap;
+
 import com.google.gson.Gson;
 
 public class Message {
     private String action;
     private String message;
+    private HashMap<String, Object> data = new HashMap<>();
+
+    public HashMap<String, Object> getData() {
+        return data;
+    }
+
+    public void addData(String key, Object value) {
+        this.data.put(key, value);
+    }
 
     public String getAction() {
         return action;

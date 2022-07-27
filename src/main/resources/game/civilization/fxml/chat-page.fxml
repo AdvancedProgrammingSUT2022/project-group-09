@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="600.0" prefWidth="400.0" stylesheets="@../css/users-page.css">
+    <AnchorPane styleClass="header" prefHeight="48" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <Label styleClass="header-text" text="Messages"  AnchorPane.topAnchor="8" AnchorPane.bottomAnchor="8" AnchorPane.rightAnchor="24" AnchorPane.leftAnchor="24"/>
+        <Button styleClass="back-button" onAction="#backClicked" AnchorPane.topAnchor="8" AnchorPane.bottomAnchor="8" AnchorPane.rightAnchor="24" AnchorPane.leftAnchor="354" />
+    </AnchorPane>
+    <ScrollPane AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="48" AnchorPane.bottomAnchor="24">
+        <VBox fx:id="messagesList" minWidth="380">
+
+        </VBox>
+    </ScrollPane>
+    <TextField AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" fx:id="newMessageField"/>
+
+</AnchorPane>

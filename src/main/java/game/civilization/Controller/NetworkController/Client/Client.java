@@ -5,12 +5,14 @@ import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.NetworkController.GameServer.Proxy;
 import game.civilization.Controller.UserDatabase;
+import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
 import game.civilization.Model.Improvements.Improvement;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Resources.Resource;
 import game.civilization.Model.Terrains.Terrain;
 import game.civilization.Model.Units.Settler;
+import game.civilization.Model.User;
 import game.civilization.Model.User;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -42,16 +44,14 @@ public class Client extends Application {
         return clientServerSocketController;
     }
 
-
     private void connectForGame() throws IOException {
         socket = new Socket("localhost", 700);
         socket2 = new Socket("localhost", 700);
     }
 
     private void connect() throws IOException {
-        socket = new Socket("localhost", 8010);
-        socket2 = new Socket("localhost", 8010);
-        clientServerSocketController = new ClientServerSocketController(socket, socket2);
+        socket = new Socket("localhost", 8000);
+        socket2 = new Socket("localhost", 8000);
     }
 
     @Override
