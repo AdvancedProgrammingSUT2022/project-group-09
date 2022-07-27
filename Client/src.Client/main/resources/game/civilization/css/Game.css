@@ -1,0 +1,12 @@
+.background {
+    -fx-background-image: url('../images/GamePictures/Cloud.jpg');
+    -fx-background-size: cover;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}

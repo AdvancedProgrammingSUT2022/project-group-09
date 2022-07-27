@@ -1,0 +1,21 @@
+.header-button {
+    -fx-pref-width: 20;
+    -fx-pref-height: 20;
+    -fx-background-color: transparent;
+    -fx-background-image: url('../images/randomRequirements/refresh.png');
+    -fx-background-size: 28;
+    -fx-background-position: 2 2;
+    -fx-background-repeat: no-repeat;
+}
+
+Button {
+    -fx-background-color: linear-gradient(#ffd65b, #e68400),
+      linear-gradient(#ffef84, #f2ba44), linear-gradient(#ffea6a, #ff9921),
+      linear-gradient(#ffe657 0%, #ff9921 50%, #ff9921 100%);
+  
+    -fx-text-fill: #654b00;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-font-family: "Lucida Handwriting";
+    -fx-background-radius: 30;
+  }
