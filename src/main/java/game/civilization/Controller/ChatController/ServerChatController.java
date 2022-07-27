@@ -29,11 +29,11 @@ public class ServerChatController {
         sender.addSentMessage(message);
 
         ServerChatDatabase.getInstance().getMessages().add(message);
-        Message response = new Message();
+        Response response = new Response();
         response.addData("message", message);
         response.addData("fromUsername", senderUsername);
         ServerSocketController receiverSocketController = Server.getClientSocketByUsername(receiverUsername);
-        receiverSocketController.sendMessageDirectly(response);
+        receiverSocketController.sendResponseDirectly(response);
         System.out.println("update sent to desired user");
     }
 

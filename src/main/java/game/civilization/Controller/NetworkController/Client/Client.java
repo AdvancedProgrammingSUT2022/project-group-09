@@ -57,19 +57,10 @@ public class Client extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Client.me = this;
-        UserDatabase.setCurrentUser(new User("a", "a", "a"));
         connect();
         SceneController.getInstance().setStage(stage);
-        stage.setTitle("CivilizationV " + UserDatabase.getCurrentUser().getUsername());
-        SceneController.getInstance().Lobby();
-
-//        Client.me = this;
-//        UserDatabase.loadUsers();
-//        UserDatabase.setCurrentUser(new User("c", "a", "a"));
-//        iJoinedLobby(stage);
-//        Scanner scanner = new Scanner(System.in);
-//        scanner.next();
-//        startOnlineGame(stage);
+        stage.setTitle("CivilizationV ");
+        SceneController.getInstance().LoginMenu();
     }
 
     public void iJoinedLobby() throws IOException, InterruptedException {

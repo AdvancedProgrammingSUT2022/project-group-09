@@ -48,9 +48,7 @@ module game.civilization {
     exports game.civilization.FxmlController to javafx.fxml;
     exports game.civilization.FxmlController.GameScenes to javafx.fxml;
     opens game.civilization.FxmlController.GameScenes to javafx.fxml;
-    exports game.civilization.Controller.NetworkController.Client to javafx.graphics;
-    exports game.civilization.Controller.NetworkController.GameServer to javafx.graphics;
-    exports game.civilization.Controller.GameControllerPackage to javafx.graphics;
     exports game.civilization.Controller.NetworkController.Client to javafx.graphics, xstream;
     exports game.civilization.Controller.NetworkController.GameServer to javafx.graphics, xstream;
+    exports game.civilization.Controller.GameControllerPackage to javafx.graphics;
 }

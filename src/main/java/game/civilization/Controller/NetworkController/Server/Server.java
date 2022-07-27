@@ -29,7 +29,7 @@ public class Server extends Application {
     }
 
     private void connect() throws IOException {
-        ServerSocket serverSocket = new ServerSocket(8010);
+        ServerSocket serverSocket = new ServerSocket(8000);
         while (true) {
             Socket socket = serverSocket.accept();
             System.out.println(socket + " first is connected");

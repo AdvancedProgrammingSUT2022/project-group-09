@@ -72,6 +72,7 @@ public class ClientServerSocketController {
             case "are you alive?" -> stayinAlive();
         }
     }
+
     private void launchRealGame() throws IOException, InterruptedException {
         Platform.runLater(new Runnable() {
             @Override
@@ -86,7 +87,7 @@ public class ClientServerSocketController {
         });
     }
 
-    private void updateList(Response response) {
+    private void updateList(Response response) throws IOException {
         ClientLobbyDatabase.getInstance().getLobbyController().setMyGames((ArrayList<Game>) response.getData().get("list2"));
         for (Game availableGame : ClientLobbyDatabase.getInstance().getLobbyController().getAvailableGames()) {
             for (Game game : ((ArrayList<Game>) response.getData().get("list2"))) {
@@ -95,10 +96,13 @@ public class ClientServerSocketController {
                 }
             }
         }
+    }
+
     public void stayinAlive() throws IOException {
         Request request = new Request();
         request.setAction("stayin alive");
         justSendRequest(request);
+    }
 
     public void justSendRequest(Request request) throws IOException {
         String messageJson = new XStream().toXML(request);
