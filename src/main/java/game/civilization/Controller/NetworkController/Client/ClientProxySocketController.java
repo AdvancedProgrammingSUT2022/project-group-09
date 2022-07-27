@@ -6,6 +6,7 @@ import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
+import game.civilization.FxmlController.GameScenes.StreamSceneController;
 import game.civilization.Model.Civilization;
 import game.civilization.Model.NetworkModels.Message;
 import game.civilization.Model.Request;
@@ -94,7 +95,10 @@ public class ClientProxySocketController {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        GameSceneDataBase.getInstance().getGameSceneController().refresh();
+                        if (StreamSceneController.streamSceneController == null)
+                            GameSceneDataBase.getInstance().getGameSceneController().refresh();
+                        else
+                            StreamSceneController.streamSceneController.refresh();
                     }
                 });
             }

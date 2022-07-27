@@ -7,6 +7,8 @@ import game.civilization.FxmlController.MapMovement;
 import game.civilization.Model.Civilization;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
@@ -17,13 +19,39 @@ public class StreamSceneController implements Initializable {
     public Pane pane;
     public Label turnLabel;
     public Label civilizationName;
+    public TextArea notification;
+    public ImageView demographic;
+    public ImageView currentTech;
+    public Label scienceLabel;
+    public Label happinessLabel;
+    public Label goldLabel;
+    public Label year;
+    public Pane cityButtonsPane;
+    public Label currentTechTurn;
+    public ImageView military;
+    public static StreamSceneController streamSceneController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        GameSceneDataBase.getInstance().setGameSceneController(new GameSceneController());
+        setDataToGameSceneDataBase();
         MapController.getInstance().run();
         MapMovement.getInstance().run();
         loadPane();
         refresh();
+        StreamSceneController.streamSceneController = this;
+    }
+
+    private void setDataToGameSceneDataBase() {
+        GameSceneDataBase.getInstance().setYear(year);
+        GameSceneDataBase.getInstance().setBackPane(backPane);
+        GameSceneDataBase.getInstance().setPane(pane);
+        GameSceneDataBase.getInstance().setGoldLabel(goldLabel);
+        GameSceneDataBase.getInstance().setHappinessLabel(happinessLabel);
+        GameSceneDataBase.getInstance().setScienceLabel(scienceLabel);
+        GameSceneDataBase.getInstance().setCityButtonsPane(cityButtonsPane);
+        GameSceneDataBase.getInstance().setCurrentTechTurn(currentTechTurn);
+        GameSceneDataBase.getInstance().setCurrentTech(currentTech);
     }
 
     private void clearPane() {
