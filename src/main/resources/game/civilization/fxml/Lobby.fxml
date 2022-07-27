@@ -86,5 +86,10 @@
             <Font name="Baloo Bhaina Regular" size="10.0" />
          </font>
       </Button>
+      <Button layoutX="33.0" layoutY="677.0" mnemonicParsing="false" onAction="#back" text="BACK">
+         <font>
+            <Font name="Baloo Bhaina Regular" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

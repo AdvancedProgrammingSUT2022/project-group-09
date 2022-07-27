@@ -2,22 +2,15 @@ package game.civilization.Controller.NetworkController.Server;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.AnyTypePermission;
+import game.civilization.Controller.*;
 import game.civilization.Controller.GameControllerPackage.GameDataBase;
 import game.civilization.Controller.GameControllerPackage.GameDataBaseSaving;
-import game.civilization.Controller.LobbyDatabase;
-import game.civilization.Controller.LoginMenuController;
 import game.civilization.Controller.NetworkController.GameServer.Proxy;
 import game.civilization.Controller.NetworkController.GameServer.ProxySocketController;
-import game.civilization.Controller.ProfileMenuController;
-import game.civilization.Controller.UserDatabase;
 import game.civilization.Controller.ChatController.ServerChatController;
 import game.civilization.FxmlController.ScoreBoardViewController;
-import game.civilization.Model.Game;
+import game.civilization.Model.*;
 import game.civilization.Model.NetworkModels.Message;
-import game.civilization.Model.JSONWebToken;
-import game.civilization.Model.Request;
-import game.civilization.Model.Response;
-import game.civilization.Model.User;
 import game.civilization.Model.Chat.ChatMessage;
 
 import java.io.DataInputStream;
@@ -102,7 +95,38 @@ public class ServerSocketController {
             case "get online users" -> getOnlineUsers();
             case "get_messages" -> getMessages(request);
             case "send_message" -> sendMessage(request);
+            case "init invitation" -> initInvitation(request);
+            case "send invitation" -> sendInvitation(request);
+            case "accept invitation" -> acceptInvitation(request);
+            case "deny invitation" -> denyInvitation(request);
         }
+    }
+
+    private void initInvitation(Request request) throws IOException {
+        User user = (User) request.getData().get("this");
+        ArrayList<Invitation> invitations = InvitationDatabase.getInstance().getInvitationByReceiver(user.getUsername());
+        Response response = new Response();
+        response.addData("invitations", invitations);
+        sendResponse(response);
+    }
+    private void sendInvitation(Request request) {
+        Invitation invitation = (Invitation) request.getData().get("invitation");
+        InvitationDatabase.getInstance().addInvitation(invitation);
+    }
+    private void acceptInvitation(Request request) throws IOException {
+        Invitation invitation = (Invitation) request.getData().get("invitation");
+        InvitationDatabase.getInstance().removeInvitation(invitation);
+        Request requestt = new Request();
+        requestt.setAction("add to game");
+        Game game = LobbyDatabase.getInstance().findGameById(invitation.getGameId());
+        game.addPlayer((User) request.getData().get("this"));
+        requestt.addData("game", game);
+        requestt.addData("this", request.getData().get("this"));
+        addToGame(requestt);
+    }
+    private void denyInvitation(Request request) {
+        Invitation invitation = (Invitation) request.getData().get("invitation");
+        InvitationDatabase.getInstance().removeInvitation(invitation);
     }
 
     private void launchGame(Request request) throws IOException, InterruptedException {

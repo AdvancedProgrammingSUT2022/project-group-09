@@ -31,4 +31,12 @@ public class LobbyDatabase {
     public void addGame(Game game) {
         allGames.add(game);
     }
+
+    public Game findGameById(String id){
+        for (Game allGame : allGames) {
+            if (allGame.getId().equals(id))
+                return allGame;
+        }
+        return null;
+    }
 }

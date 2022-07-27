@@ -7,13 +7,9 @@ import game.civilization.Controller.GameControllerPackage.SqlHandler;
 import game.civilization.Controller.LobbyDatabase;
 import game.civilization.Controller.UserDatabase;
 import game.civilization.FxmlController.SceneController;
-import game.civilization.Model.Game;
+import game.civilization.Model.*;
 import game.civilization.FxmlController.GameScenes.SceneModels.GameSceneDataBase;
-import game.civilization.Model.Civilization;
-import game.civilization.Model.JSONWebToken;
 import game.civilization.Model.NetworkModels.Message;
-import game.civilization.Model.Request;
-import game.civilization.Model.Response;
 import javafx.application.Platform;
 
 import java.io.DataInputStream;
@@ -199,6 +195,43 @@ public class ClientServerSocketController {
         request.addData("id", id);
         return sendRequestAndGetResponse(request);
     }
+
+    public Response initInvitation() throws IOException {
+        Request request = new Request();
+        request.setAction("init invitation");
+        request.addData("this", UserDatabase.getCurrentUser());
+        return sendRequestAndGetResponse(request);
+    }
+
+    public void sendInvitation(Invitation invitation) throws IOException {
+        Request request = new Request();
+        request.setAction("send invitation");
+        request.addData("invitation", invitation);
+        justSendRequest(request);
+    }
+
+    public void acceptInvitation(Invitation invitation) throws IOException {
+        Request request = new Request();
+        request.setAction("accept invitation");
+        request.addData("invitation", invitation);
+        request.addData("this", UserDatabase.getCurrentUser());
+        justSendRequest(request);
+    }
+
+    public void denyInvitation(Invitation invitation) throws IOException {
+        Request request = new Request();
+        request.setAction("deny invitation");
+        request.addData("invitation", invitation);
+        justSendRequest(request);
+    }
+
+    public Response findGameById(String id) throws IOException {
+        Request request = new Request();
+        request.setAction("find game");
+        request.addData("id", id);
+        return sendRequestAndGetResponse(request);
+    }
+
 
 
 }

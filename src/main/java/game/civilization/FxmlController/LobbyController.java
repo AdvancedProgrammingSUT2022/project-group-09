@@ -316,4 +316,11 @@ public class LobbyController implements Initializable {
             }
         }
     }
+
+    public void back() throws IOException {
+        ClientLobbyDatabase.getInstance().setMyGames(myGames);
+        ClientLobbyDatabase.getInstance().setAvailableGames(availableGames);
+        ClientLobbyDatabase.getInstance().setGamesIn(gamesIn);
+        SceneController.getInstance().gameMenu();
+    }
 }

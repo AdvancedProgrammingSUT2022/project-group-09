@@ -1,26 +1,29 @@
 package game.civilization.FxmlController;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.ConcurrentModificationException;
-
 import game.civilization.Controller.NetworkController.Client.Client;
 import game.civilization.Controller.UserDatabase;
-import game.civilization.Main;
 import game.civilization.FxmlController.Components.SwitchButton;
+import game.civilization.Main;
+import game.civilization.Model.Invitation;
+import game.civilization.Model.Response;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.print.PageLayout;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class GameMenuViewController {
+    public TextField invitationText;
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -31,6 +34,9 @@ public class GameMenuViewController {
     private SwitchButton musicButton;
     private Spinner<Integer> widthSpinner;
     private Spinner<Integer> heightSpinner;
+    private ArrayList<Invitation> invitations;
+    private boolean state = false;
+    private Pane invitationPane;
 
     private String toolTipStyle = "-fx-text-fill: white; -fx-font-family: \"Times New Roman\"; -fx-font-size: 15;";
     private String boxBackgroundStyle = "-fx-background-color: linear-gradient(#ffd65b, #e68400)," +
@@ -141,5 +147,78 @@ public class GameMenuViewController {
                 }
             }
         });
+    }
+
+    public void sentInvitation() throws IOException {
+        if (invitationText.getText().equals("")) {
+            return;
+        }
+        String[] strings = invitationText.getText().split(" ");
+        Invitation invitation = new Invitation();
+        invitation.setUsername1(UserDatabase.getCurrentUser().getUsername());
+        invitation.setUsername2(strings[1]);
+        invitation.setGameId(strings[0]);
+        Client.getClientServerSocketController().sendInvitation(invitation);
+    }
+
+    public void showInvitationPanel() throws IOException {
+        System.out.println(state + " state");
+        if (!state) {
+            invitationPane = new Pane();
+            Response response = Client.getClientServerSocketController().initInvitation();
+            invitations = (ArrayList<Invitation>) response.getData().get("invitations");
+            int x = 20, y = 50;
+            for (Invitation invitation : invitations) {
+                Label label = new Label(invitation.getGameId());
+                label.setLayoutY(y += 40);
+                label.setLayoutX(x);
+//            label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                @Override
+//                public void handle(MouseEvent mouseEvent) {
+//
+//                }
+//            });
+                Button button1 = new Button("accept");
+                Button button2 = new Button("deny");
+                button1.setLayoutY(y);
+                button2.setLayoutY(y);
+                button1.setLayoutX(60);
+                button2.setLayoutX(120);
+                button1.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        try {
+                            Client.getClientServerSocketController().acceptInvitation(invitation);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                button2.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        try {
+                            Client.getClientServerSocketController().denyInvitation(invitation);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                invitationPane.getChildren().add(label);
+                invitationPane.getChildren().add(button1);
+                invitationPane.getChildren().add(button2);
+            }
+            anchorPane.getChildren().add(invitationPane);
+            state = true;
+        }
+        else {
+            clear();
+            state = false;
+        }
+
+    }
+
+    private void clear() {
+        anchorPane.getChildren().remove(invitationPane);
     }
 }
