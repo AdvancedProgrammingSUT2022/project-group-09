@@ -51,7 +51,6 @@ public class UserDatabase {
             LocalDateTime now = LocalDateTime.now();
             currentUser.setLastLoginTime(dtf.format(now));
         }
-        saveUsers();
     }
 
 //    static public void saveUsers() {
