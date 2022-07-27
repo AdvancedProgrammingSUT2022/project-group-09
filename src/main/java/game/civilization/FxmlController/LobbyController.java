@@ -8,6 +8,7 @@ import game.civilization.FxmlController.GameScenes.SceneController.SettlerContro
 import game.civilization.Model.Game;
 import game.civilization.Model.Response;
 import game.civilization.Model.User;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -58,7 +59,7 @@ public class LobbyController implements Initializable {
         buildTable2();
     }
 
-    private void clear(){
+    private void clear() {
         pane.getChildren().removeAll(allLabels);
     }
 
@@ -144,7 +145,17 @@ public class LobbyController implements Initializable {
         stream.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //todo
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Client.me.startWatchingStream(SceneController.getInstance().getStage());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
         Button join = new Button();
@@ -213,7 +224,7 @@ public class LobbyController implements Initializable {
         return gamesIn;
     }
 
-    private User isInGame(Game game){
+    private User isInGame(Game game) {
         for (User player : game.getPlayers()) {
             if (player.getUsername().equals(UserDatabase.getCurrentUser().getUsername()))
                 return player;
@@ -221,7 +232,7 @@ public class LobbyController implements Initializable {
         return null;
     }
 
-    private void showDetails(Pane pane, Game game){
+    private void showDetails(Pane pane, Game game) {
         Label label1 = new Label("max players: " + String.valueOf(game.getNumberOfPlayers()));
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("players: ");
@@ -239,7 +250,7 @@ public class LobbyController implements Initializable {
         pane.getChildren().add(label2);
     }
 
-    public void buildTable2(){
+    public void buildTable2() {
         int x = 570, y = 243;
         for (Game myGame : myGames) {
             System.out.println("okkk");
@@ -286,10 +297,10 @@ public class LobbyController implements Initializable {
 
     public void search() throws IOException {
         String id = searchField.getText();
-        if (!id.equals("")){
+        if (!id.equals("")) {
             Response response = Client.getClientServerSocketController().searchForGame(id);
             Game game = (Game) response.getData().get("game");
-            if (game != null){
+            if (game != null) {
                 availableGames = new ArrayList<Game>();
                 availableGames.add(game);
                 clear();
